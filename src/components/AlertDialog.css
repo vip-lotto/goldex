@@ -1,0 +1,100 @@
+.dialog-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.65);
+    backdrop-filter:blur(6px);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation:fadeIn .2s ease;
+}
+
+.dialog-box{
+    width:420px;
+    max-width:92%;
+    background:#111827;
+    border:1px solid rgba(250,204,21,.25);
+    border-radius:24px;
+    padding:35px 30px;
+    text-align:center;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    animation:zoomIn .25s ease;
+}
+
+.dialog-icon{
+    display:flex;
+    justify-content:center;
+    margin-bottom:18px;
+}
+
+.dialog-icon svg{
+    stroke:#fff;
+}
+
+.dialog-icon.success svg{
+    color:#22c55e;
+}
+
+.dialog-icon.warning svg{
+    color:#facc15;
+}
+
+.dialog-icon.error svg{
+    color:#ef4444;
+}
+
+.dialog-icon.info svg{
+    color:#3b82f6;
+}
+
+.dialog-box h2{
+    margin:0;
+    color:#fff;
+    font-size:28px;
+    font-weight:700;
+}
+
+.dialog-box p{
+    margin:18px 0 28px;
+    color:#cbd5e1;
+    line-height:1.7;
+    font-size:17px;
+}
+
+.dialog-btn{
+    width:100%;
+    padding:15px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(90deg,#facc15,#d4a017);
+    color:#111827;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.dialog-btn:hover{
+    transform:translateY(-2px);
+}
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+    }
+}
+
+@keyframes zoomIn{
+    from{
+        transform:scale(.85);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}

@@ -1,0 +1,47 @@
+.order-detail-page{
+    min-height:100vh;
+    background:#0f1722;
+    color:#fff;
+    padding-bottom:80px;
+}
+
+.detail-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+}
+
+.detail-header h2{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+}
+
+.detail-card{
+    margin:20px;
+    background:#1a2433;
+    border-radius:20px;
+    padding:20px;
+}
+
+.detail-card div{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:14px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.detail-card div:last-child{
+    border-bottom:none;
+}
+
+.detail-card b{
+    color:#bfc9d8;
+}
+
+.detail-card span{
+    font-weight:700;
+    color:#fff;
+}

@@ -1,0 +1,164 @@
+.orders-page{
+    min-height:100vh;
+    background:#0f1722;
+    color:#fff;
+    padding-bottom:90px;
+}
+
+.orders-header{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+    font-size:20px;
+    font-weight:700;
+}
+
+.back-btn{
+    width:40px;
+    height:40px;
+    border:none;
+    border-radius:50%;
+    background:#1c2635;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+}
+
+.orders-filter{
+    display:flex;
+    gap:10px;
+    padding:0 20px 20px;
+    overflow-x:auto;
+}
+
+.orders-filter button{
+    padding:10px 18px;
+    border:none;
+    border-radius:30px;
+    background:#1b2433;
+    color:#aaa;
+    cursor:pointer;
+    white-space:nowrap;
+    transition:.25s;
+}
+
+.orders-filter button.active{
+    background:#f6c343;
+    color:#000;
+    font-weight:bold;
+}
+
+.orders-list{
+    padding:0 18px;
+}
+
+.order-card{
+    background:#1a2433;
+    border-radius:18px;
+    padding:18px;
+    margin-bottom:16px;
+    cursor:pointer;
+    transition:.25s;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.order-card:hover{
+    transform:translateY(-2px);
+}
+
+.order-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.order-left{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.order-side{
+    padding:5px 12px;
+    border-radius:30px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.buy{
+    background:#00c853;
+    color:#fff;
+}
+
+.sell{
+    background:#ff5252;
+    color:#fff;
+}
+
+.order-coin{
+    font-size:18px;
+    font-weight:700;
+}
+
+.order-result{
+    font-size:13px;
+    font-weight:bold;
+}
+
+.win{
+    color:#00e676;
+}
+
+.lose{
+    color:#ff5252;
+}
+
+.trading{
+    color:#f6c343;
+}
+
+.order-info{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    color:#bfc9d8;
+    font-size:14px;
+}
+
+.order-info div{
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.order-bottom{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.green{
+    color:#00e676;
+}
+
+.red{
+    color:#ff5252;
+}
+
+.order-date{
+    margin-top:15px;
+    font-size:13px;
+    color:#7f8ea3;
+}
+
+.orders-loading,
+.orders-empty{
+    text-align:center;
+    padding:80px 20px;
+    color:#9aa7b9;
+}

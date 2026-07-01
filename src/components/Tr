@@ -1,0 +1,100 @@
+import { useMemo, useState } from "react";
+
+const DURATION_OPTIONS = [
+  { minute: 1, min: 50000, profit: 100 },
+  { minute: 2, min: 30000, profit: 85 },
+  { minute: 3, min: 10000, profit: 75 },
+  { minute: 4, min: 5000, profit: 55 },
+  { minute: 5, min: 1000, profit: 35 },
+  { minute: 6, min: 100, profit: 15 },
+];
+
+export default function TradePanel() {
+  const [amount, setAmount] = useState("");
+  const [duration, setDuration] = useState(1);
+
+  const current = useMemo(
+    () => DURATION_OPTIONS.find((d) => d.minute === duration),
+    [duration]
+  );
+
+  const handleTrade = (side) => {
+    const value = Number(amount);
+
+    if (!value || value <= 0) {
+      alert("กรุณาใส่จำนวนเงิน");
+      return;
+    }
+
+    if (value < current.min) {
+      alert(
+        `เวลา ${current.minute} นาที ต้องลงทุนขั้นต่ำ $${current.min.toLocaleString()}`
+      );
+      return;
+    }
+
+    alert(
+      `${side}\n\nจำนวนเงิน $${value.toLocaleString()}\nเวลา ${
+        current.minute
+      } นาที\nผลตอบแทน ${current.profit}%`
+    );
+
+    // ตรงนี้เดี๋ยวเราจะเชื่อม Supabase ในขั้นต่อไป
+  };
+
+  return (
+    <div className="trade-panel">
+      <h3>Trade</h3>
+
+      <label>Amount (USDT)</label>
+
+      <input
+        type="number"
+        value={amount}
+        onChange={(e) => setAmount(e.target.value)}
+        placeholder="0.00"
+      />
+
+      <label>Duration</label>
+
+      <select
+        value={duration}
+        onChange={(e) => setDuration(Number(e.target.value))}
+      >
+        {DURATION_OPTIONS.map((item) => (
+          <option key={item.minute} value={item.minute}>
+            {item.minute} นาที
+          </option>
+        ))}
+      </select>
+
+      <div className="trade-info-box">
+        <p>
+          ทุนขั้นต่ำ
+          <strong>
+            ${current.min.toLocaleString()}
+          </strong>
+        </p>
+
+        <p>
+          กำไร
+          <strong>{current.profit}%</strong>
+        </p>
+      </div>
+
+      <button
+        className="buy-btn"
+        onClick={() => handleTrade("BUY")}
+      >
+        BUY
+      </button>
+
+      <button
+        className="sell-btn"
+        onClick={() => handleTrade("SELL")}
+      >
+        SELL
+      </button>
+    </div>
+  );
+}

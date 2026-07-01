@@ -1,0 +1,374 @@
+.market-page{
+    background:#050505;
+    min-height:100vh;
+    padding:15px;
+    color:#fff;
+}
+
+/* ================= Header ================= */
+
+.market-header{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:18px;
+    margin-bottom:20px;
+}
+
+.market-title{
+    text-align:center;
+}
+
+.market-title h2{
+    margin:0;
+    font-size:42px;
+    font-weight:800;
+    color:#F5C542;
+    letter-spacing:1px;
+}
+
+.market-count{
+    margin-top:6px;
+    color:#888;
+    font-size:14px;
+}
+
+/* ================= Search ================= */
+
+.search-box{
+
+    width:100%;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#111111;
+
+    border:1px solid #222;
+
+    border-radius:18px;
+
+    padding:14px 16px;
+
+    box-shadow:0 0 20px rgba(245,197,66,.08);
+
+}
+
+.search-icon{
+    font-size:20px;
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:none;
+
+    color:white;
+
+    font-size:15px;
+
+}
+
+.search-box input::placeholder{
+    color:#777;
+}
+
+.refresh-btn{
+
+    width:44px;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#F5C542;
+
+    color:#000;
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.refresh-btn:hover{
+
+    transform:rotate(180deg);
+
+    box-shadow:0 0 15px rgba(245,197,66,.5);
+
+}
+
+/* ================= Tabs ================= */
+
+.market-tabs{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+    overflow:auto;
+
+}
+
+.market-tabs::-webkit-scrollbar{
+    display:none;
+}
+
+.tab{
+
+    border:none;
+
+    padding:12px 20px;
+
+    border-radius:14px;
+
+    background:#111;
+
+    color:#ccc;
+
+    cursor:pointer;
+
+    font-weight:700;
+
+    transition:.25s;
+
+    white-space:nowrap;
+
+}
+
+.tab:hover{
+
+    background:#1d1d1d;
+
+}
+
+.tab.active{
+
+    background:#F5C542;
+
+    color:#000;
+
+}
+
+/* ================= Table Header ================= */
+
+.market-header-simple{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    align-items:center;
+
+    background:#111111;
+
+    border:1px solid #222;
+
+    padding:16px 18px;
+
+    border-radius:18px;
+
+    margin-bottom:12px;
+
+    color:#999;
+
+    font-weight:700;
+
+}
+
+/* ================= List ================= */
+
+.market-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+
+}
+
+/* ================= Card ================= */
+
+.market-item{
+
+    display:grid;
+
+    grid-template-columns:2fr 1fr 1fr;
+
+    align-items:center;
+
+    background:#111111;
+
+    border:1px solid #1d1d1d;
+
+    border-radius:18px;
+
+    padding:16px 18px;
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.market-item:hover{
+
+    transform:translateY(-3px);
+
+    border-color:#F5C542;
+
+    box-shadow:0 0 20px rgba(245,197,66,.15);
+
+}
+
+/* ================= Left ================= */
+
+.market-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+}
+
+.market-logo{
+
+    width:50px;
+
+    height:50px;
+
+    border-radius:50%;
+
+    background:#1b1b1b;
+
+    object-fit:cover;
+
+}
+
+.market-name{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:white;
+
+}
+
+.market-symbol{
+
+    margin-top:5px;
+
+    color:#888;
+
+    font-size:13px;
+
+}
+
+/* ================= LIVE ================= */
+
+.market-live{
+
+    margin-left:8px;
+
+    color:#00ff99;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+.market-offline{
+
+    margin-left:8px;
+
+    color:#ff4d6d;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+/* ================= Price ================= */
+
+.market-price{
+
+    text-align:right;
+
+    color:#fff;
+
+    font-size:20px;
+
+    font-weight:800;
+
+}
+
+/* ================= Percent ================= */
+
+.market-percent{
+
+    text-align:right;
+
+    font-size:18px;
+
+    font-weight:800;
+
+}
+
+.market-percent.up{
+
+    color:#00E676;
+
+}
+
+.market-percent.down{
+
+    color:#ff4d6d;
+
+}
+
+/* ================= Loading ================= */
+
+.market-loading{
+
+    padding:80px;
+
+    text-align:center;
+
+    color:#F5C542;
+
+    font-size:20px;
+
+}
+
+/* ================= Empty ================= */
+
+.market-empty{
+
+    padding:80px;
+
+    text-align:center;
+
+    color:#777;
+
+}

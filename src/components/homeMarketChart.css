@@ -1,0 +1,398 @@
+.market-widget{
+    width:100%;
+    background:#111827;
+    border-radius:18px;
+    padding:16px;
+    color:#fff;
+    border:1px solid #263248;
+}
+
+/* ======================
+   Header
+====================== */
+
+.perpetual-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:16px;
+}
+
+.perpetual-header h2{
+    margin:0;
+    font-size:22px;
+    font-weight:700;
+}
+
+.perpetual-subtitle{
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:12px;
+}
+
+
+
+/* ======================
+   Coin Cards
+====================== */
+
+.perpetual-list{
+
+    display:flex;
+
+    flex-wrap:nowrap;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    gap:14px;
+
+    margin-bottom:22px;
+
+    padding-bottom:8px;
+
+    scroll-behavior:smooth;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+.coin-card{
+
+    flex:0 0 180px;
+
+    min-width:180px;
+
+    max-width:180px;
+
+    background:#0f1b33;
+
+    border:1px solid #2b3650;
+
+    border-radius:14px;
+
+    padding:12px;
+
+    min-height:105px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.coin-top{
+
+width:100%;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+.perpetual-list::-webkit-scrollbar{
+
+    height:6px;
+
+}
+
+.perpetual-list::-webkit-scrollbar-thumb{
+
+    background:#555;
+
+    border-radius:20px;
+
+}
+
+.perpetual-list::-webkit-scrollbar-track{
+
+    background:transparent;
+
+}
+
+
+.coin-card:hover{
+    transform:translateY(-2px);
+    border-color:#ffc107;
+}
+
+.coin-top{
+    display:flex;
+    align-items:flex-start;
+}
+
+.coin-name{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.coin-icon{
+    font-size:20px;
+}
+
+.coin-name h3{
+    margin:0;
+    font-size:15px;
+    font-weight:700;
+}
+
+.coin-price{
+    margin-top:8px;
+    font-size:16px;
+    font-weight:700;
+}
+
+.coin-percent{
+    margin-top:5px;
+    font-size:13px;
+    font-weight:700;
+}
+
+.coin-percent.green{
+    color:#37d67a;
+}
+
+.coin-percent.red{
+    color:#ff5b6d;
+}
+
+.coin-info{
+    display:flex;
+    gap:5px;
+    margin-top:8px;
+}
+
+.coin-info span{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#2a364d;
+    border-radius:5px;
+    height:18px;
+    padding:0 7px;
+    font-size:10px;
+    color:#d6dbe5;
+}
+
+.loading-card{
+    text-align:center;
+    padding:20px;
+    color:#94a3b8;
+    font-size:13px;
+}
+
+/* ======================
+   Market Header
+====================== */
+
+.market-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:14px;
+}
+
+.market-left h2{
+    margin:0;
+    font-size:24px;
+}
+
+.market-symbol{
+    display:block;
+    margin-top:3px;
+    color:#94a3b8;
+    font-size:12px;
+}
+
+.market-status{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#1b2537;
+    color:#42d77d;
+    font-size:13px;
+    font-weight:600;
+}
+
+.live-dot{
+    width:8px;
+    height:8px;
+    background:#42d77d;
+    border-radius:50%;
+    animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+
+0%{
+opacity:.5;
+transform:scale(.8);
+}
+
+50%{
+opacity:1;
+transform:scale(1.15);
+}
+
+100%{
+opacity:.5;
+transform:scale(.8);
+}
+
+}
+
+/* ======================
+   Tabs
+====================== */
+
+.market-tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    margin-bottom:14px;
+}
+
+.market-tabs::-webkit-scrollbar{
+    display:none;
+}
+
+.market-tab{
+    border:none;
+    border-radius:10px;
+    background:#1d283b;
+    color:#fff;
+    padding:10px 16px;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.market-tab.active{
+    background:#ffc107;
+    color:#111;
+}
+
+.period-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+.period{
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:10px;
+    background:#1d283b;
+    color:#fff;
+    font-size:13px;
+    cursor:pointer;
+}
+
+.period.active{
+    background:#2563eb;
+}
+
+/* ======================
+   Chart
+====================== */
+
+.chart-wrapper{
+    width:100%;
+    height:520px;
+    overflow:hidden;
+    border-radius:14px;
+    border:1px solid #2f3d57;
+    background:#131722;
+}
+
+.chart-wrapper iframe{
+    border:none;
+}
+
+/* ======================
+   Summary
+====================== */
+
+.market-summary{
+
+    margin-top:20px;
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:12px;
+
+}
+
+.summary-card{
+    background:#1b2537;
+    border:1px solid #2f3d57;
+    border-radius:14px;
+    padding:14px;
+}
+
+.summary-title{
+    color:#94a3b8;
+    font-size:11px;
+}
+
+.summary-card h3{
+    margin:8px 0 4px;
+    font-size:20px;
+}
+
+.summary-card p{
+    margin:0;
+    color:#94a3b8;
+    font-size:12px;
+}
+
+/* ======================
+   Footer
+====================== */
+
+.market-footer{
+    margin-top:22px;
+    padding-top:14px;
+    border-top:1px solid #2f3d57;
+    display:flex;
+    justify-content:space-between;
+    color:#94a3b8;
+    font-size:12px;
+}
+
+/* ======================
+   Responsive
+====================== */
+
+@media(max-width:768px){
+
+.market-widget{
+    padding:12px;
+}
+
+.market-header{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:10px;
+}
+
+.market-footer{
+    flex-direction:column;
+    gap:8px;
+}
+
+.chart-wrapper{
+    height:420px;
+}
+
+}
