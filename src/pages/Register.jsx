@@ -17,7 +17,7 @@ import {
 import { useToast } from "../context/ToastContext";
 import { language } from "../data/language";
 
-import "../styles/register.css";
+import "../styles/Register.css";
 
 export default function Register() {
 
