@@ -14,7 +14,7 @@ width:100%;
 }
 
 .home-header h1{
-font-size:42px;
+font-size:clamp(28px,7vw,38px);
 font-weight:800;
 color:#F5C542;
 letter-spacing:2px;
@@ -83,18 +83,18 @@ box-shadow:0 0 20px rgba(245,197,66,.08);
 
 .asset-card span{
 color:#a7b0bf;
-font-size:14px;
+font-size:clamp(11px,2.8vw,14px);
 }
 
 .asset-card h2{
 margin-top:8px;
-font-size:34px;
+font-size:20px;
 color:white;
 }
 
 .asset-card h3{
 margin-top:8px;
-font-size:28px;
+font-size:18px;
 }
 
 .green{
@@ -336,26 +336,17 @@ background:#181818;
 
 }
 
-.market-left h3{
-
+.market-left h2{
 margin:0;
-
-font-size:28px;
-
+font-size:clamp(20px,5vw,26px);
 font-weight:700;
-
 }
 
 .market-left span{
-
 display:block;
-
-margin-top:8px;
-
+margin-top:6px;
 color:#999;
-
-font-size:18px;
-
+font-size:clamp(14px,2vw,16px);
 }
 
 .market-right{
@@ -368,7 +359,7 @@ text-align:right;
 
 margin:0;
 
-font-size:30px;
+font-size:18px;
 
 color:#F5C542;
 
@@ -378,9 +369,9 @@ color:#F5C542;
 
 display:block;
 
-margin-top:10px;
+margin-top:8px;
 
-font-size:20px;
+font-size:16px;
 
 font-weight:700;
 

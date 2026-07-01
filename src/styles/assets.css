@@ -16,12 +16,11 @@ body{
 }
 
 .assets-page{
-
+    width:100%;
     min-height:100vh;
 
-    padding:22px;
-
-    padding-bottom:40px;   /* เพิ่มบรรทัดนี้ */
+    padding:5%;
+    padding-bottom:10%;
 
     background:
     radial-gradient(circle at top right,#28446f22 0%,transparent 35%),
@@ -31,7 +30,6 @@ body{
         #07111f 0%,
         #081522 100%
     );
-
 }
 
 /* ================= Header ================= */
@@ -122,9 +120,9 @@ body{
 
     margin-top:18px;
 
-    padding:28px;
+    padding:5%;
 
-    border-radius:30px;
+    border-radius:6%;
 
     background:linear-gradient(
         135deg,
@@ -208,7 +206,7 @@ justify-content:space-between;
 
 align-items:center;
 
-margin-bottom:30px;
+margin-bottom:20px;
 
 position:relative;
 
@@ -236,9 +234,9 @@ z-index:2;
 
 .avatar{
 
-width:100px;
+width:20vw;
 
-height:100px;
+height:20vw;
 
 border-radius:50%;
 
@@ -250,7 +248,7 @@ justify-content:center;
 
 align-items:center;
 
-font-size:52px;
+font-size:40px;
 
 font-weight:800;
 
@@ -370,15 +368,14 @@ z-index:2;
 }
 
 .balance-item{
-
-display:flex;
-
-align-items:center;
-
-gap:18px;
-
-padding:28px;
-
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:16px;
+    border-radius:18px;
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.05);
+    transition:.25s;
 }
 
 .balance-item:first-child{
@@ -1054,7 +1051,7 @@ font-size:16px;
 
     margin:0;
 
-    font-size:24px;
+    font-size:16px;
 
     font-weight:700;
 
@@ -1084,7 +1081,7 @@ font-size:16px;
 
     align-items:center;
 
-    gap:22px;
+    gap:12px;
 
 }
 
@@ -1098,7 +1095,7 @@ font-size:16px;
 
 .username{
 
-    font-size:24px;
+    font-size:14px;
 
     font-weight:800;
 
@@ -1122,9 +1119,9 @@ font-size:16px;
 
 .uid{
 
-    color:#9fb3d4;
+    color:#d8b30c;
 
-    font-size:15px;
+    font-size:16px;
 
 }
 
@@ -1199,9 +1196,9 @@ font-size:16px;
 
     border:1px solid rgba(255,255,255,.05);
 
-    border-radius:22px;
+    border-radius:18px;
 
-    padding:20px;
+     padding:4%;
 
     display:flex;
 
@@ -1255,7 +1252,7 @@ font-size:16px;
 
 .invite-code{
 
-    font-size:22px;
+    font-size:14px;
 
     font-weight:800;
 
@@ -1303,9 +1300,9 @@ font-size:16px;
 
     display:grid;
 
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:repeat(2,1fr);
 
-    gap:18px;
+     gap:4%;
 
     margin-top:28px;
 
@@ -1317,9 +1314,9 @@ font-size:16px;
 
     align-items:center;
 
-    gap:16px;
+    gap:6%;
 
-    padding:22px;
+    padding:8%;
 
     border-radius:22px;
 
@@ -1341,9 +1338,9 @@ font-size:16px;
 
 .balance-circle{
 
-    width:64px;
+    width:22%;
 
-    height:64px;
+    height:15px;
 
     border-radius:18px;
 
@@ -1379,7 +1376,7 @@ font-size:16px;
 
     color:#9FB3D4;
 
-    font-size:14px;
+    font-size:clamp(11px,2.8vw,14px);
 
     margin-bottom:6px;
 
@@ -1389,9 +1386,9 @@ font-size:16px;
 
     color:#FFD54A;
 
-    font-size:26px;
+    font-size:18px;
 
-    font-weight:800;
+    font-weight:650;
 
 }
 
@@ -1399,9 +1396,9 @@ font-size:16px;
 
     color:#22C55E;
 
-    font-size:26px;
+    font-size:16px;
 
-    font-weight:800;
+    font-weight:650;
 
 }
 

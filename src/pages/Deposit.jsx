@@ -23,7 +23,7 @@ export default function Deposit() {
           <ArrowLeft size={22} />
         </button>
 
-        <h2>Crypto Deposit</h2>
+        <h2>Deposit</h2>
       </div>
 
       <div className="deposit-tabs">
@@ -37,7 +37,7 @@ export default function Deposit() {
             setTab("internal")
           }
         >
-          Deposit 
+          Crypto deposit
         </button>
 
         <button

@@ -56,13 +56,13 @@ export async function setPrimaryBank(userId, bankId) {
   // ยกเลิกบัญชีหลักทั้งหมดก่อน
   await supabase
     .from("bank_accounts")
-    .update({ is_primary: false })
+    .update({ is_default: false })
     .eq("user_id", userId);
 
   // ตั้งบัญชีใหม่เป็นหลัก
   const { error } = await supabase
     .from("bank_accounts")
-    .update({ is_primary: true })
+    .update({ is_default: true })
     .eq("id", bankId);
 
   if (error) throw error;
@@ -70,7 +70,7 @@ export async function setPrimaryBank(userId, bankId) {
 }
 
 // ตรวจสอบก่อนเพิ่มบัญชี
-export async function validateBank(userId, bankName, accountName, accountNumber) {
+export async function validateBank(userId, bankName, fullName, accountNumber) {
 
   const { data, error } = await supabase
     .from("bank_accounts")
@@ -86,9 +86,12 @@ export async function validateBank(userId, bankName, accountName, accountNumber)
 
   // ชื่อเจ้าของบัญชีต้องตรงกันทุกบัญชี
   if (data.length > 0) {
-    const owner = data[0].account_name.trim().toLowerCase();
+    const owner = (data[0].full_name || data[0].account_name)
+      .trim()
+      .toLowerCase();
 
-    if (owner !== accountName.trim().toLowerCase()) {
+  if (owner !== fullName.trim().toLowerCase()) {
+
       throw new Error("ชื่อเจ้าของบัญชีไม่ตรงกับบัญชีที่ผูกไว้");
     }
   }
@@ -113,7 +116,7 @@ export async function getPrimaryBank(userId) {
     .from("bank_accounts")
     .select("*")
     .eq("user_id", userId)
-    .eq("is_primary", true)
+    .eq("is_default", true)
     .single();
 
   if (error) throw error;

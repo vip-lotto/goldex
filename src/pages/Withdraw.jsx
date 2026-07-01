@@ -29,7 +29,7 @@ export default function Withdraw() {
           <ArrowLeft size={22} />
         </button>
 
-        <h2>ถอนเงิน</h2>
+        <h2>Withdraw</h2>
 
       </div>
 
@@ -45,7 +45,7 @@ export default function Withdraw() {
               : "withdraw-tab"
           }
         >
-          Withdraw Coins
+          Crypto Withdrawal
         </button>
 
         <button
@@ -58,7 +58,7 @@ export default function Withdraw() {
               : "withdraw-tab"
           }
         >
-          Withdraw Bank
+          Bank Withdrawal
         </button>
 
       </div>

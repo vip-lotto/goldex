@@ -147,7 +147,7 @@ if(usdtWallet){
 
       <div className="deposit-card">
 
-        <h3>เลือกเหรียญ</h3>
+        <h3>Crypto</h3>
 
         <select
           value={coin}

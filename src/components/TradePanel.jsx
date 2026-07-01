@@ -5,12 +5,35 @@ import "./TradeReceipt.css";
 
 
 const RULES = {
-  6: { min: 100, profit: 15 },
-  5: { min: 1000, profit: 35 },
-  4: { min: 5000, profit: 55 },
-  3: { min: 10000, profit: 75 },
-  2: { min: 30000, profit: 85 },
-  1: { min: 50000, profit: 100 },
+  30: {
+    min: 10,
+    max: 999,
+    profit: 5,
+  },
+
+  60: {
+    min: 1000,
+    max: 29999,
+    profit: 10,
+  },
+
+  90: {
+    min: 30000,
+    max: 49999,
+    profit: 12,
+  },
+
+  120: {
+    min: 50000,
+    max: 99999,
+    profit: 15,
+  },
+
+  180: {
+    min: 100000,
+    max: 1000000,
+    profit: 18,
+  },
 };
 
 export default function TradePanel() {
@@ -19,7 +42,7 @@ export default function TradePanel() {
 
   const { showToast } = useToast();  
 
-  const [duration, setDuration] = useState(6);
+  const [duration, setDuration] = useState(30);
   const [amount, setAmount] = useState(100);
   const [side, setSide] = useState(null);
 
@@ -125,16 +148,15 @@ setDuration(trade.duration);
 
   async function startTrade(type) {
 
-    if (amount < rule.min) {
+    if (amount < rule.min || amount > rule.max) {
 
-      showToast(
-  `ทุนขั้นต่ำ $${rule.min.toLocaleString()}`,
+  showToast(
+  `Amount ${rule.min.toLocaleString()} - ${rule.max.toLocaleString()} USDT`,
   "warning"
 );
 
-      return;
-
-    }
+  return;
+}
 
     const user = JSON.parse(
       localStorage.getItem("user")
@@ -225,7 +247,7 @@ setTradeAmount(amount);
     const now = new Date();
 
 const end = new Date(
-  now.getTime() + duration * 60 * 1000
+  now.getTime() + duration * 1000
 );
 
 const {
@@ -276,15 +298,14 @@ setCurrentTrade(trade);
 setTradeAmount(trade.amount);
 setDuration(trade.duration);
 
-setSeconds(duration * 60);
+setSeconds(duration);
 
 setIsTrading(true);
 
 showToast(
-  `${type} $${amount.toLocaleString()} • ${duration} Minute`,
+  `${type} ${amount.toLocaleString()} USDT • ${duration} Seconds`,
   "success"
 );
-
   }
 
 async function finishTrade(trade = currentTrade) {
@@ -446,9 +467,9 @@ setSeconds(0);
   if (result === "win") {
 
     showToast(
-      `ชนะ +$${payout}`,
-      "success"
-    );
+  `ชนะ +${payout.toLocaleString()} USDT`,
+  "success"
+);
 
   } else {
 
@@ -494,7 +515,7 @@ const min = String(
 
       <div>
 
-        <label>Duration</label>
+        <label>Trade Time</label>
 
         <select
           value={duration}
@@ -506,12 +527,11 @@ const min = String(
           }
         >
 
-          <option value={6}>6 Minutes</option>
-          <option value={5}>5 Minutes</option>
-          <option value={4}>4 Minutes</option>
-          <option value={3}>3 Minutes</option>
-          <option value={2}>2 Minutes</option>
-          <option value={1}>1 Minute</option>
+          <option value={30}>30 Seconds (5%)</option>
+          <option value={60}>60 Seconds (10%)</option>
+          <option value={90}>90 Seconds (12%)</option>
+          <option value={120}>120 Seconds (15%)</option>
+          <option value={180}>180 Seconds (18%)</option>
 
         </select>
 
@@ -519,21 +539,22 @@ const min = String(
 
       <div className="trade-info">
 
-        <div>
-          Minimum :
-          ${rule.min.toLocaleString()}
-        </div>
+  <div>
+    Amount :
+    {rule.min.toLocaleString()} -
+    {rule.max.toLocaleString()} USDT
+  </div>
 
-        <div>
-          Profit :
-          {rule.profit}%
-        </div>
+  <div>
+    Profit :
+    {rule.profit}%
+  </div>
 
-      </div>
+</div>
 
       <div>
 
-        <label>Amount ($)</label>
+        <label>Amount (USDT)</label>
 
         <input
           type="number"
@@ -577,19 +598,13 @@ const min = String(
 
     <h3>Trade Receipt</h3>
 
-    <p>Order : #{receipt.id}</p>
-
-    <p>Type : {receipt.side}</p>
-
-    <p>Amount : ${receipt.amount}</p>
-
-    <p>Duration : {receipt.duration} Minute</p>
-
-    <p>Result : {receipt.result}</p>
-
-    <p>Payout : ${receipt.payout}</p>
-
-    <p>{receipt.time}</p>
+<p><strong>Order :</strong> #{receipt.id}</p>
+<p><strong>Type :</strong> {receipt.side}</p>
+<p><strong>Amount :</strong> {receipt.amount.toLocaleString()} USDT</p>
+<p><strong>Duration :</strong> {receipt.duration} Seconds</p>
+<p><strong>Result :</strong> {receipt.result.toUpperCase()}</p>
+<p><strong>Payout :</strong> {receipt.payout.toLocaleString()} USDT</p>
+<p><strong>Time :</strong> {receipt.time}</p>
 
     <button
   onClick={() => {

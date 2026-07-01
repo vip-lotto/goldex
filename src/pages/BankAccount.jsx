@@ -20,9 +20,11 @@ export default function BankAccount() {
 
   const [editingId, setEditingId] = useState(null);
 
+  const [fullName, setFullName] = useState("");
   const [bankName, setBankName] = useState("");
-  const [accountName, setAccountName] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
+  const [swiftCode, setSwiftCode] = useState("");
+  const [address, setAddress] = useState("");
 
   useEffect(() => {
     loadBanks();
@@ -43,45 +45,61 @@ export default function BankAccount() {
   }
 
   function clearForm() {
-    setEditingId(null);
-    setBankName("");
-    setAccountName("");
-    setAccountNumber("");
-  }
+  setEditingId(null);
+
+  setFullName("");
+  setBankName("");
+  setAccountNumber("");
+  setSwiftCode("");
+  setAddress("");
+}
 
   async function saveBank() {
     const user = JSON.parse(localStorage.getItem("user"));
 
-    if (!bankName || !accountName || !accountNumber) {
-      alert("กรุณากรอกข้อมูลให้ครบ");
-      return;
-    }
+    if (!fullName || !bankName || !accountNumber) {
+    alert("กรุณากรอกข้อมูลให้ครบ");
+    return;
+}
 
     try {
       if (editingId) {
-        await updateBank(editingId, {
-          bank_name: bankName,
-          account_name: accountName,
-          account_number: accountNumber,
-        });
+        await updateBank(editingId,{
+    bank_name: bankName,
+    full_name: fullName,
+    account_name: fullName,
+    account_number: accountNumber,
+    swift_code: swiftCode,
+    residential_address: address,
+});
 
         alert("แก้ไขบัญชีสำเร็จ");
       } else {
 
         await validateBank(
-            user.id,
-            bankName,
-            accountName,
-            accountNumber
-            );
+    user.id,
+    bankName,
+    fullName,
+    accountNumber
+);
 
         await addBank({
-          user_id: user.id,
-          bank_name: bankName,
-          account_name: accountName,
-          account_number: accountNumber,
-          is_primary: banks.length === 0,
-        });
+    user_id: user.id,
+
+    bank_name: bankName,
+
+    full_name: fullName,
+
+    account_name: fullName,
+
+    account_number: accountNumber,
+
+    swift_code: swiftCode,
+
+    residential_address: address,
+
+    is_default: banks.length === 0,
+});
 
         alert("เพิ่มบัญชีสำเร็จ");
       }
@@ -97,16 +115,17 @@ export default function BankAccount() {
   }
 
   function editBank(bank) {
-    setEditingId(bank.id);
 
-    setBankName(bank.bank_name);
+  setEditingId(bank.id);
 
-    setAccountName(bank.account_name);
+  setFullName(bank.full_name || "");
+  setBankName(bank.bank_name || "");
+  setAccountNumber(bank.account_number || "");
+  setSwiftCode(bank.swift_code || "");
+  setAddress(bank.residential_address || "");
 
-    setAccountNumber(bank.account_number);
-
-    setShowForm(true);
-  }
+  setShowForm(true);
+}
 
   async function removeBank(id) {
     if (!window.confirm("ลบบัญชีนี้ใช่หรือไม่")) return;
@@ -149,41 +168,39 @@ export default function BankAccount() {
 
         <div className="bank-form">
 
-          <select
-  value={bankName}
-  onChange={(e) => setBankName(e.target.value)}
->
-
-  <option value="">เลือกธนาคาร</option>
-
-  <option>ธนาคารกรุงเทพ</option>
-  <option>ธนาคารกสิกรไทย</option>
-  <option>ธนาคารกรุงไทย</option>
-  <option>ธนาคารไทยพาณิชย์</option>
-  <option>ธนาคารกรุงศรีอยุธยา</option>
-  <option>ธนาคารทหารไทยธนชาต</option>
-  <option>ธนาคารออมสิน</option>
-  <option>ธ.ก.ส.</option>
-  <option>ธนาคารอาคารสงเคราะห์</option>
-  <option>UOB</option>
-  <option>CIMB Thai</option>
-  <option>LH Bank</option>
-  <option>KKP</option>
-  <option>ICBC</option>
-
-</select>
+          
 
           <input
-            placeholder="ชื่อบัญชี"
-            value={accountName}
-            onChange={(e) => setAccountName(e.target.value)}
-          />
+placeholder="Full Name"
+value={fullName}
+onChange={(e)=>setFullName(e.target.value)}
+/>
 
-          <input
-            placeholder="เลขบัญชี"
-            value={accountNumber}
-            onChange={(e) => setAccountNumber(e.target.value)}
-          />
+<input
+placeholder="Bank Name"
+value={bankName}
+onChange={(e)=>setBankName(e.target.value)}
+/>
+
+<input
+placeholder="Account Number"
+value={accountNumber}
+onChange={(e)=>setAccountNumber(e.target.value)}
+/>
+
+<input
+placeholder="SWIFT / BIC"
+value={swiftCode}
+onChange={(e)=>setSwiftCode(e.target.value)}
+/>
+
+<textarea
+className="bank-textarea"
+placeholder="Residential Address"
+rows={6}
+value={address}
+onChange={(e)=>setAddress(e.target.value)}
+/>
 
           <div className="bank-actions">
 
@@ -229,13 +246,19 @@ export default function BankAccount() {
 
               <div>
 
-                <h3>{bank.bank_name}</h3>
+                <h3>{bank.full_name}</h3>
 
-                <p>{bank.account_name}</p>
+                <p>🏦 {bank.bank_name}</p>
 
-                <p>{bank.account_number}</p>
+                <p>💳 {bank.account_number}</p>
 
-                {bank.is_primary && (
+                <p>🌐 {bank.swift_code || "-"}</p>
+
+                <p>📍 {bank.residential_address || "-"}</p>
+
+
+                {bank.is_default && (
+
                   <span>บัญชีหลัก</span>
                 )}
 
@@ -243,7 +266,7 @@ export default function BankAccount() {
 
               <div className="bank-actions">
 
-                {!bank.is_primary && (
+                {!bank.is_default && (
 
                   <button
                     className="primary-btn"

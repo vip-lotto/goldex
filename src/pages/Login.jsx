@@ -4,7 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock, FaGlobeAsia } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
 
+
 import loginBg from "../assets/login01.png";
+
+import "../styles/login.css";
+
 
 import { supabase } from "../lib/supabase";
 
@@ -277,16 +281,7 @@ setTimeout(() => {
           }}
         >
 
-          <div
-            style={{
-              textAlign:"center",
-              color:"#ffd54f",
-              fontSize:"80px",
-              fontWeight:"800",
-              letterSpacing:"3px",
-              textShadow:"0 0 20px #facc15"
-            }}
-          >
+          <div className="goldex-title">
             GOLDEX
           </div>
 

@@ -276,11 +276,11 @@ return (
     >
 
       <span>
-        ค่าธรรมเนียม
+        Transfer fee
       </span>
 
       <strong>
-        {fee} บาท
+        {fee} USDT
       </strong>
 
     </div>
@@ -290,7 +290,7 @@ return (
     >
 
       <span>
-        ได้รับจริง
+        Amount received
       </span>
 
       <strong
@@ -299,7 +299,7 @@ return (
         {receiveAmount > 0
           ? receiveAmount
           : 0}
-        บาท
+        USDT
       </strong>
 
     </div>

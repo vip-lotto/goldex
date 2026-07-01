@@ -205,7 +205,7 @@ export default function ExternalDeposit() {
       <div className="deposit-card">
 
         <h3>
-          เลือกเหรียญ
+          Crypto
         </h3>
 
         <select

@@ -283,7 +283,7 @@ setTradingAmount(tradingTotal);
 
       <div className="balance-number">
 
-        ฿{Number(wallet?.balance || 0).toLocaleString()}
+        USDT {Number(wallet?.balance || 0).toLocaleString()}
 
       </div>
 
@@ -309,7 +309,7 @@ setTradingAmount(tradingTotal);
 
       <div className="profit-number">
 
-        ฿{Number(totalProfit || 0).toLocaleString()}
+        USDT {Number(totalProfit || 0).toLocaleString()}
 
       </div>
 
@@ -391,7 +391,7 @@ setTradingAmount(tradingTotal);
     </h3>
 
     <strong>
-  ฿{Number(tradingAmount).toLocaleString()}
+  USDT {Number(tradingAmount).toLocaleString()}
 </strong>
 
 </div>

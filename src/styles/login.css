@@ -229,3 +229,14 @@
   }
 
 }
+
+.goldex-title{
+    text-align:center;
+    color:#ffd54f;
+    font-size:80px;
+    font-weight:800;
+    letter-spacing:3px;
+    text-shadow:0 0 20px #ffac15;
+    white-space:nowrap;
+}
+

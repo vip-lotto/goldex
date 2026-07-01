@@ -290,7 +290,7 @@ return (
       }
     >
       <ArrowDownToLine size={32}/>
-      <p>Depocit</p>
+      <p>Deposit</p>
     </div>
 
     <div

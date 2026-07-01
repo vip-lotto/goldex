@@ -381,7 +381,7 @@ return (
       <div className="deposit-card">
 
         <h3>
-          เลือกเหรียญ
+          Crypto
         </h3>
 
         <select
@@ -487,7 +487,7 @@ return (
       <div className="deposit-card">
 
         <h3>
-          ที่อยู่ปลายทาง
+          Address
         </h3>
 
         <input
@@ -506,7 +506,7 @@ return (
       <div className="deposit-card">
 
         <h3>
-          QR Code Wallet
+          Wallet QR Code 
         </h3>
 
         <label
@@ -519,7 +519,7 @@ return (
             {
               qrFile
               ? qrFile.name
-              : " QR Code Wallet"
+              : " Wallet QR Code "
             }
           </p>
 
@@ -541,7 +541,7 @@ return (
       <div className="deposit-card">
 
         <h3>
-          จำนวนเงิน
+          Amount
         </h3>
 
         <input
@@ -561,12 +561,12 @@ return (
       <div className="deposit-card">
 
         <p>
-          ค่าธรรมเนียม :
+          Transfer fee :
           {fee} USDT
         </p>
 
         <p>
-          ได้รับจริง :
+          Amount received :
           {receiveAmount > 0
             ? receiveAmount
             : 0}

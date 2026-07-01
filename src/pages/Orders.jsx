@@ -270,7 +270,7 @@ export default function Orders() {
 
                 <strong>
 
-                  ${Number(item.amount).toLocaleString()}
+                  ${Number(item.amount).toLocaleString()}USDT
 
                 </strong>
 
@@ -302,13 +302,13 @@ export default function Orders() {
 
                     ? `+$${Number(
                         item.profit_amount || 0
-                      ).toLocaleString()}`
+                      ).toLocaleString()} USDT`
 
                     : item.result === "lose"
 
                     ? `-$${Number(
                         item.amount
-                      ).toLocaleString()}`
+                      ).toLocaleString()}USDT`
 
                     : "-"
 
