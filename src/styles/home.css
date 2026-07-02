@@ -23,17 +23,16 @@ text-shadow:0 0 15px rgba(245,197,66,.35);
 }
 
 .notify-btn{
-position:absolute;
-right:0;
-top:50%;
-transform:translateY(-50%);
-width:42px;
-height:42px;
-display:flex;
-justify-content:center;
-align-items:center;
-cursor:pointer;
-color:#facc15;
+    width:54px;
+    height:54px;
+    border-radius:16px;
+    background:#162541;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    position:relative;
+    color:#fff;
 }
 
 .notify-badge{
@@ -374,6 +373,66 @@ margin-top:8px;
 font-size:16px;
 
 font-weight:700;
+
+}
+
+/* ===== Header ===== */
+
+.home-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+/* ===== Support ===== */
+
+.support-btn{
+
+    width:54px;
+
+    height:54px;
+
+    border-radius:16px;
+
+    background:#162541;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    color:#f5c542;
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.support-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#203353;
+
+    box-shadow:0 0 20px rgba(245,197,66,.25);
 
 }
 

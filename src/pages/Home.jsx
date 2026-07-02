@@ -5,6 +5,7 @@ ArrowDownToLine,
 ArrowUpFromLine,
 ArrowLeftRight,
 Bell,
+Headset
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
@@ -219,34 +220,46 @@ return (
 
     <h1>GOLDEX</h1>
 
-    <div
-      className="notify-btn"
-      onClick={() =>
-        navigate(
-          "/notifications"
-        )
-      }
-    >
+    <div className="header-actions">
 
-      <Bell size={26} />
-
-      {unreadCount > 0 && (
-
-        <span
-          className="notify-badge"
+        <div
+            className="support-btn"
+            onClick={() =>
+                window.open(
+                    "https://lin.ee/nFNwIxfr",
+                    "_blank"
+                )
+            }
         >
-          {
-            unreadCount > 99
-              ? "99+"
-              : unreadCount
-          }
-        </span>
+            <Headset size={24}/>
+        </div>
 
-      )}
+        <div
+            className="notify-btn"
+            onClick={() =>
+                navigate("/notifications")
+            }
+        >
+
+            <Bell size={26}/>
+
+            {unreadCount > 0 && (
+
+                <span className="notify-badge">
+
+                    {unreadCount > 99
+                        ? "99+"
+                        : unreadCount}
+
+                </span>
+
+            )}
+
+        </div>
 
     </div>
 
-  </div>
+</div>
 
   <BannerSlider />
 

@@ -240,8 +240,14 @@
 @media(max-width:768px){
 
   .deposit-page{
-    padding:15px;
+    padding-top:15px;
+    padding-right:15px;
+    padding-left:15px;
+    padding-bottom:120px;
+    box-sizing:border-box;
   }
+
+
 
   .deposit-header h2{
     font-size:26px;

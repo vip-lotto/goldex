@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 import {
   Bell,
+  Headset,
   Copy,
   ArrowDown,
   ArrowUp,
@@ -141,25 +142,35 @@ setTradingAmount(tradingTotal);
 
       <div className="assets-header">
 
-        <div>
+    <div>
 
-          <div className="logo">
-
+        <div className="logo">
             GOLDEX
-
-          </div>
-
-          <div className="welcome">
-
-            Welcome Back
-
-          </div>
-
         </div>
 
-        
+        <div className="welcome">
+            Welcome 
+        </div>
 
-      </div>
+    </div>
+
+    <div className="header-right">
+
+        <button
+            className="support-btn"
+            onClick={() =>
+                window.open(
+                    "https://lin.ee/nFNwIxfr",
+                    "_blank"
+                )
+            }
+        >
+            <Headset size={24}/>
+        </button>
+
+    </div>
+
+</div>
 
       {/* ================= Wallet ================= */}
 

@@ -1431,3 +1431,62 @@ font-size:16px;
     font-size:15px;
     font-weight:700;
 }
+
+/* ===== Header ===== */
+
+.assets-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.header-right{
+
+    display:flex;
+
+    align-items:center;
+
+}
+
+/* ===== Support ===== */
+
+.support-btn{
+
+    width:56px;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:#162541;
+
+    color:#f5c542;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.35);
+
+}
+
+.support-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#22385b;
+
+}
+

@@ -19,7 +19,8 @@ const { showToast } = useToast();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [idNumber, setIdNumber] = useState("");
-  const [country, setCountry] = useState("Laos");
+  const [documentType, setDocumentType] = useState("ID Card");
+  const [country, setCountry] = useState("");
 
   const [idCard, setIdCard] = useState(null);
   const [selfie, setSelfie] = useState(null);
@@ -134,26 +135,28 @@ async function submitKYC() {
 
     const { error } =
       await supabase
-        .from("kyc")
-        .insert({
+  .from("kyc")
+  .insert({
 
-          user_id: user.id,
+    user_id: user.id,
 
-          first_name: firstName,
+    first_name: firstName,
 
-          last_name: lastName,
+    last_name: lastName,
 
-          id_number: idNumber,
+    document_type: documentType,
 
-          country,
+    id_number: idNumber,
 
-          id_card_image: idCardUrl,
+    country,
 
-          selfie_image: selfieUrl,
+    id_card_image: idCardUrl,
 
-          status: "pending"
+    selfie_image: selfieUrl,
 
-        });
+    status: "pending"
+
+  });
 
     if (error) throw error;
 
@@ -230,16 +233,31 @@ async function submitKYC() {
 
         <div className="input-group">
 
-          <label>เลขบัตรประชาชน</label>
+  <label>Document Type</label>
 
-          <input
-            value={idNumber}
-            onChange={(e)=>
-              setIdNumber(e.target.value)
-            }
-          />
+  <select
+    className="kyc-select"
+    value={documentType}
+    onChange={(e)=>setDocumentType(e.target.value)}
+  >
+    <option value="ID Card">ID Card</option>
+    <option value="Passport">Passport</option>
+    <option value="License">Driver License</option>
+  </select>
 
-        </div>
+  <input
+    placeholder={
+      documentType === "Passport"
+        ? "Passport Number"
+        : documentType === "License"
+        ? "Driver License Number"
+        : "ID Card Number"
+    }
+    value={idNumber}
+    onChange={(e)=>setIdNumber(e.target.value)}
+  />
+
+</div>
 
         <div className="input-group">
 
@@ -258,7 +276,7 @@ async function submitKYC() {
 
           <IdCard size={34}/>
 
-          <h3>อัปโหลดบัตรประชาชน</h3>
+          <h3>อัปโหลดบัตรประชาชน </h3>
 
           <label className="upload-area">
 

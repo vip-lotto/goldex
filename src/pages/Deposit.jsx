@@ -50,7 +50,7 @@ export default function Deposit() {
             setTab("external")
           }
         >
-          Deposit Coins
+          Bank deposit
         </button>
       </div>
 
