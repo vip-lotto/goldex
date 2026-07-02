@@ -191,6 +191,35 @@ setTimeout(() => {
         }}
       >
 
+
+        <button
+  onClick={() =>
+    window.open(
+      "https://lin.ee/nFNwIxfr",
+      "_blank"
+    )
+  }
+  style={{
+    position:"absolute",
+    top:"25px",
+    left:"25px",
+    width:"60px",
+    height:"60px",
+    borderRadius:"50%",
+    border:"2px solid #facc15",
+    background:"rgba(0,0,0,.45)",
+    color:"#facc15",
+    display:"flex",
+    justifyContent:"center",
+    alignItems:"center",
+    cursor:"pointer",
+    zIndex:999
+  }}
+>
+  <Headset size={24}/>
+</button>
+
+
         {/* ภาษา */}
 
         <div
@@ -222,28 +251,7 @@ setTimeout(() => {
     <FaGlobeAsia size={24}/>
   </button>
 
-  <button
-    onClick={() =>
-      window.open(
-        "https://lin.ee/nFNwIxfr",
-        "_blank"
-      )
-    }
-    style={{
-      width:"60px",
-      height:"60px",
-      borderRadius:"50%",
-      border:"2px solid #facc15",
-      background:"rgba(0,0,0,.45)",
-      color:"#facc15",
-      display:"flex",
-      justifyContent:"center",
-      alignItems:"center",
-      cursor:"pointer"
-    }}
-  >
-    <Headset size={24}/>
-  </button>
+  
 
 
 

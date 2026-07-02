@@ -1,11 +1,11 @@
 .bank-page{
     min-height:100vh;
-    background:#0f172a;
+    background:#11182b;
     color:#fff;
-    padding:20px;
-    font-family:Prompt,sans-serif;
-}
+    padding:15px;
 
+    padding-bottom:200px; /* เดิมน่าจะ 80-100px */
+}
 .bank-header{
     display:flex;
     align-items:center;

@@ -171,7 +171,7 @@ export default function TransactionHistory() {
           <span>ฝาก</span>
 
           <h3>
-            ฿{summary.deposit.toLocaleString()}
+            USDT{summary.deposit.toLocaleString()}
           </h3>
 
         </div>
@@ -181,7 +181,7 @@ export default function TransactionHistory() {
           <span>ถอน</span>
 
           <h3>
-            ฿{summary.withdraw.toLocaleString()}
+            USDT{summary.withdraw.toLocaleString()}
           </h3>
 
         </div>
@@ -191,7 +191,7 @@ export default function TransactionHistory() {
           <span>โอน</span>
 
           <h3>
-            ฿{summary.transfer.toLocaleString()}
+            USDT{summary.transfer.toLocaleString()}
           </h3>
 
         </div>
@@ -201,7 +201,7 @@ export default function TransactionHistory() {
           <span>เทรด</span>
 
           <h3>
-            ฿{summary.trade.toLocaleString()}
+            USDT{summary.trade.toLocaleString()}
           </h3>
 
         </div>
@@ -408,7 +408,7 @@ export default function TransactionHistory() {
 
                 }
 
-                ฿
+                USDT
 
                 {
 
