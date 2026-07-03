@@ -10,7 +10,7 @@ import { useToast } from "../context/ToastContext";
 
 import CoinSelect from "../components/CoinSelect";
 
-import "../styles/Convert.css";
+import "../styles/convert.css";
 
 export default function Convert() {
 
