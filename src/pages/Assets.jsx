@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 import {
   Bell,
   Headset,
@@ -8,6 +9,7 @@ import {
   ArrowDown,
   ArrowUp,
   Repeat2,
+  RefreshCw,
   TrendingUp,
   LineChart,
   Landmark,
@@ -17,6 +19,10 @@ import {
   History,
   LogOut,
   ChevronRight,
+
+  ChevronDown,
+  ChevronUp,
+
   Wallet
 } from "lucide-react";
 
@@ -38,9 +44,24 @@ export default function Assets() {
 
   const [historyCount, setHistoryCount] = useState(0);
 
+  
+
   const [loading, setLoading] = useState(true);
 
-  const [tradingAmount, setTradingAmount] = useState(0);
+const [tradingAmount, setTradingAmount] = useState(0);
+
+const [showAssetModal, setShowAssetModal] = useState(false);
+
+const [primaryCoin, setPrimaryCoin] = useState({
+  symbol:"BTC",
+  amount:0
+});
+
+const [coins,setCoins]=useState([]);
+
+
+
+  
 
   useEffect(() => {
 
@@ -88,6 +109,8 @@ export default function Assets() {
 
       setWallet(walletData);
 
+      prepareCoins(walletData);
+
       setBanks(bankData || []);
 
       setTrades(tradeData || []);
@@ -112,6 +135,55 @@ setTradingAmount(tradingTotal);
     }
 
   }
+
+  function prepareCoins(walletData){
+
+    const list=[
+
+        {
+            symbol:"BTC",
+            amount:Number(walletData?.BTC || 0)
+        },
+
+        {
+            symbol:"ETH",
+            amount:Number(walletData?.ETH || 0)
+        },
+
+        {
+            symbol:"BNB",
+            amount:Number(walletData?.BNB || 0)
+        },
+
+        {
+            symbol:"ADA",
+            amount:Number(walletData?.ADA || 0)
+        },
+
+        {
+            symbol:"TRX",
+            amount:Number(walletData?.TRX || 0)
+        }
+
+    ];
+
+    const active=list.filter(
+        item=>item.amount>0
+    );
+
+    const first=
+
+        active.length>0
+
+        ? active[0]
+
+        : list[0];
+
+    setCoins(list);
+
+    setPrimaryCoin(first);
+
+}
 
   function copyInvite() {
 
@@ -302,84 +374,196 @@ setTradingAmount(tradingTotal);
 
   </div>
 
-  <div className="balance-item">
+  <div className="balance-item coin-wallet-card">
 
-    <div className="balance-circle profit-circle">
+    <div className="coin-box">
 
-      <TrendingUp size={28}/>
+        <div className="balance-label">
+            กระเป๋า
+        </div>
+
+        <div
+            className="coin-header"
+            onClick={() => setShowAssetModal(true)}
+        >
+
+            <span className="coin-symbol">
+                {primaryCoin.symbol}
+            </span>
+
+            <span className="coin-value">
+                {Number(primaryCoin.amount).toFixed(8)}
+            </span>
+
+        </div>
 
     </div>
 
-    <div>
-
-      <div className="balance-label">
-
-        กำไรสะสม
-
-      </div>
-
-      <div className="profit-number">
-
-        USDT {Number(totalProfit || 0).toLocaleString()}
-
-      </div>
-
-    </div>
-
-  </div>
+</div>
 
 </div>
 
       </div>
 
+
+      {
+showAssetModal && (
+
+<div
+    className="asset-modal-bg"
+    onClick={() => setShowAssetModal(false)}
+>
+
+<div
+className="asset-modal"
+onClick={(e)=>e.stopPropagation()}
+>
+
+<div className="asset-header">
+
+<h2>Asset Details</h2>
+
+<button
+className="close-btn"
+onClick={()=>setShowAssetModal(false)}
+>
+
+✕
+
+</button>
+
+</div>
+
+{
+coins
+.filter(c => c.amount > 0)
+.map((coin)=>(
+
+<div
+key={coin.symbol}
+className="asset-card"
+>
+
+<div className="asset-top">
+
+<div className="asset-name">
+
+<img
+src={`/coins/${coin.symbol.toLowerCase()}.png`}
+className="asset-icon"
+/>
+
+<span>
+
+{coin.symbol}
+
+</span>
+
+</div>
+
+</div>
+
+<div className="asset-row">
+
+<div className="asset-item">
+
+<span>
+
+Available
+
+</span>
+
+<strong>
+
+{Number(coin.amount).toFixed(8)}
+
+</strong>
+
+</div>
+
+<div className="asset-item">
+
+<span>
+
+Occupation
+
+</span>
+
+<strong>
+
+0.0000
+
+</strong>
+
+</div>
+
+<div className="asset-item">
+
+<span>
+
+Equivalent(USDT)
+
+</span>
+
+<strong>
+
+0.0000
+
+</strong>
+
+</div>
+
+</div>
+
+</div>
+
+))
+}
+
+</div>
+
+</div>
+
+)
+}
+
+
+
             {/* ================= Quick Action ================= */}
 
       <div className="home-actions">
 
-    <div
-        className="home-action-card"
-        onClick={()=>navigate("/deposit")}
-    >
+  <div
+    className="home-action-card"
+    onClick={()=>navigate("/deposit")}
+  >
+    <ArrowDown size={34}/>
+    <span>Deposit</span>
+  </div>
 
-        <ArrowDown size={34}/>
+  <div
+    className="home-action-card"
+    onClick={()=>navigate("/withdraw")}
+  >
+    <ArrowUp size={34}/>
+    <span>Withdraw</span>
+  </div>
 
-        <span>
+  <div
+    className="home-action-card"
+    onClick={()=>navigate("/transfer")}
+  >
+    <Repeat2 size={34}/>
+    <span>Transfer</span>
+  </div>
 
-            Deposit
-
-        </span>
-
-    </div>
-
-    <div
-        className="home-action-card"
-        onClick={()=>navigate("/withdraw")}
-    >
-
-        <ArrowUp size={34}/>
-
-        <span>
-
-            Withdraw
-
-        </span>
-
-    </div>
-
-    <div
-        className="home-action-card"
-        onClick={()=>navigate("/transfer")}
-    >
-
-        <Repeat2 size={34}/>
-
-        <span>
-
-            Transfer
-
-        </span>
-
-    </div>
+  <div
+    className="home-action-card"
+    onClick={() => navigate("/convert")}
+  >
+    <RefreshCw size={34}/>
+    <span>Convert</span>
+  </div>
 
 </div>
 

@@ -1,0 +1,472 @@
+/* ==================================================
+   CONVERT PAGE
+================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+.convert-page{
+    min-height:100vh;
+    background:#07111f;
+    color:#fff;
+    padding:20px;
+    padding-bottom:120px;
+}
+
+/* ==================================================
+   HEADER
+================================================== */
+
+.convert-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:30px;
+}
+
+.back-btn{
+    width:48px;
+    height:48px;
+    border:none;
+    border-radius:16px;
+    background:#13233d;
+    color:#FFD54A;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.back-btn:hover{
+    background:#1d3357;
+}
+
+.convert-header h2{
+    margin:0;
+    font-size:36px;
+    font-weight:800;
+}
+
+/* ==================================================
+   CARD
+================================================== */
+
+.convert-card{
+    background:#101d33;
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:20px;
+    border:1px solid rgba(255,255,255,.05);
+}
+
+.convert-card h3{
+    margin:0 0 14px;
+    font-size:18px;
+    font-weight:700;
+}
+
+/* ==================================================
+   SELECT
+================================================== */
+
+.convert-card select{
+    width:100%;
+    height:58px;
+    background:#162947;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px;
+    color:#fff;
+    font-size:18px;
+    padding:0 16px;
+    outline:none;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.convert-card select:hover{
+    border-color:#FFD54A;
+}
+
+.convert-card select:focus{
+    border-color:#FFD54A;
+}
+
+/* ==================================================
+   INPUT
+================================================== */
+
+.amount-input{
+    width:100%;
+    height:70px;
+    background:#162947;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    color:#fff;
+    font-size:34px;
+    font-weight:700;
+    padding:0 18px;
+    outline:none;
+    transition:.25s;
+}
+
+.amount-input:focus{
+    border-color:#FFD54A;
+}
+
+.amount-input::placeholder{
+    color:#6E84A5;
+}
+
+/* ==================================================
+   BALANCE
+================================================== */
+
+.balance-text{
+    margin-top:12px;
+    color:#91A7CA;
+    font-size:14px;
+}
+
+/* ==================================================
+   SWAP
+================================================== */
+
+.swap-circle{
+    width:72px;
+    height:72px;
+    margin:0 auto 20px;
+    border-radius:50%;
+    background:#162947;
+    border:2px solid #29446D;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#FFD54A;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.swap-circle:hover{
+    transform:rotate(180deg);
+    background:#1E3559;
+}
+
+/* ==================================================
+   RATE
+================================================== */
+
+.rate-box{
+    background:#101d33;
+    border:1px solid rgba(255,255,255,.05);
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:20px;
+}
+
+.rate-title{
+    display:block;
+    color:#8FA2C0;
+    font-size:14px;
+    margin-bottom:8px;
+}
+
+.rate-value{
+    font-size:22px;
+    font-weight:700;
+    color:#fff;
+    word-break:break-word;
+}
+
+/* ==================================================
+   RECEIVE
+================================================== */
+
+.receive-box{
+    width:100%;
+    min-height:40px;
+    background:#162947;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    color:#f7f6f4;
+    font-size:18px;
+    font-weight:700;
+    word-break:break-word;
+}
+
+/* ==================================================
+   BUTTON
+================================================== */
+
+.convert-btn{
+    width:100%;
+    height:64px;
+    border:none;
+    border-radius:18px;
+    background:linear-gradient(
+        135deg,
+        #ffd54a94,
+        #f4b300af
+    );
+    color:#111;
+    font-size:22px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.convert-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 15px 35px rgba(255,213,74,.35);
+}
+
+.convert-btn:active{
+    transform:scale(.98);
+}
+
+.convert-btn:disabled{
+    background:#4A5E7C;
+    color:#d8d8d8;
+    cursor:not-allowed;
+    box-shadow:none;
+    transform:none;
+}
+
+/* ==================================================
+   LOADING
+================================================== */
+
+.loading-page{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#FFD54A;
+    font-size:24px;
+    font-weight:700;
+}
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+.convert-card,
+.rate-box{
+    animation:fadeUp .25s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+/* ==================================================
+   EFFECT
+================================================== */
+
+.convert-card:hover{
+
+    border-color:rgba(255,213,74,.15);
+
+}
+
+.amount-input:hover{
+
+    border-color:rgba(255,213,74,.35);
+
+}
+
+.amount-input:focus{
+
+    box-shadow:
+    0 0 0 3px rgba(255,213,74,.12);
+
+}
+
+/* ==================================================
+   NUMBER INPUT
+================================================== */
+
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button{
+
+    -webkit-appearance:none;
+
+    margin:0;
+
+}
+
+.amount-input{
+
+    -moz-appearance:textfield;
+
+}
+
+/* ==================================================
+   RESPONSIVE
+================================================== */
+
+@media (max-width:768px){
+
+    .convert-page{
+
+        padding:16px;
+        padding-bottom:100px;
+
+    }
+
+    .convert-header{
+
+        gap:14px;
+
+    }
+
+    .convert-header h2{
+
+        font-size:30px;
+
+    }
+
+    .convert-card{
+
+        padding:18px;
+
+    }
+
+    .convert-card h3{
+
+        font-size:17px;
+
+    }
+
+    .convert-card select{
+
+        height:54px;
+        font-size:17px;
+
+    }
+
+    .amount-input{
+
+        height:64px;
+        font-size:28px;
+
+    }
+
+    .receive-box{
+
+        min-height:50px;
+        font-size:24px;
+
+    }
+
+    .convert-btn{
+
+        height:55px;
+        font-size:15px;
+
+    }
+
+    .swap-circle{
+
+        width:64px;
+        height:64px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .convert-header h2{
+
+        font-size:26px;
+
+    }
+
+    .back-btn{
+
+        width:44px;
+        height:44px;
+
+    }
+
+    .convert-card{
+
+        border-radius:18px;
+
+    }
+
+    .amount-input{
+
+        font-size:24px;
+
+    }
+
+    .receive-box{
+
+        font-size:20px;
+
+    }
+
+}
+
+/* ==================================================
+   END
+================================================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+button,
+input,
+select{
+
+    font-family:inherit;
+
+}
+
+.coin-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+.coin-selected{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.coin-arrow{
+
+    color:#ffffff;
+
+    transition:.25s;
+
+}
+

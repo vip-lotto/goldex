@@ -32,7 +32,7 @@ import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
 import ChangePassword from "./pages/ChangePassword";
 import KYC from "./pages/KYC";
-
+import Convert from "./pages/Convert";
 
 
 
@@ -86,6 +86,8 @@ export default function App() {
           <Route path="/transfer-receipt" element={<TransferReceipt />} />
           <Route path="/transfer-history" element={<TransferHistory />} />
           <Route path="/bank-account" element={<BankAccount />} />
+          <Route path="/convert" element={<Convert />} />
+          
 
           <Route
   path="/transactions"
