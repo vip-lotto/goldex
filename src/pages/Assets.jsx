@@ -1,89 +1,44 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-
-import {
-  Bell,
-  Headset,
-  Copy,
-  ArrowDown,
-  ArrowUp,
-  Repeat2,
-  RefreshCw,
-  TrendingUp,
-  LineChart,
-  Landmark,
-  Globe,
-  Lock,
-  BadgeCheck,
-  History,
-  LogOut,
-  ChevronRight,
-
-  ChevronDown,
-  ChevronUp,
-
-  Wallet
-} from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { ChevronDown, ChevronUp, Eye, EyeOff } from "lucide-react";
 
 import "../styles/assets.css";
 
-import { getProfile } from "../lib/profileApi";
 import { getWallet } from "../lib/walletApi";
-import { getBank } from "../lib/bankApi";
-import { getTradeHistory } from "../lib/tradeApi";
+import { getExchangeRates } from "../lib/convertApi";
 
 export default function Assets() {
 
-  const navigate = useNavigate();
-
-  const [profile, setProfile] = useState(null);
   const [wallet, setWallet] = useState(null);
-  const [banks, setBanks] = useState([]);
-  const [trades, setTrades] = useState([]);
 
-  const [historyCount, setHistoryCount] = useState(0);
-
-  
+  const [rates, setRates] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
-const [tradingAmount, setTradingAmount] = useState(0);
+  const [showBalance, setShowBalance] = useState(true);
 
-const [showAssetModal, setShowAssetModal] = useState(false);
-
-const [primaryCoin, setPrimaryCoin] = useState({
-  symbol:"BTC",
-  amount:0
-});
-
-const [coins,setCoins]=useState([]);
-
-
-
-  
+  const [expand, setExpand] = useState(true);
 
   useEffect(() => {
 
-    loadData();
+    loadAssets();
 
     window.addEventListener(
       "walletUpdated",
-      loadData
+      loadAssets
     );
 
     return () => {
 
       window.removeEventListener(
         "walletUpdated",
-        loadData
+        loadAssets
       );
 
     };
 
   }, []);
 
-  async function loadData() {
+  async function loadAssets() {
 
     const user = JSON.parse(
       localStorage.getItem("user")
@@ -93,42 +48,19 @@ const [coins,setCoins]=useState([]);
 
     try {
 
-      const profileData =
-        await getProfile(user.id);
-
       const walletData =
         await getWallet(user.id);
 
-      const bankData =
-        await getBank(user.id);
-
-      const tradeData =
-        await getTradeHistory(user.id);
-
-      setProfile(profileData);
+      const rateData =
+        await getExchangeRates();
 
       setWallet(walletData);
 
-      prepareCoins(walletData);
+      setRates(rateData || []);
 
-      setBanks(bankData || []);
+    }
 
-      setTrades(tradeData || []);
-
-      setHistoryCount((tradeData || []).length);
-
-      const tradingTotal =
-  (tradeData || [])
-    .filter(item => item.status === "trading")
-    .reduce(
-      (sum, item) => sum + Number(item.amount || 0),
-      0
-    );
-
-setTradingAmount(tradingTotal);
-
-
-    } finally {
+    finally {
 
       setLoading(false);
 
@@ -136,264 +68,173 @@ setTradingAmount(tradingTotal);
 
   }
 
-  function prepareCoins(walletData){
+  function getRate(symbol) {
 
-    const list=[
-
-        {
-            symbol:"BTC",
-            amount:Number(walletData?.BTC || 0)
-        },
-
-        {
-            symbol:"ETH",
-            amount:Number(walletData?.ETH || 0)
-        },
-
-        {
-            symbol:"BNB",
-            amount:Number(walletData?.BNB || 0)
-        },
-
-        {
-            symbol:"ADA",
-            amount:Number(walletData?.ADA || 0)
-        },
-
-        {
-            symbol:"TRX",
-            amount:Number(walletData?.TRX || 0)
-        }
-
-    ];
-
-    const active=list.filter(
-        item=>item.amount>0
+    const rate = rates.find(
+      item => item.symbol === symbol
     );
 
-    const first=
-
-        active.length>0
-
-        ? active[0]
-
-        : list[0];
-
-    setCoins(list);
-
-    setPrimaryCoin(first);
-
-}
-
-  function copyInvite() {
-
-    navigator.clipboard.writeText(
-      profile?.invite_code || ""
-    );
-
-    alert("คัดลอกรหัสเชิญแล้ว");
+    return Number(rate?.rate || 0);
 
   }
 
-  const totalProfit =
-    trades
-      ?.filter(
-        item => item.result === "win"
-      )
-      ?.reduce(
-        (sum, item) =>
-          sum + Number(item.payout || 0),
-        0
-      ) || 0;
+  const assets = useMemo(() => {
 
-  return (
+    if (!wallet) return [];
 
-    <div className="assets-page">
+    const list = [
 
-      {/* ================= Header ================= */}
+      {
+        symbol: "BTC",
+        amount: Number(wallet.BTC || 0)
+      },
 
-      <div className="assets-header">
+      {
+        symbol: "ETH",
+        amount: Number(wallet.ETH || 0)
+      },
 
-    <div>
+      {
+        symbol: "BNB",
+        amount: Number(wallet.BNB || 0)
+      },
 
-        <div className="logo">
-            GOLDEX
-        </div>
+      {
+        symbol: "TRX",
+        amount: Number(wallet.TRX || 0)
+      },
 
-        <div className="welcome">
-            Welcome 
-        </div>
+      {
+        symbol: "ADA",
+        amount: Number(wallet.ADA || 0)
+      }
 
-    </div>
+    ];
 
-    <div className="header-right">
+    return list.map(item => ({
 
-        <button
-            className="support-btn"
-            onClick={() =>
-                window.open(
-                    "https://lin.ee/nFNwIxfr",
-                    "_blank"
-                )
-            }
-        >
-            <Headset size={24}/>
-        </button>
+      ...item,
 
-    </div>
+      usdt:
 
-</div>
+        item.amount *
 
-      {/* ================= Wallet ================= */}
+        getRate(item.symbol)
 
-      <div className="wallet-card">
+    }));
 
-    <div className="wallet-glow"></div>
+  }, [wallet, rates]);
 
-    <div className="wallet-top">
+  const totalAssets = useMemo(() => {
 
-  <div className="wallet-user">
+    return assets.reduce(
 
-    <div className="avatar">
+      (sum, item) =>
 
-      {profile?.first_name
-        ?.charAt(0)
-        ?.toUpperCase() || "U"}
+        sum + item.usdt,
 
-    </div>
+      0
 
-    <div className="user-info">
+    );
 
-      <h2 className="username">
+  }, [assets]);
 
-        {profile?.first_name} {profile?.last_name}
+  if (loading) {
 
-      </h2>
+    return (
 
-      <div className="uid-row">
+      <div className="assets-loading">
 
-        <span className="uid">
-
-          UID : {profile?.member_id || "-"}
-
-        </span>
-
-        <button
-          className="uid-copy"
-          onClick={() =>
-            navigator.clipboard.writeText(
-              profile?.member_id || ""
-            )
-          }
-        >
-
-          <Copy size={15} />
-
-        </button>
+        Loading...
 
       </div>
 
-    </div>
+    );
 
-  </div>
+  }
 
-</div>
+    return (
 
-        {/* Invite */}
+<div className="assets-page">
 
-        <div className="invite-card">
+{/* =====================================
+            Total Assets
+===================================== */}
 
-    <div className="invite-left">
+<div className="assets-total-card">
 
-        
-
-        <div>
-
-            <div className="invite-title">
-
-                รหัสเชิญ
-
-            </div>
-
-            <div className="invite-code">
-
-                {profile?.invite_code || "-"}
-
-            </div>
-
-        </div>
-
-    </div>
-
-    <button
-        className="invite-copy-btn"
-        onClick={copyInvite}
-    >
-
-        <Copy size={18}/>
+    <div className="assets-total-top">
 
         <span>
 
-            คัดลอก
+            Total Assets
 
         </span>
 
-    </button>
+        <button
 
-</div>
+            className="eye-btn"
 
-        {/* Balance */}
+            onClick={()=>
+                setShowBalance(!showBalance)
+            }
 
-        {/* ================= Balance ================= */}
-
-<div className="balance-grid">
-
-  <div className="balance-item">
-
-    <div className="balance-circle wallet-circle">
-
-      <Wallet size={28}/>
-
-    </div>
-
-    <div>
-
-      <div className="balance-label">
-
-        ยอดเงินทั้งหมด
-
-      </div>
-
-      <div className="balance-number">
-
-        USDT {Number(wallet?.balance || 0).toLocaleString()}
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div className="balance-item coin-wallet-card">
-
-    <div className="coin-box">
-
-        <div className="balance-label">
-            กระเป๋า
-        </div>
-
-        <div
-            className="coin-header"
-            onClick={() => setShowAssetModal(true)}
         >
 
-            <span className="coin-symbol">
-                {primaryCoin.symbol}
-            </span>
+        {
 
-            <span className="coin-value">
-                {Number(primaryCoin.amount).toFixed(8)}
-            </span>
+            showBalance
+
+            ?
+
+            <Eye size={18}/>
+
+            :
+
+            <EyeOff size={18}/>
+
+        }
+
+        </button>
+
+    </div>
+
+    <div className="assets-total-value">
+
+    <div className="total-left">
+
+        <img
+            src="/coins/usdt.png"
+            alt="USDT"
+            className="total-usdt-logo"
+        />
+
+        <div className="total-coin-name">
+
+            USDT
+
+        </div>
+
+    </div>
+
+    <div className="total-right">
+
+        <div className="total-number">
+
+            {
+                showBalance
+                ? totalAssets.toLocaleString(undefined,{
+                    minimumFractionDigits:2,
+                    maximumFractionDigits:2
+                })
+                : "******"
+            }
+
+        </div>
+
+        <div className="total-unit">
+
+            USDT
 
         </div>
 
@@ -403,113 +244,135 @@ setTradingAmount(tradingTotal);
 
 </div>
 
-      </div>
+{/* =====================================
+          Assets Details
+===================================== */}
 
-
-      {
-showAssetModal && (
-
-<div
-    className="asset-modal-bg"
-    onClick={() => setShowAssetModal(false)}
->
+<div className="assets-card">
 
 <div
-className="asset-modal"
-onClick={(e)=>e.stopPropagation()}
+
+className="assets-header"
+
+onClick={()=>
+
+setExpand(!expand)
+
+}
+
 >
 
-<div className="asset-header">
+<h2>
 
-<h2>Asset Details</h2>
+Assets Details
 
-<button
-className="close-btn"
-onClick={()=>setShowAssetModal(false)}
->
+</h2>
 
-✕
+{
 
-</button>
+expand
+
+?
+
+<ChevronUp size={22}/>
+
+:
+
+<ChevronDown size={22}/>
+
+}
 
 </div>
 
 {
-coins
-.filter(c => c.amount > 0)
-.map((coin)=>(
+
+expand &&
+
+assets.map((coin)=>(
 
 <div
+
 key={coin.symbol}
-className="asset-card"
+
+className="asset-row"
+
 >
 
-<div className="asset-top">
-
-<div className="asset-name">
+<div className="asset-left">
 
 <img
+
 src={`/coins/${coin.symbol.toLowerCase()}.png`}
+
+alt={coin.symbol}
+
 className="asset-icon"
+
 />
 
-<span>
+<div>
+
+<div className="asset-symbol">
 
 {coin.symbol}
 
-</span>
-
 </div>
 
 </div>
 
-<div className="asset-row">
+</div>
 
-<div className="asset-item">
+<div className="asset-right">
 
-<span>
+<div className="asset-amount">
 
-Available
+{
 
-</span>
+showBalance
 
-<strong>
+?
 
-{Number(coin.amount).toFixed(8)}
+coin.amount.toFixed(6)
 
-</strong>
+:
+
+"******"
+
+}
 
 </div>
 
-<div className="asset-item">
+<div className="asset-usdt">
 
-<span>
+≈
 
-Occupation
+{
 
-</span>
+showBalance
 
-<strong>
+?
 
-0.0000
+coin.usdt.toLocaleString(
 
-</strong>
+undefined,
 
-</div>
+{
 
-<div className="asset-item">
+minimumFractionDigits:2,
 
-<span>
+maximumFractionDigits:2
 
-Equivalent(USDT)
+}
 
-</span>
+)
 
-<strong>
+:
 
-0.0000
+"******"
 
-</strong>
+}
+
+USDT
 
 </div>
 
@@ -518,246 +381,13 @@ Equivalent(USDT)
 </div>
 
 ))
+
 }
 
 </div>
 
 </div>
 
-)
-}
-
-
-
-            {/* ================= Quick Action ================= */}
-
-      <div className="home-actions">
-
-  <div
-    className="home-action-card"
-    onClick={()=>navigate("/deposit")}
-  >
-    <ArrowDown size={34}/>
-    <span>Deposit</span>
-  </div>
-
-  <div
-    className="home-action-card"
-    onClick={()=>navigate("/withdraw")}
-  >
-    <ArrowUp size={34}/>
-    <span>Withdraw</span>
-  </div>
-
-  <div
-    className="home-action-card"
-    onClick={()=>navigate("/transfer")}
-  >
-    <Repeat2 size={34}/>
-    <span>Transfer</span>
-  </div>
-
-  <div
-    className="home-action-card"
-    onClick={() => navigate("/convert")}
-  >
-    <RefreshCw size={34}/>
-    <span>Convert</span>
-  </div>
-
-</div>
-
-      {/* ================= Menu ================= */}
-
-      <div className="menu-list">
-
-              {/* ================= กำลังเทรด ================= */}
-
-        <div className="menu-card">
-
-          <div className="menu-icon trade">
-            <LineChart size={26}/>
-          </div>
-
-          <div className="menu-content row">
-
-    <h3>
-        กำลังเทรด
-    </h3>
-
-    <strong>
-  USDT {Number(tradingAmount).toLocaleString()}
-</strong>
-
-</div>
-
-          
-
-        
-
-          
-
-        </div>
-
-        {/* ================= ประวัติ ================= */}
-
-        <div
-          className="menu-card"
-          onClick={() => navigate("/transactions")}
-        >
-
-          <div className="menu-icon history">
-            <History size={26}/>
-          </div>
-
-          <div className="menu-content row">
-
-    <h3>ประวัติ</h3>
-
-    <strong>
-        {historyCount} รายการ
-    </strong>
-
-</div>
-          
-
-        </div>
-
-        {/* ================= ภาษา ================= */}
-
-        <div
-  className="menu-card"
-  onClick={() => navigate("/language")}
->
-
-  <div className="menu-icon language">
-    <Globe size={26}/>
-  </div>
-
-  <div className="menu-content">
-
-    <h3>
-      เปลี่ยนภาษา
-    </h3>
-
-  </div>
-
-  <ChevronRight size={20}/>
-
-</div>
-
-                {/* ================= เปลี่ยนรหัสผ่าน ================= */}
-
-        <div
-          className="menu-card"
-          onClick={() => navigate("/change-password")}
-        >
-
-          <div className="menu-icon password">
-            <Lock size={26}/>
-          </div>
-
-          <div className="menu-content">
-
-            <h3>
-              เปลี่ยนรหัสผ่าน
-            </h3>
-
-            
-
-          </div>
-
-          <ChevronRight size={20}/>
-
-        </div>
-
-        {/* ================= ผูกบัญชีธนาคาร ================= */}
-
-        <div
-          className="menu-card"
-          onClick={() => navigate("/bank-account")}
-        >
-
-          <div className="menu-icon bank">
-            <Landmark size={26}/>
-          </div>
-
-          <div className="menu-content">
-
-            <h3>
-              ธุรกรรมบัญชี
-            </h3>
-
-            
-
-          </div>
-
-          <ChevronRight size={20}/>
-
-        </div>
-
-        {/* ================= KYC ================= */}
-
-        <div
-  className="menu-card"
-  onClick={() => navigate("/kyc")}
->
-
-          <div className="menu-icon kyc">
-            <BadgeCheck size={26}/>
-          </div>
-
-          <div className="menu-content">
-
-            <h3>
-              KYC
-            </h3>
-
-            
-
-          </div>
-
-          <ChevronRight size={20}/>
-
-        </div>
-
-        {/* ================= Logout ================= */}
-
-        <div
-          className="menu-card logout-card"
-          onClick={() => {
-
-    localStorage.removeItem("user");
-
-    navigate("/login");
-
-}}
-        >
-
-          <div className="menu-icon logout">
-            <LogOut size={26}/>
-          </div>
-
-          <div className="menu-content">
-
-            <h3>
-              Log out
-            </h3>
-
-            
-
-          </div>
-
-          <ChevronRight size={20}/>
-
-        </div>
-
-      </div>
-
-      <div style={{ height: 30 }} />
-
-    </div>
-
-  );
+);
 
 }

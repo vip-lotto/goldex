@@ -1,38 +1,136 @@
-/* =========================================================
-   GOLDEX V2
-   Premium Dark Theme
-========================================================= */
+/* ==========================================
+   TOTAL VALUE
+========================================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:Inter,sans-serif;
-}
+.assets-total-value{
 
-body{
-    background:#050B16;
-    color:#fff;
-}
+    display:flex;
 
-.assets-page{
+    align-items:center;
+
+    gap:24px;
+
     width:100%;
-    min-height:100vh;
 
-    padding:5%;
-    padding-bottom:10%;
+    margin-top:18px;
 
-    background:
-    radial-gradient(circle at top right,#28446f22 0%,transparent 35%),
-    radial-gradient(circle at bottom left,#ffd54a18 0%,transparent 30%),
-    linear-gradient(
-        180deg,
-        #07111f 0%,
-        #081522 100%
-    );
 }
 
-/* ================= Header ================= */
+.total-left{
+
+    width:90px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+.total-usdt-logo{
+
+    width:82px;
+
+    height:82px;
+
+    object-fit:contain;
+
+    display:block;
+
+}
+
+.total-coin-name{
+
+    margin-top:8px;
+
+    color:#B7C5D9;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+}
+
+.total-right{
+
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    overflow:hidden;
+
+}
+
+.total-number{
+
+    flex:1;
+
+    min-width:0;
+
+    font-size:clamp(34px,6vw,68px);
+
+    font-weight:800;
+
+    line-height:1;
+
+    color:#fff;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.total-unit{
+
+    flex-shrink:0;
+
+    font-size:clamp(34px,6vw,68px);
+
+    font-weight:800;
+
+    line-height:1;
+
+    color:#FFD54A;
+
+    white-space:nowrap;
+
+}
+
+/* ==========================================
+   ASSETS DETAILS
+========================================== */
+
+.assets-card{
+
+    width:100%;
+
+    margin-top:24px;
+
+    background:#171717;
+
+    border-radius:22px;
+
+    padding:22px;
+
+    overflow:hidden;
+
+}
 
 .assets-header{
 
@@ -42,1435 +140,492 @@ body{
 
     align-items:center;
 
-    margin-bottom:25px;
-
-}
-
-.logo{
-
-    font-size:34px;
-
-    font-weight:900;
-
-    letter-spacing:2px;
-
-    color:#FFD54A;
-
-}
-
-.welcome{
-
-    margin-top:4px;
-
-    color:#8FA2C0;
-
-    font-size:14px;
-
-}
-
-.notify-btn{
-
-    width:52px;
-
-    height:52px;
-
-    border:none;
-
-    outline:none;
-
-    border-radius:18px;
-
-    background:
-
-    linear-gradient(
-        145deg,
-        #172A45,
-        #0D182A
-    );
-
-    color:#fff;
-
     cursor:pointer;
 
-    transition:.3s;
-
-    box-shadow:
-
-    0 12px 25px rgba(0,0,0,.35);
+    padding-bottom:12px;
 
 }
 
-.notify-btn:hover{
+.assets-header h2{
 
-    transform:translateY(-4px);
-
-    box-shadow:
-
-    0 18px 35px rgba(255,213,74,.25);
-
-}
-
-/* ================= Wallet ================= */
-
-.wallet-card{
-
-    position:relative;
-
-    overflow:hidden;
-
-    margin-top:18px;
-
-    padding:5%;
-
-    border-radius:6%;
-
-    background:linear-gradient(
-        135deg,
-        #17335d 0%,
-        #081d3f 100%
-    );
-
-    border:1px solid rgba(255,255,255,.08);
-
-    box-shadow:
-    0 25px 70px rgba(0,0,0,.45);
-
-}
-
-
-
-
-
-
-.wallet-glow{
-
-    position:absolute;
-
-    top:-130px;
-
-    right:-120px;
-
-    width:320px;
-
-    height:320px;
-
-    border-radius:50%;
-
-    background:
-
-    radial-gradient(
-
-        rgba(255,200,0,.25),
-
-        transparent 70%
-
-    );
-
-}
-
-.wallet-card::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:320px;
-
-    height:320px;
-
-    right:-130px;
-
-    top:-130px;
-
-    border-radius:50%;
-
-    background:
-
-    radial-gradient(
-
-    circle,
-
-    rgba(255,213,74,.35),
-
-    transparent
-
-    );
-
-}
-
-.wallet-top{
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-margin-bottom:20px;
-
-position:relative;
-
-z-index:2;
-
-}
-
-.wallet-top h2{
-
-    font-size:24px;
-
-    font-weight:700;
-
-}
-
-.wallet-top p{
-
-    margin-top:8px;
-
-    color:#9FB4D1;
-
-    font-size:14px;
-
-}
-
-.avatar{
-
-width:20vw;
-
-height:20vw;
-
-border-radius:50%;
-
-background:#FFC928;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-font-size:40px;
-
-font-weight:800;
-
-color:#333;
-
-box-shadow:
-
-0 0 35px rgba(255,210,0,.45);
-
-border:6px solid rgba(255,255,255,.08);
-
-}
-
-/* ================= Invite ================= */
-
-.invite-box{
-
-margin-top:28px;
-
-background:rgba(255,255,255,.05);
-
-border-radius:24px;
-
-padding:22px;
-
-display:flex;
-
-justify-content:space-between;
-
-align-items:center;
-
-position:relative;
-
-z-index:2;
-
-}
-
-.invite-box span{
-
-    color:#94A3B8;
-
-    font-size:13px;
-
-}
-
-.invite-box h3{
-
-    margin-top:6px;
-
-    font-size:20px;
-
-    letter-spacing:2px;
-
-}
-
-.copy-btn{
-
-width:210px;
-
-height:68px;
-
-border:none;
-
-border-radius:18px;
-
-background:#F5B700;
-
-font-size:24px;
-
-font-weight:700;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-gap:12px;
-
-cursor:pointer;
-
-transition:.25s;
-
-}
-
-.copy-btn:hover{
-
-transform:scale(1.03);
-
-}
-.copy-btn:hover{
-
-    transform:scale(1.08);
-
-}
-
-/* ================= Balance ================= */
-
-.balance-grid{
-
-margin-top:26px;
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-background:#0d2142;
-
-border-radius:22px;
-
-overflow:hidden;
-
-position:relative;
-
-z-index:2;
-
-}
-
-.balance-item{
-
-display:flex;
-
-align-items:center;
-
-gap:14px;
-
-padding:18px;
-
-min-height:110px;
-
-}
-.balance-item:first-child{
-
-border-right:1px solid rgba(255,255,255,.08);
-
-}
-
-.balance-icon{
-
-width:74px;
-
-height:74px;
-
-border-radius:18px;
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-background:#132b52;
-
-font-size:34px;
-
-}
-
-.balance-title{
-
-font-size:16px;
-
-color:#9DB1D1;
-
-margin-bottom:8px;
-
-}
-
-.balance-value{
-
-font-size:52px;
-
-font-weight:800;
-
-color:#FFC928;
-
-}
-
-.profit-value{
-
-font-size:52px;
-
-font-weight:800;
-
-color:#17D663;
-
-}
-
-
-
-/* =====================================================
-   QUICK ACTION
-===================================================== */
-
-.quick-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:14px;
-
-    margin:18px 0;
-
-}
-
-.quick-card{
-
-    position:relative;
-
-    height:145px;
-
-    padding:18px;
-
-    border-radius:22px;
-
-}
-
-.quick-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-
-    0 25px 45px rgba(0,0,0,.45);
-
-}
-
-.quick-bg{
-
-    position:absolute;
-
-    width:180px;
-
-    height:180px;
-
-    border-radius:50%;
-
-    top:-70px;
-
-    right:-60px;
-
-    opacity:.25;
-
-    transition:.35s;
-
-}
-
-.quick-card:hover .quick-bg{
-
-    transform:scale(1.3);
-
-    opacity:.35;
-
-}
-
-.quick-icon{
-
-    width:58px;
-
-    height:58px;
-
-}
-
-.quick-title{
-
-    position:relative;
-
-    z-index:2;
-
-    margin-top:18px;
-
-    font-size:21px;
+    font-size:clamp(20px,3vw,30px);
 
     font-weight:800;
 
-}
-
-.quick-desc{
-
-    position:relative;
-
-    z-index:2;
-
-    margin-top:8px;
-
-    color:rgba(255,255,255,.85);
-
-    font-size:14px;
-
-    line-height:1.5;
-
-}
-
-.quick-arrow{
-
-    position:absolute;
-
-    right:18px;
-
-    bottom:18px;
-
-    width:36px;
-
-    height:36px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:rgba(255,255,255,.18);
-
-}
-
-/* =====================================================
-   Deposit
-===================================================== */
-
-.deposit{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #16a34a,
-    #22c55e
-    );
-
-}
-
-.deposit .quick-bg{
-
-    background:
-
-    radial-gradient(
-    circle,
-    #ffffff,
-    transparent
-    );
-
-}
-
-/* =====================================================
-   Withdraw
-===================================================== */
-
-.withdraw{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #ef4444,
-    #dc2626
-    );
-
-}
-
-.withdraw .quick-bg{
-
-    background:
-
-    radial-gradient(
-    circle,
-    #ffffff,
-    transparent
-    );
-
-}
-
-/* =====================================================
-   Transfer
-===================================================== */
-
-.transfer{
-
-    background:
-
-    linear-gradient(
-    135deg,
-    #2563eb,
-    #3b82f6
-    );
-
-}
-
-.transfer .quick-bg{
-
-    background:
-
-    radial-gradient(
-    circle,
-    #ffffff,
-    transparent
-    );
-
-}
-
-/* =====================================================
-   Hover Glow
-===================================================== */
-
-.deposit:hover{
-
-    box-shadow:
-
-    0 25px 45px rgba(34,197,94,.45);
-
-}
-
-.withdraw:hover{
-
-    box-shadow:
-
-    0 25px 45px rgba(239,68,68,.45);
-
-}
-
-.transfer:hover{
-
-    box-shadow:
-
-    0 25px 45px rgba(59,130,246,.45);
-
-}
-
-/* =====================================================
-   Responsive
-===================================================== */
-
-@media(max-width:900px){
-
-.quick-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.quick-card{
-
-min-height:145px;
-
-}
-
-.quick-title{
-
-font-size:19px;
-
-}
-
-}
-
-/* =====================================================
-   MENU LIST
-===================================================== */
-
-.menu-list{
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-    margin-top:12px;
-
-    margin-bottom:150px;
-
-}
-
-/* =====================================================
-   MENU CARD
-===================================================== */
-
-.menu-card{
-
-    display:flex;
-
-    align-items:center;
-
-    padding:18px 20px;
-
-    border-radius:22px;
-
-    background:rgba(20,33,53,.82);
-
-    backdrop-filter:blur(20px);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    cursor:pointer;
-
-    transition:.3s;
-
-    box-shadow:
-
-    0 12px 28px rgba(0,0,0,.28);
-
-}
-
-.menu-card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:rgba(255,213,74,.35);
-
-    box-shadow:
-
-    0 18px 35px rgba(255,213,74,.15);
-
-}
-
-/* =====================================================
-   ICON
-===================================================== */
-
-.menu-icon{
-
-    width:58px;
-
-    height:58px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    margin-right:18px;
-
     color:#fff;
 
 }
 
-/* สีแต่ละเมนู */
+/* ==========================================
+   COIN ROW
+========================================== */
 
-.trade{
+.asset-row{
 
-    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    display:flex;
 
-}
+    justify-content:space-between;
 
-.profit{
+    align-items:center;
 
-    background:linear-gradient(135deg,#16a34a,#22c55e);
+    gap:16px;
 
-}
+    padding:22px 0;
 
-.history{
+    border-bottom:1px solid rgba(255,255,255,.08);
 
-    background:linear-gradient(135deg,#7c3aed,#9333ea);
-
-}
-
-.language{
-
-    background:linear-gradient(135deg,#0ea5e9,#38bdf8);
+    transition:.25s;
 
 }
 
-.password{
+.asset-row:last-child{
 
-    background:linear-gradient(135deg,#f59e0b,#fbbf24);
-
-}
-
-.bank{
-
-    background:linear-gradient(135deg,#14b8a6,#2dd4bf);
+    border-bottom:none;
 
 }
 
-.kyc{
+.asset-row:hover{
 
-    background:linear-gradient(135deg,#ec4899,#f472b6);
-
-}
-
-.logout{
-
-    background:linear-gradient(135deg,#ef4444,#dc2626);
+    background:rgba(255,255,255,.03);
 
 }
 
-/* =====================================================
-   CONTENT
-===================================================== */
+/* ==========================================
+   LEFT
+========================================== */
 
-.menu-content{
+.asset-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+    min-width:0;
 
     flex:1;
 
 }
 
-.menu-content h3{
+.asset-icon{
 
-    font-size:18px;
+    width:54px;
+
+    height:54px;
+
+    object-fit:contain;
+
+    flex-shrink:0;
+
+}
+
+.asset-symbol{
+
+    font-size:20px;
 
     font-weight:700;
 
     color:#fff;
 
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
 }
 
-.menu-content span{
+/* ==========================================
+   RIGHT
+========================================== */
+
+.asset-right{
+
+    text-align:right;
+
+    flex-shrink:0;
+
+    min-width:120px;
+
+}
+
+.asset-amount{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#fff;
+
+    white-space:nowrap;
+
+}
+
+.asset-usdt{
+
+    margin-top:6px;
+
+    font-size:15px;
+
+    color:#9EA8B8;
+
+    white-space:nowrap;
+
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+/* ---------- iPhone SE / iPhone 7 / 8 ---------- */
+
+@media (max-width:390px){
+
+    .assets-page{
+
+        padding:14px;
+
+        padding-bottom:95px;
+
+    }
+
+    .assets-total-card{
+
+        padding:18px;
+
+        border-radius:18px;
+
+        min-height:170px;
+
+    }
+
+    .assets-total-value{
+
+        gap:12px;
+
+    }
+
+    .total-left{
+
+        width:60px;
+
+    }
+
+    .total-usdt-logo{
+
+        width:56px;
+
+        height:56px;
+
+    }
+
+    .total-coin-name{
+
+        font-size:14px;
+
+    }
+
+    .total-number{
+
+        font-size:28px;
+
+    }
+
+    .total-unit{
+
+        font-size:28px;
+
+    }
+
+    .asset-icon{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .asset-symbol{
+
+        font-size:16px;
+
+    }
+
+    .asset-amount{
+
+        font-size:18px;
+
+    }
+
+    .asset-usdt{
+
+        font-size:12px;
+
+    }
+
+}
+
+/* ---------- Android / iPhone Plus ---------- */
+
+@media (min-width:391px) and (max-width:767px){
+
+    .assets-page{
+
+        padding:16px;
+
+        padding-bottom:100px;
+
+    }
+
+    .total-usdt-logo{
+
+        width:64px;
+
+        height:64px;
+
+    }
+
+    .total-number{
+
+        font-size:34px;
+
+    }
+
+}
+
+/* ---------- iPad ---------- */
+
+@media (min-width:768px) and (max-width:1199px){
+
+    .assets-page{
+
+        max-width:760px;
+
+        padding:30px;
+
+    }
+
+    .assets-total-card{
+
+        min-height:210px;
+
+    }
+
+    .total-usdt-logo{
+
+        width:74px;
+
+        height:74px;
+
+    }
+
+    .total-number{
+
+        font-size:50px;
+
+    }
+
+    .total-unit{
+
+        font-size:50px;
+
+    }
+
+    .asset-icon{
+
+        width:50px;
+
+        height:50px;
+
+    }
+
+}
+
+/* ---------- Desktop ---------- */
+
+@media (min-width:1200px){
+
+    .assets-page{
+
+        max-width:980px;
+
+        padding:38px 24px 120px;
+
+    }
+
+    .assets-total-card{
+
+        min-height:230px;
+
+    }
+
+    .total-usdt-logo{
+
+        width:88px;
+
+        height:88px;
+
+    }
+
+    .total-number{
+
+        font-size:64px;
+
+    }
+
+    .total-unit{
+
+        font-size:64px;
+
+    }
+
+}
+
+/* ==========================================
+   SAFETY
+========================================== */
+
+img{
+
+    max-width:100%;
 
     display:block;
 
-    margin-top:5px;
+}
 
-    font-size:13px;
+.asset-symbol,
+.asset-amount,
+.asset-usdt,
+.total-number,
+.total-unit{
 
-    color:#9ca3af;
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
 
 }
 
-/* =====================================================
-   ARROW
-===================================================== */
+.assets-card,
+.assets-total-card{
 
-.menu-card svg:last-child{
-
-    color:#9ca3af;
-
-    transition:.25s;
+    overflow:hidden;
 
 }
 
-.menu-card:hover svg:last-child{
+/* ==========================================
+   UI EFFECT
+========================================== */
 
-    transform:translateX(5px);
+/* Card */
 
-    color:#FFD54A;
+.assets-total-card,
+.assets-card{
 
-}
-
-/* =====================================================
-   LOGOUT
-===================================================== */
-
-.logout-card{
-
-    margin-top:12px;
-
-}
-
-.logout-card:hover{
-
-    border-color:#ef4444;
+    transition:.28s ease;
 
     box-shadow:
-
-    0 18px 40px rgba(239,68,68,.25);
-
-}
-
-/* =====================================================
-   MOBILE
-===================================================== */
-
-@media(max-width:768px){
-
-.assets-page{
-
-padding:16px;
+        0 10px 30px rgba(0,0,0,.25);
 
 }
 
-.wallet-card{
-
-padding:22px;
-
-}
-
-.balance-box h1{
-
-font-size:34px;
-
-}
-
-.logo{
-
-font-size:28px;
-
-}
-
-.quick-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.menu-card{
-
-padding:16px;
-
-}
-
-.menu-icon{
-
-width:52px;
-
-height:52px;
-
-}
-
-.menu-content h3{
-
-font-size:16px;
-
-}
-
-}
-
-
-/* ===========================
-   HOME ACTION
-=========================== */
-
-.home-actions{
-
-    display:grid;
-
-    grid-template-columns:repeat(4,1fr);
-
-    gap:12px;
-
-    margin:22px 0;
-
-}
-
-.home-action-card{
-
-    background:#11203a;
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:18px;
-
-    aspect-ratio:1/1;
-
-    min-height:88px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.home-action-card:hover{
-
-    transform:translateY(-4px);
-
-    border-color:#FFD54A;
-
-    box-shadow:0 0 18px rgba(255,213,74,.2);
-
-}
-
-.home-action-card svg{
-
-    color:#FFD54A;
-
-    margin-bottom:14px;
-
-}
-
-.home-action-card span{
-
-    color:#fff;
-
-    font-size:18px;
-
-    font-weight:700;
-
-}
-
-.menu-content.row{
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.menu-content.row h3{
-
-    margin:0;
-
-    font-size:16px;
-
-    font-weight:700;
-
-}
-
-.menu-content.row strong{
-
-    font-size:26px;
-
-    font-weight:800;
-
-    color:#f59e0b;
-
-}
-
-.green-price{
-
-    color:#22c55e !important;
-
-}
-
-/* ================= Wallet Top ================= */
-
-.wallet-user{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-}
-
-.user-info{
-
-    display:flex;
-
-    flex-direction:column;
-
-}
-
-.username{
-
-    font-size:14px;
-
-    font-weight:800;
-
-    color:#fff;
-
-    margin:0;
-
-}
-
-.uid-row{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    margin-top:8px;
-
-}
-
-.uid{
-
-    color:#d8b30c;
-
-    font-size:16px;
-
-}
-
-.uid-copy{
-
-    width:28px;
-
-    height:28px;
-
-    border:none;
-
-    border-radius:8px;
-
-    background:transparent;
-
-    color:#9fb3d4;
-
-    cursor:pointer;
-
-    transition:.25s;
-
-}
-
-.uid-copy:hover{
-
-    color:#FFD54A;
-
-    transform:scale(1.15);
-
-}
-
-.avatar{
-
-    width:95px;
-
-    height:95px;
-
-    border-radius:50%;
-
-    background:linear-gradient(
-        145deg,
-        #FFD84D,
-        #F4B400
-    );
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:46px;
-
-    font-weight:800;
-
-    color:#222;
-
-    border:5px solid rgba(255,255,255,.12);
-
-    box-shadow:
-        0 0 30px rgba(255,215,0,.35);
-
-}
-
-/* ================= Invite Card ================= */
-
-.invite-card{
-
-    margin-top:28px;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    border-radius:18px;
-
-     padding:4%;
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-}
-
-.invite-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-}
-
-.invite-icon{
-
-    width:62px;
-
-    height:62px;
-
-    border-radius:18px;
-
-    background:linear-gradient(145deg,#122b55,#945e21);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#FFD54A;
-
-    box-shadow:0 0 25px rgba(255,215,0,.12);
-
-}
-
-.invite-title{
-
-    color:#8ea3c4;
-
-    font-size:14px;
-
-    margin-bottom:8px;
-
-}
-
-.invite-code{
-
-    font-size:14px;
-
-    font-weight:800;
-
-    color:white;
-
-}
-
-.invite-copy-btn{
-
-    border:none;
-
-    background:linear-gradient(135deg,#ffd54a88,#f4b3006e);
-
-    color:#111;
-
-    padding:16px 28px;
-
-    border-radius:16px;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.invite-copy-btn:hover{
+.assets-total-card:hover{
 
     transform:translateY(-2px);
 
-    box-shadow:0 12px 25px rgba(255,215,0,.25);
+    box-shadow:
+        0 18px 40px rgba(0,0,0,.35);
 
 }
 
-/* ================= Balance Card ================= */
+.assets-card:hover{
 
-.balance-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-     gap:4%;
-
-    margin-top:28px;
+    box-shadow:
+        0 14px 35px rgba(0,0,0,.30);
 
 }
 
-.balance-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:6%;
-
-    padding:8%;
-
-    border-radius:22px;
-
-    background:rgba(255,255,255,.04);
-
-    border:1px solid rgba(255,255,255,.05);
-
-    transition:.25s;
-
-}
-
-.balance-item:hover{
-
-    transform:translateY(-3px);
-
-    border-color:#FFD54A55;
-
-}
-
-.balance-circle{
-
-    width:22%;
-
-    height:15px;
-
-    border-radius:18px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:rgb(219, 206, 19);
-
-}
-
-.wallet-circle{
-
-    background:linear-gradient(
-        135deg,
-        #122b55,#091a34
-    );
-
-}
-
-.profit-circle{
-
-    background:linear-gradient(
-        135deg,
-        #122b55,#0c3b70
-    );
-
-}
-
-.balance-label{
-
-    color:#9FB3D4;
-
-    font-size:clamp(11px,2.8vw,14px);
-
-    margin-bottom:6px;
-
-}
-
-.balance-number{
-
-    color:#FFD54A;
-
-    font-size:18px;
-
-    font-weight:650;
-
-}
-
-.profit-number{
-
-    color:#22C55E;
-
-    font-size:16px;
-
-    font-weight:650;
-
-}
-
-.menu-content.row{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    width:100%;
-}
-
-.menu-content.row strong{
-    color:#fff;
-    font-size:15px;
-    font-weight:700;
-}
-
-.menu-content.row{
-    width:100%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.menu-content.row h3{
-    margin:0;
-}
-
-.menu-content.row strong{
-    color:#fff;
-    font-size:15px;
-    font-weight:700;
-}
-
-/* ===== Header ===== */
+/* ==========================================
+   HEADER
+========================================== */
 
 .assets-header{
 
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
+    transition:.25s;
 
 }
 
-.header-right{
+.assets-header:hover{
 
-    display:flex;
-
-    align-items:center;
+    color:#FFD54A;
 
 }
 
-/* ===== Support ===== */
+/* ==========================================
+   ROW
+========================================== */
 
-.support-btn{
+.asset-row{
 
-    width:56px;
+    transition:
+        background .25s,
+        transform .18s;
 
-    height:56px;
+}
 
-    border:none;
+.asset-row:hover{
 
-    border-radius:18px;
+    background:rgba(255,255,255,.035);
 
-    background:#162541;
+    transform:translateX(3px);
 
-    color:#f5c542;
+}
+
+/* ==========================================
+   ICON
+========================================== */
+
+.asset-icon{
+
+    transition:.25s;
+
+}
+
+.asset-row:hover .asset-icon{
+
+    transform:scale(1.06);
+
+}
+
+/* ==========================================
+   TOTAL
+========================================== */
+
+.total-number{
+
+    letter-spacing:-1px;
+
+}
+
+.total-unit{
+
+    letter-spacing:-1px;
+
+}
+
+/* ==========================================
+   BUTTON
+========================================== */
+
+.eye-btn{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
 
     display:flex;
 
@@ -1478,449 +633,157 @@ font-size:16px;
 
     align-items:center;
 
-    cursor:pointer;
-
     transition:.25s;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.35);
+}
+
+.eye-btn:hover{
+
+    background:rgba(255,213,74,.12);
+
+    transform:scale(1.05);
 
 }
 
-.support-btn:hover{
-
-    transform:translateY(-2px);
-
-    background:#22385b;
-
-}
-
-/* ===========================
-   Coin Select
-=========================== */
-
-.coin-select{
-    position: relative;
-    width:100%;
-}
-
-.coin-selected{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    justify-content:space-between;
-
-    width:100%;
-
-    padding:14px;
-
-    background:#162544;
-
-    border:1px solid #f4b400;
-
-    border-radius:12px;
-
-    cursor:pointer;
-}
-
-.coin-selected img{
-
-    width:32px;
-
-    height:32px;
-
-    object-fit:contain;
-
-    flex-shrink:0;
-
-}
-
-.coin-selected span{
-
-    color:#fff;
-
-    font-size:16px;
-
-    font-weight:600;
-
-}
-
-.coin-menu{
-
-    position:absolute;
-
-    top:105%;
-
-    left:0;
-
-    width:100%;
-
-    background:#162544;
-
-    border-radius:12px;
-
-    max-height:320px;
-
-    overflow-y:auto;
-
-    z-index:999;
-
-}
-
-.coin-item{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    padding:12px 16px;
-
-    cursor:pointer;
-
-}
-
-.coin-item:hover{
-
-    background:#1d3357;
-
-}
-
-.coin-item img{
-
-    width:28px;
-
-    height:28px;
-
-    object-fit:contain;
-
-    flex-shrink:0;
-
-}
-
-.coin-item span{
-
-    color:#fff;
-
-}
-
-.coin-arrow.rotate{
-
-    transform:rotate(180deg);
-
-}
-
-
-.coin-wallet-card{
-
-    padding:18px;
-
-}
-
-.coin-box{
-
-    width:100%;
-
-}
-
-.coin-header{
-
-display:flex;
-
-align-items:center;
-
-gap:18px;
-
-margin-top:4px;
-
-cursor:pointer;
-
-}
-
-.coin-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    flex-shrink:0;
-
-}
-
-.coin-symbol{
-
-    font-size:18px;
-
-    font-weight:700;
-
-    color:#c4c7c7;
-
-    letter-spacing:.5px;
-
-}
-
-.coin-value{
-
-color:#c4c7c7;
-
-font-size:18px;
-
-font-weight:700;
-
-}
-
-.coin-dropdown{
-    margin-top:10px;
-    background:#162946;
-    border-radius:10px;
-    padding:10px;
-}
-
-.coin-row{
-    display:flex;
-    justify-content:space-between;
-    padding:6px 0;
-    color:#fff;
-}
-
-.asset-modal-bg{
-
-position:fixed;
-
-left:0;
-top:0;
-
-width:100%;
-height:100%;
-
-background:rgba(0,0,0,.55);
-
-display:flex;
-
-justify-content:center;
-
-align-items:center;
-
-z-index:9999;
-
-}
-
-.asset-modal{
-
-width:min(760px,96vw);
-
-height:min(88vh,760px);
-
-background:#111318;
-
-border:1px solid rgba(255,255,255,.08);
-
-border-radius:22px;
-
-overflow-y:auto;
-
-overflow-x:hidden;
-
-padding:24px;
-
-box-shadow:
-
-0 25px 80px rgba(0,0,0,.65);
-
-}
-
-.asset-card{
-
-display:flex;
-
-align-items:center;
-
-padding:18px 24px;
-
-margin:0 2px 16px;
-
-border-radius:12px;
-
-background:#17191e;
-
-border:1px solid rgba(255,255,255,.06);
-
-}
-
-.asset-top{
-
-display:flex;
-
-align-items:center;
-
-margin-bottom:18px;
-
-}
-
-.asset-name{
-
-width:130px;
-
-display:flex;
-
-align-items:center;
-
-gap:4px;
-
-padding-left:8px;
-
-flex-shrink:0;
-
-}
-
-.asset-icon{
-
-width:38px;
-
-height:38px;
-
-}
+/* ==========================================
+   DIVIDER
+========================================== */
 
 .asset-row{
 
-flex:1;
-
-display:flex;
-
-justify-content:space-between;
-
-gap:20px;
+    position:relative;
 
 }
 
-.asset-item{
+.asset-row::after{
 
-width:120px;
+    content:"";
 
-flex-shrink:0;
+    position:absolute;
 
-}
+    left:60px;
 
-.asset-item span{
+    right:0;
 
-font-size:13px;
+    bottom:0;
 
-color:#8d96a8;
+    height:1px;
 
-display:block;
-
-margin-bottom:8px;
+    background:rgba(255,255,255,.05);
 
 }
 
-.asset-item strong{
+.asset-row:last-child::after{
 
-font-size:14px;
-
-font-weight:600;
-
-color:white;
-
-word-break:break-word;
-
-line-height:1.4;
+    display:none;
 
 }
 
-@media (max-width:768px){
+/* ==========================================
+   SCROLL
+========================================== */
 
-.asset-modal{
+::-webkit-scrollbar{
 
-width:min(760px,96vw);
-
-height:fit-content;
-
-max-height:88vh;
-
-overflow-y:auto;
-
-}
-.asset-card{
-
-padding:16px;
+    width:7px;
 
 }
 
-.asset-name{
+::-webkit-scrollbar-track{
 
-width:90px;
-
-font-size:18px;
+    background:#0b1627;
 
 }
 
-.asset-item{
+::-webkit-scrollbar-thumb{
 
-width:90px;
+    background:#314866;
 
-}
-
-.asset-item span{
-
-font-size:11px;
+    border-radius:20px;
 
 }
 
-.asset-item strong{
+::-webkit-scrollbar-thumb:hover{
 
-font-size:13px;
-
-}
+    background:#46648d;
 
 }
 
-.asset-modal-bg{
+/* ==========================================
+   ANIMATION
+========================================== */
 
-padding:20px;
+.assets-total-card{
 
-}
-
-.asset-modal{
-
-width:100%;
-
-max-width:760px;
-
-max-height:90vh;
+    animation:fadeDown .35s ease;
 
 }
 
-@media(max-width:768px){
+.assets-card{
 
-.coin-symbol{
-    font-size:18px;
-    font-weight:700;
-    color:#fff;
-}
-
-.coin-value{
-    font-size:18px;      /* เท่ากับ BTC */
-    font-weight:700;
-    color:#fff;
-    line-height:1;
-}
+    animation:fadeUp .35s ease;
 
 }
 
-@media(max-width:420px){
+@keyframes fadeDown{
 
-.coin-symbol{
+    from{
 
-    font-size:16px;
+        opacity:0;
+
+        transform:translateY(-18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
 
 }
 
-.coin-value{
+@keyframes fadeUp{
 
-    font-size:13px;
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
 
 }
+
+/* ==========================================
+   SAFE AREA
+========================================== */
+
+.assets-page{
+
+    padding-bottom:
+        calc(120px + env(safe-area-inset-bottom));
+
+}
+
+/* ==========================================
+   IMAGE
+========================================== */
+
+img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
 
 }

@@ -19,49 +19,49 @@ const DEFAULT_CARDS = [
   {
     title: "BTC",
     symbol: "BINANCE:BTCUSDT",
-    icon: "₿",
+    logo: "/coins/btc.png",
     leverage: "40x",
   },
   {
     title: "ETH",
     symbol: "BINANCE:ETHUSDT",
-    icon: "◆",
+    logo: "/coins/eth.png",
     leverage: "25x",
   },
   {
     title: "BNB",
     symbol: "BINANCE:BNBUSDT",
-    icon: "🟡",
+    logo: "/coins/bnb.png",
     leverage: "20x",
   },
   {
     title: "SOL",
     symbol: "BINANCE:SOLUSDT",
-    icon: "◎",
+    logo: "/coins/sol.png",
     leverage: "20x",
   },
   {
     title: "XRP",
     symbol: "BINANCE:XRPUSDT",
-    icon: "✕",
+    logo: "/coins/xrp.png",
     leverage: "20x",
   },
   {
     title: "AVAX",
     symbol: "BINANCE:AVAXUSDT",
-    icon: "🔺",
+    logo: "/coins/avax.png",
     leverage: "20x",
   },
   {
     title: "LINK",
     symbol: "BINANCE:LINKUSDT",
-    icon: "🔗",
+    logo: "/coins/link.png",
     leverage: "20x",
   },
   {
     title: "TON",
     symbol: "BINANCE:TONUSDT",
-    icon: "💎",
+    logo: "/coins/ton.png",
     leverage: "20x",
   },
 ];
@@ -193,53 +193,35 @@ if (current) {
               }
             >
 
-              <div className="coin-top">
+              <img
+    src={item.logo}
+    alt={item.title}
+    className="coin-logo"
+/>
 
-                <div>
+<h3 className="coin-title">
+    {item.title}
+</h3>
 
-                  <div className="coin-name">
+<div className="coin-price">
+    ${item.price}
+</div>
 
-                    <span className="coin-icon">
-                      {item.icon}
-                    </span>
+<div
+    className={
+        item.color === "green"
+            ? "coin-percent green"
+            : "coin-percent red"
+    }
+>
+    {item.color === "green" ? "▲ " : "▼ "}
+    {item.percent}
+</div>
 
-                    <h3>{item.title}</h3>
-
-                  </div>
-
-                  <div className="coin-price">
-
-                    ${item.price}
-
-                  </div>
-
-                  <div
-                    className={
-                      item.color === "green"
-                        ? "coin-percent green"
-                        : "coin-percent red"
-                    }
-                  >
-
-                    {item.color === "green"
-                      ? "▲ "
-                      : "▼ "}
-
-                    {item.percent}
-
-                  </div>
-
-                  <div className="coin-info">
-
-                    <span>{item.leverage}</span>
-
-                    <span>USDT</span>
-
-                  </div>
-
-                </div>
-
-              </div>
+<div className="coin-info">
+    <span>{item.leverage}</span>
+    <span>USDT</span>
+</div>
 
             </div>
 

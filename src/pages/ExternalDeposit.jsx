@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   Copy,
   Download,
@@ -9,6 +9,13 @@ import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
 
 export default function ExternalDeposit() {
+
+  const [openCoin, setOpenCoin] = useState(false);
+  const [openNetwork, setOpenNetwork] = useState(false);
+  
+
+  const coinRef = useRef(null);
+const networkRef = useRef(null);
 
   const [wallets, setWallets] =
     useState([]);
@@ -27,6 +34,41 @@ export default function ExternalDeposit() {
 
   const [toastMsg, setToastMsg] =
     useState("");
+
+    const COIN_LOGO = {
+  USDT: "/coins/usdt.png",
+  BTC: "/coins/btc.png",
+  ETH: "/coins/eth.png",
+  BNB: "/coins/bnb.png",
+  SOL: "/coins/sol.png",
+  XRP: "/coins/xrp.png",
+  DOGE: "/coins/doge.png",
+  TRX: "/coins/trx.png",
+  TON: "/coins/ton.png",
+  AVAX: "/coins/avax.png",
+  LINK: "/coins/link.png",
+  LTC: "/coins/ltc.png",
+  ADA: "/coins/ada.png",
+  DOT: "/coins/dot.png",
+  BCH: "/coins/bch.png",
+  FIL: "/coins/fil.png",
+  NEAR: "/coins/near.png",
+  ATOM: "/coins/atom.png",
+  APT: "/coins/apt.png",
+  OP: "/coins/op.png",
+  ARB: "/coins/arb.png",
+  MATIC: "/coins/matic.png",
+  SUI: "/coins/sui.png"
+};
+
+const NETWORK_LOGO = {
+  TRC20: "/coins/trx.png",
+  ERC20: "/coins/eth.png",
+  BEP20: "/coins/bnb.png",
+  BEP2: "/coins/bnb.png",
+  POLYGON: "/coins/matic.png",
+  SOL: "/coins/sol.png"
+};
 
   useEffect(() => {
     loadWallets();
@@ -203,90 +245,89 @@ export default function ExternalDeposit() {
     <>
 
       <div className="deposit-card">
+  <h3>Crypto</h3>
 
-        <h3>
-          Crypto
-        </h3>
-
-        <select
-          value={coin}
-          onChange={(e) => {
-
-            const value =
-              e.target.value;
-
-            setCoin(value);
-
-            const firstNetwork =
-              wallets.find(
-                x =>
-                  x.coin ===
-                  value
-              )?.network || "";
-
-            setNetwork(
-              firstNetwork
-            );
-          }}
-        >
-
-          {[...new Set(
-            wallets.map(
-              x => x.coin
-            )
-          )].map((item) => (
-
-            <option
-              key={item}
-              value={item}
-            >
-              {item}
-            </option>
-
-          ))}
-
-        </select>
-
+  <div className="custom-select" ref={coinRef}>
+    <div
+      className="select-box"
+      onClick={() => setOpenCoin(!openCoin)}
+    >
+      <div className="select-value">
+        <img src={COIN_LOGO[coin]} className="select-logo" />
+        <span>{coin}</span>
       </div>
+
+      <span>▼</span>
+    </div>
+
+    {openCoin && (
+      <div className="select-menu">
+        {[...new Set(wallets.map(w => w.coin))].map((c) => (
+          <div
+            key={c}
+            className="select-item"
+            onClick={() => {
+              setCoin(c);
+
+              const list = wallets.filter(w => w.coin === c);
+              const trc20 = list.find(w => w.network === "TRC20");
+
+              setNetwork(trc20 ? "TRC20" : list[0]?.network || "");
+
+              setOpenCoin(false);
+            }}
+          >
+            <img src={COIN_LOGO[c]} className="select-logo" />
+            <span>{c}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
 
       <div className="deposit-card">
+  <h3>Network</h3>
 
-        <h3>
-          Network
-        </h3>
-
-        <select
-          value={network}
-          onChange={(e) =>
-            setNetwork(
-              e.target.value
-            )
-          }
-        >
-
-          {wallets
-            .filter(
-              x =>
-                x.coin === coin
-            )
-            .map((item) => (
-
-              <option
-                key={
-                  item.id
-                }
-                value={
-                  item.network
-                }
-              >
-                {item.network}
-              </option>
-
-            ))}
-
-        </select>
-
+  <div className="custom-select" ref={networkRef}>
+    <div
+      className="select-box"
+      onClick={() => setOpenNetwork(!openNetwork)}
+    >
+      <div className="select-value">
+        <img
+          src={NETWORK_LOGO[network] || "/coins/default.png"}
+          className="select-logo"
+        />
+        <span>{network}</span>
       </div>
+
+      <span>▼</span>
+    </div>
+
+    {openNetwork && (
+      <div className="select-menu">
+        {[...new Set(
+          wallets
+            .filter(w => w.coin === coin)
+            .map(w => w.network)
+        )].map((n) => (
+          <div
+            key={n}
+            className="select-item"
+            onClick={() => {
+              setNetwork(n);
+              setOpenNetwork(false);
+            }}
+          >
+            <img src={NETWORK_LOGO[n]} className="select-logo" />
+            <span>{n}</span>
+          </div>
+        ))}
+      </div>
+    )}
+  </div>
+</div>
 
       {currentWallet && (
 
@@ -308,9 +349,7 @@ export default function ExternalDeposit() {
           >
 
             <QRCodeCanvas
-              value={
-                currentWallet.address
-              }
+              value={currentWallet.address}
               size={220}
             />
 
@@ -324,7 +363,7 @@ export default function ExternalDeposit() {
             className="address-box"
           >
             {
-              currentWallet.address
+              currentWallet?.address
             }
           </div>
 

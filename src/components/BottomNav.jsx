@@ -3,8 +3,8 @@ import {
   House,
   ChartCandlestick,
   ArrowLeftRight,
-  ClipboardList,
-  Wallet
+  Wallet,
+  User
 } from "lucide-react";
 
 export default function BottomNav() {
@@ -66,14 +66,16 @@ export default function BottomNav() {
         <span>Trade</span>
       </Link>
 
-      <Link to="/orders" style={navStyle("/orders")}>
-        <ClipboardList size={22}/>
-        <span>Orders</span>
-      </Link>
+      
 
       <Link to="/assets" style={navStyle("/assets")}>
         <Wallet size={22}/>
         <span>Assets</span>
+      </Link>
+
+      <Link to="/mine" style={navStyle("/mine")}>
+      <User size={22}/>
+      <span>Mine</span>
       </Link>
 
     </div>

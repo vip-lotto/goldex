@@ -21,9 +21,10 @@ export default function CoinSelect({
     <div className="coin-left">
 
         <img
-            src={`/coins/${value.symbol.toLowerCase()}.png`}
-            alt=""
-        />
+    src={`/coins/${value.symbol.toLowerCase()}.png`}
+    alt=""
+    className="coin-logo"
+/>
 
         <span>{value.symbol}</span>
 

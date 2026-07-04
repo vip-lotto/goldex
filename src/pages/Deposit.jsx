@@ -37,7 +37,7 @@ export default function Deposit() {
             setTab("internal")
           }
         >
-          Crypto deposit
+          Internal Transfer
         </button>
 
         <button
@@ -50,7 +50,7 @@ export default function Deposit() {
             setTab("external")
           }
         >
-          Bank deposit
+          Crypto Deposit
         </button>
       </div>
 

@@ -1,279 +1,571 @@
+/* ================= GLOBAL PAGE ================= */
+
 .deposit-page{
-  min-height:100vh;
-  background:#050505;
-  color:#fff;
-  padding:20px;
-  padding-bottom:100px;
+  min-height: 100vh;
+  background: #050505;
+  color: #fff;
+  padding: 20px;
+  padding-bottom: 100px;
+  box-sizing: border-box;
 }
 
-/* ================= Header ================= */
+/* ================= HEADER ================= */
 
 .deposit-header{
-  display:flex;
-  align-items:center;
-  gap:15px;
-  margin-bottom:25px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
 }
 
 .deposit-header h2{
-  margin:0;
-  font-size:32px;
-  font-weight:800;
-  color:#f5c542;
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  color: #f5c542;
 }
 
 .back-btn{
-  width:48px;
-  height:48px;
-  border:none;
-  border-radius:14px;
-  background:#161616;
-  color:#fff;
-  cursor:pointer;
-  transition:.25s;
+  width: 46px;
+  height: 46px;
+  border: none;
+  border-radius: 12px;
+  background: #161616;
+  color: #fff;
+  cursor: pointer;
+  transition: .2s;
 }
 
 .back-btn:hover{
-  background:#222;
+  background: #222;
 }
 
-/* ================= Tabs ================= */
+/* ================= TABS ================= */
 
 .deposit-tabs{
-  display:flex;
-  gap:12px;
-  margin-bottom:25px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
 }
 
 .tab-btn{
-  flex:1;
-  height:56px;
-  border:none;
-  border-radius:16px;
-  background:#171717;
-  color:#bdbdbd;
-  border:1px solid #2a2a2a;
-  font-size:17px;
-  font-weight:700;
-  cursor:pointer;
-  transition:.25s;
+  flex: 1;
+  height: 54px;
+  border-radius: 14px;
+  border: 1px solid #2a2a2a;
+  background: #171717;
+  color: #aaa;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .2s;
 }
 
 .tab-btn:hover{
-  background:#202020;
+  background: #202020;
 }
 
 .tab-btn.active{
-  background:#f5c542;
-  color:#000;
-  border:none;
+  background: #f5c542;
+  color: #000;
+  border: none;
 }
 
-/* ================= Card ================= */
+/* ================= CARD ================= */
 
 .deposit-card{
-  background:#111111;
-  border:1px solid #252525;
-  border-radius:22px;
-  padding:22px;
-  margin-bottom:20px;
-  box-shadow:0 0 25px rgba(0,0,0,.35);
+  background: #111;
+  border: 1px solid #222;
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 16px;
 }
 
 .deposit-card h3{
-  margin:0 0 18px;
-  font-size:20px;
-  font-weight:700;
-  color:#fff;
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 700;
 }
 
-/* ================= Select ================= */
 
-.deposit-card select{
-  width:100%;
-  height:58px;
+/* ================= CUSTOM SELECT WRAPPER ================= */
+
+.custom-select{
+  position:relative;
+  margin-bottom:16px;
+}
+
+
+/* ================= SELECT BOX ================= */
+
+.select-box{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+
+  padding:18px 16px;   /* 👈 เพิ่มความสูง */
+  min-height:72px;     /* 👈 สำคัญมาก */
+
+  background:#0f172a;
+  border:1px solid #263244;
   border-radius:16px;
-  border:1px solid #333;
-  background:#1a1a1a;
-  color:#fff;
-  padding:0 18px;
-  font-size:17px;
-  outline:none;
-  transition:.25s;
+
+  cursor:pointer;
+  transition:.2s;
 }
 
-.deposit-card select:focus{
+.select-box:hover{
   border-color:#f5c542;
-  box-shadow:0 0 15px rgba(245,197,66,.18);
 }
 
-.deposit-card option{
-  background:#1a1a1a;
-  color:#fff;
+/* ================= VALUE (ICON + TEXT) ================= */
+
+.select-value img{
+  width:26px;
+  height:26px;
 }
 
-/* ================= Address ================= */
+
+.select-logo{
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+/* ================= DROPDOWN MENU ================= */
+
+.select-menu{
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+
+  margin-top: 8px;
+
+  background: #121926;
+  border: 1px solid #2b3445;
+  border-radius: 14px;
+
+  overflow: hidden;
+  z-index: 999;
+
+  animation: dropFade .15s ease;
+}
+
+/* ================= ITEM ================= */
+
+.select-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.select-item:hover{
+  background: #1b2536;
+}
+
+/* ================= ACTIVE ITEM (optional highlight) ================= */
+
+.select-item.active{
+  background: #24314a;
+}
+
+/* ================= ICON SIZE INSIDE ITEM ================= */
+
+.select-item img{
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes dropFade{
+  from{
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to{
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+/* ================= QR WRAPPER ================= */
+
+.qr-card{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ================= QR BOX ================= */
+
+.qr-box{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 20px;
+  background: #0f0f0f;
+  border: 1px solid #222;
+  border-radius: 16px;
+}
+
+/* QR IMAGE STYLE */
+.qr-box canvas{
+  border-radius:16px;
+  padding:10px;
+  background:#fff;
+}
+
+/* ================= ADDRESS LABEL ================= */
+
+.address-label{
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 5px;
+}
+
+/* ================= ADDRESS BOX ================= */
 
 .address-box{
-  width:100%;
-  min-height:60px;
-  display:flex;
-  align-items:center;
-  padding:15px 18px;
-  background:#181818;
-  border:1px solid #333;
-  border-radius:16px;
-  word-break:break-all;
-  color:#fff;
+  font-family: monospace;
+  letter-spacing: 0.5px;
 }
 
-/* ================= Copy ================= */
+/* ================= BUTTON ROW ================= */
 
-.copy-btn{
-  width:180px;
-  height:52px;
-  border:none;
-  border-radius:14px;
-  background:#f5c542;
-  color:#000;
-  font-size:16px;
-  font-weight:700;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:8px;
-  cursor:pointer;
-  transition:.25s;
+.btn-row{
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.copy-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 20px rgba(245,197,66,.35);
+/* ================= BUTTON BASE ================= */
+
+.btn{
+  flex: 1;
+  height: 52px;
+
+  border: none;
+  border-radius: 14px;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  transition: .2s;
 }
 
-/* ================= Note ================= */
+/* COPY BUTTON */
 
-.deposit-note{
-  margin-top:15px;
+.btn-copy{
+  background: #f5c542;
+  color: #000;
 }
 
-.deposit-note p{
-  margin:10px 0;
-  color:#b5b5b5;
-  font-size:15px;
-  line-height:1.6;
+.btn-copy:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(245,197,66,.25);
 }
 
-/* ================= Upload ================= */
+/* DOWNLOAD BUTTON */
+
+.btn-download{
+  background: #1f2a3a;
+  color: #fff;
+  border: 1px solid #2b3445;
+}
+
+.btn-download:hover{
+  background: #263447;
+}
+
+
+/* ================= UPLOAD CARD ================= */
+
+.upload-card{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* ================= UPLOAD BOX ================= */
 
 .upload-box{
-  width:100%;
-  min-height:190px;
-  border:2px dashed #444;
-  border-radius:20px;
-  background:#171717;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  gap:12px;
-  color:#9d9d9d;
-  cursor:pointer;
-  transition:.25s;
+  width: 100%;
+  min-height: 180px;
+
+  background: #111;
+  border: 2px dashed #2b3445;
+  border-radius: 16px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+  color: #9aa4b2;
+  cursor: pointer;
+
+  transition: .2s;
 }
 
 .upload-box:hover{
-  border-color:#f5c542;
-  background:#1e1e1e;
+  border-color: #f5c542;
+  background: #151515;
 }
 
 .upload-box svg{
-  color:#f5c542;
+  color: #f5c542;
 }
 
-/* ================= Submit ================= */
+/* ================= FILE NAME ================= */
+
+.upload-box p{
+  font-size: 14px;
+  color: #ccc;
+  margin: 0;
+}
+
+/* ================= HIDDEN INPUT ================= */
+
+.upload-box input{
+  display: none;
+}
+
+/* ================= SUBMIT BUTTON ================= */
 
 .submit-btn{
-  width:100%;
-  height:60px;
-  border:none;
-  border-radius:18px;
-  background:#f5c542;
-  color:#000;
-  font-size:20px;
-  font-weight:800;
-  cursor:pointer;
-  transition:.25s;
+  width: 100%;
+  height: 58px;
+
+  border: none;
+  border-radius: 16px;
+
+  background: #f5c542;
+  color: #000;
+
+  font-size: 18px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+  margin-top: 10px;
 }
 
+/* hover */
 .submit-btn:hover{
-  transform:translateY(-2px);
-  box-shadow:0 0 20px rgba(245,197,66,.35);
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(245,197,66,.3);
 }
 
-/* ================= QR ================= */
-
-.qr-preview{
-  width:180px;
-  margin-top:20px;
-  border-radius:16px;
-  border:2px solid #333;
+/* disabled state */
+.submit-btn:disabled{
+  background: #3a3a3a;
+  color: #777;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
-/* ================= Scroll ================= */
-
-::-webkit-scrollbar{
-  width:8px;
+/* loading effect */
+.submit-btn.loading{
+  position: relative;
+  pointer-events: none;
+  opacity: 0.8;
 }
 
-::-webkit-scrollbar-thumb{
-  background:#444;
-  border-radius:20px;
+.submit-btn.loading::after{
+  content: "";
+  width: 18px;
+  height: 18px;
+
+  border: 2px solid #000;
+  border-top-color: transparent;
+  border-radius: 50%;
+
+  position: absolute;
+  right: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  animation: spin .7s linear infinite;
 }
 
-::-webkit-scrollbar-thumb:hover{
-  background:#666;
+/* ================= ANIMATION ================= */
+
+@keyframes spin{
+  from { transform: translateY(-50%) rotate(0deg); }
+  to { transform: translateY(-50%) rotate(360deg); }
 }
 
-/* ================= Mobile ================= */
 
-@media(max-width:768px){
+/* ================= FINAL STABILITY FIX ================= */
 
-  .deposit-page{
-    padding-top:15px;
-    padding-right:15px;
-    padding-left:15px;
-    padding-bottom:120px;
-    box-sizing:border-box;
+/* กัน dropdown ดัน layout */
+.custom-select{
+  position: relative;
+  width: 100%;
+}
+
+/* ================= DROPDOWN OVERLAY FIX ================= */
+
+.select-menu{
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  width: 100%;
+
+  background: #121926;
+  border: 1px solid #2b3445;
+  border-radius: 14px;
+
+  z-index: 9999;
+
+  overflow: hidden;
+
+  /* สำคัญ: ไม่ดัน layout */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+
+  animation: dropdownFade .15s ease;
+}
+
+/* ================= SAFE ITEM ================= */
+
+.select-item{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  padding: 12px 14px;
+  cursor: pointer;
+
+  transition: .15s;
+}
+
+.select-item:hover{
+  background: #1b2536;
+}
+
+/* ================= PREVENT LAYOUT SHIFT ================= */
+
+.select-box{
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 16px;
+
+  background: #121926;
+  border: 1px solid #2b3445;
+  border-radius: 14px;
+
+  cursor: pointer;
+}
+
+/* ================= GLOBAL SAFETY ================= */
+
+/* กัน dropdown ไปโดน QR / card */
+.deposit-card{
+  position: relative;
+  overflow: visible;
+}
+
+/* ================= MOBILE FIX ================= */
+
+@media (max-width: 768px){
+
+  .select-menu{
+    position: absolute;
+    z-index: 99999;
   }
 
-
-
-  .deposit-header h2{
-    font-size:26px;
+  .select-item{
+    padding: 14px;
   }
 
-  .deposit-tabs{
-    gap:10px;
+  .select-box{
+    height: 52px;
   }
+}
 
-  .tab-btn{
-    height:52px;
-    font-size:15px;
+/* ================= ANIMATION ================= */
+
+@keyframes dropdownFade{
+  from{
+    opacity: 0;
+    transform: translateY(-6px);
   }
-
-  .deposit-card{
-    padding:18px;
+  to{
+    opacity: 1;
+    transform: translateY(0);
   }
+}
 
-  .copy-btn{
-    width:100%;
-    margin-top:12px;
-    font-size:15px;
-  }
 
-  .address-box{
-    font-size:14px;
-  }
 
+.tab-switch{
+  position: relative;
+  display: flex;
+  background: #111;
+  border-radius: 14px;
+  padding: 4px;
+  margin-bottom: 18px;
+  border: 1px solid #222;
+  overflow: hidden;
+}
+
+/* ตัวเลื่อน (สำคัญมาก) */
+.tab-slider{
+  position: absolute;
+  top: 4px;
+  bottom: 4px;
+  width: 50%;
+  border-radius: 12px;
+  background: #f5c542;
+  transition: all .25s ease;
+}
+
+/* อยู่ฝั่งซ้าย */
+.tab-slider.internal{
+  left: 4px;
+}
+
+/* อยู่ฝั่งขวา */
+.tab-slider.crypto{
+  left: 50%;
+}
+
+/* ปุ่ม */
+.tab-btn{
+  flex: 1;
+  z-index: 2;
+  background: transparent;
+  border: none;
+  color: #aaa;
+  font-weight: 700;
+  padding: 12px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+/* active text */
+.tab-btn.active{
+  color: #000;
 }

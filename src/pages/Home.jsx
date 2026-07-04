@@ -4,6 +4,7 @@ import {
 ArrowDownToLine,
 ArrowUpFromLine,
 ArrowLeftRight,
+RefreshCcw,
 Bell,
 Headset
 } from "lucide-react";
@@ -77,28 +78,30 @@ try {
     await res.json();
 
   setCoins([
-    {
-      symbol: "BTC",
-      name: "Bitcoin",
-      icon: "🟠",
+    
+      {
+  symbol: "BTC",
+  name: "Bitcoin",
+  logo: "/coins/btc.png",
       price:
         data.bitcoin.usd,
       change:
         data.bitcoin.usd_24h_change,
     },
     {
-      symbol: "ETH",
-      name: "Ethereum",
-      icon: "🔷",
+      
+  symbol: "ETH",
+  name: "Ethereum",
+  logo: "/coins/eth.png",
       price:
         data.ethereum.usd,
       change:
         data.ethereum.usd_24h_change,
     },
     {
-      symbol: "SOL",
-      name: "Solana",
-      icon: "🟣",
+  symbol: "SOL",
+  name: "Solana",
+  logo: "/coins/sol.png",
       price:
         data.solana.usd,
       change:
@@ -294,43 +297,39 @@ return (
 
   <div className="action-grid">
 
-    <div
-      className="action-box"
-      onClick={() =>
-        navigate(
-          "/deposit"
-        )
-      }
-    >
-      <ArrowDownToLine size={32}/>
-      <p>Deposit</p>
-    </div>
-
-    <div
-      className="action-box"
-      onClick={() =>
-        navigate(
-          "/withdraw"
-        )
-      }
-    >
-      <ArrowUpFromLine size={32}/>
-      <p>Withdraw</p>
-    </div>
-
-    <div
-      className="action-box"
-      onClick={() =>
-        navigate(
-          "/transfer"
-        )
-      }
-    >
-      <ArrowLeftRight size={32}/>
-      <p>Transfer</p>
-    </div>
-
+  <div
+    className="action-box"
+    onClick={() => navigate("/deposit")}
+  >
+    <ArrowDownToLine size={30}/>
+    <p>Deposit</p>
   </div>
+
+  <div
+    className="action-box"
+    onClick={() => navigate("/withdraw")}
+  >
+    <ArrowUpFromLine size={30}/>
+    <p>Withdraw</p>
+  </div>
+
+  <div
+    className="action-box"
+    onClick={() => navigate("/transfer")}
+  >
+    <ArrowLeftRight size={30}/>
+    <p>Transfer</p>
+  </div>
+
+  <div
+    className="action-box"
+    onClick={() => navigate("/convert")}
+  >
+    <RefreshCcw size={30}/>
+    <p>Convert</p>
+  </div>
+
+</div>
 
   <div className="gold-section">
 
@@ -380,42 +379,51 @@ return (
     coins.map((coin) => (
 
       <div
-        className="market-row"
-        key={coin.symbol}
-      >
+    className="market-row"
+    key={coin.symbol}
+>
 
-        <div className="market-left">
+    <div className="market-left">
 
-          <h3>
-            {coin.icon} {coin.symbol}
-          </h3>
+        <img
+            src={coin.logo}
+            alt={coin.symbol}
+            className="market-logo"
+        />
 
-          <span>
-            {coin.name}
-          </span>
+        <div className="market-info">
 
+    <div className="market-symbol">
+        {coin.symbol}
+    </div>
+
+    <div className="market-name">
+        {coin.name}
+    </div>
+
+</div>
+
+    </div>
+
+    <div className="market-right">
+
+        <div className="market-price">
+            ${Number(coin.price).toLocaleString()}
         </div>
 
-        <div className="market-right">
-
-          <h3>
-            $
-            {Number(coin.price).toLocaleString()}
-          </h3>
-
-          <span
+        <div
             className={
-              coin.change > 0
-                ? "green"
-                : "red"
+                coin.change > 0
+                    ? "market-change green"
+                    : "market-change red"
             }
-          >
+        >
             ▲ {coin.change.toFixed(2)}%
-          </span>
-
         </div>
 
-      </div>
+    </div>
+
+</div>
 
     ))}
 

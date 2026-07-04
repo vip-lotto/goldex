@@ -32,6 +32,16 @@ export default function InternalWithdraw() {
   );
 
   
+  const currentWallet =
+  wallets.find(
+    item =>
+      item.coin === coin &&
+      item.network === network
+  );
+
+  
+  
+
   useEffect(() => {
     loadWallets();
   }, []);
@@ -592,4 +602,9 @@ disabled={loading}
     </>
   );
 }
+
+
+
+
+
 

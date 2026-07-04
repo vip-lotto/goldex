@@ -1,0 +1,1007 @@
+/* ==========================================================
+   GOLDEX MINE V2
+   PART 1
+   Layout + Header + Profile Card
+==========================================================*/
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+.mine-page{
+
+    width:100%;
+
+    max-width:760px;
+
+    margin:auto;
+
+    min-height:100vh;
+
+    padding:clamp(14px,4vw,24px);
+
+    padding-bottom:clamp(90px,12vw,120px);
+
+    background:#050505;
+
+    color:#fff;
+
+}
+
+/* ===========================
+   TITLE
+=========================== */
+
+.mine-title{
+
+    font-size:clamp(26px,7vw,34px);
+
+    font-weight:800;
+
+    margin-bottom:clamp(18px,5vw,28px);
+
+}
+
+/* ===========================
+   PROFILE CARD
+=========================== */
+
+.profile-card{
+
+    background:linear-gradient(
+        135deg,
+        #17335D,
+        #0A2143
+    );
+
+    border-radius:clamp(18px,4vw,24px);
+
+    padding:clamp(18px,5vw,24px);
+
+    border:1px solid rgba(255,255,255,.06);
+
+    margin-bottom:clamp(18px,5vw,26px);
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.profile-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    background:rgba(245,197,66,.08);
+
+    border-radius:50%;
+
+    right:-70px;
+
+    top:-70px;
+
+}
+
+/* ===========================
+   PROFILE TOP
+=========================== */
+
+.profile-top{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:clamp(14px,4vw,20px);
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/* ===========================
+   AVATAR
+=========================== */
+
+.avatar{
+
+    width:clamp(60px,16vw,76px);
+
+    height:clamp(60px,16vw,76px);
+
+    border-radius:50%;
+
+    background:#F5C542;
+
+    color:#111;
+
+    font-size:clamp(24px,7vw,34px);
+
+    font-weight:800;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    flex-shrink:0;
+
+}
+
+/* ===========================
+   PROFILE INFO
+=========================== */
+
+.profile-info{
+
+    flex:1;
+
+}
+
+.profile-info h2{
+
+    font-size:clamp(18px,5vw,24px);
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+.uid-row{
+
+    margin-top:6px;
+
+    font-size:clamp(12px,3vw,15px);
+
+    color:#C6D4E6;
+
+}
+
+/* ===========================
+   INVITE
+=========================== */
+
+.invite-box{
+
+    margin-top:clamp(18px,5vw,24px);
+
+    background:rgba(255,255,255,.06);
+
+    border-radius:clamp(14px,4vw,18px);
+
+    padding:clamp(14px,4vw,18px);
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:12px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.invite-label{
+
+    color:#9FB3D4;
+
+    font-size:clamp(12px,3vw,14px);
+
+}
+
+.invite-code{
+
+    margin-top:6px;
+
+    color:#fff;
+
+    font-size:clamp(15px,4vw,20px);
+
+    font-weight:700;
+
+}
+
+/* ===========================
+   COPY BUTTON
+=========================== */
+
+.copy-btn{
+
+    height:clamp(38px,10vw,44px);
+
+    padding:0 clamp(16px,4vw,20px);
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#F5C542;
+
+    color:#111;
+
+    font-weight:700;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.copy-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 25px rgba(245,197,66,.28);
+
+}
+
+.copy-btn:active{
+
+    transform:scale(.96);
+
+}
+
+/* ==========================================================
+   GOLDEX MINE V2
+   PART 2
+   ACTION BUTTONS
+==========================================================*/
+
+/* ===========================
+   ACTION GRID
+=========================== */
+
+.action-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:clamp(8px,2vw,16px);
+
+    margin-bottom:clamp(24px,6vw,32px);
+
+}
+
+/* ===========================
+   ACTION CARD
+=========================== */
+
+.action-card{
+
+     background:#162238;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:clamp(14px,4vw,20px);
+
+    aspect-ratio:1/1;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    user-select:none;
+
+}
+
+/* Hover */
+
+.action-card:hover{
+    transform:translateY(-3px);
+    border-color:#F5C542;
+    box-shadow:none;
+}
+
+/* Click */
+
+.action-card:active{
+
+    transform:scale(.96);
+
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.action-card svg{
+
+    width:clamp(22px,6vw,30px);
+
+    height:clamp(22px,6vw,30px);
+
+    color:#F5C542;
+
+    margin-bottom:clamp(8px,2vw,12px);
+
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+.action-card span{
+
+    font-size:clamp(11px,3vw,15px);
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+/* ===========================
+   SMALL PHONE
+=========================== */
+
+@media(max-width:360px){
+
+.action-grid{
+
+    gap:6px;
+
+}
+
+.action-card{
+
+    border-radius:14px;
+
+}
+
+.action-card span{
+
+    font-size:11px;
+
+}
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(min-width:768px){
+
+.action-grid{
+
+    gap:18px;
+
+}
+
+.action-card{
+
+    border-radius:22px;
+
+}
+
+}
+
+/* ==========================================================
+   GOLDEX MINE V2
+   PART 3
+   MENU + LOGOUT
+==========================================================*/
+
+/* ===========================
+   MENU
+=========================== */
+
+.mine-menu{
+
+     background:#111;
+
+    border-radius:clamp(18px,4vw,22px);
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    margin-bottom:clamp(24px,6vw,32px);
+
+}
+
+/* ===========================
+   MENU ITEM
+=========================== */
+
+.mine-item{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    min-height:clamp(56px,13vw,66px);
+
+    padding:0 clamp(16px,4vw,22px);
+
+    border-bottom:1px solid #262626;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.mine-item:last-child{
+
+    border-bottom:none;
+
+}
+
+/* Hover */
+
+.mine-item:hover{
+    background:#181818;
+    border-color:#F5C542;
+}
+/* Click */
+
+
+.mine-item:active{
+
+    transform:scale(.99);
+
+}
+
+/* ===========================
+   LEFT
+=========================== */
+
+.mine-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:clamp(12px,3vw,18px);
+
+}
+
+/* ICON */
+
+.mine-left svg{
+
+    width:clamp(20px,5vw,24px);
+
+    height:clamp(20px,5vw,24px);
+
+    color:#F5C542;
+
+    flex-shrink:0;
+
+}
+
+/* IMAGE ICON */
+
+.menu-icon-img{
+
+    width:clamp(20px,5vw,24px);
+
+    height:clamp(20px,5vw,24px);
+
+    object-fit:contain;
+
+    flex-shrink:0;
+
+}
+
+/* TEXT */
+
+.mine-left span{
+
+    font-size:clamp(14px,3.6vw,17px);
+
+    font-weight:600;
+
+    color:#fff;
+
+}
+
+/* ===========================
+   RIGHT ARROW
+=========================== */
+
+.mine-item > svg{
+
+    width:clamp(16px,4vw,20px);
+
+    height:clamp(16px,4vw,20px);
+
+    color:#7F8EA5;
+
+    transition:.25s;
+
+}
+
+.mine-item:hover > svg{
+
+    color:#F5C542;
+
+    transform:translateX(4px);
+
+}
+
+/* ===========================
+   LOGOUT
+=========================== */
+
+.logout-btn{
+
+    width:100%;
+
+    height:clamp(48px,12vw,56px);
+
+    border:none;
+
+    border-radius:clamp(14px,4vw,18px);
+
+    background:#F5C542;
+
+    color:#111;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:clamp(15px,4vw,17px);
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.logout-btn svg{
+
+    width:clamp(18px,4vw,22px);
+
+    height:clamp(18px,4vw,22px);
+
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+        0 15px 30px rgba(245,197,66,.28);
+
+}
+
+.logout-btn:active{
+
+    transform:scale(.97);
+
+}
+
+/* ===========================
+   SMALL PHONE
+=========================== */
+
+@media(max-width:360px){
+
+.mine-item{
+
+    padding:0 14px;
+
+}
+
+.mine-left{
+
+    gap:10px;
+
+}
+
+.mine-left span{
+
+    font-size:13px;
+
+}
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(min-width:768px){
+
+.mine-menu{
+
+    border-radius:24px;
+
+}
+
+.mine-item{
+
+    min-height:68px;
+
+}
+
+}
+
+/* ==========================================================
+   GOLDEX MINE V2
+   PART 4
+   RESPONSIVE + SAFE AREA + ANIMATION
+==========================================================*/
+
+/* ===========================
+   SAFE AREA (iPhone)
+=========================== */
+
+@supports (padding:max(0px)){
+
+.mine-page{
+
+    padding-bottom:
+    calc(
+        clamp(90px,12vw,120px)
+        + env(safe-area-inset-bottom)
+    );
+
+}
+
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+button{
+
+    font-family:inherit;
+
+    outline:none;
+
+    border:none;
+
+}
+
+button:focus{
+
+    outline:none;
+
+}
+
+/* ===========================
+   COMMON TRANSITION
+=========================== */
+
+.profile-card,
+.invite-box,
+.action-card,
+.mine-item,
+.logout-btn{
+
+    transition:.25s ease;
+
+}
+
+/* ===========================
+   DESKTOP HOVER
+=========================== */
+
+@media(hover:hover){
+
+.profile-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.28);
+
+}
+
+.action-card:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.mine-item:hover{
+
+    background:#1A2A46;
+
+}
+
+.logout-btn:hover{
+
+    transform:translateY(-2px);
+
+}
+
+}
+
+/* ===========================
+   iPhone 7 / 8 / SE
+=========================== */
+
+@media(max-width:390px){
+
+.mine-page{
+
+    padding:12px;
+
+}
+
+.mine-title{
+
+    color:#F5C542;
+
+    font-size:38px;
+
+    font-weight:800;
+
+}
+.profile-info h2{
+
+    font-size:18px;
+
+}
+
+.uid-row{
+
+    font-size:12px;
+
+}
+
+.invite-code{
+
+    font-size:15px;
+
+}
+
+.copy-btn{
+
+    height:38px;
+
+    padding:0 14px;
+
+    font-size:12px;
+
+}
+
+}
+
+/* ===========================
+   iPhone Plus
+=========================== */
+
+@media(min-width:391px){
+
+.mine-page{
+
+    max-width:430px;
+
+    margin:auto;
+
+}
+
+}
+
+/* ===========================
+   iPad
+=========================== */
+
+@media(min-width:768px){
+
+.mine-page{
+
+    max-width:700px;
+
+}
+
+.profile-card{
+
+    padding:26px;
+
+}
+
+.action-grid{
+
+    margin:24px 0;
+
+}
+
+.mine-item{
+
+    min-height:68px;
+
+}
+
+}
+
+/* ===========================
+   Desktop
+=========================== */
+
+@media(min-width:1200px){
+
+.mine-page{
+
+    max-width:760px;
+
+}
+
+}
+
+/* ===========================
+   SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:6px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#344155;
+
+    border-radius:20px;
+
+}
+
+*{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#344155 transparent;
+
+}
+
+/* ===========================
+   TEXT SELECTION
+=========================== */
+
+::selection{
+
+    background:#F5C542;
+
+    color:#111;
+
+}
+
+/* ===========================
+   FINAL OPTIMIZATION
+=========================== */
+
+html{
+
+    overflow-x:hidden;
+
+}
+
+body{
+
+    overflow-x:hidden;
+
+    background:#08111d;
+
+}
+
+.mine-page{
+
+    overflow-x:hidden;
+
+}
+
+/* ===========================
+   SMOOTH ANIMATION
+=========================== */
+
+.profile-card,
+.action-card,
+.mine-item,
+.logout-btn{
+
+    will-change:transform;
+
+}
+
+/* ===========================
+   FADE IN
+=========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:
+        translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+}
+
+.profile-card{
+
+    animation:fadeUp .35s ease;
+
+}
+
+.action-grid{
+
+    animation:fadeUp .45s ease;
+
+}
+
+.mine-menu{
+
+    animation:fadeUp .55s ease;
+
+}
+
+.logout-btn{
+
+    animation:fadeUp .65s ease;
+
+}
+

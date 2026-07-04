@@ -1,5 +1,5 @@
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { Copy, Download } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabase";
@@ -10,71 +10,135 @@ export default function InternalDeposit() {
   const [wallets, setWallets] = useState([]);
   const [coin, setCoin] = useState("");
   const [network, setNetwork] = useState("");
+  const [showCoinMenu, setShowCoinMenu] = useState(false);
+const [showNetworkMenu, setShowNetworkMenu] = useState(false);
+
+const coinRef = useRef(null);
+const networkRef = useRef(null);
+
   const { showToast } = useToast();
+
+  const COIN_LOGO = {
+  USDT: "/coins/usdt.png",
+  BTC: "/coins/btc.png",
+  ETH: "/coins/eth.png",
+  BNB: "/coins/bnb.png",
+  SOL: "/coins/sol.png",
+  XRP: "/coins/xrp.png",
+  DOGE: "/coins/doge.png",
+  TRX: "/coins/trx.png",
+  TON: "/coins/ton.png",
+  AVAX: "/coins/avax.png",
+  LINK: "/coins/link.png",
+  LTC: "/coins/ltc.png",
+  ADA: "/coins/ada.png",
+  DOT: "/coins/dot.png",
+  BCH: "/coins/bch.png",
+  FIL: "/coins/fil.png",
+  NEAR: "/coins/near.png",
+  ATOM: "/coins/atom.png",
+  APT: "/coins/apt.png",
+  OP: "/coins/op.png",
+  ARB: "/coins/arb.png",
+  MATIC: "/coins/matic.png",
+  SUI: "/coins/sui.png"
+};
+
+const NETWORK_LOGO = {
+  TRC20: "/coins/trx.png",
+  ERC20: "/coins/eth.png",
+  BEP20: "/coins/bnb.png",
+  BEP2: "/coins/bnb.png",
+  POLYGON: "/coins/matic.png",
+  SOL: "/coins/sol.png"
+};
   
 
   useEffect(() => {
     loadWallets();
   }, []);
 
+  useEffect(() => {
+
+  function handleClickOutside(e){
+
+    if(
+      coinRef.current &&
+      !coinRef.current.contains(e.target)
+    ){
+      setShowCoinMenu(false);
+    }
+
+    if(
+      networkRef.current &&
+      !networkRef.current.contains(e.target)
+    ){
+      setShowNetworkMenu(false);
+    }
+
+  }
+
+  document.addEventListener(
+    "mousedown",
+    handleClickOutside
+  );
+
+  return () => {
+
+    document.removeEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+  };
+
+}, []);
+
   
 
   const loadWallets = async () => {
 
-  const user =
-    JSON.parse(
-      localStorage.getItem("user")
-    );
+  const user = JSON.parse(localStorage.getItem("user"));
 
-  const { data, error } =
-    await supabase
-      .from("user_wallets")
-      .select("*")
-      .eq(
-        "user_id",
-        user.id
-      );
+  const { data, error } = await supabase
+    .from("user_wallets")
+    .select("*")
+    .eq("user_id", user.id);
 
-    
-    console.log("USER =", user);
-console.log("DATA =", data);
-console.log("ERROR =", error);
+  console.log("DATA =", data);
 
+  if (!data || data.length === 0) return;
 
-  console.log(data);
+  setWallets(data);
 
-  if (data?.length > 0) {
+  // 👉 default USDT
+  const usdtWallet = data.find(x => x.coin === "USDT");
 
-    setWallets(data);
-
-    const usdtWallet =
-  data.find(
-    x => x.coin === "USDT"
+  // 👉 force TRC20 first
+  const trc20Wallet = data.find(
+    x => x.coin === "USDT" && x.network === "TRC20"
   );
 
-if(usdtWallet){
+  if (usdtWallet) {
 
-  setCoin(
-    usdtWallet.coin
-  );
+    setCoin("USDT");
 
-  setNetwork(
-    usdtWallet.network
-  );
+    if (trc20Wallet) {
+      setNetwork("TRC20");
+    } else {
+      setNetwork(usdtWallet.network);
+    }
 
-}else{
+  } else {
 
-  setCoin(data[0].coin);
-
-  setNetwork(
-    data[0].network
-  );
-
-}
+    setCoin(data[0].coin);
+    setNetwork(data[0].network);
 
   }
-
 };
+
+
+  
 
   const currentWallet =
     wallets.find(
@@ -82,6 +146,46 @@ if(usdtWallet){
         item.coin === coin &&
         item.network === network
     );
+
+    const coinList = [
+  ...new Set(wallets.map(item => item.coin))
+].sort((a, b) => {
+
+  const priority = ["USDT", "BTC", "ETH"];
+
+  const ai = priority.indexOf(a);
+  const bi = priority.indexOf(b);
+
+  if (ai !== -1 && bi !== -1) return ai - bi;
+  if (ai !== -1) return -1;
+  if (bi !== -1) return 1;
+
+  return a.localeCompare(b);
+
+});
+
+const networkPriority = [
+  "TRC20",
+  "ERC20",
+  "BEP20",
+  "BEP2",
+  "POLYGON",
+  "SOL"
+];
+
+const networkList = wallets
+  .filter(item => item.coin === coin)
+  .sort((a, b) => {
+
+    const ai = networkPriority.indexOf(a.network);
+    const bi = networkPriority.indexOf(b.network);
+
+    if (ai !== -1 && bi !== -1) return ai - bi;
+    if (ai !== -1) return -1;
+    if (bi !== -1) return 1;
+
+    return a.network.localeCompare(b.network);
+  });
 
   const copyAddress = () => {
 
@@ -147,94 +251,149 @@ if(usdtWallet){
 
       <div className="deposit-card">
 
-        <h3>Crypto</h3>
+    <h3>Crypto</h3>
 
-        <select
-          value={coin}
-          onChange={handleCoinChange}
+    <div
+        className="custom-select"
+        ref={coinRef}
+    >
+
+        <div
+            className="select-box"
+            onClick={() =>
+                setShowCoinMenu(!showCoinMenu)
+            }
         >
 
-          {[
-  ...new Set(
-    wallets.map(
-      item => item.coin
-    )
-  )
-]
-.sort((a,b)=>{
+            <div className="select-value">
 
-  const priority = [
-    "USDT",
-    "BTC",
-    "ETH"
-  ];
+                <img
+                    src={COIN_LOGO[coin]}
+                    className="select-logo"
+                    alt=""
+                />
 
-  const aIndex =
-    priority.indexOf(a);
+                <span>{coin}</span>
 
-  const bIndex =
-    priority.indexOf(b);
+            </div>
 
-  if(
-    aIndex !== -1 &&
-    bIndex !== -1
-  ){
-    return aIndex - bIndex;
-  }
+            <span>▼</span>
 
-  if(aIndex !== -1) return -1;
-  if(bIndex !== -1) return 1;
+        </div>
 
-  return a.localeCompare(b);
+        {showCoinMenu && (
 
-})
-.map((item) => (
+            <div className="select-menu">
 
-            <option
-              key={item}
-              value={item}
-            >
-              {item}
-            </option>
+                {coinList.map((item)=>(
 
-          ))}
+                    <div
+                        key={item}
+                        className="select-item"
+                        onClick={() => {
 
-        </select>
+                            setCoin(item);
 
-      </div>
+                            const first =
+                                wallets.find(
+                                    x => x.coin === item
+                                );
+
+                            setNetwork(first.network);
+
+                            setShowCoinMenu(false);
+
+                        }}
+                    >
+
+                        <img
+                            src={COIN_LOGO[item]}
+                            className="select-logo"
+                            alt=""
+                        />
+
+                        <span>{item}</span>
+
+                    </div>
+
+                ))}
+
+            </div>
+
+        )}
+
+    </div>
+
+</div>
 
       <div className="deposit-card">
 
-        <h3>Network</h3>
+    <h3>Network</h3>
 
-        <select
-          value={network}
-          onChange={(e) =>
-            setNetwork(
-              e.target.value
-            )
-          }
+    <div
+        className="custom-select"
+        ref={networkRef}
+    >
+
+        <div
+            className="select-box"
+            onClick={() =>
+                setShowNetworkMenu(!showNetworkMenu)
+            }
         >
 
-          {wallets
-            .filter(
-              item =>
-                item.coin === coin
-            )
-            .map((item) => (
+            <div className="select-value">
 
-              <option
-                key={item.id}
-                value={item.network}
-              >
-                {item.network}
-              </option>
+                <img
+                    src={NETWORK_LOGO[network]}
+                    className="select-logo"
+                    alt=""
+                />
 
-            ))}
+                <span>{network}</span>
 
-        </select>
+            </div>
 
-      </div>
+            <span>▼</span>
+
+        </div>
+
+        {showNetworkMenu && (
+
+            <div className="select-menu">
+
+                {networkList.map((item) => (
+
+                    <div
+                        key={item.id}
+                        className="select-item"
+                        onClick={() => {
+
+                            setNetwork(item.network);
+                            setShowNetworkMenu(false);
+
+                        }}
+                    >
+
+                        <img
+                            src={NETWORK_LOGO[item.network] || COIN_LOGO[item.coin]}
+                            className="select-logo"
+                            alt=""
+                        />
+
+                        <span>{item.network}</span>
+
+                    </div>
+
+                ))}
+
+            </div>
+
+        )}
+
+    </div>
+
+</div>
 
       {currentWallet && (
 
@@ -269,9 +428,11 @@ if(usdtWallet){
             Deposit Address
           </p>
 
-          <div className="address-box">
-            {currentWallet.address}
-          </div>
+          <div className="address-box" onClick={copyAddress}>
+  <span className="address-text">
+    {currentWallet?.address}
+  </span>
+</div>
 
           <div
             style={{
