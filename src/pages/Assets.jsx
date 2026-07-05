@@ -16,27 +16,34 @@ export default function Assets() {
 
   const [showBalance, setShowBalance] = useState(true);
 
-  const [expand, setExpand] = useState(true);
+  const [expand, setExpand] = useState(false);
 
   useEffect(() => {
 
-    loadAssets();
+  loadAssets();
 
-    window.addEventListener(
+  // รีโหลดทุก 10 วินาที
+  const interval = setInterval(() => {
+    loadAssets();
+  }, 10000);
+
+  window.addEventListener(
+    "walletUpdated",
+    loadAssets
+  );
+
+  return () => {
+
+    clearInterval(interval);
+
+    window.removeEventListener(
       "walletUpdated",
       loadAssets
     );
 
-    return () => {
+  };
 
-      window.removeEventListener(
-        "walletUpdated",
-        loadAssets
-      );
-
-    };
-
-  }, []);
+}, []);
 
   async function loadAssets() {
 
@@ -80,64 +87,44 @@ export default function Assets() {
 
   const assets = useMemo(() => {
 
-    if (!wallet) return [];
+  if (!wallet || rates.length === 0) return [];
 
-    const list = [
+  return rates
+    .filter(rate => rate.symbol !== "USDT")
+    .map(rate => {
 
-      {
-        symbol: "BTC",
-        amount: Number(wallet.BTC || 0)
-      },
+      const amount = Number(wallet[rate.symbol] || 0);
 
-      {
-        symbol: "ETH",
-        amount: Number(wallet.ETH || 0)
-      },
+      return {
+        symbol: rate.symbol,
+        amount,
+        usdt: amount * Number(rate.rate || 0)
+      };
 
-      {
-        symbol: "BNB",
-        amount: Number(wallet.BNB || 0)
-      },
+    });
 
-      {
-        symbol: "TRX",
-        amount: Number(wallet.TRX || 0)
-      },
+}, [wallet, rates]);
 
-      {
-        symbol: "ADA",
-        amount: Number(wallet.ADA || 0)
-      }
+ const totalAssets = useMemo(() => {
 
-    ];
+  const usdtBalance = Number(wallet?.balance || 0);
 
-    return list.map(item => ({
+  const otherAssets = assets.reduce(
+    (sum, item) => sum + Number(item.usdt || 0),
+    0
+  );
 
-      ...item,
+  return usdtBalance + otherAssets;
 
-      usdt:
+}, [wallet, assets]);
 
-        item.amount *
+const popularCoins = ["BTC", "ETH", "BNB", "TRX", "ADA"];
 
-        getRate(item.symbol)
-
-    }));
-
-  }, [wallet, rates]);
-
-  const totalAssets = useMemo(() => {
-
-    return assets.reduce(
-
-      (sum, item) =>
-
-        sum + item.usdt,
-
-      0
-
-    );
-
-  }, [assets]);
+const displayAssets = expand
+  ? assets
+  : popularCoins
+      .map(symbol => assets.find(item => item.symbol === symbol))
+      .filter(Boolean);
 
   if (loading) {
 
@@ -165,80 +152,62 @@ export default function Assets() {
 
     <div className="assets-total-top">
 
-        <span>
+  <div className="assets-title">
 
-            Total Assets
+    <span>Total Assets</span>
 
-        </span>
+    <button
+      className="eye-btn"
+      onClick={() => setShowBalance(!showBalance)}
+    >
+      {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
+    </button>
 
-        <button
+  </div>
 
-            className="eye-btn"
-
-            onClick={()=>
-                setShowBalance(!showBalance)
-            }
-
-        >
-
-        {
-
-            showBalance
-
-            ?
-
-            <Eye size={18}/>
-
-            :
-
-            <EyeOff size={18}/>
-
-        }
-
-        </button>
-
-    </div>
+</div>
 
     <div className="assets-total-value">
 
     <div className="total-left">
 
-        <img
-            src="/coins/usdt.png"
-            alt="USDT"
-            className="total-usdt-logo"
-        />
+    <img
+        src="/coins/usdt.png"
+        alt="USDT"
+        className="total-usdt-logo"
+    />
 
-        <div className="total-coin-name">
-
-            USDT
-
-        </div>
-
-    </div>
+</div>
 
     <div className="total-right">
 
-        <div className="total-number">
+  <div className="total-main">
 
-            {
-                showBalance
-                ? totalAssets.toLocaleString(undefined,{
-                    minimumFractionDigits:2,
-                    maximumFractionDigits:2
-                })
-                : "******"
-            }
-
-        </div>
-
-        <div className="total-unit">
-
-            USDT
-
-        </div>
-
+    <div className="total-number">
+      {showBalance
+        ? totalAssets.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+          })
+        : "******"}
     </div>
+
+    <div className="total-unit">
+      USDT
+    </div>
+
+  </div>
+
+  <div className="total-sub">
+    {showBalance
+      ? `≈ ${totalAssets.toLocaleString(undefined, {
+          minimumFractionDigits: 2,
+          maximumFractionDigits: 2
+        })} USDT`
+      : "******"}
+  </div>
+
+</div>
 
 </div>
 
@@ -286,9 +255,7 @@ expand
 
 {
 
-expand &&
-
-assets.map((coin)=>(
+displayAssets.map((coin) => (
 
 <div
 

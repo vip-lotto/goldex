@@ -126,15 +126,23 @@ navigator.clipboard.writeText(code);
 
 <div className="mine-page">
 
-{/* ===========================
-    Header
-=========================== */}
+  <div className="mine-header">
 
-<h1 className="mine-title">
+    <h1 className="mine-title">
+      Mine
+    </h1>
 
-    Mine
+    <button
+      className="logout-top-btn"
+      onClick={logout}
+    >
+      <LogOut size={18}/>
+      
+    </button>
 
-</h1>
+  </div>
+
+
 
 {/* ===========================
     Profile Card
@@ -434,20 +442,7 @@ Convert
 
 </div>
 
-{/* ===========================
-    Logout
-=========================== */}
 
-<button
-  className="logout-btn"
-  onClick={logout}
->
-
-  <LogOut size={20}/>
-
-  Log out
-
-</button>
 
 </div>
 

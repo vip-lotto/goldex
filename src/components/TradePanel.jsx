@@ -31,7 +31,7 @@ const RULES = {
 
   180: {
     min: 100000,
-    max: 1000000,
+    max: Infinity,
     profit: 18,
   },
 };
@@ -43,7 +43,7 @@ export default function TradePanel() {
   const { showToast } = useToast();  
 
   const [duration, setDuration] = useState(30);
-  const [amount, setAmount] = useState(100);
+  const [amount, setAmount] = useState("");
   const [side, setSide] = useState(null);
 
   const [isTrading, setIsTrading] = useState(false);
@@ -62,6 +62,34 @@ export default function TradePanel() {
   const [tradeAmount, setTradeAmount] = useState(0);
 
   const rule = RULES[duration];
+
+  useEffect(() => {
+
+  if (isTrading) return;
+
+  if (amount >= 100000) {
+
+    setDuration(180);
+
+  } else if (amount >= 50000) {
+
+    setDuration(120);
+
+  } else if (amount >= 30000) {
+
+    setDuration(90);
+
+  } else if (amount >= 1000) {
+
+    setDuration(60);
+
+  } else {
+
+    setDuration(30);
+
+  }
+
+}, [amount, isTrading]);
 
   useEffect(() => {
   resumeTrade();
@@ -493,6 +521,62 @@ const min = String(
 
     <div className="trade-panel">
 
+      
+
+      <div>
+
+        <label>Duration</label>
+
+        <div className="trade-time-tabs">
+
+  {[30,60,90,120,180].map(sec => (
+
+    <button
+      key={sec}
+      type="button"
+      disabled={isTrading}
+      onClick={() => setDuration(sec)}
+      className={
+        duration === sec
+          ? "time-btn active"
+          : "time-btn"
+      }
+    >
+
+      {sec === 30 ? "30 sec" : `${sec} sec`}
+
+    </button>
+
+  ))}
+
+</div>
+
+      </div>
+
+      <div className="trade-info">
+
+  <div>
+
+    Profit : {rule.profit}%
+
+  </div>
+
+</div>
+
+      <div>
+
+        <label>Amount (USDT)</label>
+
+        <input
+  type="number"
+  value={amount}
+  placeholder="00.00"
+  disabled={isTrading}
+  onChange={(e) => setAmount(e.target.value)}
+/>
+
+      </div>
+
       <div className="trade-buttons">
 
         <button
@@ -510,62 +594,6 @@ const min = String(
         >
           SELL
         </button>
-
-      </div>
-
-      <div>
-
-        <label>Trade Time</label>
-
-        <select
-          value={duration}
-          disabled={isTrading}
-          onChange={(e) =>
-            setDuration(
-              Number(e.target.value)
-            )
-          }
-        >
-
-          <option value={30}>30 Seconds (5%)</option>
-          <option value={60}>60 Seconds (10%)</option>
-          <option value={90}>90 Seconds (12%)</option>
-          <option value={120}>120 Seconds (15%)</option>
-          <option value={180}>180 Seconds (18%)</option>
-
-        </select>
-
-      </div>
-
-      <div className="trade-info">
-
-  <div>
-    Amount :
-    {rule.min.toLocaleString()} -
-    {rule.max.toLocaleString()} USDT
-  </div>
-
-  <div>
-    Profit :
-    {rule.profit}%
-  </div>
-
-</div>
-
-      <div>
-
-        <label>Amount (USDT)</label>
-
-        <input
-          type="number"
-          value={amount}
-          disabled={isTrading}
-          onChange={(e) =>
-            setAmount(
-              Number(e.target.value)
-            )
-          }
-        />
 
       </div>
 

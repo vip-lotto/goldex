@@ -155,3 +155,188 @@
 }
 
 }
+
+/* =========================================
+   TRADE TIME BUTTONS
+   Responsive
+   iPhone 7/8
+   iPad
+   Desktop
+========================================= */
+
+.trade-time-tabs{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,minmax(0,1fr));
+
+    gap:8px;
+
+    width:100%;
+
+    margin-top:12px;
+
+    margin-bottom:10px;
+
+}
+
+.time-btn{
+
+    width:100%;
+
+    min-width:0;
+
+    height:48px;
+
+    padding:0 6px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#1d2433;
+
+    color:#ffffff;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    user-select:none;
+
+    flex-shrink:0;
+
+}
+
+.time-btn:hover{
+
+    background:#2b3448;
+
+}
+
+.time-btn.active{
+
+    background:#19b95a;
+
+    color:#fff;
+
+    box-shadow:
+    0 0 12px rgba(25,185,90,.35);
+
+}
+
+.time-btn:disabled{
+
+    opacity:1;
+
+    cursor:default;
+
+}
+
+/* ===========================
+      iPhone 7 / 8
+=========================== */
+
+@media (max-width:390px){
+
+    .trade-time-tabs{
+
+        gap:6px;
+
+    }
+
+    .time-btn{
+
+        height:42px;
+
+        font-size:11px;
+
+        padding:0 2px;
+
+        border-radius:10px;
+
+    }
+
+}
+
+/* ===========================
+      iPhone Plus
+=========================== */
+
+@media (min-width:391px) and (max-width:767px){
+
+    .time-btn{
+
+        height:46px;
+
+        font-size:12px;
+
+    }
+
+}
+
+/* ===========================
+          iPad
+=========================== */
+
+@media (min-width:768px) and (max-width:1199px){
+
+    .trade-time-tabs{
+
+        gap:10px;
+
+    }
+
+    .time-btn{
+
+        height:54px;
+
+        font-size:15px;
+
+        border-radius:14px;
+
+    }
+
+}
+
+/* ===========================
+         Desktop
+=========================== */
+
+@media (min-width:1200px){
+
+    .trade-time-tabs{
+
+        gap:12px;
+
+    }
+
+    .time-btn{
+
+        height:58px;
+
+        font-size:16px;
+
+        border-radius:15px;
+
+    }
+
+}

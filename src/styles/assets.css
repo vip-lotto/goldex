@@ -1,4 +1,107 @@
 /* ==========================================
+   ASSETS PAGE
+========================================== */
+
+.assets-page{
+    width:100%;
+    max-width:980px;
+    margin:0 auto;
+    padding:18px;
+    padding-bottom:120px;
+    color:#fff;
+}
+
+/* ==========================================
+   TOTAL ASSETS CARD
+========================================== */
+
+.assets-total-card{
+
+    width:100%;
+
+    background:linear-gradient(135deg,#14386b,#1d467f);
+
+    border-radius:24px;
+
+    padding:24px;
+
+    box-shadow:0 12px 35px rgba(0,0,0,.28);
+
+}
+
+/* ==========================================
+   TOP
+========================================== */
+
+.assets-total-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+}
+
+.assets-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+}
+
+.assets-title span{
+
+    font-size:26px;
+
+    font-weight:700;
+
+    color:#fff;
+
+}
+
+/* ==========================================
+   EYE
+========================================== */
+
+.eye-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    background:transparent;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#FFD54A;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.eye-btn:hover{
+
+    background:rgba(255,213,74,.12);
+
+}
+
+/* ==========================================
    TOTAL VALUE
 ========================================== */
 
@@ -10,23 +113,13 @@
 
     gap:24px;
 
-    width:100%;
-
-    margin-top:18px;
-
 }
 
+/* ==========================================
+   LEFT
+========================================== */
+
 .total-left{
-
-    width:90px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-
-    justify-content:center;
 
     flex-shrink:0;
 
@@ -40,23 +133,17 @@
 
     object-fit:contain;
 
-    display:block;
-
 }
 
 .total-coin-name{
 
-    margin-top:8px;
-
-    color:#B7C5D9;
-
-    font-size:18px;
-
-    font-weight:700;
-
-    letter-spacing:.3px;
+    display:none;
 
 }
+
+/* ==========================================
+   RIGHT
+========================================== */
 
 .total-right{
 
@@ -66,49 +153,79 @@
 
     display:flex;
 
-    align-items:center;
+    flex-direction:column;
 
-    gap:14px;
+    justify-content:center;
 
     overflow:hidden;
+
+}
+
+/* ==========================================
+   MAIN
+========================================== */
+
+.total-main{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    gap:14px;
 
 }
 
 .total-number{
+    flex: 1;
+    min-width: 0;
 
-    flex:1;
-
-    min-width:0;
-
-    font-size:clamp(34px,6vw,68px);
-
-    font-weight:800;
-
-    line-height:1;
-
-    color:#fff;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .total-unit{
+    flex-shrink: 0;
+}
+
+.total-number{
+    flex:1;
+    min-width:0;
+
+    font-size:clamp(28px,4vw,46px);
+
+    font-weight:800;
+    color:#fff;
+    line-height:1;
+
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.total-unit{
+    font-size:clamp(20px,3vw,34px);
+
+    font-weight:800;
+    color:#FFD54A;
 
     flex-shrink:0;
 
-    font-size:clamp(34px,6vw,68px);
+    position:relative;
+    top:18px;
+}
 
-    font-weight:800;
+/* ==========================================
+   SUB
+========================================== */
 
-    line-height:1;
+.total-sub{
 
-    color:#FFD54A;
+    margin-top:10px;
 
-    white-space:nowrap;
+    font-size:16px;
+
+    color:#A5B3C9;
 
 }
 
@@ -120,7 +237,7 @@
 
     width:100%;
 
-    margin-top:24px;
+    margin-top:22px;
 
     background:#171717;
 
@@ -128,9 +245,13 @@
 
     padding:22px;
 
-    overflow:hidden;
+    box-shadow:0 10px 30px rgba(0,0,0,.28);
 
 }
+
+/* ==========================================
+   HEADER
+========================================== */
 
 .assets-header{
 
@@ -142,22 +263,24 @@
 
     cursor:pointer;
 
-    padding-bottom:12px;
+    padding-bottom:18px;
 
 }
 
 .assets-header h2{
 
-    font-size:clamp(20px,3vw,30px);
+    font-size:24px;
 
-    font-weight:800;
+    font-weight:700;
 
     color:#fff;
+
+    margin:0;
 
 }
 
 /* ==========================================
-   COIN ROW
+   ROW
 ========================================== */
 
 .asset-row{
@@ -167,8 +290,6 @@
     justify-content:space-between;
 
     align-items:center;
-
-    gap:16px;
 
     padding:22px 0;
 
@@ -202,17 +323,13 @@
 
     gap:16px;
 
-    min-width:0;
-
-    flex:1;
-
 }
 
 .asset-icon{
 
-    width:54px;
+    width:48px;
 
-    height:54px;
+    height:48px;
 
     object-fit:contain;
 
@@ -222,17 +339,11 @@
 
 .asset-symbol{
 
-    font-size:20px;
+    font-size:22px;
 
     font-weight:700;
 
     color:#fff;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
 
 }
 
@@ -244,10 +355,6 @@
 
     text-align:right;
 
-    flex-shrink:0;
-
-    min-width:120px;
-
 }
 
 .asset-amount{
@@ -257,8 +364,6 @@
     font-weight:700;
 
     color:#fff;
-
-    white-space:nowrap;
 
 }
 
@@ -270,321 +375,10 @@
 
     color:#9EA8B8;
 
-    white-space:nowrap;
-
 }
 
 /* ==========================================
-   RESPONSIVE
-========================================== */
-
-/* ---------- iPhone SE / iPhone 7 / 8 ---------- */
-
-@media (max-width:390px){
-
-    .assets-page{
-
-        padding:14px;
-
-        padding-bottom:95px;
-
-    }
-
-    .assets-total-card{
-
-        padding:18px;
-
-        border-radius:18px;
-
-        min-height:170px;
-
-    }
-
-    .assets-total-value{
-
-        gap:12px;
-
-    }
-
-    .total-left{
-
-        width:60px;
-
-    }
-
-    .total-usdt-logo{
-
-        width:56px;
-
-        height:56px;
-
-    }
-
-    .total-coin-name{
-
-        font-size:14px;
-
-    }
-
-    .total-number{
-
-        font-size:28px;
-
-    }
-
-    .total-unit{
-
-        font-size:28px;
-
-    }
-
-    .asset-icon{
-
-        width:42px;
-
-        height:42px;
-
-    }
-
-    .asset-symbol{
-
-        font-size:16px;
-
-    }
-
-    .asset-amount{
-
-        font-size:18px;
-
-    }
-
-    .asset-usdt{
-
-        font-size:12px;
-
-    }
-
-}
-
-/* ---------- Android / iPhone Plus ---------- */
-
-@media (min-width:391px) and (max-width:767px){
-
-    .assets-page{
-
-        padding:16px;
-
-        padding-bottom:100px;
-
-    }
-
-    .total-usdt-logo{
-
-        width:64px;
-
-        height:64px;
-
-    }
-
-    .total-number{
-
-        font-size:34px;
-
-    }
-
-}
-
-/* ---------- iPad ---------- */
-
-@media (min-width:768px) and (max-width:1199px){
-
-    .assets-page{
-
-        max-width:760px;
-
-        padding:30px;
-
-    }
-
-    .assets-total-card{
-
-        min-height:210px;
-
-    }
-
-    .total-usdt-logo{
-
-        width:74px;
-
-        height:74px;
-
-    }
-
-    .total-number{
-
-        font-size:50px;
-
-    }
-
-    .total-unit{
-
-        font-size:50px;
-
-    }
-
-    .asset-icon{
-
-        width:50px;
-
-        height:50px;
-
-    }
-
-}
-
-/* ---------- Desktop ---------- */
-
-@media (min-width:1200px){
-
-    .assets-page{
-
-        max-width:980px;
-
-        padding:38px 24px 120px;
-
-    }
-
-    .assets-total-card{
-
-        min-height:230px;
-
-    }
-
-    .total-usdt-logo{
-
-        width:88px;
-
-        height:88px;
-
-    }
-
-    .total-number{
-
-        font-size:64px;
-
-    }
-
-    .total-unit{
-
-        font-size:64px;
-
-    }
-
-}
-
-/* ==========================================
-   SAFETY
-========================================== */
-
-img{
-
-    max-width:100%;
-
-    display:block;
-
-}
-
-.asset-symbol,
-.asset-amount,
-.asset-usdt,
-.total-number,
-.total-unit{
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-.assets-card,
-.assets-total-card{
-
-    overflow:hidden;
-
-}
-
-/* ==========================================
-   UI EFFECT
-========================================== */
-
-/* Card */
-
-.assets-total-card,
-.assets-card{
-
-    transition:.28s ease;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.25);
-
-}
-
-.assets-total-card:hover{
-
-    transform:translateY(-2px);
-
-    box-shadow:
-        0 18px 40px rgba(0,0,0,.35);
-
-}
-
-.assets-card:hover{
-
-    box-shadow:
-        0 14px 35px rgba(0,0,0,.30);
-
-}
-
-/* ==========================================
-   HEADER
-========================================== */
-
-.assets-header{
-
-    transition:.25s;
-
-}
-
-.assets-header:hover{
-
-    color:#FFD54A;
-
-}
-
-/* ==========================================
-   ROW
-========================================== */
-
-.asset-row{
-
-    transition:
-        background .25s,
-        transform .18s;
-
-}
-
-.asset-row:hover{
-
-    background:rgba(255,255,255,.035);
-
-    transform:translateX(3px);
-
-}
-
-/* ==========================================
-   ICON
+   HOVER
 ========================================== */
 
 .asset-icon{
@@ -595,53 +389,13 @@ img{
 
 .asset-row:hover .asset-icon{
 
-    transform:scale(1.06);
-
-}
-
-/* ==========================================
-   TOTAL
-========================================== */
-
-.total-number{
-
-    letter-spacing:-1px;
-
-}
-
-.total-unit{
-
-    letter-spacing:-1px;
-
-}
-
-/* ==========================================
-   BUTTON
-========================================== */
-
-.eye-btn{
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    transition:.25s;
-
-}
-
-.eye-btn:hover{
-
-    background:rgba(255,213,74,.12);
-
     transform:scale(1.05);
+
+}
+
+.asset-row:hover{
+
+    transform:translateX(3px);
 
 }
 
@@ -661,7 +415,7 @@ img{
 
     position:absolute;
 
-    left:60px;
+    left:64px;
 
     right:0;
 
@@ -669,7 +423,7 @@ img{
 
     height:1px;
 
-    background:rgba(255,255,255,.05);
+    background:rgba(255,255,255,.06);
 
 }
 
@@ -680,37 +434,284 @@ img{
 }
 
 /* ==========================================
-   SCROLL
+   MOBILE
+========================================== */
+
+@media (max-width:390px){
+
+.assets-page{
+
+    padding:14px;
+    padding-bottom:100px;
+
+}
+
+.assets-total-card{
+
+    overflow: hidden;
+    padding:18px;
+    
+
+}
+
+.assets-total-value{
+
+    gap:16px;
+
+}
+
+.total-usdt-logo{
+
+    width:82px;
+    height:82px;
+
+}
+
+.total-number{
+
+    font-size:20px;
+
+}
+
+.total-unit{
+
+    font-size:34px;
+
+}
+
+.total-sub{
+
+    font-size:13px;
+
+}
+
+.asset-icon{
+
+    width:42px;
+    height:42px;
+
+}
+
+.asset-symbol{
+
+    font-size:18px;
+
+}
+
+.asset-amount{
+
+    font-size:18px;
+
+}
+
+.asset-usdt{
+
+    font-size:13px;
+
+}
+
+}
+
+/* ==========================================
+   NORMAL PHONE
+========================================== */
+
+@media (min-width:391px) and (max-width:767px){
+
+.assets-page{
+
+    padding:16px;
+    padding-bottom:105px;
+
+}
+
+.total-usdt-logo{
+
+    width:72px;
+    height:72px;
+
+}
+
+.total-number{
+
+    font-size:30px;
+
+}
+
+.total-unit{
+
+    font-size:40px;
+
+}
+
+}
+
+/* ==========================================
+   IPAD
+========================================== */
+
+@media (min-width:768px) and (max-width:1199px){
+
+.assets-page{
+
+    max-width:760px;
+    margin:auto;
+
+}
+
+.assets-total-card{
+
+    padding:30px;
+
+}
+
+.total-usdt-logo{
+
+    width:84px;
+    height:84px;
+
+}
+
+.total-number{
+
+    font-size:40px;
+
+}
+
+.total-unit{
+
+    font-size:54px;
+
+}
+
+.total-sub{
+
+    font-size:18px;
+
+}
+
+.asset-icon{
+
+    width:54px;
+    height:54px;
+
+}
+
+.asset-symbol{
+
+    font-size:22px;
+
+}
+
+.asset-amount{
+
+    font-size:22px;
+
+}
+
+}
+
+/* ==========================================
+   DESKTOP
+========================================== */
+
+@media (min-width:1200px){
+
+.assets-page{
+
+    max-width:980px;
+    margin:auto;
+
+}
+
+.assets-total-card{
+
+    padding:34px;
+
+}
+
+.total-usdt-logo{
+
+    width:96px;
+    height:96px;
+
+}
+
+.total-number{
+
+    font-size:40px;
+
+}
+
+.total-unit{
+
+    font-size:60px;
+
+}
+
+.total-sub{
+
+    font-size:20px;
+
+}
+
+.asset-icon{
+
+    width:58px;
+    height:58px;
+
+}
+
+.asset-symbol{
+
+    font-size:24px;
+
+}
+
+.asset-amount{
+
+    font-size:24px;
+
+}
+
+}
+
+/* ==========================================
+   SAFE AREA
+========================================== */
+
+.assets-page{
+
+padding-bottom:
+calc(120px + env(safe-area-inset-bottom));
+
+}
+
+/* ==========================================
+   SCROLLBAR
 ========================================== */
 
 ::-webkit-scrollbar{
 
-    width:7px;
-
-}
-
-::-webkit-scrollbar-track{
-
-    background:#0b1627;
+width:6px;
 
 }
 
 ::-webkit-scrollbar-thumb{
 
-    background:#314866;
-
-    border-radius:20px;
+background:#324865;
+border-radius:20px;
 
 }
 
-::-webkit-scrollbar-thumb:hover{
+::-webkit-scrollbar-track{
 
-    background:#46648d;
+background:#091220;
 
 }
 
 /* ==========================================
-   ANIMATION
+   CARD ANIMATION
 ========================================== */
 
 .assets-total-card{
@@ -730,7 +731,6 @@ img{
     from{
 
         opacity:0;
-
         transform:translateY(-18px);
 
     }
@@ -738,7 +738,6 @@ img{
     to{
 
         opacity:1;
-
         transform:translateY(0);
 
     }
@@ -750,7 +749,6 @@ img{
     from{
 
         opacity:0;
-
         transform:translateY(18px);
 
     }
@@ -758,7 +756,6 @@ img{
     to{
 
         opacity:1;
-
         transform:translateY(0);
 
     }
@@ -766,24 +763,181 @@ img{
 }
 
 /* ==========================================
-   SAFE AREA
+   ROW EFFECT
 ========================================== */
 
-.assets-page{
+.asset-row{
 
-    padding-bottom:
-        calc(120px + env(safe-area-inset-bottom));
+    transition:
+        background .25s,
+        transform .2s;
+
+}
+
+.asset-row:hover{
+
+    background:rgba(255,255,255,.03);
+
+    transform:translateX(5px);
+
+}
+
+.asset-row:active{
+
+    transform:scale(.99);
 
 }
 
 /* ==========================================
-   IMAGE
+   ICON
 ========================================== */
 
-img{
+.asset-icon{
+
+    transition:
+        transform .25s;
+
+}
+
+.asset-row:hover .asset-icon{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================================
+   CARD SHADOW
+========================================== */
+
+.assets-total-card{
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.28);
+
+}
+
+.assets-card{
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.22);
+
+}
+
+/* ==========================================
+   NUMBER EFFECT
+========================================== */
+
+.total-number{
+
+    letter-spacing:2px;
+
+    text-shadow:
+        0 4px 12px rgba(0,0,0,.25);
+
+}
+
+.total-unit{
+
+    letter-spacing:-1px;
+
+}
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.assets-total-card:hover{
+
+    transform:translateY(-2px);
+
+    transition:.25s;
+
+}
+
+.assets-card:hover{
+
+    transition:.25s;
+
+}
+
+/* ==========================================
+   EYE BUTTON
+========================================== */
+
+.eye-btn{
+
+    transition:
+        background .25s,
+        transform .25s;
+
+}
+
+.eye-btn:hover{
+
+    background:rgba(255,255,255,.08);
+
+    transform:scale(1.08);
+
+}
+
+.eye-btn:active{
+
+    transform:scale(.96);
+
+}
+
+/* ==========================================
+   DIVIDER
+========================================== */
+
+.asset-row::after{
+
+    content:"";
+
+    position:absolute;
+
+    left:70px;
+
+    right:0;
+
+    bottom:0;
+
+    height:1px;
+
+    background:rgba(255,255,255,.05);
+
+}
+
+.asset-row:last-child::after{
+
+    display:none;
+
+}
+
+/* ==========================================
+   SELECT DISABLE
+========================================== */
+
+.assets-page{
 
     user-select:none;
 
+}
+
+img{
+
     -webkit-user-drag:none;
+
+}
+
+/* ==========================================
+   SMOOTH FONT
+========================================== */
+
+.assets-page{
+
+    -webkit-font-smoothing:antialiased;
+
+    text-rendering:optimizeLegibility;
 
 }

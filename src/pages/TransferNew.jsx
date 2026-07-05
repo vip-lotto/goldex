@@ -9,6 +9,42 @@ import { useNavigate } from "react-router-dom";
 import QRScanner from "../components/QRScanner";
 import { useToast } from "../context/ToastContext";
 
+const COIN_LOGO = {
+  USDT:"/coins/usdt.png",
+  BTC:"/coins/btc.png",
+  ETH:"/coins/eth.png",
+  BNB:"/coins/bnb.png",
+  SOL:"/coins/sol.png",
+  XRP:"/coins/xrp.png",
+  DOGE:"/coins/doge.png",
+  ADA:"/coins/ada.png",
+  TRX:"/coins/trx.png",
+  TON:"/coins/ton.png",
+  AVAX:"/coins/avax.png",
+  LINK:"/coins/link.png",
+  LTC:"/coins/ltc.png",
+  BCH:"/coins/bch.png",
+  DOT:"/coins/dot.png",
+  ETC:"/coins/etc.png",
+  FIL:"/coins/fil.png",
+  NEAR:"/coins/near.png",
+  ATOM:"/coins/atom.png",
+  APT:"/coins/apt.png",
+  ARB:"/coins/arb.png",
+  OP:"/coins/op.png",
+  MATIC:"/coins/matic.png",
+  SUI:"/coins/sui.png",
+};
+
+const NETWORK_LOGO = {
+  TRC20:"/coins/trx.png",
+  ERC20:"/coins/eth.png",
+  BEP20:"/coins/bnb.png",
+  BEP2:"/coins/bnb.png",
+  POLYGON:"/coins/matic.png",
+  SOL:"/coins/sol.png",
+};
+
 
 export default function TransferNew() {
 
@@ -33,6 +69,9 @@ useState("TRC20");
 
 const [walletList, setWalletList] =
 useState([]);
+
+const [openCoin,setOpenCoin]=useState(false);
+const [openNetwork,setOpenNetwork]=useState(false);
 
 const loadWalletList = async () => {
 
@@ -385,35 +424,73 @@ return (
 
     <h3>Coin</h3>
 
-    <select
-      value={coin}
-      onChange={(e)=>
-        setCoin(
-          e.target.value
-        )
-      }
-      style={{
-        width:"100%",
-        padding:"15px",
-        borderRadius:"15px",
-        background:"#1a1d23",
-        color:"#fff",
-        border:"none"
-      }}
-    >
+    <div
+  className="custom-select"
+  onClick={() => setOpenCoin(!openCoin)}
+>
+  <div className="selected-item">
+    <img
+      src={COIN_LOGO[coin]}
+      className="coin-icon"
+      alt=""
+    />
 
-      {[...new Set(walletList.map(item => item.coin))].map((item) => (
+    <span>{coin}</span>
+  </div>
 
-  <option
-    key={item}
-    value={item}
-  >
-    {item}
-  </option>
+  <span>▼</span>
+</div>
+
+{openCoin && (
+
+<div className="dropdown-menu">
+
+{[...new Set(walletList.map(w=>w.coin))]
+.map(item=>(
+
+<div
+key={item}
+className="dropdown-item"
+onClick={()=>{
+
+setCoin(item);
+
+const networks =
+walletList.filter(
+w=>w.coin===item
+);
+
+const trc20 =
+networks.find(
+w=>w.network==="TRC20"
+);
+
+setNetwork(
+trc20
+? trc20.network
+: networks[0]?.network || ""
+);
+
+setOpenCoin(false);
+
+}}
+>
+
+<img
+src={COIN_LOGO[item]}
+className="coin-icon"
+alt=""
+/>
+
+{item}
+
+</div>
 
 ))}
 
-    </select>
+</div>
+
+)}
 
   </div>
 
@@ -489,39 +566,88 @@ return (
 
     <h3>Network</h3>
 
-    <select
-      value={network}
-      onChange={(e)=>
-        setNetwork(
-          e.target.value
-        )
-      }
-      style={{
-        width:"100%",
-        padding:"15px",
-        borderRadius:"15px",
-        background:"#1a1d23",
-        color:"#fff",
-        border:"none"
-      }}
-    >
+    <div
+  className="custom-select"
+  onClick={() => setOpenNetwork(!openNetwork)}
+>
+  <div className="selected-item">
+    <img
+      src={NETWORK_LOGO[network]}
+      className="coin-icon"
+      alt=""
+    />
 
-      {[...new Set(
-  walletList
-    .filter(item => item.coin === coin)
-    .map(item => item.network)
-)].map((item) => (
+    <span>{network}</span>
+  </div>
 
-  <option
-    key={item}
-    value={item}
-  >
-    {item}
-  </option>
+  <span>▼</span>
+</div>
 
-))}
+{openNetwork && (
 
-    </select>
+<div className="dropdown-menu">
+
+{[...new Set(
+
+walletList
+.filter(w=>w.coin===coin)
+.map(w=>w.network)
+
+)]
+.sort((a,b)=>{
+
+const priority=[
+"TRC20",
+"ERC20",
+"BEP20",
+"BEP2",
+"POLYGON",
+"SOL"
+];
+
+const ai=priority.indexOf(a);
+const bi=priority.indexOf(b);
+
+if(ai===-1 && bi===-1)
+return a.localeCompare(b);
+
+if(ai===-1) return 1;
+if(bi===-1) return -1;
+
+return ai-bi;
+
+})
+
+.map(item=>(
+
+<div
+key={item}
+className="dropdown-item"
+onClick={()=>{
+
+setNetwork(item);
+setOpenNetwork(false);
+
+}}
+>
+
+<img
+src={NETWORK_LOGO[item]}
+className="coin-icon"
+alt=""
+/>
+
+{item}
+
+</div>
+
+))
+
+}
+
+</div>
+
+)}
 
   </div>
 

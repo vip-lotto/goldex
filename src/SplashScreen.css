@@ -1,0 +1,94 @@
+/* Splash Screen */
+
+.splash-screen{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100dvh;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    overflow:hidden;
+    z-index:999999;
+}
+
+/* Logo */
+
+.splash-logo{
+    width:min(75vw,420px);
+    max-width:420px;
+    min-width:220px;
+    height:auto;
+    object-fit:contain;
+
+    animation:
+        zoomIn .9s ease,
+        glow 2s ease-in-out infinite;
+}
+
+/* Fade */
+
+@keyframes zoomIn{
+
+    0%{
+        opacity:0;
+        transform:scale(.65);
+    }
+
+    60%{
+        opacity:1;
+        transform:scale(1.08);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+
+/* Glow */
+
+@keyframes glow{
+
+    0%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,140,255,.2))
+            drop-shadow(0 0 10px rgba(0,255,180,.2));
+    }
+
+    50%{
+        filter:
+            drop-shadow(0 0 15px rgba(0,140,255,.7))
+            drop-shadow(0 0 35px rgba(0,255,180,.7));
+    }
+
+    100%{
+        filter:
+            drop-shadow(0 0 5px rgba(0,140,255,.2))
+            drop-shadow(0 0 10px rgba(0,255,180,.2));
+    }
+
+}
+
+/* iPhone 7/8 */
+@media (max-width:430px){
+    .splash-logo{
+        width:250px;
+    }
+}
+
+/* iPad */
+@media (min-width:768px){
+    .splash-logo{
+        width:340px;
+    }
+}
+
+/* Desktop */
+@media (min-width:1200px){
+    .splash-logo{
+        width:420px;
+    }
+}

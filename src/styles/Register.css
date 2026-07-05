@@ -71,9 +71,9 @@
   background:
   linear-gradient(
     180deg,
-    #fff7c2,
-    #ffd84f,
-    #d4a017
+    #07f3e7,
+    #0a06e2,
+    #17d46c
   );
 
   -webkit-background-clip:text;
@@ -113,7 +113,7 @@
     transform:translateY(-50%);
     width:20px;
     height:20px;
-    color:#facc15;
+    color:#15ebfa;
     z-index:2;
     pointer-events:none;
 }
@@ -137,7 +137,7 @@
 
   outline:none;
 
-  border-color:#facc15;
+  border-color:#155dfa;
 
   box-shadow:
   0 0 15px
@@ -166,9 +166,9 @@
   background:
   linear-gradient(
     90deg,
-    #fff3a8,
-    #facc15,
-    #d4a017
+    #08c4e6,
+    #1580fa,
+    #17d4b4
   );
 }
 
@@ -186,11 +186,11 @@
 
   border-radius:18px;
 
-  border:1px solid #facc15;
+  border:1px solid #15a6fa;
 
   background:transparent;
 
-  color:#facc15;
+  color:#1915fa;
 
   cursor:pointer;
 
@@ -215,12 +215,12 @@
 
   border-radius:50%;
 
-  border:2px solid #facc15;
+  border:2px solid #1537fa;
 
   background:
   rgba(255,215,0,.10);
 
-  color:#facc15;
+  color:#15a6fa;
 
   display:flex;
   justify-content:center;
@@ -241,7 +241,7 @@
 }
 
 .register-footer span{
-  color:#facc15;
+  color:#15c4fa;
 }
 
 @media(max-width:768px){

@@ -655,3 +655,103 @@ color:#c6c6c6;
 line-height:1.6;
 
 }
+
+/* ===========================
+   Custom Select
+=========================== */
+
+.custom-select{
+    width:100%;
+    background:#121b2b;
+    border:1px solid #31425d;
+    border-radius:16px;
+    padding:14px 18px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    cursor:pointer;
+    color:#fff;
+    transition:.25s;
+    position:relative;
+}
+
+.custom-select:hover{
+    border-color:#f5c542;
+}
+
+.selected-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    font-size:18px;
+    font-weight:600;
+}
+
+.coin-icon{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    object-fit:cover;
+    flex-shrink:0;
+}
+
+.dropdown-menu{
+    margin-top:10px;
+    width:100%;
+    background:#121b2b;
+    border:1px solid #31425d;
+    border-radius:16px;
+    overflow:hidden;
+    max-height:320px;
+    overflow-y:auto;
+}
+
+.dropdown-menu::-webkit-scrollbar{
+    width:6px;
+}
+
+.dropdown-menu::-webkit-scrollbar-thumb{
+    background:#f5c542;
+    border-radius:20px;
+}
+
+.dropdown-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:14px 18px;
+    color:#fff;
+    cursor:pointer;
+    transition:.2s;
+    font-size:17px;
+    font-weight:600;
+}
+
+.dropdown-item:hover{
+    background:#1a2740;
+}
+
+.dropdown-item img{
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.custom-select span:last-child{
+    color:#fff;
+    font-size:18px;
+}
+
+.deposit-card{
+    position:relative;
+    overflow:visible;
+}
+
+.dropdown-menu{
+    position:absolute;
+    left:0;
+    right:0;
+    z-index:999;
+    box-shadow:0 10px 35px rgba(0,0,0,.45);
+}

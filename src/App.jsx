@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import SplashScreen from "./SplashScreen";
+
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ToastProvider } from "./context/ToastContext";
 import { LanguageProvider } from "./context/LanguageContext";
@@ -97,6 +100,21 @@ function Layout() {
 }
 
 export default function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return <SplashScreen />;
+  }
+
   return (
     <LanguageProvider>
       <ToastProvider>

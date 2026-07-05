@@ -40,9 +40,9 @@
 
     letter-spacing:2px;
 
-    color:#ffd54f;
+    color:#0a77f3;
 
-    text-shadow:0 0 18px rgba(255,193,7,.55);
+    text-shadow:0 0 18px rgba(7, 218, 255, 0.55);
 
     line-height:1;
 
@@ -83,9 +83,9 @@
     width:52px;
     height:52px;
     border-radius:50%;
-    border:2px solid #f5c542;
+    border:2px solid #1678d4;
     background:#091324;
-    color:#f5c542;
+    color:#08b7ec;
     font-size:22px;
     display:flex;
     justify-content:center;

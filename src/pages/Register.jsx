@@ -423,7 +423,7 @@ setTimeout(() => {
         <div className="register-card">
 
           <div className="register-title">
-            GOLDEX
+            TRUST
           </div>
 
           <div className="register-sub">

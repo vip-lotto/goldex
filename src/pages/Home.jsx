@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import {
 ArrowDownToLine,
@@ -10,6 +10,10 @@ Headset
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
+
+import { getWallet } from "../lib/walletApi";
+import { getExchangeRates } from "../lib/convertApi";
+
 
 import BannerSlider from "../components/BannerSlider";
 import BottomNav from "../components/BottomNav";
@@ -24,8 +28,10 @@ const navigate = useNavigate();
 const [coins, setCoins] = useState([]);
 const [activeTab, setActiveTab] =
 useState("trending");
-const [walletBalance, setWalletBalance] =
-useState(0);
+
+
+const [wallet, setWallet] = useState(null);
+const [rates, setRates] = useState([]);
 
 const [unreadCount,
 setUnreadCount] =
@@ -120,44 +126,34 @@ try {
 
 const loadWallet = async () => {
 
-  const user =
-    JSON.parse(
-      localStorage.getItem("user")
-    );
-
-  console.log("USER =", user);
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
 
   if (!user) return;
 
-  const { data, error } =
-    await supabase
-      .from("wallets")
-      .select("*")
-      .eq("user_id", user.id);
+  const walletData =
+    await getWallet(user.id);
 
-  console.log("DATA =", data);
-  console.log("ERROR =", error);
+  setWallet(walletData);
 
-  if (
-    data &&
-    data.length > 0
-  ) {
+};
 
-    setWalletBalance(
-      Number(
-        data[0].balance || 0
-      )
-    );
+const loadRates = async () => {
 
-  }
+  const rateData =
+    await getExchangeRates();
+
+  setRates(rateData || []);
 
 };
 
 useEffect(() => {
 
-  loadMarket();
-  loadNotifications();
-  loadWallet();
+loadMarket();
+loadNotifications();
+loadWallet();
+loadRates();
 
   const user =
     JSON.parse(
@@ -192,12 +188,13 @@ useEffect(() => {
       .subscribe();
 
   const interval =
-    setInterval(() => {
+  setInterval(() => {
 
-      loadMarket();
-      loadWallet();
+    loadMarket();
+    loadWallet();
+    loadRates();
 
-    }, 30000);
+  }, 30000);
 
   return () => {
 
@@ -214,14 +211,43 @@ useEffect(() => {
 }, []);
 
 
-return (
 
+
+
+
+// ===== เพิ่มตรงนี้ =====
+
+
+
+const totalAssets = useMemo(() => {
+
+  if (!wallet || rates.length === 0) return 0;
+
+  const usdtBalance = Number(wallet.balance || 0);
+
+  const otherAssets = rates
+    .filter(rate => rate.symbol !== "USDT")
+    .reduce((sum, rate) => {
+
+      const amount = Number(wallet[rate.symbol] || 0);
+
+      return sum + amount * Number(rate.rate || 0);
+
+    }, 0);
+
+  return usdtBalance + otherAssets;
+
+}, [wallet, rates]);
+
+// ===== จบที่เพิ่ม =====
+
+return (
 
 <div className="home-page">
 
   <div className="home-header">
 
-    <h1>GOLDEX</h1>
+    <h1>TRUST</h1>
 
     <div className="header-actions">
 
@@ -275,9 +301,12 @@ return (
       </span>
 
       <h2>
-        {walletBalance.toLocaleString()}
-        {" "}USDT
-      </h2>
+  {totalAssets.toLocaleString(undefined,{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  })}{" "}
+  USDT
+</h2>
 
     </div>
 

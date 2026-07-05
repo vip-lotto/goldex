@@ -5,6 +5,43 @@ import { useToast } from "../context/ToastContext";
 import { addTransaction } from "../lib/transactionApi";
 
 
+const COIN_LOGO = {
+  USDT:"/coins/usdt.png",
+  BTC:"/coins/btc.png",
+  ETH:"/coins/eth.png",
+  BNB:"/coins/bnb.png",
+  SOL:"/coins/sol.png",
+  XRP:"/coins/xrp.png",
+  DOGE:"/coins/doge.png",
+  ADA:"/coins/ada.png",
+  TRX:"/coins/trx.png",
+  TON:"/coins/ton.png",
+  AVAX:"/coins/avax.png",
+  LINK:"/coins/link.png",
+  LTC:"/coins/ltc.png",
+  BCH:"/coins/bch.png",
+  DOT:"/coins/dot.png",
+  ETC:"/coins/etc.png",
+  FIL:"/coins/fil.png",
+  NEAR:"/coins/near.png",
+  ATOM:"/coins/atom.png",
+  APT:"/coins/apt.png",
+  ARB:"/coins/arb.png",
+  OP:"/coins/op.png",
+  MATIC:"/coins/matic.png",
+  SUI:"/coins/sui.png",
+};
+
+const NETWORK_LOGO = {
+  TRC20:"/coins/trx.png",
+  ERC20:"/coins/eth.png",
+  BEP20:"/coins/bnb.png",
+  BEP2:"/coins/bnb.png",
+  POLYGON:"/coins/matic.png",
+  SOL:"/coins/sol.png",
+};
+
+
 export default function InternalWithdraw() {
 
   const [wallets, setWallets] = useState([]);
@@ -18,6 +55,9 @@ export default function InternalWithdraw() {
   const [qrFile, setQrFile] = useState(null);
 
   const [loading, setLoading] = useState(false);
+
+  const [openCoin,setOpenCoin]=useState(false);
+const [openNetwork,setOpenNetwork]=useState(false);
 
   const { showToast } = useToast();
 
@@ -66,30 +106,46 @@ export default function InternalWithdraw() {
 
     setWallets(data);
 
-    const usdt =
-  data.find(
+    const usdtNetworks = data.filter(
+  item => item.coin === "USDT"
+);
+
+const trc20 = usdtNetworks.find(
+  item =>
+    item.network
+      .replace("-", "")
+      .toUpperCase() === "TRC20"
+);
+
+if (usdtNetworks.length > 0) {
+
+  setCoin("USDT");
+
+  setNetwork(
+    trc20
+      ? trc20.network
+      : usdtNetworks[0].network
+  );
+
+} else {
+
+  setCoin(data[0].coin);
+
+  const firstNetworks = data.filter(
+    item => item.coin === data[0].coin
+  );
+
+  const trc = firstNetworks.find(
     item =>
-      item.coin === "USDT"
-  );
-
-if(usdt){
-
-  setCoin(
-    usdt.coin
+      item.network
+        .replace("-", "")
+        .toUpperCase() === "TRC20"
   );
 
   setNetwork(
-    usdt.network
-  );
-
-}else{
-
-  setCoin(
-    data[0].coin
-  );
-
-  setNetwork(
-    data[0].network
+    trc
+      ? trc.network
+      : firstNetworks[0].network
   );
 
 }
@@ -105,13 +161,22 @@ if(usdt){
 
     setCoin(value);
 
-    const firstNetwork =
-      wallets.find(
-        item =>
-          item.coin === value
-      )?.network || "";
+    const networks = wallets.filter(
+  item => item.coin === value
+);
 
-    setNetwork(firstNetwork);
+console.log(networks);
+
+const trc20 = networks.find(
+  item =>
+    item.network.replace("-", "").toUpperCase() === "TRC20"
+);
+
+setNetwork(
+  trc20
+    ? trc20.network
+    : networks[0]?.network || ""
+);
   };
 
   const submitWithdraw =
@@ -394,24 +459,37 @@ return (
           Crypto
         </h3>
 
-        <select
-          value={coin}
-          onChange={
-            handleCoinChange
-          }
-        >
+        <div
+  className="custom-select"
+  onClick={() => setOpenCoin(!openCoin)}
+>
 
-          {
-            [
-  ...new Set(
-    wallets.map(
-      item => item.coin
-    )
-  )
+  <div className="selected-item">
+
+    <img
+      src={COIN_LOGO[coin]}
+      className="coin-icon"
+      alt=""
+    />
+
+    <span>{coin}</span>
+
+  </div>
+
+  <span>▼</span>
+
+</div>
+
+{openCoin && (
+
+<div className="dropdown-menu">
+
+{[
+  ...new Set(wallets.map(item => item.coin))
 ]
 .sort((a,b)=>{
 
-  const priority = [
+  const priority=[
     "USDT",
     "BTC",
     "ETH",
@@ -421,34 +499,64 @@ return (
     "DOGE"
   ];
 
-  const aIndex =
-    priority.indexOf(a);
+  const ai=priority.indexOf(a);
+  const bi=priority.indexOf(b);
 
-  const bIndex =
-    priority.indexOf(b);
-
-  if(aIndex === -1 && bIndex === -1){
+  if(ai===-1&&bi===-1)
     return a.localeCompare(b);
-  }
 
-  if(aIndex === -1) return 1;
-  if(bIndex === -1) return -1;
+  if(ai===-1) return 1;
+  if(bi===-1) return -1;
 
-  return aIndex - bIndex;
+  return ai-bi;
 
 })
-          .map((item) => (
+.map(item=>(
 
-            <option
-              key={item}
-              value={item}
-            >
-              {item}
-            </option>
+<div
+key={item}
+className="dropdown-item"
+onClick={() => {
 
-          ))}
+setCoin(item);
 
-        </select>
+const networks = wallets.filter(
+  w => w.coin === item
+);
+
+const trc20 = networks.find(
+  w =>
+    w.network
+      .replace("-", "")
+      .toUpperCase() === "TRC20"
+);
+
+setNetwork(
+  trc20
+    ? trc20.network
+    : networks[0]?.network || ""
+);
+
+setOpenCoin(false);
+
+}}
+>
+
+<img
+src={COIN_LOGO[item]}
+className="coin-icon"
+alt=""
+/>
+
+{item}
+
+</div>
+
+))}
+
+</div>
+
+)}
 
       </div>
 
@@ -458,39 +566,83 @@ return (
           Network
         </h3>
 
-        <select
-          value={network}
-          onChange={(e) =>
-            setNetwork(
-              e.target.value
-            )
-          }
+        <div
+className="custom-select"
+onClick={()=>setOpenNetwork(!openNetwork)}
+>
+
+<div className="selected-item">
+
+<img
+src={NETWORK_LOGO[network]}
+className="coin-icon"
+alt=""
+/>
+
+<span>{network}</span>
+
+</div>
+
+<span>▼</span>
+
+</div>
+
+{openNetwork && (
+
+  <div className="dropdown-menu">
+
+    {wallets
+      .filter((w) => w.coin === coin)
+      .sort((a, b) => {
+
+        const priority = [
+          "TRC20",
+          "ERC20",
+          "BEP20",
+          "BEP2",
+          "POLYGON",
+          "SOL",
+        ];
+
+        const an = a.network.replace("-", "").toUpperCase();
+const bn = b.network.replace("-", "").toUpperCase();
+
+const aIndex = priority.indexOf(an);
+const bIndex = priority.indexOf(bn);
+
+        if (aIndex === -1 && bIndex === -1) {
+          return a.network.localeCompare(b.network);
+        }
+
+        if (aIndex === -1) return 1;
+        if (bIndex === -1) return -1;
+
+        return aIndex - bIndex;
+
+      })
+      .map((item) => (
+
+        <div
+          key={item.id}
+          className="dropdown-item"
+          onClick={() => {
+            setNetwork(item.network);
+            setOpenNetwork(false);
+          }}
         >
+          <img
+            src={NETWORK_LOGO[item.network]}
+            className="coin-icon"
+            alt=""
+          />
+          {item.network}
+        </div>
 
-          {wallets
-  .filter(
-    item =>
-      item.coin === coin
-  )
-  .sort((a,b)=>
-    a.network.localeCompare(
-      b.network
-    )
-  )
-  .map((item) => (
+      ))}
 
-              <option
-                key={item.id}
-                value={
-                  item.network
-                }
-              >
-                {item.network}
-              </option>
+  </div>
 
-            ))}
-
-        </select>
+)}
 
       </div>
 

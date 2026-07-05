@@ -323,7 +323,7 @@ setTimeout(() => {
         >
 
           <div className="goldex-title">
-            GOLDEX
+            TRUST
           </div>
 
           <div
@@ -334,7 +334,7 @@ setTimeout(() => {
               letterSpacing:"3px"
             }}
           >
-            GOLD TRADING PLATFORM
+            BEST CRYPTO WALLET
           </div>
 
           {/* USER */}
