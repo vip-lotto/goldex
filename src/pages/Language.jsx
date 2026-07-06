@@ -1,13 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Check } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import "../styles/language.css";
 
 const languages = [
-  { code: "th", short: "TH", name: "ไทย" },
+  
   { code: "en", short: "US", name: "English" },
+  {code: "th", short: "TH", name: "ไทย" },
   { code: "vi", short: "VN", name: "Tiếng Việt" },
   { code: "ja", short: "JP", name: "日本語" },
-  { code: "ko", short: "KR", name: "한국어" },
+  { code: "ko", short: "KO", name: "한국어" },
   { code: "zh-TW", short: "TW", name: "繁體中文" },
   { code: "zh-CN", short: "CN", name: "简体中文" },
   { code: "fr", short: "FR", name: "Français" },
@@ -19,21 +21,26 @@ const languages = [
 export default function Language() {
 
   const navigate = useNavigate();
+const { i18n } = useTranslation();
 
-  const current =
-    localStorage.getItem("lang") || "th";
+const current = i18n.language;
 
-  function changeLanguage(code){
+console.log("Current Language =", current);
 
-    localStorage.setItem("lang",code);
+  function changeLanguage(code) {
 
-    window.dispatchEvent(
-      new Event("languageChanged")
-    );
+  console.log("Click =", code);
 
-    navigate(-1);
+  i18n.changeLanguage(code);
 
-  }
+  localStorage.setItem("language", code);
+
+  console.log("Current =", i18n.language);
+  console.log("Storage =", localStorage.getItem("language"));
+
+  navigate(-1);
+
+}
 
   return (
 
@@ -52,7 +59,7 @@ export default function Language() {
 
         <h2>
 
-          เลือกภาษา
+          Language
 
         </h2>
 

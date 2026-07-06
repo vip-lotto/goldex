@@ -1,5 +1,6 @@
 
 export const language = {
+  
 
   th: {
     login: "เข้าสู่ระบบ",
@@ -84,7 +85,7 @@ export const language = {
     secure: "Secure • Stable • Trustworthy",
 
     createAccount: "CREATE YOUR TRADING ACCOUNT",
-    goldPlatform: "GOLD TRADING PLATFORM"
+    goldPlatform: "TRUST TRADING PLATFORM"
   },
 
   vi: {

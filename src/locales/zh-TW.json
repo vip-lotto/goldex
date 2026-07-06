@@ -1,0 +1,228 @@
+
+
+
+{
+
+
+
+
+  "username":"使用者名稱 / 電子郵件 / 手機號碼",
+  "password":"密碼",
+  "login":"登入",
+  "register":"註冊",
+  "loading":"載入中...",
+  "secure":"安全加密登入",
+  "fillLogin":"請輸入使用者名稱和密碼",
+  "loginFailMessage":"使用者名稱或密碼錯誤",
+
+  "loadingMarket":"正在載入市場...",
+  "currentMarket":"目前市場",
+  "interval":"時間週期",
+  "updated":"已更新",
+  "markets":"市場",
+  "available":"可用",
+
+  "marketDescription1":"包含多種熱門市場。",
+  "marketDescription2":"全球市場，提供超過 100 種資產。",
+
+  "pair":"交易對",
+  "lastPrice":"最新價格",
+  "change24h":"24 小時 %",
+  "searchMarket":"搜尋市場...",
+
+  "all":"全部",
+  "commodities":"大宗商品",
+  "crypto":"加密貨幣",
+  "stocks":"股票",
+
+  "mine":"我的",
+  "transactionRecords":"交易紀錄",
+  "bankAccounts":"銀行帳戶",
+  "kyc":"KYC",
+  "security":"安全",
+  "languages":"語言",
+  "about":"關於",
+
+  "inviteCode":"邀請碼",
+  "copy":"複製",
+  "inviteCopied":"邀請碼已複製",
+
+  "network":"網路",
+  "qrCode":"QR Code",
+  "depositAddress":"充值地址",
+  "saveQR":"儲存 QR Code",
+
+  "walletCopied":"錢包地址已複製",
+  "qrSaved":"QR Code 已儲存",
+
+  "depositWarning":"轉帳前請再次確認錢包地址與網路。",
+  "depositInfo":"請確認所有資訊填寫正確。",
+
+  "uploadSlip":"上傳付款憑證",
+  "selectSlip":"選擇憑證",
+  "submitDeposit":"提交充值",
+  "pleaseUploadSlip":"請上傳付款憑證",
+  "pleaseLogin":"請先登入",
+  "uploadFailed":"上傳失敗",
+  "saveFailed":"儲存資料失敗",
+  "depositSubmitted":"充值申請已成功提交",
+
+
+
+
+
+
+
+
+
+  "address":"地址",
+  "walletAddress":"錢包地址",
+  "walletQRCode":"錢包 QR Code",
+  "amount":"金額",
+  "transferFee":"轉帳手續費",
+  "amountReceived":"實際到帳金額",
+  "submitWithdraw":"提交提款",
+  "submitting":"提交中...",
+  "pendingWithdraw":"您已有一筆待處理的提款申請。",
+  "walletNotFound":"找不到錢包",
+  "insufficientBalance":"餘額不足",
+  "enterAmount":"請輸入金額",
+  "enterAddress":"請輸入錢包地址或上傳 QR Code",
+  "minimumWithdraw":"最低提款金額為 1 USDT",
+  "withdrawSubmitted":"提款申請已成功提交",
+
+  "notifications":"通知",
+  "noNotifications":"沒有通知",
+
+  "withdraw":"提款",
+  "cryptoWithdrawal":"加密貨幣提款",
+  "bankWithdrawal":"銀行提款",
+
+  "noBankAccount":"尚未新增銀行帳戶",
+  "addBankAccountMessage":"請先到 Assets 頁面新增銀行帳戶。",
+  "destinationAccount":"收款帳戶",
+
+  "pleaseAddBank":"請先新增銀行帳戶。",
+  "transactionHistory":"交易紀錄",
+  "records":"紀錄",
+  "deposit":"充值",
+  "trade":"交易",
+
+  "searchRecords":"搜尋交易紀錄...",
+  "loadingData":"資料載入中...",
+  "noRecords":"沒有紀錄",
+
+  "pending":"處理中",
+  "success":"成功",
+  "rejected":"已拒絕",
+  "failed":"失敗",
+
+  "transferReceived":"收到轉帳",
+  "received":"已收到",
+  "fromMember":"來自會員",
+  "transferCompleted":"轉帳成功",
+  "transferred":"已轉出",
+  "toAddress":"轉至地址：",
+
+  "sendCrypto":"發送加密貨幣",
+  "coin":"幣種",
+  "scanQR":"掃描 QR Code",
+
+  "next":"下一步",
+
+  "enterDepositAddress":"請輸入錢包地址",
+  "minimumTransfer":"最低轉帳金額為 1 USDT",
+  "senderWalletNotFound":"找不到發送方錢包",
+  "receiverWalletNotFound":"找不到接收方錢包",
+  "invalidAddress":"錢包地址無效",
+  "cannotTransferSelf":"不能轉帳給自己",
+  "transferSuccess":"轉帳成功",
+
+  "moneyReceived":"收到款項",
+  "convert":"兌換",
+  "from":"從",
+  "to":"到",
+  "balance":"餘額",
+  "rate":"匯率",
+  "receive":"可收到",
+  "convertNow":"立即兌換",
+  "converting":"兌換中...",
+  "convertSuccess":"兌換成功",
+  "selectCoin":"請選擇幣種",
+  "userNotFound":"找不到使用者",
+
+
+
+
+
+
+
+
+  "changePassword":"變更密碼",
+  "oldPassword":"目前密碼",
+  "newPassword":"新密碼",
+  "confirmPassword":"確認新密碼",
+  "save":"儲存",
+  "fillAllFields":"請填寫所有欄位",
+  "passwordNotMatch":"密碼不一致",
+  "oldPasswordIncorrect":"目前密碼錯誤",
+  "passwordChanged":"密碼已成功變更",
+
+  "fullName":"姓名",
+  "bankName":"銀行名稱",
+  "accountNumber":"帳號",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"居住地址",
+  "bankAdded":"銀行帳戶新增成功",
+  "bankUpdated":"銀行帳戶更新成功",
+  "confirmDeleteBank":"確定要刪除此銀行帳戶嗎？",
+  "primaryAccount":"主要帳戶",
+  "setPrimary":"設為主要",
+  "edit":"編輯",
+  "delete":"刪除",
+  "add":"新增",
+  "addBankAccount":"新增銀行帳戶",
+
+  "kycVerification":"KYC 身分驗證",
+  "firstName":"名字",
+  "lastName":"姓氏",
+  "documentType":"證件類型",
+  "idCard":"身分證",
+  "passport":"護照",
+  "driverLicense":"駕駛執照",
+  "passportNumber":"護照號碼",
+  "driverLicenseNumber":"駕照號碼",
+  "idCardNumber":"身分證號碼",
+  "country":"國家",
+  "uploadIdCard":"上傳身分證",
+  "uploadSelfie":"上傳自拍照",
+  "clickToUpload":"點擊上傳",
+  "submit":"提交",
+  "submitting":"提交中...",
+  "uploadAllImages":"請上傳所有必要圖片",
+  "kycSubmitted":"KYC 已成功提交",
+
+  "profit":"收益",
+  "status":"狀態",
+  "trading":"交易中...",
+  "type":"類型",
+  "tradeReceipt":"交易收據",
+  "order":"訂單",
+  "result":"結果",
+  "payout":"支付金額",
+  "time":"時間",
+  "close":"關閉",
+
+  "totalAssets":"總資產",
+  "assetsDetails":"資產明細"
+
+
+
+
+
+
+
+
+
+
+}

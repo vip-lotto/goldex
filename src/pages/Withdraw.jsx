@@ -7,6 +7,7 @@ import BankWithdraw from "./BankWithdraw";
 
 import "../styles/withdraw.css";
 
+
 export default function Withdraw() {
 
   const navigate = useNavigate();

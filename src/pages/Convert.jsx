@@ -8,11 +8,15 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
 
+import { useTranslation } from "react-i18next";
+
 import CoinSelect from "../components/CoinSelect";
 
 import "../styles/convert.css";
 
 export default function Convert() {
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
 
@@ -71,10 +75,7 @@ console.log("USER =", user);
 
 if (!user) {
 
-  showToast(
-    "ไม่พบข้อมูลผู้ใช้",
-    "error"
-  );
+  showToast(t("userNotFound"), "error");
 
   return;
 }
@@ -384,10 +385,7 @@ if (assetError) {
 
       if (!fromCoin || !toCoin) {
 
-        showToast(
-          "กรุณาเลือกเหรียญ",
-          "warning"
-        );
+        showToast(t("selectCoin"), "warning");
 
         return;
 
@@ -398,10 +396,7 @@ if (assetError) {
 
       if (!input || input <= 0) {
 
-        showToast(
-          "กรุณากรอกจำนวนเงิน",
-          "warning"
-        );
+        showToast(t("enterAmount"), "warning");
 
         return;
 
@@ -414,10 +409,7 @@ if (assetError) {
 
       if (input > balance) {
 
-        showToast(
-          "ยอดเงินไม่เพียงพอ",
-          "error"
-        );
+        showToast(t("insufficientBalance"), "error");
 
         return;
 
@@ -511,10 +503,7 @@ if(error1)
         new Event("walletUpdated")
         );
 
-        showToast(
-        "Convert Success",
-        "success"
-        );
+        showToast(t("convertSuccess"), "success");
 
     } catch(err) {
 
@@ -543,7 +532,7 @@ if(error1)
 
       <div className="convert-page">
 
-        <h2>Loading...</h2>
+        <h2>{t("loading")}</h2>
 
       </div>
 
@@ -584,7 +573,7 @@ if(error1)
 
         <p className="balance-text">
 
-          Balance :
+          {t("balance")} :
 
           {" "}
 
@@ -602,7 +591,7 @@ if(error1)
 
       <div className="convert-card">
 
-        <h3>Amount</h3>
+        <h3>{t("amount")}</h3>
 
         <input
 
@@ -651,7 +640,7 @@ if(error1)
 
         <p className="balance-text">
 
-          Balance :
+          {t("balance")} :
 
           {" "}
 
@@ -669,7 +658,7 @@ if(error1)
 
       <div className="convert-card">
 
-        <h3>Rate</h3>
+        <h3>{t("rate")}</h3>
 
         <p>
 
@@ -706,7 +695,7 @@ if(error1)
 
       <div className="convert-card">
 
-        <h3>Receive</h3>
+        <h3>{t("receive")}</h3>
 
         <div className="receive-box">
 
@@ -738,11 +727,11 @@ if(error1)
 
           ?
 
-          "Converting..."
+          t("converting")
 
           :
 
-          "Convert Now"
+          t("convertNow")
 
         }
 

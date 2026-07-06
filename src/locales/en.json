@@ -1,0 +1,203 @@
+{
+  "username": "Username / Email / Phone",
+  "password": "Password",
+  "login": "Login",
+  "register": "Register",
+  "loading": "Loading...",
+  "secure": "Secure encrypted login",
+  "fillLogin": "Please enter username and password",
+  "loginFailMessage": "Invalid username or password",
+
+  "loadingMarket": "Loading Market...",
+  "currentMarket": "Current Market",
+  "interval": "Interval",
+  "updated": "Updated",
+  "markets": "Markets",
+  "available": "Available",
+  "marketDescription1": "This includes various interesting markets as well.",
+  "marketDescription2": "A global international market with more than 100 items.",
+  "pair": "Pair",
+  "lastPrice": "Last Price",
+  "change24h": "24h %",
+  "searchMarket": "Search market...",
+  "all": "All",
+  "commodities": "Commodities",
+  "crypto": "Crypto",
+  "stocks": "Stocks",
+
+  "mine": "Mine",
+  "transactionRecords": "Transaction Records",
+  "bankAccounts": "Bank Accounts",
+  "kyc": "KYC",
+  "security": "Security",
+  "languages": "Languages",
+  "about": "About",
+
+  "inviteCode": "Invitation Code",
+  "copy": "Copy",
+  "inviteCopied": "Invitation code copied",
+
+  "network": "Network",
+  "coin": "Coin",
+  "amount": "Amount",
+  "address": "Address",
+  "walletAddress": "Wallet Address",
+  "depositAddress": "Deposit Address",
+
+  "qrCode": "QR Code",
+  "walletQRCode": "Wallet QR Code",
+  "saveQR": "Save QR",
+  "walletCopied": "Wallet address copied",
+  "qrSaved": "QR Code saved",
+
+  "depositWarning": "Please double-check the wallet address and network before transferring.",
+  "depositInfo": "Please make sure the information is correct.",
+
+  "uploadSlip": "Upload Slip",
+  "selectSlip": "Select Slip",
+  "submitDeposit": "Submit Deposit",
+  "pleaseUploadSlip": "Please upload a payment slip",
+  "pleaseLogin": "Please log in",
+  "uploadFailed": "Upload failed",
+  "saveFailed": "Failed to save data",
+  "depositSubmitted": "Deposit request submitted successfully",
+
+  "withdraw": "Withdraw",
+  "cryptoWithdrawal": "Crypto Withdrawal",
+  "bankWithdrawal": "Bank Withdrawal",
+  "transferFee": "Transfer Fee",
+  "amountReceived": "Amount Received",
+  "submitWithdraw": "Submit Withdrawal",
+  "pendingWithdraw": "You already have a pending withdrawal request.",
+  "minimumWithdraw": "Amount is too low.",
+  "enterAmount": "Please enter an amount.",
+  "enterAddress": "Please enter a wallet address or upload a QR code",
+  "walletNotFound": "Wallet not found",
+  "insufficientBalance": "Insufficient balance",
+  "withdrawSubmitted": "Withdrawal request submitted successfully",
+
+  "noBankAccount": "No bank account",
+  "addBankAccountMessage": "Please add a bank account from the Assets page.",
+  "destinationAccount": "Destination Account",
+  "pleaseAddBank": "Please add a bank account first.",
+
+
+
+
+
+    "transactionHistory": "Transaction History",
+  "records": "Records",
+  "deposit": "Deposit",
+  "trade": "Trade",
+  "searchRecords": "Search records...",
+  "loadingData": "Loading data...",
+  "noRecords": "No records",
+
+  "pending": "Pending",
+  "success": "Success",
+  "rejected": "Rejected",
+  "failed": "Failed",
+
+  "transfer": "Transfer",
+  "sendCrypto": "Send Crypto",
+  "scanQR": "Scan QR",
+  "next": "Next",
+
+  "enterDepositAddress": "Please enter wallet address",
+  "minimumTransfer": "Minimum transfer is 1 USDT",
+  "senderWalletNotFound": "Sender wallet not found",
+  "receiverWalletNotFound": "Receiver wallet not found",
+  "invalidAddress": "Invalid wallet address",
+  "cannotTransferSelf": "You cannot transfer to yourself",
+  "transferSuccess": "Transfer successful",
+
+  "moneyReceived": "Money Received",
+  "received": "Received",
+  "transferred": "Transferred",
+  "fromMember": "From Member",
+  "toAddress": "To Address",
+
+  "convert": "Convert",
+  "from": "From",
+  "to": "To",
+  "balance": "Balance",
+  "rate": "Rate",
+  "receive": "Receive",
+  "convertNow": "Convert Now",
+  "converting": "Converting...",
+  "convertSuccess": "Convert successful",
+  "selectCoin": "Please select a coin",
+  "userNotFound": "User not found",
+
+  "notifications": "Notifications",
+  "noNotifications": "No notifications",
+
+  "changePassword": "Change Password",
+  "oldPassword": "Current Password",
+  "newPassword": "New Password",
+  "confirmPassword": "Confirm New Password",
+  "save": "Save",
+
+  "fillAllFields": "Please fill in all fields",
+  "passwordNotMatch": "Passwords do not match",
+  "oldPasswordIncorrect": "Current password is incorrect",
+  "passwordChanged": "Password changed successfully",
+
+  "fullName": "Full Name",
+  "bankName": "Bank Name",
+  "accountNumber": "Account Number",
+  "swiftCode": "SWIFT / BIC",
+  "residentialAddress": "Residential Address",
+
+  "bankAdded": "Bank account added successfully",
+  "bankUpdated": "Bank account updated successfully",
+  "confirmDeleteBank": "Are you sure you want to delete this bank account?",
+  "primaryAccount": "Primary Account",
+  "setPrimary": "Set Primary",
+  "edit": "Edit",
+  "delete": "Delete",
+  "add": "Add",
+  "addBankAccount": "Add Bank Account",
+
+
+
+
+
+    "kycVerification": "KYC Verification",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "documentType": "Document Type",
+  "idCard": "ID Card",
+  "passport": "Passport",
+  "driverLicense": "Driver License",
+  "passportNumber": "Passport Number",
+  "driverLicenseNumber": "Driver License Number",
+  "idCardNumber": "ID Card Number",
+  "country": "Country",
+
+  "uploadIdCard": "Upload ID Card",
+  "uploadSelfie": "Upload Selfie",
+  "clickToUpload": "Click to Upload",
+  "submit": "Submit",
+  "submitting": "Submitting...",
+  "uploadAllImages": "Please upload all required images",
+  "kycSubmitted": "KYC submitted successfully",
+
+  "profit": "Profit",
+  "status": "Status",
+  "trading": "Executing Trade...",
+  "type": "Trade Type",
+  "tradeReceipt": "Transaction Details",
+  "order": "Order",
+  "result": "Trade Result",
+  "payout": "Payout",
+  "time": "Execution Time",
+  "close": "Close",
+
+  "totalAssets": "Total Assets",
+  "assetsDetails": "Assets Details"
+}
+
+
+
+

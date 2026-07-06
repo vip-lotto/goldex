@@ -1,0 +1,226 @@
+
+
+
+{
+
+
+
+
+  "username":"Имя пользователя / Email / Телефон",
+  "password":"Пароль",
+  "login":"Войти",
+  "register":"Регистрация",
+  "loading":"Загрузка...",
+  "secure":"Безопасный зашифрованный вход",
+  "fillLogin":"Введите имя пользователя и пароль",
+  "loginFailMessage":"Неверное имя пользователя или пароль",
+
+  "loadingMarket":"Загрузка рынка...",
+  "currentMarket":"Текущий рынок",
+  "interval":"Интервал",
+  "updated":"Обновлено",
+  "markets":"Рынки",
+  "available":"Доступно",
+
+  "marketDescription1":"Включает различные популярные рынки.",
+  "marketDescription2":"Глобальный рынок с более чем 100 активами.",
+
+  "pair":"Торговая пара",
+  "lastPrice":"Последняя цена",
+  "change24h":"24 ч %",
+  "searchMarket":"Поиск рынка...",
+
+  "all":"Все",
+  "commodities":"Товары",
+  "crypto":"Криптовалюта",
+  "stocks":"Акции",
+
+  "mine":"Мой аккаунт",
+  "transactionRecords":"История операций",
+  "bankAccounts":"Банковские счета",
+  "kyc":"KYC",
+  "security":"Безопасность",
+  "languages":"Языки",
+  "about":"О нас",
+
+  "inviteCode":"Код приглашения",
+  "copy":"Копировать",
+  "inviteCopied":"Код приглашения скопирован",
+
+  "network":"Сеть",
+  "qrCode":"QR-код",
+  "depositAddress":"Адрес депозита",
+  "saveQR":"Сохранить QR",
+
+  "walletCopied":"Адрес кошелька скопирован",
+  "qrSaved":"QR-код сохранён",
+
+  "depositWarning":"Перед переводом обязательно проверьте адрес кошелька и сеть.",
+  "depositInfo":"Пожалуйста, убедитесь, что вся информация верна.",
+
+  "uploadSlip":"Загрузить квитанцию",
+  "selectSlip":"Выбрать квитанцию",
+  "submitDeposit":"Отправить депозит",
+  "pleaseUploadSlip":"Пожалуйста, загрузите квитанцию",
+  "pleaseLogin":"Пожалуйста, войдите в систему",
+  "uploadFailed":"Ошибка загрузки",
+  "saveFailed":"Не удалось сохранить данные",
+  "depositSubmitted":"Запрос на депозит успешно отправлен",
+
+
+
+
+
+
+
+
+  "address":"Адрес",
+  "walletAddress":"Адрес кошелька",
+  "walletQRCode":"QR-код кошелька",
+  "amount":"Сумма",
+  "transferFee":"Комиссия за перевод",
+  "amountReceived":"Получаемая сумма",
+  "submitWithdraw":"Отправить заявку на вывод",
+  "submitting":"Отправка...",
+  "pendingWithdraw":"У вас уже есть ожидающая заявка на вывод.",
+  "walletNotFound":"Кошелёк не найден",
+  "insufficientBalance":"Недостаточно средств",
+  "enterAmount":"Введите сумму",
+  "enterAddress":"Введите адрес кошелька или загрузите QR-код",
+  "minimumWithdraw":"Минимальная сумма вывода — 1 USDT",
+  "withdrawSubmitted":"Заявка на вывод успешно отправлена",
+
+  "notifications":"Уведомления",
+  "noNotifications":"Нет уведомлений",
+
+  "withdraw":"Вывод",
+  "cryptoWithdrawal":"Вывод криптовалюты",
+  "bankWithdrawal":"Банковский вывод",
+
+  "noBankAccount":"Банковский счёт не добавлен",
+  "addBankAccountMessage":"Добавьте банковский счёт на странице Assets.",
+  "destinationAccount":"Счёт получателя",
+
+  "pleaseAddBank":"Сначала добавьте банковский счёт.",
+
+  "transactionHistory":"История транзакций",
+  "records":"Записи",
+  "deposit":"Депозит",
+  "trade":"Торговля",
+
+  "searchRecords":"Поиск транзакций...",
+  "loadingData":"Загрузка данных...",
+  "noRecords":"Нет записей",
+
+  "pending":"В ожидании",
+  "success":"Успешно",
+  "rejected":"Отклонено",
+  "failed":"Ошибка",
+
+  "transferReceived":"Получен перевод",
+  "received":"Получено",
+  "fromMember":"От участника",
+  "transferCompleted":"Перевод выполнен",
+  "transferred":"Переведено",
+  "toAddress":"На адрес:",
+
+  "sendCrypto":"Отправить криптовалюту",
+  "coin":"Монета",
+  "scanQR":"Сканировать QR-код",
+
+  "next":"Далее",
+
+  "enterDepositAddress":"Введите адрес кошелька",
+  "minimumTransfer":"Минимальный перевод — 1 USDT",
+  "senderWalletNotFound":"Кошелёк отправителя не найден",
+  "receiverWalletNotFound":"Кошелёк получателя не найден",
+  "invalidAddress":"Недействительный адрес кошелька",
+  "cannotTransferSelf":"Нельзя перевести самому себе",
+  "transferSuccess":"Перевод выполнен",
+
+  "moneyReceived":"Средства получены",
+  "convert":"Конвертация",
+  "from":"Из",
+  "to":"В",
+  "balance":"Баланс",
+  "rate":"Курс",
+  "receive":"Получить",
+  "convertNow":"Конвертировать",
+  "converting":"Конвертация...",
+  "convertSuccess":"Конвертация выполнена",
+  "selectCoin":"Выберите монету",
+  "userNotFound":"Пользователь не найден",
+
+
+
+
+
+
+
+
+
+    "changePassword":"Изменить пароль",
+  "oldPassword":"Текущий пароль",
+  "newPassword":"Новый пароль",
+  "confirmPassword":"Подтвердите новый пароль",
+  "save":"Сохранить",
+  "fillAllFields":"Пожалуйста, заполните все поля",
+  "passwordNotMatch":"Пароли не совпадают",
+  "oldPasswordIncorrect":"Текущий пароль неверен",
+  "passwordChanged":"Пароль успешно изменён",
+
+  "fullName":"Полное имя",
+  "bankName":"Название банка",
+  "accountNumber":"Номер счёта",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"Адрес проживания",
+  "bankAdded":"Банковский счёт успешно добавлен",
+  "bankUpdated":"Банковский счёт успешно обновлён",
+  "confirmDeleteBank":"Вы уверены, что хотите удалить этот банковский счёт?",
+  "primaryAccount":"Основной счёт",
+  "setPrimary":"Сделать основным",
+  "edit":"Редактировать",
+  "delete":"Удалить",
+  "add":"Добавить",
+  "addBankAccount":"Добавить банковский счёт",
+
+  "kycVerification":"KYC-проверка",
+  "firstName":"Имя",
+  "lastName":"Фамилия",
+  "documentType":"Тип документа",
+  "idCard":"Удостоверение личности",
+  "passport":"Паспорт",
+  "driverLicense":"Водительское удостоверение",
+  "passportNumber":"Номер паспорта",
+  "driverLicenseNumber":"Номер водительского удостоверения",
+  "idCardNumber":"Номер удостоверения личности",
+  "country":"Страна",
+  "uploadIdCard":"Загрузить удостоверение личности",
+  "uploadSelfie":"Загрузить селфи",
+  "clickToUpload":"Нажмите для загрузки",
+  "submit":"Отправить",
+  "submitting":"Отправка...",
+  "uploadAllImages":"Пожалуйста, загрузите все необходимые изображения",
+  "kycSubmitted":"Заявка KYC успешно отправлена",
+
+  "profit":"Прибыль",
+  "status":"Статус",
+  "trading":"Торговля...",
+  "type":"Тип",
+  "tradeReceipt":"Квитанция сделки",
+  "order":"Ордер",
+  "result":"Результат",
+  "payout":"Выплата",
+  "time":"Время",
+  "close":"Закрыть",
+
+  "totalAssets":"Общие активы",
+  "assetsDetails":"Детали активов"
+
+
+
+
+
+
+
+}

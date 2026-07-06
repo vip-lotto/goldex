@@ -23,7 +23,7 @@
     margin:0;
     font-size:42px;
     font-weight:800;
-    color:#F5C542;
+    color:#42bcf5;
     letter-spacing:1px;
 }
 
@@ -159,7 +159,7 @@
 
 .tab.active{
 
-    background:#F5C542;
+    background:#42c2f5;
 
     color:#000;
 
@@ -231,7 +231,7 @@
 
     transform:translateY(-3px);
 
-    border-color:#F5C542;
+    border-color:#42cbf5;
 
     box-shadow:0 0 20px rgba(245,197,66,.15);
 
@@ -355,7 +355,7 @@
 
     text-align:center;
 
-    color:#F5C542;
+    color:#42bcf5;
 
     font-size:20px;
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
 import "./TradeReceipt.css";
+import { useTranslation } from "react-i18next";
 
 
 const RULES = {
@@ -41,6 +42,8 @@ export default function TradePanel() {
     
 
   const { showToast } = useToast();  
+
+  const { t } = useTranslation();
 
   const [duration, setDuration] = useState(30);
   const [amount, setAmount] = useState("");
@@ -525,7 +528,7 @@ const min = String(
 
       <div>
 
-        <label>Duration</label>
+        <label>{t("duration")}</label>
 
         <div className="trade-time-tabs">
 
@@ -557,7 +560,7 @@ const min = String(
 
   <div>
 
-    Profit : {rule.profit}%
+    {t("profit")} : {rule.profit}%
 
   </div>
 
@@ -565,7 +568,7 @@ const min = String(
 
       <div>
 
-        <label>Amount (USDT)</label>
+        <label>{t("amount")} (USDT)</label>
 
         <input
   type="number"
@@ -609,11 +612,11 @@ const min = String(
 
           <div className="trade-info">
 
-            Status : Trading...
+            {t("status")} : {t("trading")}
 
             <br />
 
-            Type : {side}
+            {t("type")} : {side}
 
           </div>
 
@@ -624,15 +627,15 @@ const min = String(
       {receipt && (
   <div className="trade-receipt">
 
-    <h3>Trade Receipt</h3>
+    <h3>{t("tradeReceipt")}</h3>
 
-<p><strong>Order :</strong> #{receipt.id}</p>
-<p><strong>Type :</strong> {receipt.side}</p>
-<p><strong>Amount :</strong> {receipt.amount.toLocaleString()} USDT</p>
-<p><strong>Duration :</strong> {receipt.duration} Seconds</p>
-<p><strong>Result :</strong> {receipt.result.toUpperCase()}</p>
-<p><strong>Payout :</strong> {receipt.payout.toLocaleString()} USDT</p>
-<p><strong>Time :</strong> {receipt.time}</p>
+<p><strong>{t("order")} :</strong> #{receipt.id}</p>
+<p><strong>{t("type")} :</strong> {receipt.side}</p>
+<p><strong>{t("amount")} :</strong> {receipt.amount.toLocaleString()} USDT</p>
+<p><strong>{t("duration")} :</strong> {receipt.duration} Seconds</p>
+<p><strong>{t("result")} :</strong> {receipt.result.toUpperCase()}</p>
+<p><strong>{t("payout")} :</strong> {receipt.payout.toLocaleString()} USDT</p>
+<p><strong>{t("time")} :</strong> {receipt.time}</p>
 
     <button
   onClick={() => {
@@ -643,7 +646,7 @@ const min = String(
     setSeconds(0);
   }}
 >
-  Close
+  {t("close")}
 </button>
 
   </div>

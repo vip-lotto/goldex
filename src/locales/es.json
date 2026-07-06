@@ -1,0 +1,222 @@
+
+{
+
+
+
+
+
+  "username":"Usuario / Correo / Teléfono",
+  "password":"Contraseña",
+  "login":"Iniciar sesión",
+  "register":"Registrarse",
+  "loading":"Cargando...",
+  "secure":"Inicio de sesión seguro cifrado",
+  "fillLogin":"Ingrese el usuario y la contraseña",
+  "loginFailMessage":"Usuario o contraseña incorrectos",
+
+  "loadingMarket":"Cargando mercado...",
+  "currentMarket":"Mercado actual",
+  "interval":"Intervalo",
+  "updated":"Actualizado",
+  "markets":"Mercados",
+  "available":"Disponible",
+
+  "marketDescription1":"Incluye una variedad de mercados interesantes.",
+  "marketDescription2":"Un mercado internacional con más de 100 activos.",
+
+  "pair":"Par",
+  "lastPrice":"Último precio",
+  "change24h":"24 h %",
+  "searchMarket":"Buscar mercado...",
+
+  "all":"Todo",
+  "commodities":"Materias primas",
+  "crypto":"Cripto",
+  "stocks":"Acciones",
+
+  "mine":"Mi cuenta",
+  "transactionRecords":"Historial de transacciones",
+  "bankAccounts":"Cuentas bancarias",
+  "kyc":"KYC",
+  "security":"Seguridad",
+  "languages":"Idiomas",
+  "about":"Acerca de",
+
+  "inviteCode":"Código de invitación",
+  "copy":"Copiar",
+  "inviteCopied":"Código de invitación copiado",
+
+  "network":"Red",
+  "qrCode":"Código QR",
+  "depositAddress":"Dirección de depósito",
+  "saveQR":"Guardar QR",
+
+  "walletCopied":"Dirección copiada",
+  "qrSaved":"Código QR guardado",
+
+  "depositWarning":"Verifique cuidadosamente la dirección de la billetera y la red antes de transferir.",
+  "depositInfo":"Asegúrese de que la información sea correcta.",
+
+  "uploadSlip":"Subir comprobante",
+  "selectSlip":"Seleccionar comprobante",
+  "submitDeposit":"Enviar depósito",
+  "pleaseUploadSlip":"Suba un comprobante de pago",
+  "pleaseLogin":"Inicie sesión",
+  "uploadFailed":"Error al subir el archivo",
+  "saveFailed":"Error al guardar los datos",
+  "depositSubmitted":"Solicitud de depósito enviada correctamente",
+
+
+
+
+
+
+
+    "address":"Dirección",
+  "walletAddress":"Dirección de la billetera",
+  "walletQRCode":"Código QR de la billetera",
+  "amount":"Cantidad",
+  "transferFee":"Comisión de transferencia",
+  "amountReceived":"Cantidad recibida",
+  "submitWithdraw":"Enviar retiro",
+  "submitting":"Enviando...",
+  "pendingWithdraw":"Ya tiene una solicitud de retiro pendiente.",
+  "walletNotFound":"Billetera no encontrada",
+  "insufficientBalance":"Saldo insuficiente",
+  "enterAmount":"Ingrese una cantidad",
+  "enterAddress":"Ingrese una dirección de billetera o cargue un código QR",
+  "minimumWithdraw":"El retiro mínimo es de 1 USDT",
+  "withdrawSubmitted":"Solicitud de retiro enviada correctamente",
+
+  "notifications":"Notificaciones",
+  "noNotifications":"No hay notificaciones",
+
+  "withdraw":"Retirar",
+  "cryptoWithdrawal":"Retiro de criptomonedas",
+  "bankWithdrawal":"Retiro bancario",
+
+  "noBankAccount":"No hay una cuenta bancaria",
+  "addBankAccountMessage":"Agregue una cuenta bancaria desde la página de Activos.",
+  "destinationAccount":"Cuenta de destino",
+
+  "pleaseAddBank":"Agregue primero una cuenta bancaria.",
+  "transactionHistory":"Historial de transacciones",
+  "records":"Registros",
+  "deposit":"Depósito",
+  "trade":"Operación",
+
+  "searchRecords":"Buscar registros...",
+  "loadingData":"Cargando datos...",
+  "noRecords":"No hay registros",
+
+  "pending":"Pendiente",
+  "success":"Completado",
+  "rejected":"Rechazado",
+  "failed":"Fallido",
+
+  "transferReceived":"Transferencia recibida",
+  "received":"Recibido",
+  "fromMember":"De miembro",
+  "transferCompleted":"Transferencia completada",
+  "transferred":"Transferido",
+  "toAddress":"A la dirección:",
+
+  "sendCrypto":"Enviar criptomonedas",
+  "coin":"Moneda",
+  "scanQR":"Escanear QR",
+
+  "next":"Siguiente",
+
+  "enterDepositAddress":"Ingrese la dirección de la billetera",
+  "minimumTransfer":"La transferencia mínima es de 1 USDT",
+  "senderWalletNotFound":"Billetera del remitente no encontrada",
+  "receiverWalletNotFound":"Billetera del destinatario no encontrada",
+  "invalidAddress":"Dirección de billetera no válida",
+  "cannotTransferSelf":"No puede transferirse a usted mismo",
+  "transferSuccess":"Transferencia realizada correctamente",
+
+  "moneyReceived":"Dinero recibido",
+  "convert":"Convertir",
+  "from":"Desde",
+  "to":"Hasta",
+  "balance":"Saldo",
+  "rate":"Tipo de cambio",
+  "receive":"Recibir",
+  "convertNow":"Convertir ahora",
+  "converting":"Convirtiendo...",
+  "convertSuccess":"Conversión realizada correctamente",
+  "selectCoin":"Seleccione una moneda",
+  "userNotFound":"Usuario no encontrado",
+
+
+
+
+
+
+
+
+    "changePassword":"Cambiar contraseña",
+  "oldPassword":"Contraseña actual",
+  "newPassword":"Nueva contraseña",
+  "confirmPassword":"Confirmar nueva contraseña",
+  "save":"Guardar",
+  "fillAllFields":"Por favor complete todos los campos",
+  "passwordNotMatch":"Las contraseñas no coinciden",
+  "oldPasswordIncorrect":"La contraseña actual es incorrecta",
+  "passwordChanged":"Contraseña cambiada correctamente",
+
+  "fullName":"Nombre completo",
+  "bankName":"Nombre del banco",
+  "accountNumber":"Número de cuenta",
+  "swiftCode":"Código SWIFT / BIC",
+  "residentialAddress":"Dirección residencial",
+  "bankAdded":"Cuenta bancaria agregada correctamente",
+  "bankUpdated":"Cuenta bancaria actualizada correctamente",
+  "confirmDeleteBank":"¿Está seguro de que desea eliminar esta cuenta bancaria?",
+  "primaryAccount":"Cuenta principal",
+  "setPrimary":"Establecer como principal",
+  "edit":"Editar",
+  "delete":"Eliminar",
+  "add":"Agregar",
+  "addBankAccount":"Agregar cuenta bancaria",
+
+  "kycVerification":"Verificación KYC",
+  "firstName":"Nombre",
+  "lastName":"Apellido",
+  "documentType":"Tipo de documento",
+  "idCard":"Documento de identidad",
+  "passport":"Pasaporte",
+  "driverLicense":"Licencia de conducir",
+  "passportNumber":"Número de pasaporte",
+  "driverLicenseNumber":"Número de licencia de conducir",
+  "idCardNumber":"Número de documento",
+  "country":"País",
+  "uploadIdCard":"Subir documento de identidad",
+  "uploadSelfie":"Subir selfie",
+  "clickToUpload":"Haga clic para subir",
+  "submit":"Enviar",
+  "submitting":"Enviando...",
+  "uploadAllImages":"Suba todas las imágenes requeridas",
+  "kycSubmitted":"KYC enviado correctamente",
+
+  "profit":"Ganancia",
+  "status":"Estado",
+  "trading":"Operando...",
+  "type":"Tipo",
+  "tradeReceipt":"Recibo de operación",
+  "order":"Orden",
+  "result":"Resultado",
+  "payout":"Pago",
+  "time":"Hora",
+  "close":"Cerrar",
+
+  "totalAssets":"Activos totales",
+  "assetsDetails":"Detalles de los activos"
+
+
+
+
+
+
+
+}

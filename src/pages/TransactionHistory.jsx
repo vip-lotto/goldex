@@ -13,12 +13,15 @@ import {
 } from "lucide-react";
 
 import { getTransactions } from "../lib/transactionApi";
+import { useTranslation } from "react-i18next";
 
 import "../styles/transactionHistory.css";
 
 export default function TransactionHistory() {
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -150,13 +153,11 @@ export default function TransactionHistory() {
 
         <div>
 
-          <h2>
-            ประวัติ
-          </h2>
+          <h2>{t("transactionHistory")}</h2>
 
-          <span>
-            {transactions.length} รายการ
-          </span>
+<span>
+  {transactions.length} {t("records")}
+</span>
 
         </div>
 
@@ -168,7 +169,7 @@ export default function TransactionHistory() {
 
         <div className="dashboard-card deposit">
 
-          <span>ฝาก</span>
+          <span>{t("deposit")}</span>
 
           <h3>
             USDT{summary.deposit.toLocaleString()}
@@ -178,7 +179,7 @@ export default function TransactionHistory() {
 
         <div className="dashboard-card withdraw">
 
-          <span>ถอน</span>
+          <span>{t("withdraw")}</span>
 
           <h3>
             USDT{summary.withdraw.toLocaleString()}
@@ -188,7 +189,7 @@ export default function TransactionHistory() {
 
         <div className="dashboard-card transfer">
 
-          <span>โอน</span>
+          <span>{t("transfer")}</span>
 
           <h3>
             USDT{summary.transfer.toLocaleString()}
@@ -198,7 +199,7 @@ export default function TransactionHistory() {
 
         <div className="dashboard-card trade">
 
-          <span>เทรด</span>
+          <span>{t("trade")}</span>
 
           <h3>
             USDT{summary.trade.toLocaleString()}
@@ -216,7 +217,7 @@ export default function TransactionHistory() {
 
         <input
           type="text"
-          placeholder="ค้นหารายการ..."
+          placeholder={t("searchRecords")}
           value={keyword}
           onChange={(e) =>
             setKeyword(e.target.value)
@@ -239,7 +240,7 @@ export default function TransactionHistory() {
             setFilter("all")
           }
         >
-          ทั้งหมด
+          {t("all")}
         </button>
 
         <button
@@ -252,7 +253,7 @@ export default function TransactionHistory() {
             setFilter("deposit")
           }
         >
-          ฝาก
+          {t("deposit")}
         </button>
 
         <button
@@ -265,7 +266,7 @@ export default function TransactionHistory() {
             setFilter("withdraw")
           }
         >
-          ถอน
+          {t("withdraw")}
         </button>
 
         <button
@@ -278,7 +279,7 @@ export default function TransactionHistory() {
             setFilter("transfer")
           }
         >
-          โอน
+          {t("transfer")}
         </button>
 
         <button
@@ -291,7 +292,7 @@ export default function TransactionHistory() {
             setFilter("trade")
           }
         >
-          เทรด
+          {t("trade")}
         </button>
 
       </div>
@@ -304,7 +305,7 @@ export default function TransactionHistory() {
 
           <div className="loader"></div>
 
-          <p>Loading data...</p>
+          <p>{t("loadingData")}</p>
 
         </div>
 
@@ -317,7 +318,7 @@ export default function TransactionHistory() {
             alt=""
           />
 
-          <h3>ยังไม่มีรายการ</h3>
+          <h3>{t("noRecords")}</h3>
 
           
 
@@ -450,21 +451,21 @@ export default function TransactionHistory() {
 
       ["pending","processing"].includes(item.status)
 
-      ? "รอดำเนินการ"
+      ? t("pending")
 
       :
 
       ["success","approved","finished"].includes(item.status)
 
-      ? "สำเร็จ"
+      ? t("success")
 
       :
 
       item.status === "rejected"
 
-      ? "ถูกปฏิเสธ"
+      ? t("rejected")
 
-      : "ไม่สำเร็จ"
+      : t("failed")
 
     }
 

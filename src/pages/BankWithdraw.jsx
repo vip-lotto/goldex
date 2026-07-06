@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
+import { useTranslation } from "react-i18next";
+
 
 export default function BankWithdraw() {
+
+  const { t } = useTranslation();
 
 const [bank, setBank] = useState(null);
 
@@ -89,7 +93,7 @@ const user =
 if (!bank) {
 
   notify(
-    "กรุณาผูกบัญชีธนาคารก่อน"
+   t("pleaseAddBank")
   );
 
   return;
@@ -98,7 +102,7 @@ if (!bank) {
 if (!amount) {
 
   notify(
-    "กรุณากรอกจำนวนเงิน"
+    t("enterAmount")
   );
 
   return;
@@ -109,7 +113,7 @@ if (
 ) {
 
   notify(
-    "จำนวนเงินน้อยเกินไป"
+    t("minimumWithdraw")
   );
 
   return;
@@ -158,7 +162,7 @@ if (error) {
 }
 
 notify(
-  "ส่งคำขอถอนสำเร็จ"
+  t("withdrawSubmitted")
 );
 
 setAmount("");
@@ -176,7 +180,7 @@ return (
       padding:"20px"
     }}
   >
-    กำลังโหลด...
+    {t("loading")}
   </div>
 );
 
@@ -195,7 +199,7 @@ return (
     >
 
       <h3>
-        ยังไม่ได้ผูกบัญชี
+        {t("noBankAccount")}
       </h3>
 
       <p
@@ -203,8 +207,7 @@ return (
           color:"#aaa"
         }}
       >
-        กรุณาไปผูกบัญชีธนาคาร
-        ที่หน้า Assets
+        {t("addBankAccountMessage")}
       </p>
 
     </div>
@@ -218,7 +221,7 @@ return (
     >
 
       <h3>
-        บัญชีปลายทาง
+        {t("destinationAccount")}
       </h3>
 
       <div
@@ -250,7 +253,7 @@ return (
   >
 
     <h3>
-      จำนวนเงิน
+      {t("amount")}
     </h3>
 
     <input
@@ -276,7 +279,7 @@ return (
     >
 
       <span>
-        Transfer fee
+        {t("transferFee")}
       </span>
 
       <strong>
@@ -290,7 +293,7 @@ return (
     >
 
       <span>
-        Amount received
+        {t("amountReceived")}
       </span>
 
       <strong
@@ -312,7 +315,7 @@ return (
       submitWithdraw
     }
   >
-    ส่งคำขอถอน
+    {t("submitWithdraw")}
   </button>
 
   <Toast

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateBank } from "../lib/bankApi";
+import { useTranslation } from "react-i18next";
 import "../styles/bankAccount.css";
 
 import {
@@ -13,6 +14,8 @@ import {
 
 export default function BankAccount() {
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const [banks, setBanks] = useState([]);
 
@@ -58,7 +61,7 @@ export default function BankAccount() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!fullName || !bankName || !accountNumber) {
-    alert("กรุณากรอกข้อมูลให้ครบ");
+    alert(t("fillAllFields"));
     return;
 }
 
@@ -73,7 +76,7 @@ export default function BankAccount() {
     residential_address: address,
 });
 
-        alert("แก้ไขบัญชีสำเร็จ");
+        alert(t("bankUpdated"));
       } else {
 
         await validateBank(
@@ -101,7 +104,7 @@ export default function BankAccount() {
     is_default: banks.length === 0,
 });
 
-        alert("เพิ่มบัญชีสำเร็จ");
+        alert(t("bankAdded"));
       }
 
       clearForm();
@@ -128,7 +131,7 @@ export default function BankAccount() {
 }
 
   async function removeBank(id) {
-    if (!window.confirm("ลบบัญชีนี้ใช่หรือไม่")) return;
+    if (!window.confirm(t("confirmDeleteBank"))) return;
 
     try {
       await deleteBank(id);
@@ -160,7 +163,7 @@ export default function BankAccount() {
           ←
         </button>
 
-        <h2>บัญชีธนาคาร</h2>
+        <h2>{t("bankAccounts")}</h2>
 
       </div>
 
@@ -171,32 +174,32 @@ export default function BankAccount() {
           
 
           <input
-placeholder="Full Name"
+placeholder={t("fullName")}
 value={fullName}
 onChange={(e)=>setFullName(e.target.value)}
 />
 
 <input
-placeholder="Bank Name"
+placeholder={t("bankName")}
 value={bankName}
 onChange={(e)=>setBankName(e.target.value)}
 />
 
 <input
-placeholder="Account Number"
+placeholder={t("accountNumber")}
 value={accountNumber}
 onChange={(e)=>setAccountNumber(e.target.value)}
 />
 
 <input
-placeholder="SWIFT / BIC"
+placeholder={t("swiftCode")}
 value={swiftCode}
 onChange={(e)=>setSwiftCode(e.target.value)}
 />
 
 <textarea
 className="bank-textarea"
-placeholder="Residential Address"
+placeholder={t("residentialAddress")}
 rows={6}
 value={address}
 onChange={(e)=>setAddress(e.target.value)}
@@ -208,7 +211,7 @@ onChange={(e)=>setAddress(e.target.value)}
               className="primary-btn"
               onClick={saveBank}
             >
-              {editingId ? "บันทึก" : "เพิ่ม"}
+              {editingId ? t("save") : t("add")}
             </button>
 
             <button
@@ -218,7 +221,7 @@ onChange={(e)=>setAddress(e.target.value)}
                 setShowForm(false);
               }}
             >
-              ยกเลิก
+              {t("cancel")}
             </button>
 
           </div>
@@ -232,7 +235,7 @@ onChange={(e)=>setAddress(e.target.value)}
         {banks.length === 0 ? (
 
           <div className="empty">
-            ยังไม่มีบัญชีธนาคาร
+            {t("noBankAccount")}
           </div>
 
         ) : (
@@ -259,7 +262,7 @@ onChange={(e)=>setAddress(e.target.value)}
 
                 {bank.is_default && (
 
-                  <span>บัญชีหลัก</span>
+                  <span>{t("primaryAccount")}</span>
                 )}
 
               </div>
@@ -272,7 +275,7 @@ onChange={(e)=>setAddress(e.target.value)}
                     className="primary-btn"
                     onClick={() => primaryBank(bank.id)}
                   >
-                    ตั้งเป็นหลัก
+                    {t("setPrimary")}
                   </button>
 
                 )}
@@ -281,14 +284,14 @@ onChange={(e)=>setAddress(e.target.value)}
                   className="edit-btn"
                   onClick={() => editBank(bank)}
                 >
-                  แก้ไข
+                  {t("edit")}
                 </button>
 
                 <button
                   className="delete-btn"
                   onClick={() => removeBank(bank.id)}
                 >
-                  ลบ
+                  {t("delete")}
                 </button>
 
               </div>
@@ -308,7 +311,7 @@ onChange={(e)=>setAddress(e.target.value)}
           setShowForm(true);
         }}
       >
-        + เพิ่มบัญชีธนาคาร
+        + {t("addBankAccount")}
       </button>
 
     </div>

@@ -1,0 +1,219 @@
+
+
+{
+
+
+
+
+  "username":"Benutzername / E-Mail / Telefon",
+  "password":"Passwort",
+  "login":"Anmelden",
+  "register":"Registrieren",
+  "loading":"Wird geladen...",
+  "secure":"Sicher verschlüsselte Anmeldung",
+  "fillLogin":"Bitte Benutzername und Passwort eingeben",
+  "loginFailMessage":"Benutzername oder Passwort ist falsch",
+
+  "loadingMarket":"Markt wird geladen...",
+  "currentMarket":"Aktueller Markt",
+  "interval":"Intervall",
+  "updated":"Aktualisiert",
+  "markets":"Märkte",
+  "available":"Verfügbar",
+
+  "marketDescription1":"Enthält verschiedene interessante Märkte.",
+  "marketDescription2":"Ein internationaler Markt mit mehr als 100 Vermögenswerten.",
+
+  "pair":"Handelspaar",
+  "lastPrice":"Letzter Preis",
+  "change24h":"24 Std. %",
+  "searchMarket":"Markt suchen...",
+
+  "all":"Alle",
+  "commodities":"Rohstoffe",
+  "crypto":"Kryptowährungen",
+  "stocks":"Aktien",
+
+  "mine":"Mein Konto",
+  "transactionRecords":"Transaktionsverlauf",
+  "bankAccounts":"Bankkonten",
+  "kyc":"KYC",
+  "security":"Sicherheit",
+  "languages":"Sprachen",
+  "about":"Über uns",
+
+  "inviteCode":"Einladungscode",
+  "copy":"Kopieren",
+  "inviteCopied":"Einladungscode kopiert",
+
+  "network":"Netzwerk",
+  "qrCode":"QR-Code",
+  "depositAddress":"Einzahlungsadresse",
+  "saveQR":"QR-Code speichern",
+
+  "walletCopied":"Wallet-Adresse kopiert",
+  "qrSaved":"QR-Code gespeichert",
+
+  "depositWarning":"Bitte überprüfen Sie die Wallet-Adresse und das Netzwerk sorgfältig, bevor Sie übertragen.",
+  "depositInfo":"Bitte stellen Sie sicher, dass alle Angaben korrekt sind.",
+
+  "uploadSlip":"Beleg hochladen",
+  "selectSlip":"Beleg auswählen",
+  "submitDeposit":"Einzahlung senden",
+  "pleaseUploadSlip":"Bitte laden Sie einen Zahlungsbeleg hoch",
+  "pleaseLogin":"Bitte melden Sie sich an",
+  "uploadFailed":"Hochladen fehlgeschlagen",
+  "saveFailed":"Speichern der Daten fehlgeschlagen",
+  "depositSubmitted":"Einzahlungsanfrage erfolgreich gesendet",
+
+
+
+
+
+
+    "address":"Adresse",
+  "walletAddress":"Wallet-Adresse",
+  "walletQRCode":"Wallet-QR-Code",
+  "amount":"Betrag",
+  "transferFee":"Überweisungsgebühr",
+  "amountReceived":"Erhaltener Betrag",
+  "submitWithdraw":"Auszahlung senden",
+  "submitting":"Wird gesendet...",
+  "pendingWithdraw":"Sie haben bereits eine ausstehende Auszahlungsanfrage.",
+  "walletNotFound":"Wallet nicht gefunden",
+  "insufficientBalance":"Unzureichendes Guthaben",
+  "enterAmount":"Bitte geben Sie einen Betrag ein",
+  "enterAddress":"Bitte geben Sie eine Wallet-Adresse ein oder laden Sie einen QR-Code hoch",
+  "minimumWithdraw":"Mindestauszahlung beträgt 1 USDT",
+  "withdrawSubmitted":"Auszahlungsanfrage erfolgreich gesendet",
+
+  "notifications":"Benachrichtigungen",
+  "noNotifications":"Keine Benachrichtigungen",
+
+  "withdraw":"Auszahlung",
+  "cryptoWithdrawal":"Krypto-Auszahlung",
+  "bankWithdrawal":"Bankauszahlung",
+
+  "noBankAccount":"Kein Bankkonto vorhanden",
+  "addBankAccountMessage":"Bitte fügen Sie auf der Assets-Seite ein Bankkonto hinzu.",
+  "destinationAccount":"Empfängerkonto",
+
+  "pleaseAddBank":"Bitte fügen Sie zuerst ein Bankkonto hinzu.",
+  "transactionHistory":"Transaktionsverlauf",
+  "records":"Einträge",
+  "deposit":"Einzahlung",
+  "trade":"Handel",
+
+  "searchRecords":"Transaktionen suchen...",
+  "loadingData":"Daten werden geladen...",
+  "noRecords":"Keine Einträge",
+
+  "pending":"Ausstehend",
+  "success":"Erfolgreich",
+  "rejected":"Abgelehnt",
+  "failed":"Fehlgeschlagen",
+
+  "transferReceived":"Überweisung erhalten",
+  "received":"Erhalten",
+  "fromMember":"Von Mitglied",
+  "transferCompleted":"Überweisung erfolgreich",
+  "transferred":"Übertragen",
+  "toAddress":"An Adresse:",
+
+  "sendCrypto":"Krypto senden",
+  "coin":"Coin",
+  "scanQR":"QR-Code scannen",
+
+  "next":"Weiter",
+
+  "enterDepositAddress":"Bitte geben Sie die Wallet-Adresse ein",
+  "minimumTransfer":"Mindestüberweisung beträgt 1 USDT",
+  "senderWalletNotFound":"Sender-Wallet nicht gefunden",
+  "receiverWalletNotFound":"Empfänger-Wallet nicht gefunden",
+  "invalidAddress":"Ungültige Wallet-Adresse",
+  "cannotTransferSelf":"Sie können sich nicht selbst Geld senden",
+  "transferSuccess":"Überweisung erfolgreich",
+
+  "moneyReceived":"Geld erhalten",
+  "convert":"Umtauschen",
+  "from":"Von",
+  "to":"Nach",
+  "balance":"Guthaben",
+  "rate":"Wechselkurs",
+  "receive":"Erhalten",
+  "convertNow":"Jetzt umtauschen",
+  "converting":"Wird umgetauscht...",
+  "convertSuccess":"Umtausch erfolgreich",
+  "selectCoin":"Bitte wählen Sie eine Coin",
+  "userNotFound":"Benutzer nicht gefunden",
+
+
+
+
+
+
+
+
+
+
+    "changePassword":"Passwort ändern",
+  "oldPassword":"Aktuelles Passwort",
+  "newPassword":"Neues Passwort",
+  "confirmPassword":"Neues Passwort bestätigen",
+  "save":"Speichern",
+  "fillAllFields":"Bitte füllen Sie alle Felder aus",
+  "passwordNotMatch":"Die Passwörter stimmen nicht überein",
+  "oldPasswordIncorrect":"Das aktuelle Passwort ist falsch",
+  "passwordChanged":"Passwort erfolgreich geändert",
+
+  "fullName":"Vollständiger Name",
+  "bankName":"Bankname",
+  "accountNumber":"Kontonummer",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"Wohnadresse",
+  "bankAdded":"Bankkonto erfolgreich hinzugefügt",
+  "bankUpdated":"Bankkonto erfolgreich aktualisiert",
+  "confirmDeleteBank":"Möchten Sie dieses Bankkonto wirklich löschen?",
+  "primaryAccount":"Hauptkonto",
+  "setPrimary":"Als Hauptkonto festlegen",
+  "edit":"Bearbeiten",
+  "delete":"Löschen",
+  "add":"Hinzufügen",
+  "addBankAccount":"Bankkonto hinzufügen",
+
+  "kycVerification":"KYC-Verifizierung",
+  "firstName":"Vorname",
+  "lastName":"Nachname",
+  "documentType":"Dokumenttyp",
+  "idCard":"Personalausweis",
+  "passport":"Reisepass",
+  "driverLicense":"Führerschein",
+  "passportNumber":"Reisepassnummer",
+  "driverLicenseNumber":"Führerscheinnummer",
+  "idCardNumber":"Ausweisnummer",
+  "country":"Land",
+  "uploadIdCard":"Personalausweis hochladen",
+  "uploadSelfie":"Selfie hochladen",
+  "clickToUpload":"Zum Hochladen klicken",
+  "submit":"Senden",
+  "submitting":"Wird gesendet...",
+  "uploadAllImages":"Bitte laden Sie alle erforderlichen Bilder hoch",
+  "kycSubmitted":"KYC erfolgreich eingereicht",
+
+  "profit":"Gewinn",
+  "status":"Status",
+  "trading":"Handel läuft...",
+  "type":"Typ",
+  "tradeReceipt":"Handelsbeleg",
+  "order":"Auftrag",
+  "result":"Ergebnis",
+  "payout":"Auszahlung",
+  "time":"Zeit",
+  "close":"Schließen",
+
+  "totalAssets":"Gesamtvermögen",
+  "assetsDetails":"Vermögensdetails"
+
+
+
+}

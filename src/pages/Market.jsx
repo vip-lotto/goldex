@@ -6,9 +6,13 @@ import MarketList from "../components/MarketList";
 
 import { getMarkets } from "../lib/marketApi";
 
+import { useTranslation } from "react-i18next";
+
 import "../styles/market.css";
 
 export default function Market() {
+
+  const { t } = useTranslation();
   const [markets, setMarkets] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -71,14 +75,14 @@ export default function Market() {
       />
 
       <div className="market-header-simple">
-        <div>รายการ</div>
-        <div>ราคาล่าสุด</div>
-        <div>24 ชม. %</div>
-      </div>
+  <div>{t("pair")}</div>
+  <div>{t("lastPrice")}</div>
+  <div>{t("change24h")}</div>
+</div>
 
       {loading ? (
         <div className="market-loading">
-          Loading data...
+          {t("loading")}
         </div>
       ) : (
         <MarketList markets={filteredMarkets} />

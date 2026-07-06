@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { useTranslation } from "react-i18next";
 
 
 import {
@@ -26,6 +27,8 @@ import { getWallet } from "../lib/walletApi";
 export default function Mine() {
 
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   const [wallet,setWallet] = useState(null);
 
@@ -96,7 +99,7 @@ if (!code) return;
 
 navigator.clipboard.writeText(code);
 
-    alert("คัดลอกรหัสเชิญแล้ว");
+    alert(t("inviteCopied"));
 
   }
 
@@ -114,7 +117,7 @@ navigator.clipboard.writeText(code);
 
       <div className="mine-page">
 
-        Loading...
+        {t("loading")}
 
       </div>
 
@@ -184,7 +187,7 @@ navigator.clipboard.writeText(code);
 
             <div className="invite-label">
 
-                รหัสเชิญ
+                {t("inviteCode")}
 
             </div>
 
@@ -206,7 +209,7 @@ navigator.clipboard.writeText(code);
 
             <Copy size={18}/>
 
-            คัดลอก
+            {t("copy")}
 
         </button>
 
@@ -322,7 +325,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>ประวัติ</span>
+      <span>{t("transactionRecords")}</span>
 
     </div>
 
@@ -344,7 +347,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>ธุรกรรมบัญชี</span>
+      <span>{t("bankAccounts")}</span>
 
     </div>
 
@@ -366,7 +369,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>KYC</span>
+      <span>{t("kyc")}</span>
 
     </div>
 
@@ -388,7 +391,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>เปลี่ยนรหัสผ่าน</span>
+      <span>{t("security")}</span>
 
     </div>
 
@@ -410,7 +413,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>เปลี่ยนภาษา</span>
+      <span>{t("languages")}</span>
 
     </div>
 
@@ -432,7 +435,7 @@ Convert
         color="#F5C542"
       />
 
-      <span>About</span>
+      <span>{t("about")}</span>
 
     </div>
 

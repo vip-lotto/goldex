@@ -3,6 +3,7 @@ import { Upload } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
 import { addTransaction } from "../lib/transactionApi";
+import { useTranslation } from "react-i18next";
 
 
 const COIN_LOGO = {
@@ -60,6 +61,8 @@ export default function InternalWithdraw() {
 const [openNetwork,setOpenNetwork]=useState(false);
 
   const { showToast } = useToast();
+
+  const { t } = useTranslation();
 
   
 
@@ -209,7 +212,7 @@ if (
 ) {
 
   showToast(
-  "คุณมีรายการถอนที่กำลังรอการตรวจสอบ กรุณารอการอนุมัติ",
+  t("pendingWithdraw"),
   "warning"
 );
 
@@ -235,7 +238,7 @@ setLoading(false);
 if (!wallet) {
 
   showToast(
-  "ไม่พบกระเป๋าเงิน",
+  t("walletNotFound"),
   "error"
 );
 
@@ -250,7 +253,7 @@ if (
 ) {
 
   showToast(
-  "ยอดเงินไม่เพียงพอ",
+  t("insufficientBalance"),
   "error"
 );
 
@@ -263,7 +266,7 @@ setLoading(false);
 
     if (!amount) {
       showToast(
-  "กรุณากรอกจำนวนเงิน",
+  t("enterAmount"),
   "warning"
 );
 
@@ -276,7 +279,7 @@ setLoading(false);
 
     if (!address && !qrFile) {
   showToast(
-  "กรุณากรอก Wallet Address หรือแนบ QR Code",
+  t("enterAddress"),
   "warning"
 );
 
@@ -288,7 +291,7 @@ setLoading(false);
     if (Number(amount) < 1) {
 
   showToast(
-  "ถอนขั้นต่ำ 1 USDT",
+  t("minimumWithdraw"),
   "warning"
 );
 
@@ -437,7 +440,7 @@ Network : ${network}
   });
 
     showToast(
-"ส่งคำขอถอนสำเร็จ",
+t("withdrawSubmitted"),
 "success"
 );
 
@@ -455,9 +458,7 @@ return (
 
       <div className="deposit-card">
 
-        <h3>
-          Crypto
-        </h3>
+        <h3>{t("crypto")}</h3>
 
         <div
   className="custom-select"
@@ -562,9 +563,7 @@ alt=""
 
       <div className="deposit-card">
 
-        <h3>
-          Network
-        </h3>
+        <h3>{t("network")}</h3>
 
         <div
 className="custom-select"
@@ -648,9 +647,7 @@ const bIndex = priority.indexOf(bn);
 
       <div className="deposit-card">
 
-        <h3>
-          Address
-        </h3>
+        <h3>{t("address")}</h3>
 
         <input
           value={address}
@@ -659,7 +656,7 @@ const bIndex = priority.indexOf(bn);
               e.target.value
             )
           }
-          placeholder="Wallet Address"
+          placeholder={t("walletAddress")}
           className="deposit-input"
         />
 
@@ -667,9 +664,7 @@ const bIndex = priority.indexOf(bn);
 
       <div className="deposit-card">
 
-        <h3>
-          Wallet QR Code 
-        </h3>
+        <h3>{t("walletQRCode")}</h3>
 
         <label
           className="upload-box"
@@ -681,7 +676,7 @@ const bIndex = priority.indexOf(bn);
             {
               qrFile
               ? qrFile.name
-              : " Wallet QR Code "
+              : t("walletQRCode")
             }
           </p>
 
@@ -702,9 +697,7 @@ const bIndex = priority.indexOf(bn);
 
       <div className="deposit-card">
 
-        <h3>
-          Amount
-        </h3>
+        <h3>{t("amount")}</h3>
 
         <input
           type="number"
@@ -723,12 +716,12 @@ const bIndex = priority.indexOf(bn);
       <div className="deposit-card">
 
         <p>
-          Transfer fee :
+          {t("transferFee")} :
           {fee} USDT
         </p>
 
         <p>
-          Amount received :
+          {t("amountReceived")} :
           {receiveAmount > 0
             ? receiveAmount
             : 0}
@@ -745,8 +738,8 @@ disabled={loading}
 >
 
 {loading
-? "กำลังส่ง..."
-: "ส่งคำขอถอน"}
+? t("submitting")
+: t("submitWithdraw")}
 
 </button>
 

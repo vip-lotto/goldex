@@ -1,0 +1,221 @@
+
+
+
+{
+
+
+
+
+  "username":"Nom d'utilisateur / E-mail / Téléphone",
+  "password":"Mot de passe",
+  "login":"Connexion",
+  "register":"S'inscrire",
+  "loading":"Chargement...",
+  "secure":"Connexion sécurisée et chiffrée",
+  "fillLogin":"Veuillez saisir votre nom d'utilisateur et votre mot de passe",
+  "loginFailMessage":"Nom d'utilisateur ou mot de passe incorrect",
+
+  "loadingMarket":"Chargement du marché...",
+  "currentMarket":"Marché actuel",
+  "interval":"Intervalle",
+  "updated":"Mis à jour",
+  "markets":"Marchés",
+  "available":"Disponible",
+
+  "marketDescription1":"Comprend plusieurs marchés populaires.",
+  "marketDescription2":"Un marché mondial proposant plus de 100 actifs.",
+
+  "pair":"Paire",
+  "lastPrice":"Dernier prix",
+  "change24h":"24 h %",
+  "searchMarket":"Rechercher un marché...",
+
+  "all":"Tous",
+  "commodities":"Matières premières",
+  "crypto":"Crypto",
+  "stocks":"Actions",
+
+  "mine":"Mon compte",
+  "transactionRecords":"Historique des transactions",
+  "bankAccounts":"Comptes bancaires",
+  "kyc":"KYC",
+  "security":"Sécurité",
+  "languages":"Langues",
+  "about":"À propos",
+
+  "inviteCode":"Code d'invitation",
+  "copy":"Copier",
+  "inviteCopied":"Code d'invitation copié",
+
+  "network":"Réseau",
+  "qrCode":"Code QR",
+  "depositAddress":"Adresse de dépôt",
+  "saveQR":"Enregistrer le QR",
+
+  "walletCopied":"Adresse du portefeuille copiée",
+  "qrSaved":"Code QR enregistré",
+
+  "depositWarning":"Veuillez vérifier l'adresse du portefeuille et le réseau avant le transfert.",
+  "depositInfo":"Veuillez vous assurer que toutes les informations sont correctes.",
+
+  "uploadSlip":"Téléverser le justificatif",
+  "selectSlip":"Sélectionner un justificatif",
+  "submitDeposit":"Soumettre le dépôt",
+  "pleaseUploadSlip":"Veuillez téléverser un justificatif",
+  "pleaseLogin":"Veuillez vous connecter",
+  "uploadFailed":"Échec du téléversement",
+  "saveFailed":"Échec de l'enregistrement",
+  "depositSubmitted":"Demande de dépôt envoyée avec succès",
+
+
+
+
+
+
+
+    "address":"Adresse",
+  "walletAddress":"Adresse du portefeuille",
+  "walletQRCode":"QR Code du portefeuille",
+  "amount":"Montant",
+  "transferFee":"Frais de transfert",
+  "amountReceived":"Montant reçu",
+  "submitWithdraw":"Soumettre le retrait",
+  "submitting":"Envoi en cours...",
+  "pendingWithdraw":"Vous avez déjà une demande de retrait en attente.",
+  "walletNotFound":"Portefeuille introuvable",
+  "insufficientBalance":"Solde insuffisant",
+  "enterAmount":"Veuillez saisir un montant",
+  "enterAddress":"Veuillez saisir une adresse de portefeuille ou téléverser un QR Code",
+  "minimumWithdraw":"Le retrait minimum est de 1 USDT",
+  "withdrawSubmitted":"Demande de retrait envoyée avec succès",
+
+  "notifications":"Notifications",
+  "noNotifications":"Aucune notification",
+
+  "withdraw":"Retrait",
+  "cryptoWithdrawal":"Retrait Crypto",
+  "bankWithdrawal":"Retrait bancaire",
+
+  "noBankAccount":"Aucun compte bancaire",
+  "addBankAccountMessage":"Veuillez ajouter un compte bancaire depuis la page Assets.",
+  "destinationAccount":"Compte de destination",
+
+  "pleaseAddBank":"Veuillez d'abord ajouter un compte bancaire.",
+
+  "transactionHistory":"Historique des transactions",
+  "records":"Enregistrements",
+  "deposit":"Dépôt",
+  "trade":"Trading",
+
+  "searchRecords":"Rechercher un enregistrement...",
+  "loadingData":"Chargement des données...",
+  "noRecords":"Aucun enregistrement",
+
+  "pending":"En attente",
+  "success":"Succès",
+  "rejected":"Rejeté",
+  "failed":"Échec",
+
+  "transferReceived":"Transfert reçu",
+  "received":"Reçu",
+  "fromMember":"De la part du membre",
+  "transferCompleted":"Transfert réussi",
+  "transferred":"Transféré",
+  "toAddress":"Vers l'adresse :",
+
+  "sendCrypto":"Envoyer des cryptomonnaies",
+  "coin":"Monnaie",
+  "scanQR":"Scanner le QR Code",
+
+  "next":"Suivant",
+
+  "enterDepositAddress":"Veuillez saisir l'adresse du portefeuille",
+  "minimumTransfer":"Le transfert minimum est de 1 USDT",
+  "senderWalletNotFound":"Portefeuille de l'expéditeur introuvable",
+  "receiverWalletNotFound":"Portefeuille du destinataire introuvable",
+  "invalidAddress":"Adresse du portefeuille invalide",
+  "cannotTransferSelf":"Vous ne pouvez pas transférer vers vous-même",
+  "transferSuccess":"Transfert réussi",
+
+  "moneyReceived":"Argent reçu",
+  "convert":"Convertir",
+  "from":"De",
+  "to":"Vers",
+  "balance":"Solde",
+  "rate":"Taux",
+  "receive":"Recevoir",
+  "convertNow":"Convertir maintenant",
+  "converting":"Conversion en cours...",
+  "convertSuccess":"Conversion réussie",
+  "selectCoin":"Veuillez sélectionner une monnaie",
+  "userNotFound":"Utilisateur introuvable",
+
+
+
+
+
+
+
+  "changePassword":"Changer le mot de passe",
+  "oldPassword":"Mot de passe actuel",
+  "newPassword":"Nouveau mot de passe",
+  "confirmPassword":"Confirmer le nouveau mot de passe",
+  "save":"Enregistrer",
+  "fillAllFields":"Veuillez remplir tous les champs",
+  "passwordNotMatch":"Les mots de passe ne correspondent pas",
+  "oldPasswordIncorrect":"Le mot de passe actuel est incorrect",
+  "passwordChanged":"Le mot de passe a été modifié avec succès",
+
+  "fullName":"Nom complet",
+  "bankName":"Nom de la banque",
+  "accountNumber":"Numéro de compte",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"Adresse résidentielle",
+  "bankAdded":"Compte bancaire ajouté avec succès",
+  "bankUpdated":"Compte bancaire mis à jour avec succès",
+  "confirmDeleteBank":"Êtes-vous sûr de vouloir supprimer ce compte bancaire ?",
+  "primaryAccount":"Compte principal",
+  "setPrimary":"Définir comme principal",
+  "edit":"Modifier",
+  "delete":"Supprimer",
+  "add":"Ajouter",
+  "addBankAccount":"Ajouter un compte bancaire",
+
+  "kycVerification":"Vérification KYC",
+  "firstName":"Prénom",
+  "lastName":"Nom",
+  "documentType":"Type de document",
+  "idCard":"Carte d'identité",
+  "passport":"Passeport",
+  "driverLicense":"Permis de conduire",
+  "passportNumber":"Numéro de passeport",
+  "driverLicenseNumber":"Numéro du permis de conduire",
+  "idCardNumber":"Numéro de carte d'identité",
+  "country":"Pays",
+  "uploadIdCard":"Téléverser la carte d'identité",
+  "uploadSelfie":"Téléverser un selfie",
+  "clickToUpload":"Cliquez pour téléverser",
+  "submit":"Soumettre",
+  "submitting":"Envoi en cours...",
+  "uploadAllImages":"Veuillez téléverser toutes les images requises",
+  "kycSubmitted":"La demande KYC a été envoyée avec succès",
+
+  "profit":"Profit",
+  "status":"Statut",
+  "trading":"En cours...",
+  "type":"Type",
+  "tradeReceipt":"Reçu de transaction",
+  "order":"Ordre",
+  "result":"Résultat",
+  "payout":"Paiement",
+  "time":"Heure",
+  "close":"Fermer",
+
+  "totalAssets":"Total des actifs",
+  "assetsDetails":"Détails des actifs"
+
+
+
+
+
+}

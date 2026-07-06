@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { useLanguage } from "../context/LanguageContext";
+
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock, FaGlobeAsia } from "react-icons/fa";
 import { IoEyeOutline } from "react-icons/io5";
+import { useTranslation } from "react-i18next";
 
 
 import loginBg from "../assets/login01.png";
@@ -32,19 +33,15 @@ export default function Login() {
 
   
 
-  const { t, setLang } = useLanguage();
+  const { t, i18n } = useTranslation();
 
   
 
   const changeLanguage = (value) => {
 
-  localStorage.setItem("lang", value);
+  i18n.changeLanguage(value);
 
-  setLang(value);
-
-  window.dispatchEvent(
-    new Event("languageChanged")
-  );
+  localStorage.setItem("language", value);
 
   setShowLang(false);
 
@@ -54,7 +51,7 @@ export default function Login() {
 
     if(!username || !password){
       showToast(
-    t.fillLogin,
+    t("fillLogin"),
     "warning"
 );
       return;
@@ -92,7 +89,7 @@ export default function Login() {
       setLoading(false);
 
       showToast(
-    t.loginFailMessage,
+    t("loginFailMessage"),
     "error"
 );
 
@@ -273,17 +270,19 @@ setTimeout(() => {
 
                 {[
                   
-                  ["th","🇹🇭 ไทย"],
-                  ["en","🇺🇸 English"],
-                  ["vi","🇻🇳 Tiếng Việt"],
-                  ["ja","🇯🇵 日本語"],
-                  ["ko","🇰🇷 한국어"],
-                  ["zh-TW","🇹🇼 繁體中文"],
-                  ["zh-CN","🇨🇳 简体中文"],
-                  ["fr","🇫🇷 Français"],
-                  ["de","🇩🇪 Deutsch"],
-                  ["es","🇪🇸 Español"],
-                  ["ru","🇷🇺 Русский"]
+                  
+  ["en","🇺🇸 English"],
+  ["th","🇹🇭 ไทย"],
+  ["vi","🇻🇳 Tiếng Việt"],
+  ["ja","🇯🇵 日本語"],
+  ["ko","🇰🇷 한국어"],
+  ["zh-TW","🇹🇼 繁體中文"],
+  ["zh-CN","🇨🇳 简体中文"],
+  ["fr","🇫🇷 Français"],
+  ["de","🇩🇪 Deutsch"],
+  ["es","🇪🇸 Español"],
+  ["ru","🇷🇺 Русский"]
+
 
                 ].map(([code,name]) => (
 
@@ -353,7 +352,7 @@ setTimeout(() => {
             <FaUserAlt color="#ddd" />
 
             <input
-              placeholder={t.username}
+              placeholder={t("username")}
               value={username}
               onChange={(e)=>setUsername(e.target.value)}
               style={{
@@ -388,7 +387,7 @@ setTimeout(() => {
                 ? "text"
                 : "password"
               }
-              placeholder={t.password}
+              placeholder={t("password")}
               value={password}
               onChange={(e)=>setPassword(e.target.value)}
               style={{
@@ -432,8 +431,8 @@ setTimeout(() => {
           >
             {
               loading
-                ? t.loading
-                : t.login
+  ? t("loading")
+  : t("login")
             }
           </button>
 
@@ -454,7 +453,7 @@ setTimeout(() => {
               cursor:"pointer"
             }}
           >
-            {t.register}
+            {t("register")}
           </button>
 
           <div
@@ -465,7 +464,7 @@ setTimeout(() => {
               fontSize:"18px"
             }}
           >
-            🛡️ {t.secure}
+            🛡️ {t("secure")}
           </div>
 
         </div>

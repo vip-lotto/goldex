@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { AdvancedRealTimeChart } from "react-ts-tradingview-widgets";
 import "./homeMarketChart.css";
+import { useTranslation } from "react-i18next";
 
 const MARKETS = [
   { title: "BTC", symbol: "BINANCE:BTCUSDT" },
@@ -67,7 +68,11 @@ const DEFAULT_CARDS = [
 ];
 
 export default function HomeMarketChart() {
+
+  const { t } = useTranslation();
+
   const [market, setMarket] = useState(MARKETS[0]);
+
   const [interval, setInterval] = useState("60");
 
   const [cards, setCards] = useState([]);
@@ -155,10 +160,10 @@ if (current) {
 
         <div>
 
-          <h2>Perpetuals</h2>
+          <h2>{t("perpetuals")}</h2>
 
           <p className="perpetual-subtitle">
-            🟢 Live Crypto Market
+            🟢 {t("liveCryptoMarket")}
           </p>
 
         </div>
@@ -174,7 +179,7 @@ if (current) {
 
     <div className="loader"></div>
 
-    Loading Market...
+    {t("loadingMarket")}
 
 </div>
         )}
@@ -263,7 +268,7 @@ if (current) {
 
   <span className="summary-title">
 
-    Current Market
+    {t("currentMarket")}
 
   </span>
 
@@ -301,7 +306,7 @@ if (current) {
 
   <span className="summary-title">
 
-    Interval
+    {t("interval")}
 
   </span>
 
@@ -323,7 +328,7 @@ if (current) {
 
   <p>
 
-    Updated
+    {t("updated")}
 
     {" "}
 
@@ -336,7 +341,7 @@ if (current) {
         <div className="summary-card">
 
           <span className="summary-title">
-            Markets
+            {t("markets")}
           </span>
 
           <h3>
@@ -344,7 +349,7 @@ if (current) {
           </h3>
 
           <p>
-            Available
+            {t("available")}
           </p>
 
         </div>
@@ -359,11 +364,11 @@ if (current) {
       <div className="market-footer">
 
         <div className="footer-left">
-          This includes various interesting markets as well.
+          {t("marketDescription1")}
         </div>
 
         <div className="footer-right">
-          A global international market with more than 100 items.
+          {t("marketDescription2")}
         </div>
 
       </div>

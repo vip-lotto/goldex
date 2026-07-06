@@ -2,9 +2,13 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { useTranslation } from "react-i18next";
+
+
 
 export default function Notifications() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [items, setItems] = useState([]);
 
@@ -127,7 +131,7 @@ export default function Notifications() {
             fontWeight: "700",
           }}
         >
-          แจ้งเตือน
+          {t("notifications")}
         </h2>
       </div>
 
@@ -139,7 +143,7 @@ export default function Notifications() {
             color: "#bfc9e0",
           }}
         >
-          ไม่มีแจ้งเตือน
+          {t("noNotifications")}
         </div>
       ) : (
         items.map((item) => (

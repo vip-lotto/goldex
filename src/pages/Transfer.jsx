@@ -4,10 +4,13 @@ import { Upload, ArrowLeft } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import "../styles/Transfer.css";
 import Toast from "../components/Toast";
+import { useTranslation } from "react-i18next";
 
 
 export default function Transfer() {
     const navigate = useNavigate();
+
+    const { t } = useTranslation();
 
   const [wallets, setWallets] = useState([]);
 
@@ -120,16 +123,13 @@ const { data } =
 
     if (!address) {
 
-  notify(
-    "กรุณากรอก Deposit Address"
-  );
-
+  notify(t("enterDepositAddress"));
   return;
 }
 
     if (!amount) {
 
-      notify("กรุณากรอกจำนวนเงิน");
+      notify(t("enterAmount"));
 
       return;
     }
@@ -146,18 +146,15 @@ const { data } =
 
     if (!senderWallet) {
 
-      notify("ไม่พบ Wallet ผู้ส่ง");
+  notify(t("senderWalletNotFound"));
 
-      return;
-    }
-
+  return;
+}
     if (
   Number(amount) < 1
 ) {
 
-  notify(
-    "โอนขั้นต่ำ 1 USDT"
-  );
+  notify(t("minimumTransfer"));
 
   return;
 }
@@ -169,7 +166,7 @@ const { data } =
       Number(amount)
     ) {
 
-      notify("ยอดเงินไม่พอ");
+      notify(t("insufficientBalance"));
 
       return;
     }
@@ -216,9 +213,7 @@ console.log(
 
     if (!receiverAddress) {
 
-  notify(
-    "Address หรือ Coin/Network ไม่ถูกต้อง"
-  );
+  notify(t("invalidAddress"));
 
   return;
 }
@@ -231,7 +226,7 @@ console.log(
       Number(user.id)
     ) {
 
-      notify("ไม่สามารถโอนให้ตัวเองได้");
+      notify(t("cannotTransferSelf"));
       return;
     }
 
@@ -247,10 +242,10 @@ console.log(
 
     if (!receiverWallet) {
 
-      notify("ไม่พบ Wallet ผู้รับ");
+  notify(t("receiverWalletNotFound"));
 
-      return;
-    }
+  return;
+}
 
     await supabase
       .from("wallets")
@@ -311,20 +306,18 @@ console.log(
 .from("notifications")
 .insert({
 
-  user_id:
-    receiverId,
+  user_id: receiverId,
 
-  title:
-    "ได้รับเงินโอน",
+  title: t("transferReceived"),
 
   message:
-`ได้รับ ${amount} ${coin}
+`${t("received")} ${amount} ${coin}
 
-Network : ${network}
+${t("network")} : ${network}
 
-จากสมาชิก ID ${user.id}`,
+${t("fromMember")} ID ${user.id}`,
 
-  is_read:false
+  is_read: false
 
 });
 
@@ -333,26 +326,24 @@ Network : ${network}
 .from("notifications")
 .insert({
 
-  user_id:
-    user.id,
+  user_id: user.id,
 
-  title:
-    "โอนเงินสำเร็จ",
+  title: t("transferCompleted"),
 
   message:
-`โอน ${amount} ${coin}
+`${t("transferred")} ${amount} ${coin}
 
-Network : ${network}
+${t("network")} : ${network}
 
-ไปยัง Address :
+${t("toAddress")}
 
 ${address}`,
 
-  is_read:false
+  is_read: false
 
 });
 
-    notify("โอนสำเร็จ");
+    notify(t("transferSuccess"));
 
     setAddress("");
     setAmount("");
@@ -391,14 +382,14 @@ ${address}`,
       margin:0
     }}
   >
-    โอนเงิน
+    {t("transfer")}
   </h2>
 
 </div>
 
     <div className="transfer-card">
 
-      <h3>เลือกสกุลเหรียญ</h3>
+      <h3>{t("coin")}</h3>
 
       <select
         className="transfer-select"
@@ -457,7 +448,7 @@ ${address}`,
 
     <div className="transfer-card">
 
-      <h3>เลือก Network</h3>
+      <h3>{t("network")}</h3>
 
       <select
         className="transfer-select"
@@ -491,13 +482,11 @@ ${address}`,
 
     <div className="transfer-card">
 
-      <h3>
-        Deposit Address
-      </h3>
+      <h3>{t("depositAddress")}</h3>
 
       <input
         className="transfer-input"
-        placeholder="TX89ABC123456789TRC20"
+        placeholder={t("walletAddress")}
         value={address}
         onChange={(e)=>
           setAddress(
@@ -510,9 +499,7 @@ ${address}`,
 
     <div className="transfer-card">
 
-      <h3>
-        สแกน QR หรือเลือกรูป
-      </h3>
+      <h3>{t("scanQR")}</h3>
 
       <label
         className="transfer-upload"
@@ -524,7 +511,7 @@ ${address}`,
           {
             qrFile
             ? qrFile.name
-            : "กดเพื่อสแกน QR หรือเลือกรูป"
+            : t("tapToScan")
           }
         </p>
 
@@ -546,9 +533,9 @@ ${address}`,
 
     <div className="transfer-card">
 
-      <h3>
-        จำนวนเงิน
-      </h3>
+      
+        <h3>{t("amount")}</h3>
+      
 
       <input
         type="number"
@@ -570,7 +557,7 @@ ${address}`,
         className="transfer-confirm"
         onClick={transferMoney}
       >
-        ยืนยัน
+        {t("confirm")}
       </button>
 
       <button
@@ -581,7 +568,7 @@ ${address}`,
           setQrFile(null);
         }}
       >
-        ยกเลิก
+        {t("cancel")}
       </button>
 
     </div>

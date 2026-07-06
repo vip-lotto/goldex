@@ -7,8 +7,12 @@ import {
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
+import { useTranslation } from "react-i18next";
+
 
 export default function ExternalDeposit() {
+
+  const { t } = useTranslation();
 
   const [openCoin, setOpenCoin] = useState(false);
   const [openNetwork, setOpenNetwork] = useState(false);
@@ -120,7 +124,7 @@ const NETWORK_LOGO = {
       currentWallet.address
     );
 
-    notify("คัดลอกที่อยู่กระเป๋าแล้ว");
+    notify(t("walletCopied"));
   };
 
   const saveQR = () => {
@@ -145,13 +149,13 @@ const NETWORK_LOGO = {
 
     link.click();
 
-    notify("บันทึก QR สำเร็จ");
+    notify(t("qrSaved"));
   };
 
   const submitDeposit = async () => {
 
   if (!slip) {
-    notify("กรุณาแนบสลิป");
+    notify(t("pleaseUploadSlip"));
     return;
   }
 
@@ -161,7 +165,7 @@ const NETWORK_LOGO = {
     );
 
   if (!user) {
-    notify("กรุณาเข้าสู่ระบบ");
+    notify(t("pleaseLogin"));
     return;
   }
 
@@ -186,7 +190,7 @@ const NETWORK_LOGO = {
     JSON.stringify(uploadError)
   );
 
-  notify("อัปโหลดสลิปไม่สำเร็จ");
+  notify(t("uploadFailed"));
 
   return;
 }
@@ -227,17 +231,13 @@ const NETWORK_LOGO = {
     JSON.stringify(error)
   );
 
-  notify(
-    "บันทึกข้อมูลไม่สำเร็จ"
-  );
+  notify(t("saveFailed"));
 
   return;
 
 }
 
-  notify(
-    "ส่งคำขอฝากสำเร็จ"
-  );
+  notify(t("depositSubmitted"));
 
 };
 
@@ -245,7 +245,7 @@ const NETWORK_LOGO = {
     <>
 
       <div className="deposit-card">
-  <h3>Crypto</h3>
+  <h3>{t("crypto")}</h3>
 
   <div className="custom-select" ref={coinRef}>
     <div
@@ -287,7 +287,7 @@ const NETWORK_LOGO = {
 </div>
 
       <div className="deposit-card">
-  <h3>Network</h3>
+  <h3>{t("network")}</h3>
 
   <div className="custom-select" ref={networkRef}>
     <div
@@ -333,9 +333,7 @@ const NETWORK_LOGO = {
 
         <div className="deposit-card">
 
-          <h3>
-            QR Code
-          </h3>
+          <h3>{t("qrCode")}</h3>
 
           <div
             className="external-qr"
@@ -356,7 +354,7 @@ const NETWORK_LOGO = {
           </div>
 
           <p>
-            Deposit Address
+            <p>{t("depositAddress")}</p>
           </p>
 
           <div
@@ -382,7 +380,7 @@ const NETWORK_LOGO = {
               }
             >
               <Copy size={18}/>
-              คัดลอก
+{t("copy")}
             </button>
 
             <button
@@ -392,7 +390,7 @@ const NETWORK_LOGO = {
               }
             >
               <Download size={18}/>
-              บันทึก QR
+{t("saveQR")}
             </button>
 
           </div>
@@ -403,9 +401,7 @@ const NETWORK_LOGO = {
 
       <div className="deposit-card">
 
-        <h3>
-          แนบสลิป
-        </h3>
+        <h3>{t("uploadSlip")}</h3>
 
         <label
           className="upload-box"
@@ -417,7 +413,7 @@ const NETWORK_LOGO = {
             {
               slip
               ? slip.name
-              : "เลือกสลิป"
+              : t("selectSlip")
             }
           </p>
 
@@ -442,7 +438,7 @@ const NETWORK_LOGO = {
           submitDeposit
         }
       >
-        ส่งคำขอฝาก
+        {t("submitDeposit")}
       </button>
 
       <Toast

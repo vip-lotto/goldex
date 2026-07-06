@@ -1,9 +1,13 @@
+
+import { useTranslation } from "react-i18next";
 export default function MarketHeader({
   search,
   setSearch,
   total = 0,
   onRefresh,
 }) {
+
+  const { t } = useTranslation();
   return (
     <div className="market-header">
 
@@ -25,7 +29,7 @@ export default function MarketHeader({
 
         <input
           type="text"
-          placeholder="Search market..."
+          placeholder={t("searchMarket")}
           value={search}
           onChange={(e) =>
             setSearch(e.target.value)

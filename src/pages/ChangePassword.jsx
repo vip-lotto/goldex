@@ -3,12 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { ArrowLeft, Lock } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
 import "../styles/changePassword.css";
 
 export default function ChangePassword() {
 
   const navigate = useNavigate();
   const { showToast } = useToast();
+  const { t } = useTranslation();
 
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -26,7 +28,7 @@ export default function ChangePassword() {
       !confirmPassword
     ) {
       showToast(
-        "กรุณากรอกข้อมูลให้ครบ",
+         t("fillAllFields"),
         "warning"
       );
       return;
@@ -34,7 +36,7 @@ export default function ChangePassword() {
 
     if (newPassword !== confirmPassword) {
       showToast(
-        "รหัสผ่านใหม่ไม่ตรงกัน",
+        t("passwordNotMatch"),
         "warning"
       );
       return;
@@ -46,7 +48,7 @@ export default function ChangePassword() {
 
     if (!user) {
       showToast(
-        "กรุณาเข้าสู่ระบบ",
+        t("pleaseLogin"),
         "warning"
       );
       return;
@@ -69,7 +71,7 @@ export default function ChangePassword() {
 
     if (profile.password !== oldPassword) {
       showToast(
-        "รหัสผ่านเดิมไม่ถูกต้อง",
+        t("oldPasswordIncorrect"),
         "error"
       );
       setLoading(false);
@@ -95,7 +97,7 @@ export default function ChangePassword() {
     }
 
     showToast(
-      "เปลี่ยนรหัสผ่านสำเร็จ",
+      t("passwordChanged"),
       "success"
     );
 
@@ -116,7 +118,7 @@ export default function ChangePassword() {
           <ArrowLeft size={22}/>
         </button>
 
-        <h2>เปลี่ยนรหัสผ่าน</h2>
+        <h2>{t("changePassword")}</h2>
 
       </div>
 
@@ -128,7 +130,7 @@ export default function ChangePassword() {
 
           <input
             type="password"
-            placeholder="รหัสผ่านเดิม"
+            placeholder={t("oldPassword")}
             value={oldPassword}
             onChange={(e)=>
               setOldPassword(e.target.value)
@@ -143,7 +145,7 @@ export default function ChangePassword() {
 
           <input
             type="password"
-            placeholder="รหัสผ่านใหม่"
+            placeholder={t("newPassword")}
             value={newPassword}
             onChange={(e)=>
               setNewPassword(e.target.value)
@@ -158,7 +160,7 @@ export default function ChangePassword() {
 
           <input
             type="password"
-            placeholder="ยืนยันรหัสผ่านใหม่"
+            placeholder={t("confirmPassword")}
             value={confirmPassword}
             onChange={(e)=>
               setConfirmPassword(e.target.value)
@@ -175,8 +177,8 @@ export default function ChangePassword() {
 
           {
             loading
-              ? "Loading..."
-              : "บันทึก"
+  ? t("loading")
+  : t("save")
           }
 
         </button>

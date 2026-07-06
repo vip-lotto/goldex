@@ -209,7 +209,7 @@ color:#ff5b7d;
 
     transform:translateY(-3px);
 
-    border-color:#F5C542;
+    border-color:#2e71ee;
 
 }
 
@@ -219,7 +219,7 @@ color:#ff5b7d;
 
     height:clamp(22px,3vw,32px);
 
-    color:#F5C542;
+    color:#4296f5;
 
 }
 
@@ -251,7 +251,7 @@ color:#ff5b7d;
 
 .gold-section h2{
 margin-bottom:15px;
-color:#F5C542;
+color:#428af5;
 font-size:22px;
 }
 
@@ -285,7 +285,7 @@ font-weight:600;
 }
 
 .tab-btn.active{
-background:#F5C542;
+background:#42a4f5;
 color:#000;
 }
 
@@ -327,7 +327,7 @@ border-radius:20px;
 
 .market-section h2{
 margin-bottom:15px;
-color:#F5C542;
+color:#429ef5;
 font-size:22px;
 }
 

@@ -1,0 +1,221 @@
+
+
+{
+
+
+
+
+  "username":"ユーザー名 / メールアドレス / 電話番号",
+  "password":"パスワード",
+  "login":"ログイン",
+  "register":"登録",
+  "loading":"読み込み中...",
+  "secure":"安全な暗号化ログイン",
+  "fillLogin":"ユーザー名とパスワードを入力してください",
+  "loginFailMessage":"ユーザー名またはパスワードが正しくありません",
+
+  "loadingMarket":"市場を読み込み中...",
+  "currentMarket":"現在の市場",
+  "interval":"時間足",
+  "updated":"更新済み",
+  "markets":"市場",
+  "available":"利用可能",
+
+  "marketDescription1":"さまざまな人気市場を提供しています。",
+  "marketDescription2":"100種類以上の資産を提供するグローバル市場です。",
+
+  "pair":"取引ペア",
+  "lastPrice":"最新価格",
+  "change24h":"24時間 %",
+  "searchMarket":"市場を検索...",
+
+  "all":"すべて",
+  "commodities":"商品",
+  "crypto":"暗号資産",
+  "stocks":"株式",
+
+  "mine":"マイページ",
+  "transactionRecords":"取引履歴",
+  "bankAccounts":"銀行口座",
+  "kyc":"本人確認",
+  "security":"セキュリティ",
+  "languages":"言語",
+  "about":"会社概要",
+
+  "inviteCode":"招待コード",
+  "copy":"コピー",
+  "inviteCopied":"招待コードをコピーしました",
+
+  "network":"ネットワーク",
+  "qrCode":"QRコード",
+  "depositAddress":"入金アドレス",
+  "saveQR":"QRコードを保存",
+
+  "walletCopied":"ウォレットアドレスをコピーしました",
+  "qrSaved":"QRコードを保存しました",
+
+  "depositWarning":"送金前にウォレットアドレスとネットワークを必ず確認してください。",
+  "depositInfo":"入力内容が正しいことを確認してください。",
+
+  "uploadSlip":"支払い証明をアップロード",
+  "selectSlip":"証明を選択",
+  "submitDeposit":"入金申請",
+  "pleaseUploadSlip":"支払い証明をアップロードしてください",
+  "pleaseLogin":"ログインしてください",
+  "uploadFailed":"アップロードに失敗しました",
+  "saveFailed":"データの保存に失敗しました",
+  "depositSubmitted":"入金申請が正常に送信されました",
+
+
+
+
+
+
+    "address":"住所",
+  "walletAddress":"ウォレットアドレス",
+  "walletQRCode":"ウォレットQRコード",
+  "amount":"金額",
+  "transferFee":"送金手数料",
+  "amountReceived":"受取金額",
+  "submitWithdraw":"出金申請",
+  "submitting":"送信中...",
+  "pendingWithdraw":"保留中の出金申請があります。",
+  "walletNotFound":"ウォレットが見つかりません",
+  "insufficientBalance":"残高不足",
+  "enterAmount":"金額を入力してください",
+  "enterAddress":"ウォレットアドレスを入力するかQRコードをアップロードしてください",
+  "minimumWithdraw":"最低出金額は1 USDTです",
+  "withdrawSubmitted":"出金申請が正常に送信されました",
+
+  "notifications":"通知",
+  "noNotifications":"通知はありません",
+
+  "withdraw":"出金",
+  "cryptoWithdrawal":"暗号資産の出金",
+  "bankWithdrawal":"銀行出金",
+
+  "noBankAccount":"銀行口座がありません",
+  "addBankAccountMessage":"Assetsページで銀行口座を追加してください。",
+  "destinationAccount":"振込先口座",
+
+  "pleaseAddBank":"先に銀行口座を追加してください。",
+  "transactionHistory":"取引履歴",
+  "records":"履歴",
+  "deposit":"入金",
+  "trade":"取引",
+
+  "searchRecords":"履歴を検索...",
+  "loadingData":"データを読み込み中...",
+  "noRecords":"履歴はありません",
+
+  "pending":"保留中",
+  "success":"成功",
+  "rejected":"拒否",
+  "failed":"失敗",
+
+  "transferReceived":"送金を受信",
+  "received":"受信",
+  "fromMember":"送信者",
+  "transferCompleted":"送金完了",
+  "transferred":"送金済み",
+  "toAddress":"送金先アドレス:",
+
+  "sendCrypto":"暗号資産を送金",
+  "coin":"通貨",
+  "scanQR":"QRコードをスキャン",
+
+  "next":"次へ",
+
+  "enterDepositAddress":"ウォレットアドレスを入力してください",
+  "minimumTransfer":"最低送金額は1 USDTです",
+  "senderWalletNotFound":"送信者ウォレットが見つかりません",
+  "receiverWalletNotFound":"受信者ウォレットが見つかりません",
+  "invalidAddress":"無効なウォレットアドレス",
+  "cannotTransferSelf":"自分自身へ送金できません",
+  "transferSuccess":"送金が完了しました",
+
+  "moneyReceived":"入金を受信",
+  "convert":"交換",
+  "from":"変換元",
+  "to":"変換先",
+  "balance":"残高",
+  "rate":"レート",
+  "receive":"受取",
+  "convertNow":"今すぐ交換",
+  "converting":"交換中...",
+  "convertSuccess":"交換が完了しました",
+  "selectCoin":"通貨を選択してください",
+  "userNotFound":"ユーザーが見つかりません",
+
+
+
+
+
+
+
+
+  "changePassword":"パスワード変更",
+  "oldPassword":"現在のパスワード",
+  "newPassword":"新しいパスワード",
+  "confirmPassword":"新しいパスワードを確認",
+  "save":"保存",
+  "fillAllFields":"すべての項目を入力してください",
+  "passwordNotMatch":"パスワードが一致しません",
+  "oldPasswordIncorrect":"現在のパスワードが正しくありません",
+  "passwordChanged":"パスワードが正常に変更されました",
+
+  "fullName":"氏名",
+  "bankName":"銀行名",
+  "accountNumber":"口座番号",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"住所",
+  "bankAdded":"銀行口座を追加しました",
+  "bankUpdated":"銀行口座を更新しました",
+  "confirmDeleteBank":"この銀行口座を削除してもよろしいですか？",
+  "primaryAccount":"メイン口座",
+  "setPrimary":"メインに設定",
+  "edit":"編集",
+  "delete":"削除",
+  "add":"追加",
+  "addBankAccount":"銀行口座を追加",
+
+  "kycVerification":"KYC認証",
+  "firstName":"名",
+  "lastName":"姓",
+  "documentType":"本人確認書類",
+  "idCard":"身分証明書",
+  "passport":"パスポート",
+  "driverLicense":"運転免許証",
+  "passportNumber":"パスポート番号",
+  "driverLicenseNumber":"運転免許証番号",
+  "idCardNumber":"身分証番号",
+  "country":"国",
+  "uploadIdCard":"身分証をアップロード",
+  "uploadSelfie":"セルフィーをアップロード",
+  "clickToUpload":"クリックしてアップロード",
+  "submit":"送信",
+  "submitting":"送信中...",
+  "uploadAllImages":"必要な画像をすべてアップロードしてください",
+  "kycSubmitted":"KYC申請が正常に送信されました",
+
+  "profit":"利益",
+  "status":"ステータス",
+  "trading":"取引中...",
+  "type":"種類",
+  "tradeReceipt":"取引明細",
+  "order":"注文",
+  "result":"結果",
+  "payout":"受取額",
+  "time":"時間",
+  "close":"閉じる",
+
+  "totalAssets":"総資産",
+  "assetsDetails":"資産詳細"
+
+
+
+
+
+
+
+}

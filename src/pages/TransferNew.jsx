@@ -8,6 +8,7 @@ import { supabase } from "../lib/supabase";
 import { useNavigate } from "react-router-dom";
 import QRScanner from "../components/QRScanner";
 import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
 
 const COIN_LOGO = {
   USDT:"/coins/usdt.png",
@@ -47,6 +48,8 @@ const NETWORK_LOGO = {
 
 
 export default function TransferNew() {
+
+  const { t } = useTranslation();
 
 const navigate = useNavigate();
 
@@ -100,7 +103,7 @@ const pasteAddress = async () => {
   } catch {
 
     showToast(
-      "ไม่สามารถวางข้อมูลได้",
+      t("cannotPaste"),
       "error"
     );
 
@@ -126,7 +129,7 @@ const handleSubmit = async () => {
 if (!user) {
 
   showToast(
-  "ไม่พบข้อมูลผู้ใช้",
+  t("userNotFound"),
   "error"
 );
 
@@ -137,7 +140,7 @@ if (!user) {
 if (!address) {
 
   showToast(
-  "กรุณากรอก Address",
+   t("enterAddress"),
   "warning"
 );
 
@@ -150,7 +153,7 @@ if (!address) {
   if (!amount) {
 
   showToast(
-    "กรุณากรอกจำนวนเงิน",
+    t("enterAmount"),
     "warning"
   );
 
@@ -168,7 +171,7 @@ await supabase
 if (!senderWallet) {
 
   showToast(
-  "ไม่พบ Wallet ผู้ส่ง",
+  t("senderWalletNotFound"),
   "error"
 );
 
@@ -182,7 +185,7 @@ if (
   Number(amount)
 ) {
   showToast(
-  "ยอดเงินไม่พอ",
+  t("insufficientBalance"),
   "error"
 );
 
@@ -206,7 +209,7 @@ await supabase
 if (!receiverAddress) {
 
   showToast(
-  "ไม่พบ Address ผู้รับ",
+  t("receiverAddressNotFound"),
   "error"
 );
 
@@ -224,7 +227,7 @@ if (
 ) {
 
   showToast(
-  "โอนให้ตัวเองไม่ได้",
+  t("cannotTransferSelf"),
   "error"
 );
 
@@ -244,7 +247,7 @@ const {
   if (!receiverWallet) {
 
   showToast(
-    "ไม่พบ Wallet ผู้รับ",
+     t("receiverWalletNotFound"),
     "error"
   );
 
@@ -331,8 +334,8 @@ await supabase
   .insert([
     {
       user_id: receiverId,
-      title: "ได้รับเงิน",
-      message: `ได้รับ ${amount} ${coin}`
+      title: t("moneyReceived"),
+      message: `${t("received")} ${amount} ${coin}`
     }
   ]);
 
@@ -348,8 +351,8 @@ await supabase
   .insert([
     {
       user_id: user.id,
-      title: "โอนเงินสำเร็จ",
-      message: `โอน ${amount} ${coin} ไปยัง ${address}`
+      title: t("transferSuccess"),
+      message: `${t("transferred")} ${amount} ${coin}\n${t("toAddress")} ${address}`
     }
   ]);
 
@@ -361,7 +364,7 @@ if (notifySenderError) {
 
 
   showToast(
-  "โอนเงินสำเร็จ",
+   t("transferSuccess"),
   "success"
 );
 
@@ -415,14 +418,14 @@ return (
         margin:0
       }}
     >
-      Send Crypto
+      {t("sendCrypto")}
     </h2>
 
   </div>
 
   <div>
 
-    <h3>Coin</h3>
+    <h3>{t("coin")}</h3>
 
     <div
   className="custom-select"
@@ -500,7 +503,7 @@ alt=""
     }}
   >
 
-    <h3>Address</h3>
+    <h3>{t("address")}</h3>
 
     <div
       style={{
@@ -520,7 +523,7 @@ alt=""
             e.target.value
           )
         }
-        placeholder="Wallet Address"
+        placeholder={t("walletAddress")}
         style={{
           flex:1,
           background:"transparent",
@@ -564,7 +567,7 @@ alt=""
     }}
   >
 
-    <h3>Network</h3>
+    <h3>{t("network")}</h3>
 
     <div
   className="custom-select"
@@ -657,7 +660,7 @@ alt=""
     }}
   >
 
-    <h3>Amount</h3>
+    <h3>{t("amount")}</h3>
 
     <input
       type="number"
@@ -690,7 +693,7 @@ alt=""
     height:"60px",
     border:"none",
     borderRadius:"30px",
-    background:"#f0b906de",
+    background:"#06a6f0de",
     color:"#000",
     fontWeight:"bold",
     fontSize:"20px",
@@ -700,7 +703,7 @@ alt=""
 
 
 
-    Next
+    {t("next")}
   </button>
 
   {

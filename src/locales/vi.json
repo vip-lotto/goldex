@@ -1,0 +1,223 @@
+
+
+{
+
+
+
+  "username":"Tên đăng nhập / Email / Số điện thoại",
+  "password":"Mật khẩu",
+  "login":"Đăng nhập",
+  "register":"Đăng ký",
+  "loading":"Đang tải...",
+  "secure":"Đăng nhập được mã hóa an toàn",
+  "fillLogin":"Vui lòng nhập tên đăng nhập và mật khẩu",
+  "loginFailMessage":"Tên đăng nhập hoặc mật khẩu không đúng",
+
+  "loadingMarket":"Đang tải thị trường...",
+  "currentMarket":"Thị trường hiện tại",
+  "interval":"Khoảng thời gian",
+  "updated":"Đã cập nhật",
+  "markets":"Thị trường",
+  "available":"Có sẵn",
+
+  "marketDescription1":"Bao gồm nhiều thị trường hấp dẫn.",
+  "marketDescription2":"Thị trường quốc tế với hơn 100 tài sản.",
+
+  "pair":"Cặp giao dịch",
+  "lastPrice":"Giá gần nhất",
+  "change24h":"24h %",
+  "searchMarket":"Tìm kiếm thị trường...",
+
+  "all":"Tất cả",
+  "commodities":"Hàng hóa",
+  "crypto":"Tiền điện tử",
+  "stocks":"Cổ phiếu",
+
+  "mine":"Tài khoản",
+  "transactionRecords":"Lịch sử giao dịch",
+  "bankAccounts":"Tài khoản ngân hàng",
+  "kyc":"KYC",
+  "security":"Bảo mật",
+  "languages":"Ngôn ngữ",
+  "about":"Giới thiệu",
+
+  "inviteCode":"Mã giới thiệu",
+  "copy":"Sao chép",
+  "inviteCopied":"Đã sao chép mã giới thiệu",
+
+  "network":"Mạng",
+  "qrCode":"Mã QR",
+  "depositAddress":"Địa chỉ nạp",
+  "saveQR":"Lưu mã QR",
+
+  "walletCopied":"Đã sao chép địa chỉ ví",
+  "qrSaved":"Đã lưu mã QR",
+
+  "depositWarning":"Vui lòng kiểm tra kỹ địa chỉ ví và mạng trước khi chuyển.",
+  "depositInfo":"Vui lòng đảm bảo thông tin chính xác.",
+
+  "uploadSlip":"Tải lên biên lai",
+  "selectSlip":"Chọn biên lai",
+  "submitDeposit":"Gửi yêu cầu nạp",
+  "pleaseUploadSlip":"Vui lòng tải lên biên lai thanh toán",
+  "pleaseLogin":"Vui lòng đăng nhập",
+  "uploadFailed":"Tải lên thất bại",
+  "saveFailed":"Lưu dữ liệu thất bại",
+  "depositSubmitted":"Yêu cầu nạp tiền đã được gửi thành công",
+
+
+
+
+
+
+  "address":"Địa chỉ",
+  "walletAddress":"Địa chỉ ví",
+  "walletQRCode":"Mã QR ví",
+  "amount":"Số lượng",
+  "transferFee":"Phí chuyển",
+  "amountReceived":"Số tiền nhận được",
+  "submitWithdraw":"Gửi yêu cầu rút",
+  "submitting":"Đang gửi...",
+  "pendingWithdraw":"Bạn đã có yêu cầu rút tiền đang chờ xử lý.",
+  "walletNotFound":"Không tìm thấy ví",
+  "insufficientBalance":"Số dư không đủ",
+  "enterAmount":"Vui lòng nhập số tiền",
+  "enterAddress":"Vui lòng nhập địa chỉ ví hoặc tải lên mã QR",
+  "minimumWithdraw":"Rút tối thiểu là 1 USDT",
+  "withdrawSubmitted":"Yêu cầu rút tiền đã được gửi thành công",
+
+  "notifications":"Thông báo",
+  "noNotifications":"Không có thông báo",
+
+  "withdraw":"Rút tiền",
+  "cryptoWithdrawal":"Rút tiền điện tử",
+  "bankWithdrawal":"Rút về ngân hàng",
+
+  "noBankAccount":"Chưa có tài khoản ngân hàng",
+  "addBankAccountMessage":"Vui lòng thêm tài khoản ngân hàng từ trang Tài sản.",
+  "destinationAccount":"Tài khoản nhận",
+
+  "pleaseAddBank":"Vui lòng thêm tài khoản ngân hàng trước.",
+  "transactionHistory":"Lịch sử giao dịch",
+  "records":"Bản ghi",
+  "deposit":"Nạp tiền",
+  "trade":"Giao dịch",
+
+  "searchRecords":"Tìm kiếm giao dịch...",
+  "loadingData":"Đang tải dữ liệu...",
+  "noRecords":"Không có giao dịch",
+
+  "pending":"Đang chờ",
+  "success":"Thành công",
+  "rejected":"Đã từ chối",
+  "failed":"Thất bại",
+
+  "transferReceived":"Đã nhận chuyển khoản",
+  "received":"Đã nhận",
+  "fromMember":"Từ thành viên",
+  "transferCompleted":"Chuyển tiền thành công",
+  "transferred":"Đã chuyển",
+  "toAddress":"Đến địa chỉ:",
+
+  "sendCrypto":"Chuyển tiền điện tử",
+  "coin":"Tiền",
+  "scanQR":"Quét mã QR",
+
+  "next":"Tiếp theo",
+
+  "enterDepositAddress":"Vui lòng nhập địa chỉ ví",
+  "minimumTransfer":"Chuyển tối thiểu 1 USDT",
+  "senderWalletNotFound":"Không tìm thấy ví người gửi",
+  "receiverWalletNotFound":"Không tìm thấy ví người nhận",
+  "invalidAddress":"Địa chỉ ví không hợp lệ",
+  "cannotTransferSelf":"Không thể chuyển cho chính mình",
+  "transferSuccess":"Chuyển tiền thành công",
+
+  "moneyReceived":"Đã nhận tiền",
+  "convert":"Chuyển đổi",
+  "from":"Từ",
+  "to":"Sang",
+  "balance":"Số dư",
+  "rate":"Tỷ giá",
+  "receive":"Nhận",
+  "convertNow":"Chuyển đổi ngay",
+  "converting":"Đang chuyển đổi...",
+  "convertSuccess":"Chuyển đổi thành công",
+  "selectCoin":"Vui lòng chọn loại tiền",
+  "userNotFound":"Không tìm thấy người dùng",
+
+
+
+
+
+
+
+
+
+  "changePassword":"Đổi mật khẩu",
+  "oldPassword":"Mật khẩu hiện tại",
+  "newPassword":"Mật khẩu mới",
+  "confirmPassword":"Xác nhận mật khẩu mới",
+  "save":"Lưu",
+  "fillAllFields":"Vui lòng điền đầy đủ thông tin",
+  "passwordNotMatch":"Mật khẩu không khớp",
+  "oldPasswordIncorrect":"Mật khẩu hiện tại không đúng",
+  "passwordChanged":"Đổi mật khẩu thành công",
+
+  "fullName":"Họ và tên",
+  "bankName":"Tên ngân hàng",
+  "accountNumber":"Số tài khoản",
+  "swiftCode":"Mã SWIFT / BIC",
+  "residentialAddress":"Địa chỉ cư trú",
+  "bankAdded":"Đã thêm tài khoản ngân hàng thành công",
+  "bankUpdated":"Đã cập nhật tài khoản ngân hàng thành công",
+  "confirmDeleteBank":"Bạn có chắc muốn xóa tài khoản ngân hàng này không?",
+  "primaryAccount":"Tài khoản chính",
+  "setPrimary":"Đặt làm chính",
+  "edit":"Chỉnh sửa",
+  "delete":"Xóa",
+  "add":"Thêm",
+  "addBankAccount":"Thêm tài khoản ngân hàng",
+
+  "kycVerification":"Xác minh KYC",
+  "firstName":"Tên",
+  "lastName":"Họ",
+  "documentType":"Loại giấy tờ",
+  "idCard":"Chứng minh nhân dân",
+  "passport":"Hộ chiếu",
+  "driverLicense":"Giấy phép lái xe",
+  "passportNumber":"Số hộ chiếu",
+  "driverLicenseNumber":"Số giấy phép lái xe",
+  "idCardNumber":"Số CMND/CCCD",
+  "country":"Quốc gia",
+  "uploadIdCard":"Tải lên CMND/CCCD",
+  "uploadSelfie":"Tải lên ảnh selfie",
+  "clickToUpload":"Nhấn để tải lên",
+  "submit":"Gửi",
+  "submitting":"Đang gửi...",
+  "uploadAllImages":"Vui lòng tải lên đầy đủ hình ảnh",
+  "kycSubmitted":"Đã gửi KYC thành công",
+
+  "profit":"Lợi nhuận",
+  "status":"Trạng thái",
+  "trading":"Đang giao dịch...",
+  "type":"Loại",
+  "tradeReceipt":"Biên lai giao dịch",
+  "order":"Lệnh",
+  "result":"Kết quả",
+  "payout":"Số tiền nhận",
+  "time":"Thời gian",
+  "close":"Đóng",
+
+  "totalAssets":"Tổng tài sản",
+  "assetsDetails":"Chi tiết tài sản"
+
+
+
+
+
+
+
+
+
+}

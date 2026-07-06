@@ -3,10 +3,14 @@ import { ChevronDown, ChevronUp, Eye, EyeOff } from "lucide-react";
 
 import "../styles/assets.css";
 
+import { useTranslation } from "react-i18next";
+
 import { getWallet } from "../lib/walletApi";
 import { getExchangeRates } from "../lib/convertApi";
 
 export default function Assets() {
+
+  const { t } = useTranslation();
 
   const [wallet, setWallet] = useState(null);
 
@@ -132,7 +136,7 @@ const displayAssets = expand
 
       <div className="assets-loading">
 
-        Loading...
+        {t("loading")}
 
       </div>
 
@@ -154,7 +158,7 @@ const displayAssets = expand
 
   <div className="assets-title">
 
-    <span>Total Assets</span>
+    <span>{t("totalAssets")}</span>
 
     <button
       className="eye-btn"
@@ -231,11 +235,7 @@ setExpand(!expand)
 
 >
 
-<h2>
-
-Assets Details
-
-</h2>
+<h2>{t("assetsDetails")}</h2>
 
 {
 

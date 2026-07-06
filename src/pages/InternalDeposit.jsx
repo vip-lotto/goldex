@@ -4,6 +4,7 @@ import { Copy, Download } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
 
 export default function InternalDeposit() {
 
@@ -18,7 +19,9 @@ const networkRef = useRef(null);
 
   const { showToast } = useToast();
 
-  const COIN_LOGO = {
+const { t } = useTranslation();
+
+const COIN_LOGO = {
   USDT: "/coins/usdt.png",
   BTC: "/coins/btc.png",
   ETH: "/coins/eth.png",
@@ -196,7 +199,7 @@ const networkList = wallets
     );
 
     showToast(
-  "คัดลอกที่อยู่กระเป๋าแล้ว",
+  t("walletCopied"),
   "success"
 );
   };
@@ -224,26 +227,12 @@ const networkList = wallets
     link.click();
 
     showToast(
-  "บันทึก QR สำเร็จ",
+  t("qrSaved"),
   "success"
 );
   };
 
-  const handleCoinChange = (e) => {
-
-    const selectedCoin =
-      e.target.value;
-
-    setCoin(selectedCoin);
-
-    const firstNetwork =
-      wallets.find(
-        item =>
-          item.coin === selectedCoin
-      )?.network || "";
-
-    setNetwork(firstNetwork);
-  };
+  
 
   return (
 
@@ -251,7 +240,7 @@ const networkList = wallets
 
       <div className="deposit-card">
 
-    <h3>Crypto</h3>
+    <h3>{t("crypto")}</h3>
 
     <div
         className="custom-select"
@@ -328,7 +317,7 @@ const networkList = wallets
 
       <div className="deposit-card">
 
-    <h3>Network</h3>
+    <h3>{t("network")}</h3>
 
     <div
         className="custom-select"
@@ -399,7 +388,7 @@ const networkList = wallets
 
         <div className="deposit-card">
 
-          <h3>QR Code</h3>
+          <h3>{t("qrCode")}</h3>
 
           <div
             className="internal-qr"
@@ -425,7 +414,7 @@ const networkList = wallets
               marginBottom: "10px"
             }}
           >
-            Deposit Address
+            {t("depositAddress")}
           </p>
 
           <div className="address-box" onClick={copyAddress}>
@@ -447,7 +436,7 @@ const networkList = wallets
               onClick={copyAddress}
             >
               <Copy size={18}/>
-              คัดลอก
+              {t("copy")}
             </button>
 
             <button
@@ -455,7 +444,7 @@ const networkList = wallets
               onClick={saveQR}
             >
               <Download size={18}/>
-              บันทึก QR
+              {t("saveQR")}
             </button>
 
           </div>
@@ -467,12 +456,12 @@ const networkList = wallets
       <div className="deposit-note">
 
         <p>
-          ⚠️ Please double-check the Bitcoin and network details before transferring.
-        </p>
+  ⚠️ {t("depositWarning")}
+</p>
 
-        <p>
-          ℹ️ Please fill in the correct information.
-        </p>
+<p>
+  ℹ️ {t("depositInfo")}
+</p>
 
       </div>
 

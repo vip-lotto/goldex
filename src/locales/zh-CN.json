@@ -1,0 +1,226 @@
+
+
+{
+
+
+
+    
+  "username":"用户名 / 邮箱 / 手机号",
+  "password":"密码",
+  "login":"登录",
+  "register":"注册",
+  "loading":"加载中...",
+  "secure":"安全加密登录",
+  "fillLogin":"请输入用户名和密码",
+  "loginFailMessage":"用户名或密码错误",
+
+  "loadingMarket":"正在加载市场...",
+  "currentMarket":"当前市场",
+  "interval":"时间周期",
+  "updated":"已更新",
+  "markets":"市场",
+  "available":"可用",
+
+  "marketDescription1":"包含多种热门市场。",
+  "marketDescription2":"全球市场，提供超过100种资产。",
+
+  "pair":"交易对",
+  "lastPrice":"最新价格",
+  "change24h":"24小时 %",
+  "searchMarket":"搜索市场...",
+
+  "all":"全部",
+  "commodities":"大宗商品",
+  "crypto":"加密货币",
+  "stocks":"股票",
+
+  "mine":"我的",
+  "transactionRecords":"交易记录",
+  "bankAccounts":"银行卡",
+  "kyc":"KYC",
+  "security":"安全",
+  "languages":"语言",
+  "about":"关于",
+
+  "inviteCode":"邀请码",
+  "copy":"复制",
+  "inviteCopied":"邀请码已复制",
+
+  "network":"网络",
+  "qrCode":"二维码",
+  "depositAddress":"充值地址",
+  "saveQR":"保存二维码",
+
+  "walletCopied":"钱包地址已复制",
+  "qrSaved":"二维码已保存",
+
+  "depositWarning":"转账前请仔细确认钱包地址和网络。",
+  "depositInfo":"请确保所有信息填写正确。",
+
+  "uploadSlip":"上传付款凭证",
+  "selectSlip":"选择凭证",
+  "submitDeposit":"提交充值",
+  "pleaseUploadSlip":"请上传付款凭证",
+  "pleaseLogin":"请先登录",
+  "uploadFailed":"上传失败",
+  "saveFailed":"保存数据失败",
+  "depositSubmitted":"充值申请提交成功",
+
+
+
+
+
+
+    "address":"地址",
+  "walletAddress":"钱包地址",
+  "walletQRCode":"钱包二维码",
+  "amount":"金额",
+  "transferFee":"转账手续费",
+  "amountReceived":"到账金额",
+  "submitWithdraw":"提交提现",
+  "submitting":"提交中...",
+  "pendingWithdraw":"您已有一笔待处理的提现申请。",
+  "walletNotFound":"未找到钱包",
+  "insufficientBalance":"余额不足",
+  "enterAmount":"请输入金额",
+  "enterAddress":"请输入钱包地址或上传二维码",
+  "minimumWithdraw":"最低提现金额为 1 USDT",
+  "withdrawSubmitted":"提现申请提交成功",
+
+  "notifications":"通知",
+  "noNotifications":"暂无通知",
+
+  "withdraw":"提现",
+  "cryptoWithdrawal":"加密货币提现",
+  "bankWithdrawal":"银行卡提现",
+
+  "noBankAccount":"暂无银行卡",
+  "addBankAccountMessage":"请先在 Assets 页面添加银行卡。",
+  "destinationAccount":"收款账户",
+
+  "pleaseAddBank":"请先添加银行卡。",
+  "transactionHistory":"交易记录",
+  "records":"记录",
+  "deposit":"充值",
+  "trade":"交易",
+
+  "searchRecords":"搜索交易记录...",
+  "loadingData":"数据加载中...",
+  "noRecords":"暂无记录",
+
+  "pending":"处理中",
+  "success":"成功",
+  "rejected":"已拒绝",
+  "failed":"失败",
+
+  "transferReceived":"收到转账",
+  "received":"已收到",
+  "fromMember":"来自会员",
+  "transferCompleted":"转账成功",
+  "transferred":"已转出",
+  "toAddress":"转至地址：",
+
+  "sendCrypto":"发送加密货币",
+  "coin":"币种",
+  "scanQR":"扫描二维码",
+
+  "next":"下一步",
+
+  "enterDepositAddress":"请输入钱包地址",
+  "minimumTransfer":"最低转账金额为 1 USDT",
+  "senderWalletNotFound":"未找到发送方钱包",
+  "receiverWalletNotFound":"未找到接收方钱包",
+  "invalidAddress":"钱包地址无效",
+  "cannotTransferSelf":"不能转账给自己",
+  "transferSuccess":"转账成功",
+
+  "moneyReceived":"收到款项",
+  "convert":"兑换",
+  "from":"从",
+  "to":"到",
+  "balance":"余额",
+  "rate":"汇率",
+  "receive":"收到",
+  "convertNow":"立即兑换",
+  "converting":"兑换中...",
+  "convertSuccess":"兑换成功",
+  "selectCoin":"请选择币种",
+  "userNotFound":"未找到用户",
+
+
+
+
+
+
+
+  "changePassword":"修改密码",
+  "oldPassword":"当前密码",
+  "newPassword":"新密码",
+  "confirmPassword":"确认新密码",
+  "save":"保存",
+  "fillAllFields":"请填写所有字段",
+  "passwordNotMatch":"两次输入的密码不一致",
+  "oldPasswordIncorrect":"当前密码错误",
+  "passwordChanged":"密码修改成功",
+
+  "fullName":"姓名",
+  "bankName":"银行名称",
+  "accountNumber":"银行账号",
+  "swiftCode":"SWIFT / BIC",
+  "residentialAddress":"居住地址",
+  "bankAdded":"银行卡添加成功",
+  "bankUpdated":"银行卡更新成功",
+  "confirmDeleteBank":"确定要删除此银行卡吗？",
+  "primaryAccount":"主账户",
+  "setPrimary":"设为主账户",
+  "edit":"编辑",
+  "delete":"删除",
+  "add":"添加",
+  "addBankAccount":"添加银行卡",
+
+  "kycVerification":"KYC 身份认证",
+  "firstName":"名字",
+  "lastName":"姓氏",
+  "documentType":"证件类型",
+  "idCard":"身份证",
+  "passport":"护照",
+  "driverLicense":"驾驶证",
+  "passportNumber":"护照号码",
+  "driverLicenseNumber":"驾驶证号码",
+  "idCardNumber":"身份证号码",
+  "country":"国家",
+  "uploadIdCard":"上传身份证",
+  "uploadSelfie":"上传自拍照",
+  "clickToUpload":"点击上传",
+  "submit":"提交",
+  "submitting":"提交中...",
+  "uploadAllImages":"请上传所有必需的图片",
+  "kycSubmitted":"KYC 提交成功",
+
+  "profit":"收益",
+  "status":"状态",
+  "trading":"交易中...",
+  "type":"类型",
+  "tradeReceipt":"交易凭证",
+  "order":"订单",
+  "result":"结果",
+  "payout":"支付金额",
+  "time":"时间",
+  "close":"关闭",
+
+  "totalAssets":"总资产",
+  "assetsDetails":"资产详情"
+
+
+
+
+
+
+
+
+
+
+
+
+}
+

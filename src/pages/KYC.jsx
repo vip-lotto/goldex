@@ -5,6 +5,7 @@ import { ArrowLeft, Upload, IdCard, Camera } from "lucide-react";
 import { getProfile } from "../lib/profileApi";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
+import { useTranslation } from "react-i18next";
 
 import "../styles/kyc.css";
 
@@ -13,6 +14,8 @@ export default function KYC() {
   const navigate = useNavigate();
 
 const { showToast } = useToast();
+
+const { t } = useTranslation();
 
   const [profile, setProfile] = useState(null);
 
@@ -96,7 +99,7 @@ async function submitKYC() {
     ) {
 
       showToast(
-        "กรุณากรอกข้อมูลให้ครบ",
+        t("fillAllFields"),
         "warning"
       );
 
@@ -107,7 +110,7 @@ async function submitKYC() {
     if (!idCard || !selfie) {
 
       showToast(
-        "กรุณาอัปโหลดรูปให้ครบ",
+         t("uploadAllImages"),
         "warning"
       );
 
@@ -161,7 +164,7 @@ async function submitKYC() {
     if (error) throw error;
 
     showToast(
-      "ส่งข้อมูล KYC สำเร็จ",
+      t("kycSubmitted"),
       "success"
     );
 
@@ -207,7 +210,7 @@ async function submitKYC() {
 
         <div className="input-group">
 
-          <label>ชื่อ</label>
+          <label>{t("firstName")}</label>
 
           <input
             value={firstName}
@@ -220,7 +223,7 @@ async function submitKYC() {
 
         <div className="input-group">
 
-          <label>นามสกุล</label>
+          <label>{t("lastName")}</label>
 
           <input
             value={lastName}
@@ -233,26 +236,27 @@ async function submitKYC() {
 
         <div className="input-group">
 
-  <label>Document Type</label>
+  <label>{t("documentType")}</label>
 
   <select
     className="kyc-select"
     value={documentType}
     onChange={(e)=>setDocumentType(e.target.value)}
   >
-    <option value="ID Card">ID Card</option>
-    <option value="Passport">Passport</option>
-    <option value="License">Driver License</option>
+    <option value="ID Card">{t("idCard")}</option>
+<option value="Passport">{t("passport")}</option>
+<option value="License">{t("driverLicense")}</option>
   </select>
 
   <input
     placeholder={
-      documentType === "Passport"
-        ? "Passport Number"
-        : documentType === "License"
-        ? "Driver License Number"
-        : "ID Card Number"
-    }
+  documentType === "Passport"
+    ? t("passportNumber")
+    : documentType === "License"
+    ? t("driverLicenseNumber")
+    : t("idCardNumber")
+}
+
     value={idNumber}
     onChange={(e)=>setIdNumber(e.target.value)}
   />
@@ -261,7 +265,7 @@ async function submitKYC() {
 
         <div className="input-group">
 
-          <label>ประเทศ</label>
+          <label>{t("country")}</label>
 
           <input
             value={country}
@@ -276,7 +280,7 @@ async function submitKYC() {
 
           <IdCard size={34}/>
 
-          <h3>อัปโหลดบัตรประชาชน </h3>
+          <h3>{t("uploadIdCard")}</h3>
 
           <label className="upload-area">
 
@@ -289,7 +293,7 @@ async function submitKYC() {
 
   <Upload size={46} />
 
-  <h4>คลิกเพื่ออัปโหลด</h4>
+  <h4>{t("clickToUpload")}</h4>
 
   
   {
@@ -319,7 +323,7 @@ async function submitKYC() {
 
           <Camera size={34}/>
 
-          <h3>อัปโหลดรูปเซลฟี่</h3>
+          <h3>{t("uploadSelfie")}</h3>
 
           <label className="upload-area">
 
@@ -332,7 +336,7 @@ async function submitKYC() {
 
   <Upload size={46} />
 
-  <h4>คลิกเพื่ออัปโหลด</h4>
+  <h3>{t("clickToUpload")}</h3>
 
   
 
@@ -369,8 +373,8 @@ async function submitKYC() {
 
           {
   uploading
-    ? "กำลังส่ง..."
-    : "ส่งข้อมูล"
+  ? t("submitting")
+  : t("submit")
 }
 
         </button>

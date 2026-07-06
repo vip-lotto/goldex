@@ -20,10 +20,13 @@ import BottomNav from "../components/BottomNav";
 import HomeMarketChart from "../components/HomeMarketChart";
 
 import "../styles/home.css";
+import { useTranslation } from "react-i18next";
 
 export default function Home() {
 
 const navigate = useNavigate();
+
+const { t } = useTranslation();
 
 const [coins, setCoins] = useState([]);
 const [activeTab, setActiveTab] =
@@ -32,6 +35,8 @@ useState("trending");
 
 const [wallet, setWallet] = useState(null);
 const [rates, setRates] = useState([]);
+
+const [profit, setProfit] = useState(0);
 
 const [unreadCount,
 setUnreadCount] =
@@ -148,12 +153,44 @@ const loadRates = async () => {
 
 };
 
+
+const loadProfit = async () => {
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  if (!user) return;
+
+  const { data, error } = await supabase
+    .from("trades")
+    .select("profit_amount")
+    .eq("user_id", user.id)
+    .eq("status", "finished");
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  const total = (data || []).reduce(
+    (sum, item) =>
+      sum + Number(item.profit_amount || 0),
+    0
+  );
+
+  setProfit(total);
+
+};
+
+
 useEffect(() => {
 
 loadMarket();
 loadNotifications();
 loadWallet();
 loadRates();
+loadProfit();
 
   const user =
     JSON.parse(
@@ -193,8 +230,9 @@ loadRates();
     loadMarket();
     loadWallet();
     loadRates();
+    loadProfit();
 
-  }, 30000);
+},30000);
 
   return () => {
 
@@ -297,7 +335,7 @@ return (
     <div>
 
       <span>
-        Assets
+        {t("assets")}
       </span>
 
       <h2>
@@ -313,12 +351,22 @@ return (
     <div>
 
       <span>
-        Profit
+        {t("profit")}
       </span>
 
-      <h3 className="green">
-        +$326.44
-      </h3>
+      <h3
+  className={
+    profit >= 0
+      ? "green"
+      : "red"
+  }
+>
+  {profit >= 0 ? "+" : ""}
+  {profit.toLocaleString(undefined,{
+    minimumFractionDigits:2,
+    maximumFractionDigits:2
+  })} USDT
+</h3>
 
     </div>
 
