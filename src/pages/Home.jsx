@@ -283,9 +283,21 @@ return (
 
 <div className="home-page">
 
-  <div className="home-header">
+    <div className="home-header">
 
-    <h1>TRUST</h1>
+    <div className="brand-area">
+
+    <img
+        src="/logo.png"
+        alt="TRUST"
+        className="brand-logo"
+    />
+
+    <div className="brand-title">
+        TRUST
+    </div>
+
+</div>
 
     <div className="header-actions">
 
@@ -303,23 +315,14 @@ return (
 
         <div
             className="notify-btn"
-            onClick={() =>
-                navigate("/notifications")
-            }
+            onClick={() => navigate("/notifications")}
         >
-
             <Bell size={26}/>
 
             {unreadCount > 0 && (
-
                 <span className="notify-badge">
-
-                    {unreadCount > 99
-                        ? "99+"
-                        : unreadCount}
-
+                    {unreadCount > 99 ? "99+" : unreadCount}
                 </span>
-
             )}
 
         </div>
@@ -348,19 +351,19 @@ return (
 
     </div>
 
-    <div>
+    <div className="asset-right">
 
-      <span>
-        {t("profit")}
-      </span>
+  <span className="profit-label">
+    {t("profit")}
+  </span>
 
-      <h3
-  className={
-    profit >= 0
-      ? "green"
-      : "red"
-  }
->
+  <h3
+    className={
+      profit >= 0
+        ? "green"
+        : "red"
+    }
+  >
   {profit >= 0 ? "+" : ""}
   {profit.toLocaleString(undefined,{
     minimumFractionDigits:2,

@@ -1,7 +1,6 @@
 /* ==========================================================
-   GOLDEX HOME V4
-   PART 1A
-   GLOBAL + LAYOUT
+   TRUST HOME PRO MAX
+   SET 1 : GLOBAL + RESET + RESPONSIVE
 ========================================================== */
 
 *,
@@ -13,92 +12,43 @@
 }
 
 html{
-
     width:100%;
-
-    min-height:100%;
-
+    min-width:0;
     overflow-x:hidden;
-
     -webkit-text-size-adjust:100%;
-
-    scroll-behavior:smooth;
-
 }
 
 body{
 
     width:100%;
-
-    min-height:100vh;
+    min-width:0;
 
     overflow-x:hidden;
 
-    background:#050505;
-
+    background:#07111f;
     color:#fff;
 
     font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Helvetica,
-    Arial,
-    sans-serif;
+        Inter,
+        "Noto Sans Thai",
+        "Noto Sans SC",
+        "Noto Sans TC",
+        "Noto Sans JP",
+        "Noto Sans KR",
+        sans-serif;
 
 }
 
 #root{
 
     width:100%;
-
-    min-height:100vh;
+    min-width:0;
 
     overflow-x:hidden;
 
 }
 
-/* ==========================================
-   PAGE
-========================================== */
-
-.home-page{
-
-    width:100%;
-
-    max-width:1200px;
-
-    margin:0 auto;
-
-    min-height:100dvh;
-
-    padding:16px;
-
-    padding-bottom:
-    calc(
-        110px +
-        env(safe-area-inset-bottom)
-    );
-
-    background:#050505;
-
-    color:#fff;
-
-    overflow-x:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-/* ==========================================
-   GLOBAL FIX
-========================================== */
+/* ========================= */
 
 img{
 
@@ -106,33 +56,21 @@ img{
 
     max-width:100%;
 
-    height:auto;
-
 }
 
-svg{
-
-    flex-shrink:0;
-
-}
+/* ========================= */
 
 button{
-
-    font-family:inherit;
 
     border:none;
 
     outline:none;
 
+    background:none;
+
     cursor:pointer;
 
-}
-
-a{
-
-    color:inherit;
-
-    text-decoration:none;
+    font:inherit;
 
 }
 
@@ -140,42 +78,83 @@ input,
 textarea,
 select{
 
-    font-family:inherit;
+    font:inherit;
 
 }
 
-/* ==========================================
-   PREVENT OVERFLOW
-========================================== */
+/* ========================= */
 
-.header-actions,
-.market-left,
-.market-info,
-.market-right,
-.asset-card,
-.coin-card,
-.hot-market-card,
-.market-row{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+small,
+strong,
+div{
+
+    min-width:0;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ==========================================================
+   HOME PAGE
+========================================================== */
+
+.home-page{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    overflow-x:hidden;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+    padding:
+
+        max(18px,env(safe-area-inset-top))
+
+        max(18px,env(safe-area-inset-right))
+
+        calc(95px + env(safe-area-inset-bottom))
+
+        max(18px,env(safe-area-inset-left));
+
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.home-page>*{
+
+    width:100%;
 
     min-width:0;
 
 }
 
-.market-symbol,
-.market-name,
-.market-price,
-.market-change,
-.action-box p{
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-/* ==========================================
+/* ==========================================================
    HEADER
-========================================== */
+========================================================== */
 
 .home-header{
 
@@ -189,27 +168,57 @@ select{
 
     gap:14px;
 
+    padding:0 8px;
+
 }
 
-.home-header h1{
-
-    flex:1;
+.home-header>*{
 
     min-width:0;
 
-    font-size:clamp(30px,6vw,42px);
+}
 
-    font-weight:800;
+/* ==========================================================
+   LEFT
+========================================================== */
 
-    color:#2EA8FF;
+.header-left{
 
-    white-space:nowrap;
+    flex:1;
+
+    display:flex;
+
+    align-items:center;
+
+    min-width:0;
 
     overflow:hidden;
 
-    text-overflow:ellipsis;
+}
+
+/* ==========================================================
+   LOGO
+========================================================== */
+
+.home-logo{
+
+    margin:0;
+
+    font-size:36px;
+
+    font-weight:800;
+
+    color:#1fa2ff;
+
+    white-space:nowrap;
+
+    flex-shrink:0;
 
 }
+
+/* ==========================================================
+   ACTIONS
+========================================================== */
 
 .header-actions{
 
@@ -217,24 +226,28 @@ select{
 
     align-items:center;
 
-    gap:10px;
+    justify-content:flex-end;
+
+    gap:12px;
 
     flex-shrink:0;
 
 }
 
-/* ==========================================
-   BUTTON
-========================================== */
+/* ==========================================================
+   ICON BUTTON
+========================================================== */
 
-.notify-btn,
-.support-btn{
+.support-btn,
+.notify-btn{
 
-    width:52px;
+    position:relative;
 
-    height:52px;
+    width:48px;
 
-    border-radius:16px;
+    height:48px;
+
+    border-radius:50%;
 
     display:flex;
 
@@ -242,30 +255,28 @@ select{
 
     align-items:center;
 
-    background:#162541;
+    background:#102846;
 
-    border:1px solid rgba(255,255,255,.08);
+    border:1px solid rgba(80,170,255,.35);
 
-    color:#fff;
+    color:#55c8ff;
 
     transition:.25s;
 
 }
 
-.support-btn{
+.support-btn:hover,
+.notify-btn:hover{
 
-    color:#1fdff8;
-
-}
-
-.notify-btn:hover,
-.support-btn:hover{
+    background:#163a63;
 
     transform:translateY(-2px);
 
-    background:#203353;
-
 }
+
+/* ==========================================================
+   BADGE
+========================================================== */
 
 .notify-badge{
 
@@ -275,19 +286,17 @@ select{
 
     right:-4px;
 
-    min-width:18px;
+    min-width:20px;
 
-    height:18px;
+    height:20px;
 
-    border-radius:50%;
+    padding:0 5px;
 
-    background:#EF4444;
+    border-radius:999px;
+
+    background:#ff4242;
 
     color:#fff;
-
-    font-size:10px;
-
-    font-weight:700;
 
     display:flex;
 
@@ -295,29 +304,130 @@ select{
 
     justify-content:center;
 
-    padding:0 5px;
+    font-size:11px;
+
+    font-weight:700;
 
 }
 
-/* ==========================================
-   BANNER
-========================================== */
+/* ==========================================================
+   MOBILE
+========================================================== */
 
-.banner{
+@media(max-width:768px){
+
+.home-page{
+
+    gap:18px;
+
+    padding:
+
+        max(15px,env(safe-area-inset-top))
+
+        15px
+
+        calc(90px + env(safe-area-inset-bottom))
+
+        15px;
+
+}
+
+.home-logo{
+
+    font-size:34px;
+
+}
+
+.support-btn,
+.notify-btn{
+
+    width:44px;
+    height:44px;
+
+}
+
+}
+
+/* ==========================================================
+   iPhone SE / 7 / 8
+========================================================== */
+
+@media(max-width:380px){
+
+.home-logo{
+
+    font-size:30px;
+
+}
+
+.support-btn,
+.notify-btn{
+
+    width:40px;
+    height:40px;
+
+}
+
+.header-actions{
+
+    gap:8px;
+
+}
+
+}
+
+/* ==========================================================
+   Desktop
+========================================================== */
+
+@media(min-width:1400px){
+
+.home-page{
+
+    max-width:1600px;
+
+    margin:auto;
+
+}
+
+}
+
+/* ==========================================================
+   SET 2
+   Banner + Asset Card + Actions
+========================================================== */
+
+/* ===========================
+   Banner
+=========================== */
+
+.banner-slider{
 
     width:100%;
 
+    min-width:0;
+
+    position:relative;
+
     overflow:hidden;
 
-    border-radius:20px;
-
-    aspect-ratio:2.3/1;
-
-    background:#111;
+    border-radius:22px;
 
 }
 
-.banner-image{
+.banner-slide{
+
+    width:100%;
+
+    aspect-ratio:16/6;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+}
+
+.banner-slide img{
 
     width:100%;
 
@@ -327,109 +437,15 @@ select{
 
 }
 
-/* ==========================================
-   PHONE
-========================================== */
-
-@media(max-width:390px){
-
-.home-page{
-
-    padding:12px;
-
-}
-
-.home-header h1{
-
-    font-size:30px;
-
-}
-
-.notify-btn,
-.support-btn{
-
-    width:46px;
-
-    height:46px;
-
-    border-radius:14px;
-
-}
-
-}
-
-/* ==========================================
-   EXTRA SMALL
-========================================== */
-
-@media(max-width:340px){
-
-.home-page{
-
-    padding:10px;
-
-}
-
-.home-header{
-
-    gap:8px;
-
-}
-
-.home-header h1{
-
-    font-size:26px;
-
-}
-
-.notify-btn,
-.support-btn{
-
-    width:42px;
-
-    height:42px;
-
-}
-
-}
-
-/* ==========================================
-   TABLET
-========================================== */
-
-@media(min-width:768px){
-
-.home-page{
-
-    padding:22px;
-
-}
-
-}
-
-/* ==========================================
-   DESKTOP
-========================================== */
-
-@media(min-width:1200px){
-
-.home-page{
-
-    max-width:1200px;
-
-}
-
-}
-
-/* ==========================================================
-   GOLDEX HOME V4
-   PART 1B
-   ASSET CARD
-========================================================== */
+/* ===========================
+   Asset Card
+=========================== */
 
 .asset-card{
 
     width:100%;
+
+    min-width:0;
 
     display:flex;
 
@@ -437,62 +453,41 @@ select{
 
     align-items:center;
 
-    gap:18px;
+    gap:22px;
 
-    padding:20px;
+    padding:24px;
 
     border-radius:22px;
 
     background:linear-gradient(
         135deg,
-        #07152D,
-        #10254A
+        #10264d,
+        #0d1d37
     );
 
-    border:1px solid rgba(245,197,66,.10);
+    border:1px solid rgba(70,170,255,.25);
 
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.25);
+    overflow:hidden;
 
 }
 
-/* ===========================
-   LEFT
-=========================== */
 
-.asset-left{
+
+.asset-card>div{
 
     flex:1;
 
     min-width:0;
 
-    display:flex;
-
-    flex-direction:column;
-
 }
 
-.asset-title{
+.asset-card span{
 
-    color:#9FB3D4;
+    display:block;
 
-    font-size:clamp(12px,2vw,15px);
+    color:#9fc6ff;
 
-    font-weight:500;
-
-}
-
-.asset-value{
-
-    margin-top:8px;
-
-    font-size:clamp(24px,5vw,34px);
-
-    font-weight:800;
-
-    color:#fff;
-
-    line-height:1.1;
+    font-size:15px;
 
     white-space:nowrap;
 
@@ -502,175 +497,55 @@ select{
 
 }
 
-/* ===========================
-   RIGHT
-=========================== */
-
-.asset-right{
-
-    flex-shrink:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:flex-end;
-
-    text-align:right;
-
-}
-
-.asset-label{
-
-    color:#9FB3D4;
-
-    font-size:13px;
-
-}
-
-.asset-profit{
+.asset-card h2{
 
     margin-top:8px;
 
-    font-size:clamp(18px,3vw,24px);
+    color:#fff;
+
+    font-size:clamp(26px,5vw,38px);
 
     font-weight:800;
 
-    white-space:nowrap;
+    line-height:1.2;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
 
 }
 
-.green{
+.asset-card h3{
 
-    color:#16d47b;
+    margin-top:8px;
 
-}
+    text-align:right;
 
-.red{
+    font-size:clamp(22px,4vw,32px);
 
-    color:#ff5b7d;
+    font-weight:700;
 
-}
+    overflow-wrap:anywhere;
 
-/* ===========================
-   SMALL PHONE
-=========================== */
-
-@media(max-width:390px){
-
-.asset-card{
-
-    padding:16px;
-
-    gap:12px;
+    word-break:break-word;
 
 }
 
-.asset-title{
+.asset-card .green{
 
-    font-size:12px;
-
-}
-
-.asset-value{
-
-    font-size:22px;
+    color:#21df8f;
 
 }
 
-.asset-profit{
+.asset-card .red{
 
-    font-size:18px;
-
-}
+    color:#ff5d6d;
 
 }
 
 /* ===========================
-   EXTRA SMALL
+   Action Grid
 =========================== */
-
-@media(max-width:340px){
-
-.asset-card{
-
-    flex-direction:column;
-
-    align-items:flex-start;
-
-}
-
-.asset-right{
-
-    width:100%;
-
-    align-items:flex-start;
-
-    text-align:left;
-
-    margin-top:10px;
-
-}
-
-.asset-value{
-
-    font-size:20px;
-
-}
-
-.asset-profit{
-
-    font-size:17px;
-
-}
-
-}
-
-/* ===========================
-   TABLET
-=========================== */
-
-@media(min-width:768px){
-
-.asset-card{
-
-    padding:24px;
-
-}
-
-.asset-value{
-
-    font-size:34px;
-
-}
-
-}
-
-/* ===========================
-   DESKTOP
-=========================== */
-
-@media(min-width:1200px){
-
-.asset-card{
-
-    padding:26px;
-
-}
-
-.asset-value{
-
-    font-size:36px;
-
-}
-
-}
-
-/* ==========================================================
-   GOLDEX HOME V4
-   PART 1C
-   ACTION BUTTONS
-========================================================== */
 
 .action-grid{
 
@@ -681,31 +556,21 @@ select{
     grid-template-columns:
         repeat(4,minmax(0,1fr));
 
-    gap:12px;
-
-    margin:4px 0 8px;
+    gap:16px;
 
 }
 
-/* ===========================
-   CARD
-=========================== */
-
 .action-box{
-
-    width:100%;
 
     min-width:0;
 
-    aspect-ratio:1;
-
-    min-height:88px;
-
-    background:#162541;
-
-    border:1px solid rgba(255,255,255,.06);
+    padding:20px 12px;
 
     border-radius:20px;
+
+    background:#10233f;
+
+    border:1px solid rgba(70,170,255,.18);
 
     display:flex;
 
@@ -715,437 +580,189 @@ select{
 
     align-items:center;
 
-    gap:10px;
-
-    padding:10px 6px;
-
-    cursor:pointer;
+    gap:12px;
 
     transition:.25s;
-
-    overflow:hidden;
 
 }
 
 .action-box:hover{
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
-    border-color:#3A9CFF;
+    border-color:#2fbfff;
 
-    background:#1B3157;
-
-}
-
-.action-box:active{
-
-    transform:scale(.97);
-
-}
-
-/* ===========================
-   ICON
-=========================== */
-
-.action-box svg{
-
-    width:30px;
-
-    height:30px;
-
-    color:#42A5F5;
-
-    flex-shrink:0;
-
-}
-
-/* ===========================
-   TEXT
-=========================== */
-
-.action-box p{
-
-    width:100%;
-
-    margin:0;
-
-    padding:0 4px;
-
-    text-align:center;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    color:#fff;
-
-    line-height:1.2;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-/* ==========================================================
-   PHONE
-========================================================== */
-
-@media(max-width:390px){
-
-.action-grid{
-
-    gap:8px;
-
-}
-
-.action-box{
-
-    min-height:76px;
-
-    border-radius:16px;
-
-    padding:8px 4px;
+    background:#143055;
 
 }
 
 .action-box svg{
 
-    width:24px;
-
-    height:24px;
+    color:#42c7ff;
 
 }
 
 .action-box p{
-
-    font-size:11px;
-
-}
-
-}
-
-/* ==========================================================
-   EXTRA SMALL
-========================================================== */
-
-@media(max-width:340px){
-
-.action-grid{
-
-    gap:6px;
-
-}
-
-.action-box{
-
-    min-height:70px;
-
-    border-radius:14px;
-
-    padding:6px 2px;
-
-}
-
-.action-box svg{
-
-    width:20px;
-
-    height:20px;
-
-}
-
-.action-box p{
-
-    font-size:10px;
-
-    line-height:1.1;
-
-}
-
-}
-
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media(min-width:768px){
-
-.action-grid{
-
-    gap:18px;
-
-}
-
-.action-box{
-
-    min-height:110px;
-
-}
-
-.action-box svg{
-
-    width:34px;
-
-    height:34px;
-
-}
-
-.action-box p{
-
-    font-size:15px;
-
-}
-
-}
-
-/* ==========================================================
-   LARGE DESKTOP
-========================================================== */
-
-@media(min-width:1400px){
-
-.action-grid{
-
-    gap:20px;
-
-}
-
-.action-box{
-
-    min-height:120px;
-
-}
-
-.action-box svg{
-
-    width:36px;
-
-    height:36px;
-
-}
-
-.action-box p{
-
-    font-size:16px;
-
-}
-
-}
-
-/* ==========================================================
-   GOLDEX HOME V4
-   PART 2A
-   GOLD SECTION
-========================================================== */
-
-.gold-section{
-
-    width:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    gap:16px;
-
-}
-
-.gold-section h2{
-
-    font-size:clamp(20px,3vw,28px);
-
-    font-weight:800;
-
-    color:#3AA0FF;
-
-    line-height:1.2;
-
-}
-
-/* ===========================
-   CHART CARD
-=========================== */
-
-.gold-chart-card{
-
-    width:100%;
-
-    background:#07152D;
-
-    border-radius:22px;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    padding:18px;
-
-    overflow:hidden;
-
-}
-
-.gold-chart{
-
-    width:100%;
-
-    height:260px;
-
-}
-
-/* ===========================
-   MARKET TABS
-=========================== */
-
-.market-tabs{
-
-    width:100%;
-
-    display:grid;
-
-    grid-template-columns:repeat(3,minmax(0,1fr));
-
-    gap:10px;
-
-}
-
-.tab-btn{
 
     width:100%;
 
     min-width:0;
 
-    height:46px;
-
-    border-radius:14px;
-
-    background:#162541;
+    text-align:center;
 
     color:#fff;
 
-    border:1px solid rgba(255,255,255,.06);
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
     font-size:15px;
 
-    font-weight:700;
+    font-weight:600;
 
-    transition:.25s;
+    line-height:1.35;
 
-    overflow:hidden;
+    overflow-wrap:anywhere;
 
-}
-
-.tab-btn span{
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
+    word-break:break-word;
 
 }
 
-.tab-btn:hover{
+/* ===========================
+   Mobile
+=========================== */
 
-    background:#1D345C;
+@media(max-width:768px){
 
-    border-color:#3AA0FF;
+.asset-card{
 
-}
+    padding:18px;
 
-.tab-btn.active{
-
-    background:#3AA0FF;
-
-    color:#111;
+    gap:14px;
 
 }
 
-/* ==========================================================
-   PHONE
-========================================================== */
+.asset-card h2{
 
-@media(max-width:390px){
-
-.gold-chart-card{
-
-    padding:14px;
+    font-size:30px;
 
 }
 
-.gold-chart{
+.asset-card h3{
 
-    height:210px;
-
-}
-
-.market-tabs{
-
-    gap:8px;
+    font-size:24px;
 
 }
 
-.tab-btn{
+.action-grid{
 
-    height:40px;
+    gap:12px;
 
-    border-radius:12px;
+}
 
-    font-size:12px;
+.action-box{
+
+    padding:18px 8px;
+
+}
+
+.action-box svg{
+
+    width:26px;
+
+    height:26px;
+
+}
+
+.action-box p{
+
+    font-size:14px;
 
 }
 
 }
 
-/* ==========================================================
-   EXTRA SMALL
-========================================================== */
+/* ===========================
+   iPhone SE / 7 / 8
+=========================== */
 
-@media(max-width:340px){
+@media(max-width:380px){
 
-.market-tabs{
+.asset-card{
 
-    grid-template-columns:1fr;
-
-}
-
-.tab-btn{
-
-    height:40px;
-
-    font-size:12px;
+    padding:16px;
 
 }
 
-.gold-chart{
+.asset-card span{
 
-    height:180px;
+    font-size:13px;
+
+}
+
+.asset-card h2{
+
+    font-size:20px;
+
+}
+
+.asset-card h3{
+
+    font-size:19px;
+
+}
+
+.action-grid{
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+}
+
+.action-box{
+
+    padding:16px 8px;
+
+}
+
+.action-box p{
+
+    font-size:13px;
 
 }
 
 }
 
-/* ==========================================================
-   TABLET
-========================================================== */
+/* ===========================
+   iPad
+=========================== */
 
-@media(min-width:768px){
+@media(min-width:769px){
 
-.gold-chart{
+.action-grid{
 
-    height:320px;
+    grid-template-columns:
+        repeat(4,minmax(0,1fr));
 
 }
 
-.tab-btn{
+}
 
-    height:50px;
+/* ===========================
+   Large Desktop
+=========================== */
+
+@media(min-width:1500px){
+
+.action-grid{
+
+    gap:22px;
+
+}
+
+.action-box{
+
+    padding:24px;
+
+}
+
+.action-box p{
 
     font-size:16px;
 
@@ -1154,253 +771,99 @@ select{
 }
 
 /* ==========================================================
-   DESKTOP
+   SET 3
+   MARKET
 ========================================================== */
 
-@media(min-width:1200px){
-
-.gold-chart{
-
-    height:360px;
-
-}
-
-}
-
-/* ==========================================================
-   GOLDEX HOME V4
-   PART 2B
-   MARKET LIST
-========================================================== */
+/* ===========================
+   Market Section
+=========================== */
 
 .market-section{
 
     width:100%;
 
+    min-width:0;
+
     display:flex;
 
     flex-direction:column;
 
-    gap:16px;
-
-}
-
-.market-section h2{
-
-    color:#42A5F5;
-
-    font-size:clamp(20px,3vw,28px);
-
-    font-weight:800;
+    gap:14px;
 
 }
 
 /* ===========================
-   HORIZONTAL LIST
+   Tabs
 =========================== */
 
-.coin-list{
+.market-tabs{
 
     width:100%;
 
     display:flex;
 
-    gap:14px;
-
-    overflow-x:auto;
-
-    overflow-y:hidden;
-
-    scroll-behavior:smooth;
-
-    padding-bottom:8px;
-
-    -webkit-overflow-scrolling:touch;
-
-}
-
-.coin-list::-webkit-scrollbar{
-
-    height:6px;
-
-}
-
-.coin-list::-webkit-scrollbar-thumb{
-
-    background:#42536F;
-
-    border-radius:999px;
-
-}
-
-/* ===========================
-   CARD
-=========================== */
-
-.coin-card,
-.hot-market-card{
-
-    flex:0 0 180px;
-
-    width:180px;
-
-    min-width:180px;
-
-    height:150px;
-
-    background:#07152D;
-
-    border-radius:18px;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    padding:16px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-start;
-    gap:px;
-
-    transition:.25s;
-
-}
-
-.coin-card:hover,
-.hot-market-card:hover{
-
-    transform:translateY(-2px);
-
-    border-color:#42A5F5;
-
-}
-
-/* ===========================
-   TOP
-=========================== */
-
-.coin-top{
-
-    display:flex;
-
-    flex-direction:column;
-
     align-items:center;
 
-    gap:2px;
-
-    margin-bottom:0;
-
-}
-
-.coin-logo{
-
-    width:38px;
-
-    height:38px;
-
-    object-fit:contain;
-
-    flex-shrink:0;
-
-}
-
-.coin-info{
-
-    flex:1;
+    gap:12px;
 
     min-width:0;
 
 }
 
-.coin-symbol{
+.tab-btn{
 
-    font-size:18px;
+    flex:1;
 
-    font-weight:800;
+    min-width:0;
 
-    color:#fff;
+    height:48px;
+
+    border-radius:14px;
+
+    background:#0d1c35;
+
+    border:1px solid rgba(80,170,255,.18);
+
+    color:#86bfff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
 
     overflow:hidden;
 
     white-space:nowrap;
 
     text-overflow:ellipsis;
-
-    line-height:1.05;
 
 }
 
-.coin-name{
+.tab-btn.active{
 
-    margin-top:2px;
+    background:linear-gradient(
+        135deg,
+        #1798ff,
+        #39d0ff
+    );
 
-    font-size:12px;
+    color:#fff;
 
-    color:#9FB3D4;
-
-    overflow:hidden;
-
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
+    border-color:#39d0ff;
 
 }
 
 /* ===========================
-   PRICE
-=========================== */
-
-.coin-price{
-
-    font-size:18px;
-
-    font-weight:800;
-
-    color:#fff;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-.coin-change{
-
-    margin-top:0;
-
-    font-size:14px;
-
-    font-weight:700;
-
-    line-height:1;
-
-}
-
-.coin-change.green{
-
-    color:#14D67C;
-
-}
-
-.coin-change.red{
-
-    color:#FF5C73;
-
-}
-
-/* ===========================
-   MARKET ROW
+   Coin Row
 =========================== */
 
 .market-row{
 
     width:100%;
 
-    min-height:90px;
+    min-width:0;
 
     display:flex;
 
@@ -1410,28 +873,28 @@ select{
 
     gap:16px;
 
-    padding:16px 18px;
-
-    background:#101722;
+    padding:18px;
 
     border-radius:18px;
 
-    border:1px solid rgba(255,255,255,.05);
+    background:#101f39;
 
-    transition:.25s;
+    border:1px solid rgba(70,170,255,.15);
+
+    transition:.2s;
 
 }
 
 .market-row:hover{
 
-    background:#172235;
+    background:#15294a;
 
-    border-color:#42A5F5;
+    border-color:#2fc4ff;
 
 }
 
 /* ===========================
-   LEFT
+   Left
 =========================== */
 
 .market-left{
@@ -1448,17 +911,25 @@ select{
 
 }
 
+/* ===========================
+   Logo
+=========================== */
+
 .market-logo{
 
     width:46px;
 
     height:46px;
 
-    object-fit:contain;
-
     flex-shrink:0;
 
+    border-radius:50%;
+
 }
+
+/* ===========================
+   Info
+=========================== */
 
 .market-info{
 
@@ -1470,15 +941,15 @@ select{
 
 .market-symbol{
 
-    font-size:19px;
-
-    font-weight:800;
-
     color:#fff;
 
-    overflow:hidden;
+    font-size:18px;
+
+    font-weight:700;
 
     white-space:nowrap;
+
+    overflow:hidden;
 
     text-overflow:ellipsis;
 
@@ -1488,37 +959,45 @@ select{
 
     margin-top:4px;
 
-    font-size:13px;
+    color:#8ca6d2;
 
-    color:#97A7BF;
+    font-size:14px;
 
     overflow:hidden;
 
-    white-space:nowrap;
-
     text-overflow:ellipsis;
+
+    white-space:nowrap;
 
 }
 
 /* ===========================
-   RIGHT
+   Right
 =========================== */
 
 .market-right{
 
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-end;
+
+    gap:6px;
+
     flex-shrink:0;
 
-    text-align:right;
+    min-width:95px;
 
 }
 
 .market-price{
 
+    color:#fff;
+
     font-size:18px;
 
-    font-weight:800;
-
-    color:#fff;
+    font-weight:700;
 
     white-space:nowrap;
 
@@ -1526,90 +1005,65 @@ select{
 
 .market-change{
 
-    margin-top:5px;
+    padding:4px 10px;
 
-    font-size:14px;
+    border-radius:999px;
+
+    font-size:13px;
 
     font-weight:700;
 
-}
-
-/* ==========================================================
-   PHONE
-========================================================== */
-
-@media(max-width:390px){
-
-.coin-card,
-.hot-market-card{
-
-    flex:0 0 180px;
-
-    width:180px;
-
-    min-width:180px;
-
-    height:150px;
-
-    background:#07152D;
-
-    border-radius:18px;
-
-    border:1px solid rgba(255,255,255,.06);
-
-    padding:14px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:flex-start;
-
-    gap:4px;
-
-    transition:.25s;
+    white-space:nowrap;
 
 }
 
-.coin-logo{
+.market-change.green{
 
-    width:30px;
+    color:#18d67e;
 
-    height:30px;
-
-}
-
-.coin-symbol{
-
-    font-size:15px;
+    background:rgba(24,214,126,.08);
 
 }
 
-.coin-name{
+.market-change.red{
 
-    font-size:11px;
+    color:#ff5e6d;
+
+    background:rgba(255,94,109,.08);
 
 }
 
-.coin-price{
+/* ===========================
+   Mobile
+=========================== */
 
-    font-size:16px;
+@media(max-width:768px){
+
+.market-tabs{
+
+    gap:10px;
+
+}
+
+.tab-btn{
+
+    font-size:14px;
+
+    height:44px;
 
 }
 
 .market-row{
 
-    min-height:78px;
-
-    padding:14px;
+    padding:16px;
 
 }
 
 .market-logo{
 
-    width:38px;
+    width:40px;
 
-    height:38px;
+    height:40px;
 
 }
 
@@ -1621,44 +1075,27 @@ select{
 
 .market-name{
 
-    font-size:11px;
+    font-size:13px;
 
 }
 
 .market-price{
 
-    font-size:15px;
-
-}
-
-.market-change{
-
-    font-size:12px;
+    font-size:16px;
 
 }
 
 }
 
-/* ==========================================================
-   EXTRA SMALL
-========================================================== */
+/* ===========================
+   iPhone SE / 7 / 8
+=========================== */
 
-@media(max-width:340px){
-
-.coin-card,
-.hot-market-card{
-
-    flex-basis:135px;
-
-    min-width:135px;
-
-    height:125px;
-
-}
+@media(max-width:380px){
 
 .market-row{
 
-    padding:12px;
+    padding:14px;
 
     gap:10px;
 
@@ -1674,12 +1111,887 @@ select{
 
 .market-symbol{
 
-    font-size:14px;
+    font-size:15px;
+
+}
+
+.market-name{
+
+    font-size:12px;
 
 }
 
 .market-price{
 
+    font-size:15px;
+
+}
+
+.market-change{
+
+    font-size:11px;
+
+    padding:3px 8px;
+
+}
+
+}
+
+/* ===========================
+   Large Desktop
+=========================== */
+
+@media(min-width:1500px){
+
+.market-row{
+
+    padding:22px;
+
+}
+
+.market-logo{
+
+    width:52px;
+
+    height:52px;
+
+}
+
+.market-symbol{
+
+    font-size:20px;
+
+}
+
+.market-price{
+
+    font-size:20px;
+
+}
+
+}
+
+/* ==========================================================
+   SET 4
+   BOTTOM NAVIGATION
+========================================================== */
+
+.bottom-nav{
+
+    position:fixed;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:space-around;
+
+    align-items:center;
+
+    gap:4px;
+
+    padding:
+
+        10px
+
+        max(12px,env(safe-area-inset-right))
+
+        calc(10px + env(safe-area-inset-bottom))
+
+        max(12px,env(safe-area-inset-left));
+
+    background:rgba(7,17,31,.96);
+
+    backdrop-filter:blur(20px);
+
+    -webkit-backdrop-filter:blur(20px);
+
+    border-top:1px solid rgba(80,170,255,.15);
+
+    z-index:9999;
+
+}
+
+/* ========================= */
+
+.bottom-nav a{
+
+    flex:1;
+
+    min-width:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:5px;
+
+    color:#8db9ff;
+
+    text-decoration:none;
+
+    transition:.25s;
+
+    padding:8px 2px;
+
+    border-radius:14px;
+
+}
+
+/* ========================= */
+
+.bottom-nav a.active{
+
+    color:#35c5ff;
+
+    background:rgba(55,170,255,.08);
+
+}
+
+/* ========================= */
+
+.bottom-nav svg{
+
+    width:24px;
+
+    height:24px;
+
+    flex-shrink:0;
+
+}
+
+/* ========================= */
+
+.bottom-nav span{
+
+    width:100%;
+
+    min-width:0;
+
+    font-size:12px;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+/* ==========================================================
+   SAFE AREA
+========================================================== */
+
+@supports(padding:max(0px)){
+
+.bottom-nav{
+
+    padding-bottom:
+
+        max(10px,env(safe-area-inset-bottom));
+
+}
+
+}
+
+/* ==========================================================
+   iPhone SE
+========================================================== */
+
+@media(max-width:380px){
+
+.bottom-nav{
+
+    gap:2px;
+
+}
+
+.bottom-nav a{
+
+    padding:6px 1px;
+
+}
+
+.bottom-nav svg{
+
+    width:21px;
+
+    height:21px;
+
+}
+
+.bottom-nav span{
+
+    font-size:11px;
+
+}
+
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(min-width:768px){
+
+.bottom-nav{
+
+    max-width:720px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    border-radius:22px 22px 0 0;
+
+}
+
+}
+
+/* ==========================================================
+   DESKTOP
+========================================================== */
+
+@media(min-width:1280px){
+
+.bottom-nav{
+
+    max-width:820px;
+
+}
+
+.bottom-nav span{
+
+    font-size:13px;
+
+}
+
+.bottom-nav svg{
+
+    width:25px;
+
+    height:25px;
+
+}
+
+}
+
+/* ==========================================================
+   SET 5
+   BANNER SLIDER
+========================================================== */
+
+.banner{
+
+    width:100%;
+    overflow:hidden;
+
+    position:relative;
+
+    border-radius:22px;
+
+    background:#0d1830;
+
+}
+
+.banner-track{
+
+    display:flex;
+
+    
+
+    transition:transform .45s ease;
+
+}
+
+.banner-slide{
+
+    flex:0 0 100%;
+
+    min-width:100%;
+
+    max-width:100%;
+
+    aspect-ratio:16/6;
+
+}
+
+.banner-image{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+
+
+.gold-section{
+
+    width:100%;
+
+    min-width:0;
+
+    overflow:hidden;
+
+}
+
+/* ========================================================== */
+
+
+
+.banner-slide:hover img{
+
+    transform:scale(1.03);
+
+}
+
+/* ========================================================== */
+
+.banner-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+
+    linear-gradient(
+
+        rgba(0,0,0,.05),
+
+        rgba(0,0,0,.18)
+
+    );
+
+}
+
+/* ==========================================================
+   DOTS
+========================================================== */
+
+.banner-dots{
+
+    position:absolute;
+
+    left:50%;
+
+    bottom:14px;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    gap:8px;
+
+    z-index:10;
+
+}
+
+.banner-dot{
+
+    width:9px;
+
+    height:9px;
+
+    border-radius:999px;
+
+    background:rgba(255,255,255,.35);
+
+    transition:.25s;
+
+}
+
+.banner-dot.active{
+
+    width:28px;
+
+    background:#2dc7ff;
+
+}
+
+/* ==========================================================
+   ARROWS
+========================================================== */
+
+.banner-prev,
+.banner-next{
+
+    position:absolute;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:rgba(0,0,0,.25);
+
+    backdrop-filter:blur(12px);
+
+    color:#fff;
+
+    transition:.25s;
+
+    z-index:20;
+
+}
+
+.banner-prev{
+
+    left:14px;
+
+}
+
+.banner-next{
+
+    right:14px;
+
+}
+
+.banner-prev:hover,
+.banner-next:hover{
+
+    background:#189cff;
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:768px){
+
+.banner-slide{
+
+    aspect-ratio:16/8;
+
+}
+
+.banner-prev,
+.banner-next{
+
+    width:34px;
+
+    height:34px;
+
+}
+
+.banner-prev{
+
+    left:8px;
+
+}
+
+.banner-next{
+
+    right:8px;
+
+}
+
+.banner-dot{
+
+    width:8px;
+
+    height:8px;
+
+}
+
+.banner-dot.active{
+
+    width:22px;
+
+}
+
+}
+
+/* ==========================================================
+   iPhone SE / 7 / 8
+========================================================== */
+
+@media(max-width:380px){
+
+.banner-slide{
+
+    aspect-ratio:16/9;
+
+}
+
+.banner-prev,
+.banner-next{
+
+    display:none;
+
+}
+
+.banner-dots{
+
+    bottom:8px;
+
+}
+
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(min-width:769px){
+
+.banner-slide{
+
+    aspect-ratio:16/5.8;
+
+}
+
+}
+
+/* ==========================================================
+   LARGE DESKTOP
+========================================================== */
+
+@media(min-width:1500px){
+
+.banner-slide{
+
+    aspect-ratio:16/5.5;
+
+}
+
+}
+
+/* ==========================================================
+   SET 6
+   GLOBAL FIX + UTILITIES + RESPONSIVE
+========================================================== */
+
+/* ===========================
+   NOTIFICATION BADGE
+=========================== */
+
+.notify-btn{
+
+    position:relative;
+
+    flex-shrink:0;
+
+}
+
+.notify-badge{
+
+    position:absolute;
+
+    top:-5px;
+
+    right:-5px;
+
+    min-width:20px;
+
+    height:20px;
+
+    padding:0 5px;
+
+    border-radius:999px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#ff3b57;
+
+    color:#fff;
+
+    font-size:11px;
+
+    font-weight:700;
+
+    line-height:1;
+
+    box-shadow:0 0 10px rgba(255,60,90,.45);
+
+}
+
+/* ===========================
+   FLEX FIX
+=========================== */
+
+.home-page *,
+.home-page *::before,
+.home-page *::after{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+.home-page img{
+
+    max-width:100%;
+
+    height:auto;
+
+    display:block;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.home-page button{
+
+    max-width:100%;
+
+    min-width:0;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   INPUT
+=========================== */
+
+.home-page input,
+.home-page textarea,
+.home-page select{
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+.home-page h1,
+.home-page h2,
+.home-page h3,
+.home-page h4,
+.home-page h5,
+.home-page h6,
+.home-page p,
+.home-page span,
+.home-page label,
+.home-page small,
+.home-page strong{
+
+    max-width:100%;
+
+    min-width:0;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   LONG USERNAME
+=========================== */
+
+.username,
+.nickname,
+.member-name,
+.account-name{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+/* ===========================
+   LONG INVITE CODE
+=========================== */
+
+.invite-code{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+    flex:1;
+
+}
+
+/* ===========================
+   COPY BUTTON
+=========================== */
+
+.copy-btn{
+
+    flex-shrink:0;
+
+    min-width:70px;
+
+    max-width:110px;
+
+    padding:0 12px;
+
+    height:36px;
+
+    border-radius:10px;
+
+}
+
+/* ===========================
+   GRID FIX
+=========================== */
+
+.row,
+.col,
+.grid{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   SCROLL FIX
+=========================== */
+
+.home-page{
+
+    overflow-x:hidden;
+
+}
+
+body{
+
+    overflow-x:hidden;
+
+}
+
+html{
+
+    overflow-x:hidden;
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:900px){
+
+.copy-btn{
+
+    min-width:60px;
+
+    padding:0 10px;
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.notify-badge{
+
+    min-width:18px;
+
+    height:18px;
+
+    font-size:10px;
+
+}
+
+.copy-btn{
+
+    min-width:55px;
+
+    height:34px;
+
+    font-size:13px;
+
+}
+
+}
+
+/* ===========================
+   iPhone SE
+=========================== */
+
+@media(max-width:380px){
+
+.copy-btn{
+
+    min-width:50px;
+
+    font-size:12px;
+
+}
+
+.notify-badge{
+
+    min-width:16px;
+
+    height:16px;
+
+    font-size:9px;
+
+}
+
+}
+
+/* ===========================
+   LARGE DESKTOP
+=========================== */
+
+@media(min-width:1500px){
+
+.copy-btn{
+
+    height:38px;
+
     font-size:14px;
 
 }
@@ -1687,430 +1999,452 @@ select{
 }
 
 /* ==========================================================
-   TABLET
+   SET 7
+   PRO MAX RESPONSIVE FIX
+   FINAL
 ========================================================== */
 
-@media(min-width:768px){
+/* ===========================
+   UNIVERSAL FLEX FIX
+=========================== */
 
-.coin-card,
-.hot-market-card{
+.home-page *,
+.home-page *::before,
+.home-page *::after{
 
-    flex-basis:210px;
+    min-width:0;
+    max-width:100%;
 
-    min-width:210px;
+}
 
-    height:165px;
+/* ===========================
+   NO HORIZONTAL SCROLL
+=========================== */
+
+html,
+body,
+#root,
+.home-page{
+
+    overflow-x:hidden;
+
+}
+
+/* ===========================
+   IMAGE
+=========================== */
+
+img{
+
+    max-width:100%;
+    height:auto;
+
+}
+
+/* ===========================
+   SVG
+=========================== */
+
+svg{
+
+    flex-shrink:0;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+button{
+
+    min-width:0;
+
+    max-width:100%;
+
+}
+
+/* ===========================
+   INPUT
+=========================== */
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+strong,
+small,
+a{
+
+    min-width:0;
+
+    max-width:100%;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   LONG WORD
+=========================== */
+
+.home-page *{
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   FLEX CHILD
+=========================== */
+
+.home-page>div{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   GRID FIX
+=========================== */
+
+[class*="grid"]{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   ROW FIX
+=========================== */
+
+[class*="row"]{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   COLUMN FIX
+=========================== */
+
+[class*="col"]{
+
+    min-width:0;
+
+}
+
+/* ===========================
+   INVITE CODE
+=========================== */
+
+.invite-code,
+.invite-text,
+.invite-value{
+
+    flex:1;
+
+    min-width:0;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+/* ===========================
+   USERNAME
+=========================== */
+
+.username,
+.user-name,
+.nickname{
+
+    min-width:0;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+/* ===========================
+   COPY BUTTON
+=========================== */
+
+.copy-btn{
+
+    flex-shrink:0;
+
+    width:auto;
+
+    max-width:110px;
+
+}
+
+/* ===========================
+   ICON
+=========================== */
+
+.icon{
+
+    flex-shrink:0;
+
+}
+
+/* ===========================
+   CARD
+=========================== */
+
+[class*="card"]{
+
+    min-width:0;
+
+    overflow:hidden;
+
+}
+
+/* ===========================
+   LIST
+=========================== */
+
+ul,
+ol{
+
+    padding-left:20px;
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.home-page{
+
+    padding-bottom:110px;
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.home-page{
+
+    gap:16px;
 
 }
 
 .market-row{
 
-    min-height:96px;
-
-}
-
-}
-
-/* ==========================================================
-   DESKTOP
-========================================================== */
-
-@media(min-width:1200px){
-
-.coin-card,
-.hot-market-card{
-
-    flex-basis:230px;
-
-    min-width:230px;
-
-}
-
-}
-
-/* ==========================================================
-   GOLDEX HOME V4
-   PART 3
-   FINAL RESPONSIVE
-========================================================== */
-
-/* ==========================================
-   SAFE AREA
-========================================== */
-
-@supports (padding:max(0px)){
-
-.home-page{
-
-padding-top:
-calc(16px + env(safe-area-inset-top));
-
-padding-bottom:
-calc(110px + env(safe-area-inset-bottom));
-
-}
-
-}
-
-/* ==========================================
-   PREVENT OVERFLOW
-========================================== */
-
-html,
-body,
-#root{
-
-width:100%;
-
-overflow-x:hidden;
-
-}
-
-.home-page,
-.banner,
-.asset-card,
-.action-grid,
-.gold-section,
-.market-section,
-.market-row,
-.coin-list{
-
-max-width:100%;
-
-overflow-x:hidden;
-
-}
-
-/* ==========================================
-   FLEX FIX
-========================================== */
-
-.asset-left,
-.asset-right,
-.market-left,
-.market-right,
-.market-info,
-.coin-info,
-.header-actions{
-
-min-width:0;
-
-}
-
-/* ==========================================
-   TEXT
-========================================== */
-
-.market-symbol,
-.market-name,
-.market-price,
-.market-change,
-.coin-symbol,
-.coin-name,
-.coin-price,
-.coin-change,
-.asset-value,
-.asset-profit,
-.home-header h1,
-.action-box p{
-
-max-width:100%;
-
-overflow:hidden;
-
-text-overflow:ellipsis;
-
-white-space:nowrap;
-
-}
-
-/* ==========================================
-   IMAGE
-========================================== */
-
-img{
-
-display:block;
-
-max-width:100%;
-
-height:auto;
-
-object-fit:contain;
-
-}
-
-/* ==========================================
-   BUTTON
-========================================== */
-
-button{
-
-font-family:inherit;
-
-outline:none;
-
-border:none;
-
--webkit-tap-highlight-color:transparent;
-
-touch-action:manipulation;
-
-}
-
-button:focus-visible{
-
-outline:2px solid #42A5F5;
-
-outline-offset:2px;
-
-}
-
-/* ==========================================
-   HOVER
-========================================== */
-
-@media(hover:hover){
-
-.action-box:hover{
-
-transform:translateY(-2px);
-
-}
-
-.market-row:hover{
-
-transform:translateY(-1px);
-
-}
-
-.coin-card:hover,
-.hot-market-card:hover{
-
-transform:translateY(-2px);
-
-}
-
-}
-
-/* ==========================================
-   SMALL PHONE
-========================================== */
-
-@media(max-width:320px){
-
-.home-page{
-
-padding:10px;
-
-gap:14px;
-
-}
-
-.home-header{
-
-gap:8px;
-
-}
-
-.home-header h1{
-
-font-size:24px;
-
-}
-
-.notify-btn,
-.support-btn{
-
-width:40px;
-
-height:40px;
-
-border-radius:12px;
-
-}
-
-.notify-badge{
-
-min-width:16px;
-
-height:16px;
-
-font-size:9px;
-
-}
-
-.banner{
-
-border-radius:14px;
+    gap:10px;
 
 }
 
 .asset-card{
 
-padding:14px;
+    gap:12px;
 
 }
 
-.asset-value{
+.action-grid{
 
-font-size:20px;
-
-}
-
-.asset-profit{
-
-font-size:16px;
+    gap:10px;
 
 }
 
 }
 
-/* ==========================================
-   LANDSCAPE PHONE
-========================================== */
+/* ===========================
+   iPhone SE
+=========================== */
 
-@media (orientation:landscape) and (max-height:520px){
+@media(max-width:380px){
 
 .home-page{
 
-padding-top:10px;
-
-padding-bottom:80px;
+    gap:14px;
 
 }
 
-.banner{
+.asset-card{
 
-aspect-ratio:3.3/1;
-
-}
+    padding:14px;
 
 }
 
-/* ==========================================
-   TABLET
-========================================== */
-
-@media(min-width:768px){
-
-.home-page{
-
-width:min(96vw,1200px);
-
-}
-
-}
-
-/* ==========================================
-   DESKTOP
-========================================== */
-
-@media(min-width:1400px){
-
-.home-page{
-
-width:1200px;
-
-margin:auto;
-
-}
-
-}
-
-/* ==========================================
-   REDUCE MOTION
-========================================== */
-
-@media(prefers-reduced-motion:reduce){
-
-*{
-
-animation:none !important;
-
-transition:none !important;
-
-scroll-behavior:auto !important;
-
-}
-
-}
-
-/* ==========================================
-   SCROLLBAR
-========================================== */
-
-::-webkit-scrollbar{
-
-width:6px;
-
-height:6px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#3C4A63;
-
-border-radius:999px;
-
-}
-
-*{
-
-scrollbar-width:thin;
-
-scrollbar-color:#3C4A63 transparent;
-
-}
-
-/* ==========================================
-   SELECTION
-========================================== */
-
-::selection{
-
-background:#42A5F5;
-
-color:#fff;
-
-}
-
-/* ==========================================
-   PERFORMANCE
-========================================== */
-
-.asset-card,
-.action-box,
-.coin-card,
-.hot-market-card,
 .market-row{
 
-will-change:transform;
-
-transform:translateZ(0);
-
-backface-visibility:hidden;
-
-contain:layout paint;
+    padding:12px;
 
 }
 
-/* ==========================================
-   IOS FIX
-========================================== */
+}
 
-@supports (-webkit-touch-callout:none){
+/* ===========================
+   Desktop
+=========================== */
+
+@media(min-width:1600px){
 
 .home-page{
 
-min-height:-webkit-fill-available;
+    max-width:1700px;
+
+    margin:auto;
 
 }
 
 }
 
-/* ==========================================
+/* ==========================================================
    END
-========================================== */
+========================================================== */
 
+/* ===== FIX HEADER ===== */
+
+.home-header{
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+
+    width:100%;
+
+    padding:0 8px;
+
+    gap:12px;
+}
+
+.header-left{
+    display:flex !important;
+    align-items:center;
+
+    flex:1;
+
+    min-width:0;
+}
+
+.home-logo-img{
+
+    width:34px;
+
+    height:34px;
+
+    object-fit:contain;
+
+    margin-right:10px;
+
+    flex-shrink:0;
+
+}
+
+.home-logo{
+
+    display:block !important;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    color:#1fa2ff;
+
+    white-space:nowrap;
+
+    margin:0;
+
+    line-height:1;
+
+}
+
+.header-actions{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    flex-shrink:0;
+
+}
+
+/* =========================
+   NEW HEADER BRAND
+========================= */
+
+.brand-area{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex:1;
+    min-width:0;
+}
+
+.brand-logo{
+    width:34px;
+    height:34px;
+    object-fit:contain;
+    flex-shrink:0;
+}
+
+.brand-title{
+    font-size:32px;
+    font-weight:800;
+    color:#1fa2ff;
+    line-height:1;
+    white-space:nowrap;
+    text-shadow:0 0 12px rgba(0,170,255,.45);
+}
+
+.header-actions{
+    margin-left:auto;
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.asset-right{
+    display:flex;
+    flex-direction:column;
+    align-items:flex-end;
+}
+
+.profit-label{
+    width:100%;
+    text-align:right;
+    margin-bottom:8px;
+}
