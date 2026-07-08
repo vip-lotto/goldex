@@ -308,14 +308,21 @@ console.log(
 
   user_id: receiverId,
 
-  title: t("transferReceived"),
+  title_key: "transferReceived",
 
-  message:
-`${t("received")} ${amount} ${coin}
+  message_key: "transferReceivedMessage",
 
-${t("network")} : ${network}
+  amount: Number(amount),
 
-${t("fromMember")} ID ${user.id}`,
+  coin,
+
+  network,
+
+  sender_id: user.id,
+
+  status: "success",
+
+  type: "transfer",
 
   is_read: false
 
@@ -328,16 +335,21 @@ ${t("fromMember")} ID ${user.id}`,
 
   user_id: user.id,
 
-  title: t("transferCompleted"),
+  title_key: "transferCompleted",
 
-  message:
-`${t("transferred")} ${amount} ${coin}
+  message_key: "transferCompletedMessage",
 
-${t("network")} : ${network}
+  amount: Number(amount),
 
-${t("toAddress")}
+  coin,
 
-${address}`,
+  network,
+
+  address,
+
+  status: "success",
+
+  type: "transfer",
 
   is_read: false
 
@@ -355,6 +367,8 @@ ${address}`,
 <>
 
 <div className="transfer-page">
+
+  
 
     <div
   style={{

@@ -194,7 +194,7 @@
   "uploadSelfie":"Tải lên ảnh selfie",
   "clickToUpload":"Nhấn để tải lên",
   "submit":"Gửi",
-  "submitting":"Đang gửi...",
+  
   "uploadAllImages":"Vui lòng tải lên đầy đủ hình ảnh",
   "kycSubmitted":"Đã gửi KYC thành công",
 
@@ -210,10 +210,46 @@
   "close":"Đóng",
 
   "totalAssets":"Tổng tài sản",
-  "assetsDetails":"Chi tiết tài sản"
+  "assetsDetails":"Chi tiết tài sản",
 
 
 
+  
+"phone":"Số điện thoại",
+"email":"Email",
+
+"welcome":"Chào mừng",
+"welcomeMessage":"Chào mừng đến với TRUST",
+
+"depositSuccess":"Nạp tiền thành công",
+"depositApproved":"Khoản nạp của bạn đã được phê duyệt.",
+
+"depositFailed":"Nạp tiền thất bại",
+"depositRejected":"Khoản nạp của bạn đã bị từ chối.",
+
+"withdrawSuccess":"Rút tiền thành công",
+"withdrawApproved":"Yêu cầu rút tiền của bạn đã được phê duyệt.",
+
+"withdrawFailed":"Rút tiền thất bại",
+"withdrawRejected":"Yêu cầu rút tiền của bạn đã bị từ chối.",
+
+"withdrawProcessing":"Đang xử lý rút tiền",
+"withdrawProcessingMessage":"Yêu cầu rút tiền của bạn đang được xử lý.",
+
+"transferReceivedMessage":"Bạn đã nhận được một khoản chuyển tiền.",
+"transferCompletedMessage":"Khoản chuyển tiền của bạn đã hoàn tất thành công.",
+
+"registerSuccessMessage":"Đăng ký thành công",
+
+"phoneOrEmailExists":"Số điện thoại hoặc Email đã tồn tại",
+
+"loginSuccess":"Đăng nhập thành công",
+
+"ok":"OK",
+
+"deleteSuccess":"Đã xóa tài khoản ngân hàng thành công",
+
+"transfer":"Chuyển tiền"
 
 
 

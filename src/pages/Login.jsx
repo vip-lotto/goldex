@@ -163,7 +163,7 @@ localStorage.setItem(
 setLoading(false);
 
 showToast(
-  "เข้าสู่ระบบสำเร็จ",
+  t("loginSuccess"),
   "success"
 );
 
@@ -203,9 +203,9 @@ setTimeout(() => {
     width:"60px",
     height:"60px",
     borderRadius:"50%",
-    border:"2px solid #facc15",
+    border:"2px solid #1578fa",
     background:"rgba(0,0,0,.45)",
-    color:"#facc15",
+    color:"#0affff",
     display:"flex",
     justifyContent:"center",
     alignItems:"center",
@@ -236,9 +236,9 @@ setTimeout(() => {
       width:"60px",
       height:"60px",
       borderRadius:"50%",
-      border:"2px solid #facc15",
+      border:"2px solid #0771fc",
       background:"rgba(0,0,0,.45)",
-      color:"#facc15",
+      color:"#15f2fa",
       display:"flex",
       justifyContent:"center",
       alignItems:"center",
@@ -261,7 +261,7 @@ setTimeout(() => {
                   marginTop:"10px",
                   width:"240px",
                   background:"rgba(10,15,30,.96)",
-                  border:"1px solid #facc15",
+                  border:"1px solid #158bfa",
                   borderRadius:"20px",
                   overflow:"hidden",
                   backdropFilter:"blur(15px)"
@@ -423,7 +423,9 @@ setTimeout(() => {
               border:"none",
               borderRadius:"18px",
               background:
-                "linear-gradient(90deg,#ffd54f,#d4a017)",
+              "linear-gradient(90deg,#00b8ff,#006dff)",
+              color:"#fff",
+              boxShadow:"0 0 25px rgba(0,170,255,.45)",
               fontSize:"28px",
               fontWeight:"700",
               cursor:"pointer"
@@ -431,8 +433,8 @@ setTimeout(() => {
           >
             {
               loading
-  ? t("loading")
-  : t("login")
+              ? t("loading")
+              : t("login")
             }
           </button>
 
@@ -446,8 +448,9 @@ setTimeout(() => {
               padding:"18px",
               borderRadius:"18px",
               background:"transparent",
-              border:"2px solid #d4a017",
-              color:"#d4a017",
+              border:"2px solid #1da1ff",
+              color:"#4fdcff",
+              background:"rgba(12,30,60,.45)",
               fontSize:"24px",
               fontWeight:"700",
               cursor:"pointer"

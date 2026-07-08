@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { validateBank } from "../lib/bankApi";
 import { useTranslation } from "react-i18next";
+import { useToast } from "../context/ToastContext";
+import { useDialog } from "../components/DialogContext";
 import "../styles/bankAccount.css";
 
 import {
@@ -16,6 +18,10 @@ export default function BankAccount() {
   const navigate = useNavigate();
 
   const { t } = useTranslation();
+
+  const { showToast } = useToast();
+
+  const { showConfirm } = useDialog();
 
   const [banks, setBanks] = useState([]);
 
@@ -61,7 +67,7 @@ export default function BankAccount() {
     const user = JSON.parse(localStorage.getItem("user"));
 
     if (!fullName || !bankName || !accountNumber) {
-    alert(t("fillAllFields"));
+    showToast(t("fillAllFields"), "warning");
     return;
 }
 
@@ -76,7 +82,7 @@ export default function BankAccount() {
     residential_address: address,
 });
 
-        alert(t("bankUpdated"));
+        showToast(t("bankUpdated"), "success");
       } else {
 
         await validateBank(
@@ -104,7 +110,7 @@ export default function BankAccount() {
     is_default: banks.length === 0,
 });
 
-        alert(t("bankAdded"));
+        showToast(t("bankAdded"), "success");
       }
 
       clearForm();
@@ -113,7 +119,7 @@ export default function BankAccount() {
 
       loadBanks();
     } catch (err) {
-      alert(err.message);
+      showToast(err.message, "error");
     }
   }
 
@@ -131,16 +137,33 @@ export default function BankAccount() {
 }
 
   async function removeBank(id) {
-    if (!window.confirm(t("confirmDeleteBank"))) return;
 
-    try {
-      await deleteBank(id);
+  showConfirm({
+    type: "warning",
+    title: t("delete"),
+    message: t("confirmDeleteBank"),
 
-      loadBanks();
-    } catch (err) {
-      alert(err.message);
+    onConfirm: async () => {
+
+      try {
+
+        await deleteBank(id);
+
+        await loadBanks();
+
+        showToast(t("deleteSuccess"), "success");
+
+      } catch (err) {
+
+        showToast(err.message, "error");
+
+      }
+
     }
-  }
+
+  });
+
+}
 
   async function primaryBank(id) {
     try {
@@ -149,9 +172,12 @@ export default function BankAccount() {
       await setPrimaryBank(user.id, id);
 
       loadBanks();
+
+      showToast(t("primaryAccount"), "success");
+
     } catch (err) {
-      alert(err.message);
-    }
+  showToast(err.message, "error");
+}
   }
 
   return (

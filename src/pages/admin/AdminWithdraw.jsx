@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import "./AdminWithdraw.css";
 
 export default function AdminWithdraw() {
+
+  const navigate = useNavigate();
 
   const [withdraws, setWithdraws] =
     useState([]);
@@ -15,20 +19,23 @@ export default function AdminWithdraw() {
 
   const loadWithdraws = async () => {
 
-    const { data } =
-      await supabase
-        .from("withdrawals")
-        .select("*")
-        .order(
-          "created_at",
-          {
-            ascending:false
-          }
-        );
+    const { data, error } =
+  await supabase
+    .from("withdrawals")
+    .select("*")
+    .order(
+      "created_at",
+      {
+        ascending:false
+      }
+    );
 
-    if(data){
-      setWithdraws(data);
-    }
+console.log("withdraw data =", data);
+console.log("withdraw error =", error);
+
+if(data){
+  setWithdraws(data);
+}
   };
 
   const approveWithdraw =
@@ -56,6 +63,30 @@ export default function AdminWithdraw() {
         )
         .single();
 
+        const { data: profile } =
+  await supabase
+    .from("profiles")
+    .select("*")
+    .eq(
+      "id",
+      item.user_id
+    )
+    .single();
+
+const { data: asset } =
+  await supabase
+    .from("user_assets")
+    .select("*")
+    .eq(
+      "user_id",
+      item.user_id
+    )
+    .eq(
+      "symbol",
+      "USDT"
+    )
+    .single();
+
     if (!wallet) {
 
       alert(
@@ -64,6 +95,17 @@ export default function AdminWithdraw() {
 
       return;
     }
+
+    if (!profile) {
+  alert("ไม่พบ Profile");
+  return;
+}
+
+if (!asset) {
+  alert("ไม่พบ USDT Asset");
+  return;
+}
+
 
     if (
       Number(wallet.balance) <
@@ -77,23 +119,54 @@ export default function AdminWithdraw() {
       return;
     }
 
+    const newProfileBalance =
+  Number(profile.balance) -
+  Number(item.amount);
+
+const newWalletBalance =
+  Number(wallet.balance) -
+  Number(item.amount);
+
+const newAssetBalance =
+  Number(asset.balance) -
+  Number(item.amount);
+
+
     await supabase
-      .from("wallets")
-      .update({
+  .from("profiles")
+  .update({
 
-        balance:
-          Number(
-            wallet.balance
-          ) -
-          Number(
-            item.amount
-          )
+    balance: newProfileBalance
 
-      })
-      .eq(
-        "user_id",
-        item.user_id
-      );
+  })
+  .eq(
+    "id",
+    item.user_id
+  );
+
+await supabase
+  .from("wallets")
+  .update({
+
+    balance: newWalletBalance
+
+  })
+  .eq(
+    "user_id",
+    item.user_id
+  );
+
+await supabase
+  .from("user_assets")
+  .update({
+
+    balance: newAssetBalance
+
+  })
+  .eq(
+    "id",
+    asset.id
+  );
 
     await supabase
       .from("withdrawals")
@@ -112,34 +185,54 @@ export default function AdminWithdraw() {
       );
 
     await supabase
-      .from("notifications")
-      .insert({
+  .from("notifications")
+  .insert({
 
-        user_id:
-          item.user_id,
+    user_id: item.user_id,
 
-        title:
-          "ถอนเงินสำเร็จ",
+    title_key: "withdrawSuccess",
 
-        message:
-`Coin : ${item.coin}
+    message_key: "withdrawApproved",
 
-Network : ${item.network}
+    coin: item.coin,
 
-Amount : ${item.amount}
+    network: item.network,
 
-สถานะ : สำเร็จ`,
+    amount: Number(item.amount),
 
-        is_read:
-          false
+    status: "success",
 
-      });
+    type: "withdraw",
+
+    is_read: false
+
+  });
+
+      await supabase
+  .from("transactions")
+  .insert({
+
+    user_id: item.user_id,
+
+    type: "withdraw",
+
+    amount: item.amount,
+
+    status: "completed",
+
+    description: `Withdraw ${item.coin}`
+
+  });
 
     alert(
-      "อนุมัติสำเร็จ"
-    );
+  "อนุมัติสำเร็จ"
+);
 
-    loadWithdraws();
+window.dispatchEvent(
+  new Event("walletUpdated")
+);
+
+loadWithdraws();
 
 };
 
@@ -168,21 +261,22 @@ async (item) => {
     );
 
   await supabase
-    .from("notifications")
-    .insert({
+  .from("notifications")
+  .insert({
 
-      user_id:
-        item.user_id,
+    user_id: item.user_id,
 
-      title:
-        "กำลังตรวจสอบรายการถอน",
+    title_key: "withdrawProcessing",
 
-      message:
-        "รายการถอนของคุณกำลังอยู่ระหว่างการตรวจสอบ",
+    message_key: "withdrawProcessingMessage",
 
-      is_read:false
+    status: "processing",
 
-    });
+    type: "withdraw",
+
+    is_read: false
+
+  });
 
   loadWithdraws();
 
@@ -220,23 +314,28 @@ async (item) => {
       );
 
     await supabase
-      .from("notifications")
-      .insert({
+  .from("notifications")
+  .insert({
 
-        user_id:
-          item.user_id,
+    user_id: item.user_id,
 
-        title:
-          "ถอนเงินถูกปฏิเสธ",
+    title_key: "withdrawFailed",
 
-        message:
-          message ||
-          "รายการถอนถูกปฏิเสธ",
+    message_key: "withdrawRejected",
 
-        is_read:
-          false
+    coin: item.coin,
 
-      });
+    network: item.network,
+
+    amount: Number(item.amount),
+
+    status: "failed",
+
+    type: "withdraw",
+
+    is_read: false
+
+  });
 
     alert(
       "ปฏิเสธสำเร็จ"
@@ -256,234 +355,152 @@ async (item) => {
       }}
     >
 
-      <h2
-        style={{
-          color:"#facc15",
-          marginBottom:"20px"
-        }}
-      >
-        Withdraw Management
-      </h2>
+      <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: "20px"
+  }}
+>
 
-      {withdraws.map(
-        (item) => (
-
-        <div
-          key={item.id}
-          style={{
-            background:"#10203d",
-            padding:"20px",
-            borderRadius:"15px",
-            marginBottom:"15px"
-          }}
-        >
-
-          <p>
-            ID :
-            {item.id}
-          </p>
-
-          <p>
-            USER :
-            {item.user_id}
-          </p>
-
-          <p>
-            TYPE :
-            {item.type}
-          </p>
-
-          <p>
-            AMOUNT :
-            {item.amount}
-          </p>
-
-          <p>
-            STATUS :
-            {item.status}
-          </p>
-
-          {
-            item.type ===
-            "crypto" && (
-              <>
-                <p>
-                  COIN :
-                  {item.coin}
-                </p>
-
-                <p>
-                  NETWORK :
-                  {item.network}
-                </p>
-
-                <p>
-                  ADDRESS :
-                  {item.address}
-                </p>
-
-                {
-                  item.qr_image && (
-
-                    <img
-                      src={
-                        item.qr_image
-                      }
-                      alt=""
-                      style={{
-                        width:"180px",
-                        marginTop:"10px",
-                        borderRadius:"10px"
-                      }}
-                    />
-
-                  )
-                }
-
-              </>
-            )
-          }
-
-          {
-            item.type ===
-            "bank" && (
-              <>
-                <p>
-                  BANK :
-                  {item.bank_name}
-                </p>
-
-                <p>
-                  ACCOUNT :
-                  {
-                    item.bank_account_name
-                  }
-                </p>
-
-                <p>
-                  NUMBER :
-                  {
-                    item.bank_account_number
-                  }
-                </p>
-              </>
-            )
-          }
-
-          <textarea
-            placeholder="ข้อความถึงลูกค้า"
-            value={message}
-            onChange={(e) =>
-              setMessage(
-                e.target.value
-              )
-            }
-            style={{
-              width:"100%",
-              height:"80px",
-              marginTop:"10px",
-              borderRadius:"10px",
-              padding:"10px"
-            }}
-          />
-
-          {(
-  item.status === "pending" ||
-  item.status === "processing"
-) ? (
-
-  <div
+  <button
+    onClick={() => navigate(-1)}
     style={{
-      display:"flex",
-      gap:"10px",
-      marginTop:"10px"
+      background: "#1e3a8a",
+      color: "#fff",
+      border: "none",
+      padding: "10px 18px",
+      borderRadius: "10px",
+      cursor: "pointer",
+      fontWeight: "bold"
     }}
   >
+    ← Back
+  </button>
 
-    <button
-      onClick={() =>
-        approveWithdraw(item)
-      }
-      style={{
-        background:"#16a34a",
-        color:"#fff",
-        border:"none",
-        padding:"10px 20px",
-        borderRadius:"10px",
-        cursor:"pointer"
-      }}
-    >
-      Approve
-    </button>
-
-    {
-  item.status === "pending" && (
-
-    <button
-      onClick={() =>
-        processingWithdraw(item)
-      }
-      style={{
-        background:"#f59e0b",
-        color:"#fff",
-        border:"none",
-        padding:"10px 20px",
-        borderRadius:"10px",
-        cursor:"pointer"
-      }}
-    >
-      Processing
-    </button>
-
-  )
-}
-
-    <button
-      onClick={() =>
-        rejectWithdraw(item)
-      }
-      style={{
-        background:"#dc2626",
-        color:"#fff",
-        border:"none",
-        padding:"10px 20px",
-        borderRadius:"10px",
-        cursor:"pointer"
-      }}
-    >
-      Reject
-    </button>
-
-  </div>
-
-) : (
-
-  <div
+  <h2
     style={{
-      marginTop:"10px",
-      fontWeight:"bold",
-      color:
-        item.status === "approved"
-? "#22c55e"
-: item.status === "processing"
-? "#f59e0b"
-: "#ef4444"
+      color: "#facc15",
+      margin: 0
     }}
   >
-    {
-item.status === "approved"
-? "✅ อนุมัติแล้ว"
-: item.status === "processing"
-? "⏳ กำลังตรวจสอบ"
-: "❌ ปฏิเสธแล้ว"
+    Withdraw Management
+  </h2>
+
+  <div style={{ width: "80px" }} />
+
+</div>
+
+      <div className="withdraw-table">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>User</th>
+
+<th>Coin</th>
+
+<th>Network</th>
+
+<th>Amount</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{withdraws.map(item=>(
+
+<tr key={item.id}>
+
+<td>#{item.id}</td>
+
+<td>{item.user_id}</td>
+
+<td>{item.coin}</td>
+
+<td>{item.network}</td>
+
+<td>{item.amount}</td>
+
+<td>
+
+{item.status}
+
+</td>
+
+<td>
+
+{new Date(item.created_at).toLocaleString()}
+
+</td>
+
+<td>
+
+{item.status==="pending" ||
+
+item.status==="processing"
+
+?
+
+<>
+
+<button
+
+onClick={()=>approveWithdraw(item)}
+
+>
+
+Approve
+
+</button>
+
+<button
+
+onClick={()=>rejectWithdraw(item)}
+
+>
+
+Reject
+
+</button>
+
+</>
+
+:
+
+<span>
+
+Completed
+
+</span>
+
 }
-  </div>
 
-)}
+</td>
 
-        </div>
+</tr>
 
-      ))}
+))}
+
+</tbody>
+
+</table>
+
+</div>
 
     </div>
 

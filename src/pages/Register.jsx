@@ -15,7 +15,7 @@ import {
 } from "lucide-react";
 
 import { useToast } from "../context/ToastContext";
-import { language } from "../data/language";
+import { useTranslation } from "react-i18next";
 
 import "../styles/Register.css";
 
@@ -26,11 +26,7 @@ export default function Register() {
   const { showToast } = useToast();
 
 
-  const [lang] = useState(
-    localStorage.getItem("lang") || "th"
-  );
-
-  const t = language[lang];
+  const { t } = useTranslation();
 
   const [firstName,setFirstName] = useState("");
   const [lastName,setLastName] = useState("");
@@ -59,10 +55,9 @@ export default function Register() {
   ) {
 
     showToast(
-  t.fillAll,
+  t("fillAllFields"),
   "warning"
 );
-
 setLoading(false);
 
     return;
@@ -73,7 +68,7 @@ setLoading(false);
   ) {
 
     showToast(
-  t.passwordNotMatch,
+  t("passwordNotMatch"),
   "warning"
 );
 
@@ -154,10 +149,10 @@ if (existError) {
 
 if (existUser && existUser.length > 0) {
 
-  showToast(
-    "เบอร์โทรหรืออีเมลนี้ถูกใช้งานแล้ว",
-    "warning"
-  );
+ showToast(
+  t("phoneOrEmailExists"),
+  "warning"
+);
 
   setLoading(false);
 
@@ -358,8 +353,15 @@ const { error: notifyError } = await supabase
   .from("notifications")
   .insert({
     user_id: userId,
-    title: "ยินดีต้อนรับ",
-    message: "ยินดีต้อนรับเข้าสู่ GOLDEX",
+
+    title_key: "welcome",
+
+    message_key: "welcomeMessage",
+
+    type: "system",
+
+    status: "success",
+
     is_read: false
   });
 
@@ -380,7 +382,7 @@ if (notifyError) {
 
 
 showToast(
-  t.registerSuccessMessage,
+  t("registerSuccessMessage"),
   "success"
 );
 
@@ -434,7 +436,7 @@ setTimeout(() => {
             <User size={20}/>
             <input
               className="register-input"
-              placeholder={t.firstName}
+              placeholder={t("firstName")}
               value={firstName}
               onChange={(e)=>
                 setFirstName(e.target.value)
@@ -446,7 +448,7 @@ setTimeout(() => {
             <User size={20}/>
             <input
               className="register-input"
-              placeholder={t.lastName}
+              placeholder={t("lastName")}
               value={lastName}
               onChange={(e)=>
                 setLastName(e.target.value)
@@ -458,7 +460,7 @@ setTimeout(() => {
             <Phone size={20}/>
             <input
               className="register-input"
-              placeholder={t.phone}
+              placeholder={t("phone")}
               value={phone}
               onChange={(e)=>
                 setPhone(e.target.value)
@@ -470,7 +472,7 @@ setTimeout(() => {
             <Mail size={20}/>
             <input
               className="register-input"
-              placeholder={t.email}
+              placeholder={t("email")}
               value={email}
               onChange={(e)=>
                 setEmail(e.target.value)
@@ -483,7 +485,7 @@ setTimeout(() => {
             <input
               type="password"
               className="register-input"
-              placeholder={t.password}
+              placeholder={t("password")}
               value={password}
               onChange={(e)=>
                 setPassword(e.target.value)
@@ -496,7 +498,7 @@ setTimeout(() => {
             <input
               type="password"
               className="register-input"
-              placeholder={t.confirmPassword}
+              placeholder={t("confirmPassword")}
               value={confirmPassword}
               onChange={(e)=>
                 setConfirmPassword(e.target.value)
@@ -508,7 +510,7 @@ setTimeout(() => {
             <Gift size={20}/>
             <input
               className="register-input"
-              placeholder={t.inviteCode}
+              placeholder={t("inviteCode")}
               value={inviteCode}
               onChange={(e)=>
                 setInviteCode(e.target.value)
@@ -523,8 +525,8 @@ setTimeout(() => {
 >
             {
   loading
-    ? "Loading..."
-    : t.register
+  ? t("loading")
+  : t("register")
 }
           </button>
 
@@ -533,7 +535,7 @@ setTimeout(() => {
   onClick={() => navigate("/")}
   disabled={loading}
 >
-  {t.login}
+  {t("login")}
 </button>
 
           <div className="register-footer">

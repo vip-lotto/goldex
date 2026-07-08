@@ -686,25 +686,21 @@ alt=""
   <button
   onClick={handleSubmit}
   style={{
-    position:"fixed",
-    left:"20px",
-    right:"20px",
-    bottom:"90px",
-    height:"60px",
-    border:"none",
-    borderRadius:"30px",
-    background:"#06a6f0de",
-    color:"#000",
-    fontWeight:"bold",
-    fontSize:"20px",
-    zIndex:998
+    width: "100%",
+    height: "60px",
+    marginTop: "24px",
+    marginBottom: "24px",
+    border: "none",
+    borderRadius: "30px",
+    background: "#06a6f0de",
+    color: "#000",
+    fontWeight: "bold",
+    fontSize: "20px",
+    cursor: "pointer"
   }}
 >
-
-
-
-    {t("next")}
-  </button>
+  {t("next")}
+</button>
 
   {
     showScanner && (

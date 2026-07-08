@@ -1,277 +1,129 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabase";
+import { useNavigate } from "react-router-dom";
 
-export default function AdminDeposit() {
+export default function AdminDashboard() {
 
-  const [deposits, setDeposits] =
-    useState([]);
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    loadDeposits();
-  }, []);
 
-  const loadDeposits = async () => {
+  function logout(){
 
-    const { data } =
-      await supabase
-        .from("deposits")
-        .select("*")
-        .order(
-          "created_at",
-          { ascending:false }
-        );
+    localStorage.removeItem("admin");
 
-    if(data){
-      setDeposits(data);
+    navigate("/admin/login");
+
+  }
+
+
+  const menus = [
+    {
+      title: "💰 Deposit",
+      path: "/admin/deposit",
+      color: "#16a34a9f"
+    },
+    {
+      title: "💸 Withdraw",
+      path: "/admin/withdraw",
+      color: "#dc2626b7"
+    },
+    {
+      title: "👥 Users",
+      path: "/admin/users",
+      color: "#2564ebc5"
+    },
+    {
+      title: "📈 Trades",
+      path: "/admin/trades",
+      color: "#7c3aedb4"
+    },
+    {
+      title: "📑 Orders",
+      path: "/admin/orders",
+      color: "#ea5a0cb0"
+    },
+    {
+      title: "⚙️ Settings",
+      path: "/admin/settings",
+      color: "#475569"
     }
-  };
+  ];
 
-  const approveDeposit =
-    async (deposit) => {
-
-    if(
-      deposit.status ===
-      "approved"
-    ){
-      return;
-    }
-
-    const { data:user } =
-      await supabase
-        .from("profiles")
-        .select("*")
-        .eq(
-          "id",
-          deposit.user_id
-        )
-        .single();
-
-    if(!user){
-      alert(
-        "ไม่พบผู้ใช้"
-      );
-      return;
-    }
-
-    const newBalance =
-      Number(user.balance || 0)
-      +
-      Number(deposit.amount);
-
-    await supabase
-      .from("profiles")
-      .update({
-        balance:newBalance
-      })
-      .eq(
-        "id",
-        deposit.user_id
-      );
-
-    await supabase
-      .from("deposits")
-      .update({
-        status:"approved"
-      })
-      .eq(
-        "id",
-        deposit.id
-      );
-
-    await supabase
-      .from("notifications")
-      .insert({
-        user_id:
-          deposit.user_id,
-
-        title:
-          "Deposit Success",
-
-        message:
-          `ฝากเงินสำเร็จ ${deposit.amount}`,
-
-        is_read:false
-      });
-
-    alert(
-      "อนุมัติสำเร็จ"
-    );
-
-    loadDeposits();
-  };
-
-  const rejectDeposit =
-    async (deposit) => {
-
-    await supabase
-      .from("deposits")
-      .update({
-        status:"rejected"
-      })
-      .eq(
-        "id",
-        deposit.id
-      );
-
-    await supabase
-      .from("notifications")
-      .insert({
-        user_id:
-          deposit.user_id,
-
-        title:
-          "Deposit Rejected",
-
-        message:
-          `รายการฝาก ${deposit.amount} ถูกปฏิเสธ`,
-
-        is_read:false
-      });
-
-    alert(
-      "ปฏิเสธแล้ว"
-    );
-
-    loadDeposits();
-  };
 
   return (
     <div
       style={{
-        padding:"20px",
+        minHeight:"100vh",
+        background:"#081223",
         color:"#fff",
-        background:"#020f2d",
-        minHeight:"100vh"
+        padding:30
       }}
     >
 
-      <h2
+      <div
         style={{
-          color:"#facc15",
-          marginBottom:"20px"
-        }}
-      >
-        Deposit Management
-      </h2>
-
-      <table
-        style={{
-          width:"100%",
-          borderCollapse:
-            "collapse"
+          display:"flex",
+          justifyContent:"space-between",
+          alignItems:"center",
+          marginBottom:30
         }}
       >
 
-        <thead>
+        <h1>
+          GOLDEx Admin Panel
+        </h1>
 
-          <tr>
 
-            <th>ID</th>
+        <button
+          onClick={logout}
+          style={{
+            background:"#09f7eba4",
+            color:"#fff",
+            border:"none",
+            padding:"12px 25px",
+            borderRadius:10,
+            fontSize:16,
+            fontWeight:"bold",
+            cursor:"pointer"
+          }}
+        >
+          🚪 Logout
+        </button>
 
-            <th>User</th>
 
-            <th>Amount</th>
+      </div>
 
-            <th>Coin</th>
 
-            <th>Network</th>
+      <div
+        style={{
+          display:"grid",
+          gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",
+          gap:20
+        }}
+      >
 
-            <th>Status</th>
+        {menus.map(menu => (
 
-            <th>Action</th>
+          <div
+            key={menu.path}
+            onClick={()=>navigate(menu.path)}
+            style={{
+              background:menu.color,
+              padding:30,
+              borderRadius:15,
+              cursor:"pointer",
+              fontSize:22,
+              fontWeight:"bold",
+              textAlign:"center"
+            }}
+          >
 
-          </tr>
+            {menu.title}
 
-        </thead>
+          </div>
 
-        <tbody>
+        ))}
 
-          {
-            deposits.map(
-              (item) => (
+      </div>
 
-              <tr
-                key={item.id}
-              >
-
-                <td>
-                  {item.id}
-                </td>
-
-                <td>
-                  {item.user_id}
-                </td>
-
-                <td>
-                  {item.amount}
-                </td>
-
-                <td>
-                  {item.coin}
-                </td>
-
-                <td>
-                  {item.network}
-                </td>
-
-                <td>
-                  {item.status}
-                </td>
-
-                <td>
-
-                  <button
-                    onClick={() =>
-                      approveDeposit(
-                        item
-                      )
-                    }
-                    style={{
-                      background:
-                        "green",
-                      color:"#fff",
-                      border:"none",
-                      padding:
-                        "8px 12px",
-                      marginRight:
-                        "5px",
-                      cursor:
-                        "pointer"
-                    }}
-                  >
-                    Approve
-                  </button>
-
-                  <button
-                    onClick={() =>
-                      rejectDeposit(
-                        item
-                      )
-                    }
-                    style={{
-                      background:
-                        "red",
-                      color:"#fff",
-                      border:"none",
-                      padding:
-                        "8px 12px",
-                      cursor:
-                        "pointer"
-                    }}
-                  >
-                    Reject
-                  </button>
-
-                </td>
-
-              </tr>
-
-            ))
-          }
-
-        </tbody>
-
-      </table>
 
     </div>
   );

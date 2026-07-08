@@ -1,339 +1,1056 @@
+/* ===================================================
+   RESPONSIVE FIX (PRO MAX)
+=================================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html,
+body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
 .transfer-page{
-  min-height:100vh;
-  background:#050505d5;
-  color:#fff;
-  padding:20px;
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
 
-  /* เพิ่มตรงนี้ */
-  padding-bottom:220px;
+    padding-bottom:
+        calc(220px + env(safe-area-inset-bottom));
+
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
 }
 
-/* ================= Header ================= */
+/* ================= FLEX ================= */
 
-.transfer-title{
-  font-size:32px;
-  font-weight:800;
-  color:#f5c542;
-  margin-bottom:28px;
-  letter-spacing:.5px;
+.transfer-card,
+.transfer-info,
+.transfer-btns{
+    min-width:0;
 }
 
-/* ================= Card ================= */
-
-.transfer-card{
-
-  background:#111111;
-
-  border:1px solid #232323;
-
-  border-radius:22px;
-
-  padding:24px;
-
-  margin-bottom:22px;
-
-  box-shadow:
-  0 8px 30px rgba(0,0,0,.45);
-
+.transfer-card *{
+    min-width:0;
 }
 
-.transfer-card h3{
+/* ================= TEXT ================= */
 
-  margin:0 0 18px;
+.transfer-title,
+.transfer-card h3,
+.transfer-info p,
+.transfer-input,
+.transfer-select,
+.transfer-confirm,
+.transfer-cancel{
 
-  font-size:20px;
-
-  font-weight:700;
-
-  color:#fff;
-
+    overflow-wrap:anywhere;
+    word-break:break-word;
+    white-space:normal;
 }
 
-/* ================= Input ================= */
+/* ================= INPUT ================= */
 
 .transfer-input,
 .transfer-select{
 
-  width:100%;
+    width:100%;
+    max-width:100%;
+    min-width:0;
 
-  height:58px;
-
-  background:#181818;
-
-  border:1px solid #303030;
-
-  color:#fff;
-
-  border-radius:16px;
-
-  padding:0 18px;
-
-  box-sizing:border-box;
-
-  font-size:16px;
-
-  outline:none;
-
-  transition:.25s;
-
+    overflow:hidden;
+    text-overflow:ellipsis;
 }
 
-.transfer-input::placeholder{
-
-  color:#808080;
-
-}
-
-.transfer-select option{
-
-  background:#181818;
-
-  color:#fff;
-
-}
-
-.transfer-input:focus,
-.transfer-select:focus{
-
-  border-color:#f5c542;
-
-  box-shadow:
-  0 0 0 3px rgba(245,197,66,.08);
-
-}
-
-/* ================= Upload ================= */
-
-.transfer-upload{
-
-  width:100%;
-
-  min-height:200px;
-
-  border:2px dashed #3d3d3d;
-
-  border-radius:20px;
-
-  background:#171717;
-
-  display:flex;
-
-  flex-direction:column;
-
-  justify-content:center;
-
-  align-items:center;
-
-  gap:14px;
-
-  color:#9d9d9d;
-
-  cursor:pointer;
-
-  transition:.25s;
-
-}
-
-.transfer-upload:hover{
-
-  border-color:#f5c542;
-
-  background:#1d1d1d;
-
-}
-
-.transfer-upload svg{
-
-  width:52px;
-
-  height:52px;
-
-  color:#f5c542;
-
-}
-
-.transfer-upload p{
-
-  margin:0;
-
-  font-size:16px;
-
-  font-weight:500;
-
-}
-
-/* ================= Info ================= */
-
-.transfer-info{
-
-  background:#111111;
-
-  border:1px solid #232323;
-
-  border-radius:20px;
-
-  padding:22px;
-
-  margin-bottom:20px;
-
-}
-
-.transfer-info p{
-
-  margin:10px 0;
-
-  font-size:15px;
-
-  color:#bcbcbc;
-
-  line-height:1.7;
-
-}
-
-/* ================= Buttons ================= */
+/* ================= BUTTON ================= */
 
 .transfer-btns{
 
-  display:flex;
-
-  gap:14px;
-
-  margin-top:25px;
-
-}
-
-.transfer-confirm{
-
-  flex:1;
-
-  height:58px;
-
-  border:none;
-
-  border-radius:16px;
-
-  background:#f5c542;
-
-  color:#000;
-
-  font-size:18px;
-
-  font-weight:800;
-
-  cursor:pointer;
-
-  transition:.25s;
-
-}
-
-.transfer-confirm:hover{
-
-  transform:translateY(-2px);
-
-  box-shadow:
-
-  0 0 25px rgba(245,197,66,.28);
-
-}
-
-.transfer-cancel{
-
-  flex:1;
-
-  height:58px;
-
-  border:none;
-
-  border-radius:16px;
-
-  background:#202020;
-
-  border:1px solid #353535;
-
-  color:#fff;
-
-  font-size:18px;
-
-  font-weight:700;
-
-  cursor:pointer;
-
-  transition:.25s;
-
-}
-
-.transfer-cancel:hover{
-
-  background:#2c2c2c;
-
-}
-
-/* ================= Scroll ================= */
-
-::-webkit-scrollbar{
-
-  width:8px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-  background:#444;
-
-  border-radius:20px;
-
-}
-
-::-webkit-scrollbar-thumb:hover{
-
-  background:#666;
-
-}
-
-/* ================= Mobile ================= */
-
-@media(max-width:768px){
-
-.transfer-page{
-
-padding:15px;
-
-}
-
-.transfer-title{
-
-font-size:26px;
-
-}
-
-.transfer-card{
-
-padding:18px;
-
-}
-
-.transfer-btns{
-
-flex-direction:column;
-
+    display:flex;
+    flex-wrap:wrap;
+    gap:14px;
 }
 
 .transfer-confirm,
 .transfer-cancel{
 
-width:100%;
+    flex:1 1 220px;
+    min-width:0;
+    max-width:100%;
+}
 
-font-size:17px;
+/* ================= LONG USERNAME ================= */
 
-height:55px;
+.username,
+.invite-code,
+.wallet-address,
+.address{
 
+    min-width:0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+/* ถ้าต้องการตัดหลายบรรทัด */
+
+.wallet-address-wrap{
+
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+
+/* ================= IMAGES ================= */
+
+img,
+svg{
+
+    max-width:100%;
+    height:auto;
+}
+
+/* ================= TABLE ================= */
+
+table{
+
+    width:100%;
+    table-layout:fixed;
+}
+
+/* ================= PHONE ================= */
+
+@media (max-width:390px){
+
+.transfer-page{
+
+    padding:14px;
+    padding-bottom:calc(190px + env(safe-area-inset-bottom));
+}
+
+.transfer-title{
+
+    font-size:24px;
+}
+
+.transfer-card{
+
+    padding:16px;
+}
+
+.transfer-card h3{
+
+    font-size:18px;
 }
 
 .transfer-input,
 .transfer-select{
 
-font-size:15px;
+    height:52px;
+    font-size:15px;
+}
+
+.transfer-upload{
+
+    min-height:170px;
+}
+
+.transfer-btns{
+
+    flex-direction:column;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+
+    width:100%;
+    height:52px;
+    font-size:16px;
+}
+}
+
+/* ================= iPhone X - 16 ================= */
+
+@media (min-width:391px) and (max-width:767px){
+
+.transfer-page{
+
+    padding:16px;
+    padding-bottom:calc(210px + env(safe-area-inset-bottom));
+}
+
+.transfer-title{
+
+    font-size:28px;
+}
+
+.transfer-card{
+
+    padding:20px;
+}
+}
+
+/* ================= iPad ================= */
+
+@media (min-width:768px) and (max-width:1199px){
+
+.transfer-page{
+
+    max-width:760px;
+    margin:auto;
+}
+
+.transfer-title{
+
+    font-size:32px;
+}
+
+.transfer-card{
+
+    padding:24px;
+}
+}
+
+/* ================= Desktop ================= */
+
+@media (min-width:1200px){
+
+.transfer-page{
+
+    max-width:980px;
+    margin:auto;
+}
+
+.transfer-card{
+
+    padding:28px;
+}
+}
+
+/* ===================================================
+   PRO MAX FIX 2
+=================================================== */
+
+/* ---------- ป้องกันทุก element ล้น ---------- */
+
+.transfer-page *{
+    max-width:100%;
+}
+
+/* ---------- Card ---------- */
+
+.transfer-card,
+.transfer-info{
+
+    overflow:hidden;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+}
+
+/* ---------- Label ---------- */
+
+.transfer-card label{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    color:#d9d9d9;
+
+    overflow-wrap:anywhere;
+}
+
+/* ---------- Input ---------- */
+
+.transfer-input,
+.transfer-select{
+
+    display:block;
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+    flex:1;
+
+    appearance:none;
+
+    -webkit-appearance:none;
+}
+
+/* ---------- Placeholder ---------- */
+
+.transfer-input::placeholder{
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+/* ---------- Upload ---------- */
+
+.transfer-upload{
+
+    width:100%;
+
+    max-width:100%;
+
+    padding:20px;
+
+    text-align:center;
+
+    overflow:hidden;
+}
+
+.transfer-upload p{
+
+    max-width:100%;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+}
+
+/* ---------- Preview ---------- */
+
+.transfer-upload img{
+
+    max-width:100%;
+
+    max-height:260px;
+
+    object-fit:contain;
+
+    border-radius:14px;
+}
+
+/* ---------- Button ---------- */
+
+.transfer-confirm,
+.transfer-cancel{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+}
+
+/* ---------- Info ---------- */
+
+.transfer-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.transfer-info p{
+
+    margin:0;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:flex-start;
+
+    gap:12px;
+
+    min-width:0;
+}
+
+.transfer-info p span{
+
+    min-width:0;
+
+    flex:1;
+
+    text-align:right;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+}
+
+/* ---------- Wallet ---------- */
+
+.wallet-address{
+
+    display:block;
+
+    width:100%;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-all;
+
+    user-select:text;
+}
+
+/* ---------- QR ---------- */
+
+.qr-box{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    overflow:hidden;
+}
+
+.qr-box canvas,
+.qr-box img{
+
+    max-width:100%;
+
+    height:auto;
+}
+
+/* ---------- Icon ---------- */
+
+svg{
+
+    flex-shrink:0;
+}
+
+/* ---------- Animation ---------- */
+
+.transfer-card{
+
+    animation:fadeUp .35s ease;
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+}
+
+/* ---------- Phone ---------- */
+
+@media (max-width:390px){
+
+.transfer-upload{
+
+    min-height:150px;
+
+    padding:16px;
+}
+
+.transfer-upload svg{
+
+    width:42px;
+
+    height:42px;
+}
+
+.transfer-upload p{
+
+    font-size:14px;
+}
+
+.transfer-info{
+
+    padding:16px;
+}
+
+.transfer-info p{
+
+    flex-direction:column;
+
+    gap:4px;
+}
 
 }
 
+/* ---------- Tablet ---------- */
+
+@media (min-width:768px){
+
+.transfer-btns{
+
+    justify-content:flex-end;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+
+    max-width:260px;
+}
+
+}
+
+/* ===================================================
+   PRO MAX FIX 3
+   รองรับทุกขนาดหน้าจอ
+=================================================== */
+
+/* ---------- GLOBAL ---------- */
+
+html{
+    overflow-x:hidden;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+.transfer-page{
+    overflow-x:hidden;
+}
+
+/* ---------- FLEX ---------- */
+
+.transfer-page *{
+    min-width:0;
+}
+
+/* ---------- LONG TEXT ---------- */
+
+.transfer-page p,
+.transfer-page span,
+.transfer-page div,
+.transfer-page label,
+.transfer-page h1,
+.transfer-page h2,
+.transfer-page h3,
+.transfer-page h4,
+.transfer-page h5{
+
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+
+/* ---------- INPUT ---------- */
+
+.transfer-input,
+.transfer-select{
+
+    flex:1;
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+}
+
+/* ---------- BUTTON ---------- */
+
+.transfer-confirm,
+.transfer-cancel{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+/* ---------- IMG ---------- */
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+    height:auto;
+}
+
+/* ---------- SVG ---------- */
+
+svg{
+
+    flex-shrink:0;
+}
+
+/* ---------- CARD ---------- */
+
+.transfer-card{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow:hidden;
+}
+
+/* ---------- INFO ---------- */
+
+.transfer-info{
+
+    width:100%;
+
+    max-width:100%;
+}
+
+/* ---------- FORM ---------- */
+
+form{
+
+    width:100%;
+}
+
+/* ---------- ROW ---------- */
+
+.row,
+.form-row{
+
+    display:flex;
+
+    gap:14px;
+
+    min-width:0;
+}
+
+.row>*,
+.form-row>*{
+
+    flex:1;
+
+    min-width:0;
+}
+
+/* ---------- ADDRESS ---------- */
+
+.wallet-address,
+.receiver-address,
+.deposit-address{
+
+    user-select:text;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-all;
+}
+
+/* ---------- COPY BUTTON ---------- */
+
+.copy-btn{
+
+    flex-shrink:0;
+
+    max-width:120px;
+}
+
+@media(max-width:430px){
+
+.copy-btn{
+
+    max-width:90px;
+
+    font-size:13px;
+
+    padding:0 10px;
+}
+
+}
+
+/* ---------- UPLOAD ---------- */
+
+.transfer-upload{
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.transfer-upload input{
+
+    position:absolute;
+
+    inset:0;
+
+    opacity:0;
+
+    cursor:pointer;
+}
+
+/* ---------- SAFE AREA ---------- */
+
+@supports(padding:max(0px)){
+
+.transfer-page{
+
+padding-bottom:max(
+220px,
+calc(220px + env(safe-area-inset-bottom))
+);
+
+}
+
+}
+
+/* ---------- iPhone SE ---------- */
+
+@media(max-width:375px){
+
+.transfer-title{
+
+font-size:22px;
+}
+
+.transfer-card{
+
+padding:14px;
+}
+
+.transfer-input,
+.transfer-select{
+
+height:50px;
+
+font-size:14px;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+
+height:50px;
+
+font-size:15px;
+}
+
+}
+
+/* ---------- iPhone 7/8 ---------- */
+
+@media(min-width:376px) and (max-width:430px){
+
+.transfer-title{
+
+font-size:24px;
+}
+
+}
+
+/* ---------- Android ---------- */
+
+@media(min-width:431px) and (max-width:767px){
+
+.transfer-title{
+
+font-size:28px;
+}
+
+}
+
+/* ---------- iPad ---------- */
+
+@media(min-width:768px) and (max-width:1024px){
+
+.transfer-page{
+
+max-width:760px;
+
+margin:auto;
+}
+
+}
+
+/* ---------- Desktop ---------- */
+
+@media(min-width:1200px){
+
+.transfer-page{
+
+max-width:980px;
+
+margin:auto;
+}
+
+.transfer-btns{
+
+justify-content:flex-end;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+
+max-width:240px;
+}
+
+}
+
+/* ===================================================
+   PRO MAX FIX 4
+   Stability + Accessibility + Cross Browser
+=================================================== */
+
+/* ---------- RESET ---------- */
+
+.transfer-page *,
+.transfer-page *::before,
+.transfer-page *::after{
+    box-sizing:border-box;
+}
+
+/* ---------- SCROLL ---------- */
+
+.transfer-page{
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+}
+
+/* ---------- TOUCH ---------- */
+
+.transfer-confirm,
+.transfer-cancel,
+.transfer-upload,
+.transfer-select,
+.transfer-input{
+
+    touch-action:manipulation;
+}
+
+/* ---------- BUTTON ---------- */
+
+.transfer-confirm,
+.transfer-cancel{
+
+    user-select:none;
+    -webkit-user-select:none;
+
+    -webkit-tap-highlight-color:transparent;
+
+    transition:
+        transform .2s,
+        background .2s,
+        box-shadow .2s;
+}
+
+.transfer-confirm:active,
+.transfer-cancel:active{
+
+    transform:scale(.98);
+}
+
+/* ---------- INPUT ---------- */
+
+.transfer-input,
+.transfer-select{
+
+    -webkit-appearance:none;
+
+    appearance:none;
+
+    border-radius:16px;
+
+    background-clip:padding-box;
+}
+
+/* ---------- DISABLED ---------- */
+
+.transfer-confirm:disabled,
+.transfer-cancel:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+}
+
+/* ---------- LOADING ---------- */
+
+.loading{
+
+    pointer-events:none;
+
+    opacity:.65;
+}
+
+/* ---------- SVG ---------- */
+
+.transfer-page svg{
+
+    display:block;
+}
+
+/* ---------- IMAGE ---------- */
+
+.transfer-page img{
+
+    object-fit:contain;
+}
+
+/* ---------- LONG NUMBER ---------- */
+
+.long-number{
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+}
+
+/* ---------- LONG ADDRESS ---------- */
+
+.long-address{
+
+    overflow-wrap:anywhere;
+
+    word-break:break-all;
+}
+
+/* ---------- ANIMATION ---------- */
+
+@media(prefers-reduced-motion:reduce){
+
+*{
+
+animation:none!important;
+
+transition:none!important;
+
+scroll-behavior:auto!important;
+
+}
+
+}
+
+/* ---------- DARK MODE ---------- */
+
+@media(prefers-color-scheme:dark){
+
+.transfer-input,
+.transfer-select{
+
+color:#fff;
+
+}
+
+}
+
+/* ---------- LANDSCAPE ---------- */
+
+@media(max-height:500px){
+
+.transfer-page{
+
+padding-bottom:120px;
+
+}
+
+.transfer-upload{
+
+min-height:120px;
+
+}
+
+}
+
+/* ---------- VERY SMALL DEVICE ---------- */
+
+@media(max-width:320px){
+
+.transfer-title{
+
+font-size:20px;
+}
+
+.transfer-card{
+
+padding:12px;
+}
+
+.transfer-input,
+.transfer-select{
+
+height:46px;
+
+font-size:13px;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+
+height:46px;
+
+font-size:14px;
+}
+
+}
+
+/* ---------- LARGE DESKTOP ---------- */
+
+@media(min-width:1600px){
+
+.transfer-page{
+
+max-width:1100px;
+}
+
+}
+
+.transfer-page{
+    min-height:100vh;
+    background:#050505;
+    padding:20px;
+    padding-bottom:120px;
+}
+
+.transfer-content{
+    width:100%;
+}
+
+.transfer-btns{
+    display:flex;
+    gap:12px;
+    margin-top:24px;
+    margin-bottom:24px;
+}
+
+.transfer-confirm,
+.transfer-cancel{
+    flex:1;
 }

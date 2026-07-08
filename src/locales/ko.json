@@ -193,7 +193,7 @@
   "uploadSelfie":"셀카 업로드",
   "clickToUpload":"클릭하여 업로드",
   "submit":"제출",
-  "submitting":"제출 중...",
+  
   "uploadAllImages":"필수 이미지를 모두 업로드하세요.",
   "kycSubmitted":"KYC 신청이 성공적으로 제출되었습니다.",
 
@@ -209,8 +209,46 @@
   "close":"닫기",
 
   "totalAssets":"총 자산",
-  "assetsDetails":"자산 상세"
+  "assetsDetails":"자산 상세",
 
+
+
+  
+"phone":"전화번호",
+"email":"이메일",
+
+"welcome":"환영합니다",
+"welcomeMessage":"TRUST에 오신 것을 환영합니다",
+
+"depositSuccess":"입금 완료",
+"depositApproved":"입금이 승인되었습니다.",
+
+"depositFailed":"입금 실패",
+"depositRejected":"입금이 거부되었습니다.",
+
+"withdrawSuccess":"출금 완료",
+"withdrawApproved":"출금이 승인되었습니다.",
+
+"withdrawFailed":"출금 실패",
+"withdrawRejected":"출금이 거부되었습니다.",
+
+"withdrawProcessing":"출금 처리 중",
+"withdrawProcessingMessage":"출금이 현재 처리 중입니다.",
+
+"transferReceivedMessage":"송금을 받았습니다.",
+"transferCompletedMessage":"송금이 성공적으로 완료되었습니다.",
+
+"registerSuccessMessage":"회원가입이 완료되었습니다.",
+
+"phoneOrEmailExists":"전화번호 또는 이메일이 이미 존재합니다.",
+
+"loginSuccess":"로그인 성공",
+
+"ok":"확인",
+
+"deleteSuccess":"은행 계좌가 삭제되었습니다.",
+
+"transfer":"송금"
 
 
 

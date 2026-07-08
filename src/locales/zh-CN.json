@@ -193,7 +193,7 @@
   "uploadSelfie":"上传自拍照",
   "clickToUpload":"点击上传",
   "submit":"提交",
-  "submitting":"提交中...",
+  
   "uploadAllImages":"请上传所有必需的图片",
   "kycSubmitted":"KYC 提交成功",
 
@@ -209,9 +209,44 @@
   "close":"关闭",
 
   "totalAssets":"总资产",
-  "assetsDetails":"资产详情"
+  "assetsDetails":"资产详情",
 
+  
+"phone":"手机号",
+"email":"邮箱",
 
+"welcome":"欢迎",
+"welcomeMessage":"欢迎使用 TRUST",
+
+"depositSuccess":"充值成功",
+"depositApproved":"您的充值已通过审核。",
+
+"depositFailed":"充值失败",
+"depositRejected":"您的充值已被拒绝。",
+
+"withdrawSuccess":"提现成功",
+"withdrawApproved":"您的提现已通过审核。",
+
+"withdrawFailed":"提现失败",
+"withdrawRejected":"您的提现已被拒绝。",
+
+"withdrawProcessing":"提现处理中",
+"withdrawProcessingMessage":"您的提现正在处理中。",
+
+"transferReceivedMessage":"您收到了一笔转账。",
+"transferCompletedMessage":"您的转账已成功完成。",
+
+"registerSuccessMessage":"注册成功",
+
+"phoneOrEmailExists":"手机号或邮箱已存在",
+
+"loginSuccess":"登录成功",
+
+"ok":"确定",
+
+"deleteSuccess":"银行卡删除成功",
+
+"transfer":"转账"
 
 
 

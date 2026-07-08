@@ -7,13 +7,19 @@ import {
   Info,
 } from "lucide-react";
 
+import { useTranslation } from "react-i18next";
+
 export default function AlertDialog({
   open,
   type,
   title,
   message,
+  confirm = false,
+  onConfirm,
   onClose,
 }) {
+
+  const { t } = useTranslation();
 
   if (!open) return null;
 
@@ -29,7 +35,6 @@ export default function AlertDialog({
       className="dialog-overlay"
       onClick={onClose}
     >
-
       <div
         className="dialog-box"
         onClick={(e) => e.stopPropagation()}
@@ -43,15 +48,38 @@ export default function AlertDialog({
 
         <p>{message}</p>
 
-        <button
-          className="dialog-btn"
-          onClick={onClose}
-        >
-          ตกลง
-        </button>
+        {confirm ? (
+
+          <div className="dialog-actions">
+
+            <button
+              className="dialog-cancel"
+              onClick={onClose}
+            >
+              {t("cancel")}
+            </button>
+
+            <button
+              className="dialog-confirm"
+              onClick={onConfirm}
+            >
+              {t("delete")}
+            </button>
+
+          </div>
+
+        ) : (
+
+          <button
+            className="dialog-btn"
+            onClick={onClose}
+          >
+            {t("ok")}
+          </button>
+
+        )}
 
       </div>
-
     </div>
   );
 }

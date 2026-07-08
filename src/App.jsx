@@ -39,7 +39,18 @@ import Notifications from "./pages/Notifications";
 
 import AdminWithdraw from "./pages/admin/AdminWithdraw";
 import AdminDeposit from "./pages/admin/AdminDeposit";
-import Admin from "./screens/Admin";
+import AdminDashboard from "./pages/admin/AdminDashboard";
+import AdminUsers from "./pages/admin/AdminUsers";
+import AdminTradeOrders from "./pages/admin/AdminTradeOrders";
+import AdminTrades from "./pages/admin/AdminTrades";
+import AdminSettings from "./pages/admin/AdminSettings";
+
+
+import AdminLogin from "./pages/admin/AdminLogin";
+import AdminRoute from "./pages/admin/AdminRoute";
+
+
+
 
 function Layout() {
 
@@ -88,9 +99,85 @@ function Layout() {
         <Route path="/about" element={<About />} />
         <Route path="/notifications" element={<Notifications />} />
 
-        <Route path="/admin-withdraw" element={<AdminWithdraw />} />
-        <Route path="/admin-deposit" element={<AdminDeposit />} />
-        <Route path="/admin" element={<Admin />} />
+        
+        
+        
+
+<Route
+  path="/admin/login"
+  element={<AdminLogin />}
+/>
+
+
+<Route
+  path="/admin"
+  element={
+    <AdminRoute>
+      <AdminDashboard />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/users"
+  element={
+    <AdminRoute>
+      <AdminUsers />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/deposit"
+  element={
+    <AdminRoute>
+      <AdminDeposit />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/withdraw"
+  element={
+    <AdminRoute>
+      <AdminWithdraw />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/orders"
+  element={
+    <AdminRoute>
+      <AdminTradeOrders />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/trades"
+  element={
+    <AdminRoute>
+      <AdminTrades />
+    </AdminRoute>
+  }
+/>
+
+
+<Route
+  path="/admin/settings"
+  element={
+    <AdminRoute>
+      <AdminSettings />
+    </AdminRoute>
+  }
+/>
+
 
       </Routes>
 

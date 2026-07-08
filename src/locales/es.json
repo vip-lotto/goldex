@@ -79,7 +79,7 @@
   "transferFee":"Comisión de transferencia",
   "amountReceived":"Cantidad recibida",
   "submitWithdraw":"Enviar retiro",
-  "submitting":"Enviando...",
+  
   "pendingWithdraw":"Ya tiene una solicitud de retiro pendiente.",
   "walletNotFound":"Billetera no encontrada",
   "insufficientBalance":"Saldo insuficiente",
@@ -211,8 +211,41 @@
   "close":"Cerrar",
 
   "totalAssets":"Activos totales",
-  "assetsDetails":"Detalles de los activos"
+  "assetsDetails":"Detalles de los activos",
 
+  "phone":"Teléfono",
+"email":"Correo electrónico",
+
+"welcome":"Bienvenido",
+"welcomeMessage":"Bienvenido a TRUST",
+
+"depositSuccess":"Depósito exitoso",
+"depositApproved":"Su depósito ha sido aprobado.",
+
+"depositFailed":"Depósito fallido",
+"depositRejected":"Su depósito ha sido rechazado.",
+
+"withdrawSuccess":"Retiro exitoso",
+"withdrawApproved":"Su retiro ha sido aprobado.",
+
+"withdrawFailed":"Retiro fallido",
+"withdrawRejected":"Su retiro ha sido rechazado.",
+
+"withdrawProcessing":"Retiro en proceso",
+"withdrawProcessingMessage":"Su retiro está siendo procesado.",
+
+"transferReceivedMessage":"Ha recibido una transferencia.",
+"transferCompletedMessage":"Su transferencia se ha completado correctamente.",
+
+"registerSuccessMessage":"Registro completado correctamente",
+"phoneOrEmailExists":"El número de teléfono o el correo electrónico ya existen",
+"loginSuccess":"Inicio de sesión exitoso",
+
+"ok":"Aceptar",
+
+"deleteSuccess":"Cuenta bancaria eliminada correctamente",
+
+"transfer":"Transferencia"
 
 
 

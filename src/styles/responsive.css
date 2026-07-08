@@ -1,0 +1,1075 @@
+/* ==========================================================
+   GLOBAL RESPONSIVE FRAMEWORK
+   Trust Exchange
+========================================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html{
+
+    width:100%;
+
+    max-width:100%;
+
+    overflow-x:hidden;
+
+    -webkit-text-size-adjust:100%;
+
+    text-size-adjust:100%;
+
+}
+
+body{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    overflow-x:hidden;
+
+    margin:0;
+
+}
+
+#root{
+
+    width:100%;
+
+    min-height:100vh;
+    min-height:100dvh;
+
+    overflow-x:hidden;
+
+}
+
+img{
+
+    display:block;
+
+    max-width:100%;
+
+    height:auto;
+
+}
+
+svg{
+
+    flex-shrink:0;
+
+}
+
+button{
+
+    min-width:0;
+
+    cursor:pointer;
+
+    font:inherit;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+    font:inherit;
+
+}
+
+table{
+
+    width:100%;
+
+    max-width:100%;
+
+}
+
+iframe{
+
+    max-width:100%;
+
+}
+
+video{
+
+    max-width:100%;
+
+}
+
+canvas{
+
+    max-width:100%;
+
+}
+
+/* ==========================================================
+   FLEX / GRID PROTECTION
+========================================================== */
+
+[class*="page"],
+[class*="card"],
+[class*="box"],
+[class*="container"],
+[class*="content"],
+[class*="header"],
+[class*="footer"]{
+
+    width:100%;
+
+    max-width:100%;
+
+    min-width:0;
+
+}
+
+[class*="row"],
+[class*="left"],
+[class*="right"],
+[class*="top"],
+[class*="bottom"],
+[class*="item"]{
+
+    min-width:0;
+
+}
+
+.row,
+.flex{
+
+    display:flex;
+
+    min-width:0;
+
+}
+
+.flex-column{
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+}
+
+.grid{
+
+    display:grid;
+
+    min-width:0;
+
+}
+
+button{
+
+    min-width:0;
+
+    max-width:100%;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+input{
+
+    min-width:0;
+
+}
+
+textarea{
+
+    resize:vertical;
+
+    min-width:0;
+
+}
+
+select{
+
+    min-width:0;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+label,
+small,
+strong,
+b,
+a{
+
+    min-width:0;
+
+    max-width:100%;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+ul,
+ol{
+
+    min-width:0;
+
+    padding-left:20px;
+
+}
+
+li{
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ==========================================================
+   SAFE AREA + RESPONSIVE DEVICES
+========================================================== */
+
+/* iPhone Safe Area */
+:root{
+
+    --safe-top:env(safe-area-inset-top);
+
+    --safe-right:env(safe-area-inset-right);
+
+    --safe-bottom:env(safe-area-inset-bottom);
+
+    --safe-left:env(safe-area-inset-left);
+
+}
+
+.page,
+[class*="page"]{
+
+    padding-top:max(16px,var(--safe-top));
+
+    padding-right:max(16px,var(--safe-right));
+
+    padding-bottom:max(16px,var(--safe-bottom));
+
+    padding-left:max(16px,var(--safe-left));
+
+}
+
+/* Dynamic Viewport */
+
+.full-height{
+
+    min-height:100vh;
+
+    min-height:100dvh;
+
+}
+
+/* Horizontal Scroll Protection */
+
+html,
+body,
+#root{
+
+    overflow-x:hidden;
+
+}
+
+/* Long Number / Wallet / Invite */
+
+.wallet-address,
+.invite-code,
+.uid,
+.address{
+
+    overflow-wrap:anywhere;
+
+    word-break:break-all;
+
+    white-space:normal;
+
+}
+
+/* Images */
+
+img{
+
+    object-fit:contain;
+
+}
+
+/* Prevent flex overflow */
+
+.flex,
+[class*="flex"]>*{
+
+    min-width:0;
+
+}
+
+/* ==========================================================
+   iPhone SE / 7 / 8
+========================================================== */
+
+@media (max-width:380px){
+
+    h1{
+
+        font-size:24px;
+
+    }
+
+    h2{
+
+        font-size:20px;
+
+    }
+
+    h3{
+
+        font-size:17px;
+
+    }
+
+    p,
+    span,
+    button,
+    input,
+    select,
+    textarea{
+
+        font-size:13px;
+
+    }
+
+}
+
+/* ==========================================================
+   Phones
+========================================================== */
+
+@media (max-width:768px){
+
+    .desktop-only{
+
+        display:none !important;
+
+    }
+
+    .mobile-full{
+
+        width:100% !important;
+
+    }
+
+}
+
+/* ==========================================================
+   Tablets
+========================================================== */
+
+@media (min-width:769px) and (max-width:1199px){
+
+    .tablet-center{
+
+        max-width:900px;
+
+        margin:auto;
+
+    }
+
+}
+
+/* ==========================================================
+   Desktop
+========================================================== */
+
+@media (min-width:1200px){
+
+    .desktop-center{
+
+        width:min(1400px,95%);
+
+        margin:auto;
+
+    }
+
+}
+
+/* ==========================================================
+   Universal Responsive Utilities
+========================================================== */
+
+.hide-overflow{
+
+    overflow:hidden;
+
+}
+
+.scroll-x{
+
+    overflow-x:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+.text-break{
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+.no-select{
+
+    user-select:none;
+
+}
+
+.touch{
+
+    touch-action:manipulation;
+
+}
+
+/* ==========================================================
+   PRO MAX - Layout Utilities
+========================================================== */
+
+/* Flex */
+
+.flex{
+    display:flex;
+}
+
+.flex-column{
+    display:flex;
+    flex-direction:column;
+}
+
+.flex-center{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.flex-between{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.flex-wrap{
+    flex-wrap:wrap;
+}
+
+.flex-1{
+    flex:1;
+    min-width:0;
+}
+
+/* Grid */
+
+.grid-2{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:16px;
+}
+
+.grid-4{
+    display:grid;
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:16px;
+}
+
+/* Width */
+
+.w-100{
+    width:100%;
+}
+
+.max-100{
+    max-width:100%;
+}
+
+/* Text */
+
+.text-center{
+    text-align:center;
+}
+
+.text-right{
+    text-align:right;
+}
+
+.break-word{
+    overflow-wrap:anywhere;
+    word-break:break-word;
+}
+
+.no-wrap{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+/* Image */
+
+.img-fluid{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+/* Buttons */
+
+.btn-fluid{
+    width:100%;
+    min-width:0;
+}
+
+/* Inputs */
+
+.input-fluid{
+    width:100%;
+    min-width:0;
+}
+
+/* Cards */
+
+.card-fluid{
+    width:100%;
+    max-width:100%;
+    min-width:0;
+    overflow:hidden;
+}
+
+/* ==========================================================
+   PRO MAX - Bottom Navigation / Fixed Button
+========================================================== */
+
+/* Safe Area */
+
+:root{
+
+    --safe-top:env(safe-area-inset-top);
+
+    --safe-right:env(safe-area-inset-right);
+
+    --safe-bottom:env(safe-area-inset-bottom);
+
+    --safe-left:env(safe-area-inset-left);
+
+}
+
+/* Bottom Navigation */
+
+.bottom-nav{
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    padding-bottom:max(8px,var(--safe-bottom));
+
+    min-height:70px;
+
+    box-sizing:border-box;
+
+}
+
+/* Floating Button */
+
+.fixed-bottom,
+
+.bottom-fixed,
+
+.submit-fixed,
+
+.action-fixed{
+
+    position:fixed;
+
+    left:max(16px,var(--safe-left));
+
+    right:max(16px,var(--safe-right));
+
+    bottom:calc(16px + var(--safe-bottom));
+
+    z-index:999;
+
+}
+
+/* Prevent content hidden behind fixed button */
+
+.has-fixed-button{
+
+    padding-bottom:110px;
+
+}
+
+.has-bottom-nav{
+
+    padding-bottom:95px;
+
+}
+
+/* Dialog */
+
+.dialog-overlay{
+
+    padding:20px;
+
+    box-sizing:border-box;
+
+}
+
+.dialog-box{
+
+    width:100%;
+
+    max-width:420px;
+
+    max-height:90vh;
+
+    overflow:auto;
+
+}
+
+/* Toast */
+
+.toast{
+
+    left:16px;
+
+    right:16px;
+
+    width:auto;
+
+    max-width:480px;
+
+    margin:auto;
+
+    box-sizing:border-box;
+
+}
+
+/* Modal */
+
+.modal{
+
+    width:100%;
+
+    max-width:100%;
+
+    max-height:100dvh;
+
+    overflow:auto;
+
+}
+
+.modal-content{
+
+    width:min(95%,700px);
+
+    margin:auto;
+
+}
+
+/* Scroll */
+
+.scroll-y{
+
+    overflow-y:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+/* iOS Safari */
+
+input,
+textarea,
+select{
+
+    font-size:16px;
+
+}
+
+/* Touch */
+
+button,
+input,
+select,
+textarea{
+
+    touch-action:manipulation;
+
+}
+
+/* Landscape */
+
+@media (orientation:landscape){
+
+.has-bottom-nav{
+
+padding-bottom:24px;
+
+}
+
+.has-fixed-button{
+
+padding-bottom:40px;
+
+}
+
+}
+
+/* Tablet */
+
+@media (min-width:768px){
+
+.fixed-bottom,
+.bottom-fixed,
+.submit-fixed,
+.action-fixed{
+
+max-width:700px;
+
+margin:auto;
+
+}
+
+}
+
+/* Desktop */
+
+@media (min-width:1200px){
+
+.dialog-box{
+
+max-width:520px;
+
+}
+
+.toast{
+
+max-width:600px;
+
+}
+
+}
+
+/* ==========================================================
+   PRO MAX FINAL
+   Overflow / Long Text / Responsive Utilities
+========================================================== */
+
+/* ---------- Long Text ---------- */
+
+.long-text,
+.wallet-address,
+.invite-code,
+.uid,
+.email,
+.username,
+.address,
+.txid,
+.hash{
+
+    min-width:0;
+
+    max-width:100%;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ---------- Universal Flex ---------- */
+
+.flex-auto{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    min-width:0;
+
+}
+
+.flex-auto>*{
+
+    min-width:0;
+
+}
+
+.flex-grow{
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.flex-shrink-0{
+
+    flex-shrink:0;
+
+}
+
+/* ---------- Button ---------- */
+
+button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    min-width:0;
+
+    max-width:100%;
+
+    transition:.25s;
+
+}
+
+button span{
+
+    min-width:0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+/* ---------- Input ---------- */
+
+input,
+select,
+textarea{
+
+    border-radius:14px;
+
+    max-width:100%;
+
+    min-width:0;
+
+}
+
+/* ---------- Card ---------- */
+
+.card,
+[class*="card"]{
+
+    min-width:0;
+
+    max-width:100%;
+
+    overflow:hidden;
+
+}
+
+/* ---------- Lists ---------- */
+
+ul,
+ol{
+
+    max-width:100%;
+
+}
+
+li{
+
+    max-width:100%;
+
+}
+
+/* ---------- Image ---------- */
+
+img{
+
+    image-rendering:auto;
+
+}
+
+svg{
+
+    overflow:visible;
+
+}
+
+/* ---------- Links ---------- */
+
+a{
+
+    overflow-wrap:anywhere;
+
+}
+
+/* ---------- Table ---------- */
+
+table{
+
+    border-collapse:collapse;
+
+    table-layout:auto;
+
+}
+
+.table-scroll{
+
+    overflow-x:auto;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+/* ---------- Animation ---------- */
+
+.fade-in{
+
+    animation:fadeIn .25s ease;
+
+}
+
+@keyframes fadeIn{
+
+from{
+
+opacity:0;
+
+transform:translateY(8px);
+
+}
+
+to{
+
+opacity:1;
+
+transform:none;
+
+}
+
+}
+
+/* ---------- Scrollbar ---------- */
+
+::-webkit-scrollbar{
+
+width:8px;
+
+height:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+border-radius:20px;
+
+}
+
+::-webkit-scrollbar-track{
+
+background:transparent;
+
+}
+
+/* ---------- Accessibility ---------- */
+
+:focus-visible{
+
+outline:2px solid #2EDCFF;
+
+outline-offset:2px;
+
+}
+
+/* ---------- Very Small Phones ---------- */
+
+@media (max-width:340px){
+
+html{
+
+font-size:14px;
+
+}
+
+button{
+
+font-size:13px;
+
+}
+
+}
+
+/* ---------- Large Desktop ---------- */
+
+@media (min-width:1600px){
+
+.container-xl{
+
+width:min(1500px,96%);
+
+margin:auto;
+
+}
+
+}
+
+/* ---------- 4K ---------- */
+
+@media (min-width:2200px){
+
+.container-4k{
+
+width:min(1800px,92%);
+
+margin:auto;
+
+}
+
+}

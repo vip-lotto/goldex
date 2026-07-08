@@ -80,7 +80,7 @@
   "transferFee":"Frais de transfert",
   "amountReceived":"Montant reçu",
   "submitWithdraw":"Soumettre le retrait",
-  "submitting":"Envoi en cours...",
+  
   "pendingWithdraw":"Vous avez déjà une demande de retrait en attente.",
   "walletNotFound":"Portefeuille introuvable",
   "insufficientBalance":"Solde insuffisant",
@@ -212,8 +212,42 @@
   "close":"Fermer",
 
   "totalAssets":"Total des actifs",
-  "assetsDetails":"Détails des actifs"
+  "assetsDetails":"Détails des actifs",
 
+
+  "phone":"Téléphone",
+"email":"E-mail",
+
+"welcome":"Bienvenue",
+"welcomeMessage":"Bienvenue sur TRUST",
+
+"depositSuccess":"Dépôt réussi",
+"depositApproved":"Votre dépôt a été approuvé.",
+
+"depositFailed":"Échec du dépôt",
+"depositRejected":"Votre dépôt a été rejeté.",
+
+"withdrawSuccess":"Retrait réussi",
+"withdrawApproved":"Votre retrait a été approuvé.",
+
+"withdrawFailed":"Échec du retrait",
+"withdrawRejected":"Votre retrait a été rejeté.",
+
+"withdrawProcessing":"Retrait en cours",
+"withdrawProcessingMessage":"Votre retrait est en cours de traitement.",
+
+"transferReceivedMessage":"Vous avez reçu un transfert.",
+"transferCompletedMessage":"Votre transfert a été effectué avec succès.",
+
+"registerSuccessMessage":"Inscription réussie",
+"phoneOrEmailExists":"Le numéro de téléphone ou l'adresse e-mail existe déjà",
+"loginSuccess":"Connexion réussie",
+
+"ok":"OK",
+
+"deleteSuccess":"Compte bancaire supprimé avec succès",
+
+"transfer":"Transfert"
 
 
 

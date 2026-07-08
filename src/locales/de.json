@@ -78,7 +78,7 @@
   "transferFee":"Überweisungsgebühr",
   "amountReceived":"Erhaltener Betrag",
   "submitWithdraw":"Auszahlung senden",
-  "submitting":"Wird gesendet...",
+ 
   "pendingWithdraw":"Sie haben bereits eine ausstehende Auszahlungsanfrage.",
   "walletNotFound":"Wallet nicht gefunden",
   "insufficientBalance":"Unzureichendes Guthaben",
@@ -98,7 +98,7 @@
   "addBankAccountMessage":"Bitte fügen Sie auf der Assets-Seite ein Bankkonto hinzu.",
   "destinationAccount":"Empfängerkonto",
 
-  "pleaseAddBank":"Bitte fügen Sie zuerst ein Bankkonto hinzu.",
+ 
   "transactionHistory":"Transaktionsverlauf",
   "records":"Einträge",
   "deposit":"Einzahlung",
@@ -195,7 +195,7 @@
   "uploadIdCard":"Personalausweis hochladen",
   "uploadSelfie":"Selfie hochladen",
   "clickToUpload":"Zum Hochladen klicken",
-  "submit":"Senden",
+  
   "submitting":"Wird gesendet...",
   "uploadAllImages":"Bitte laden Sie alle erforderlichen Bilder hoch",
   "kycSubmitted":"KYC erfolgreich eingereicht",
@@ -212,7 +212,48 @@
   "close":"Schließen",
 
   "totalAssets":"Gesamtvermögen",
-  "assetsDetails":"Vermögensdetails"
+  "assetsDetails":"Vermögensdetails",
+"phone":"Telefon",
+"email":"E-Mail",
+
+"welcome":"Willkommen",
+"welcomeMessage":"Willkommen bei TRUST",
+
+"depositSuccess":"Einzahlung erfolgreich",
+"depositApproved":"Ihre Einzahlung wurde genehmigt.",
+
+"depositFailed":"Einzahlung fehlgeschlagen",
+"depositRejected":"Ihre Einzahlung wurde abgelehnt.",
+
+"withdrawSuccess":"Auszahlung erfolgreich",
+"withdrawApproved":"Ihre Auszahlung wurde genehmigt.",
+
+"withdrawFailed":"Auszahlung fehlgeschlagen",
+"withdrawRejected":"Ihre Auszahlung wurde abgelehnt.",
+
+"withdrawProcessing":"Auszahlung wird bearbeitet",
+"withdrawProcessingMessage":"Ihre Auszahlung wird derzeit bearbeitet.",
+
+"transferReceivedMessage":"Sie haben eine Überweisung erhalten.",
+
+"transferCompletedMessage":"Ihre Überweisung wurde erfolgreich abgeschlossen.",
+
+"phoneOrEmailExists":"Telefonnummer oder E-Mail existiert bereits",
+
+"registerSuccessMessage":"Registrierung erfolgreich",
+
+"loginSuccess":"Anmeldung erfolgreich",
+
+"ok":"OK",
+
+
+"transfer":"Transfer",
+
+"pleaseAddBank":"Bitte fügen Sie zuerst ein Bankkonto hinzu.",
+
+"submit":"Senden",
+
+"deleteSuccess":"Bankkonto erfolgreich gelöscht"
 
 
 

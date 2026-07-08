@@ -159,25 +159,40 @@ export default function Notifications() {
             }}
           >
             <h3
-              style={{
-                margin: "0 0 10px",
-                color: "#fff",
-                fontSize: "20px",
-              }}
-            >
-              {item.title}
-            </h3>
+  style={{
+    margin: "0 0 10px",
+    color: "#fff",
+    fontSize: "20px",
+  }}
+>
+  {t(item.title_key || item.title)}
+</h3>
 
             <p
-              style={{
-                margin: "0 0 10px",
-                whiteSpace: "pre-line",
-                color: "#e8ecff",
-                lineHeight: "1.6",
-              }}
-            >
-              {item.message}
-            </p>
+  style={{
+    margin: "0 0 10px",
+    whiteSpace: "pre-line",
+    color: "#e8ecff",
+    lineHeight: "1.6",
+  }}
+>
+  {item.message_key ? (
+    <>
+      {t(item.message_key)}
+      <br />
+      <br />
+      {t("coin")} : {item.coin}
+      <br />
+      {t("network")} : {item.network}
+      <br />
+      {t("amount")} : {item.amount}
+      <br />
+      {t("status")} : {t(item.status)}
+    </>
+  ) : (
+    item.message
+  )}
+</p>
 
             <small
               style={{

@@ -194,7 +194,7 @@
   "uploadSelfie":"セルフィーをアップロード",
   "clickToUpload":"クリックしてアップロード",
   "submit":"送信",
-  "submitting":"送信中...",
+
   "uploadAllImages":"必要な画像をすべてアップロードしてください",
   "kycSubmitted":"KYC申請が正常に送信されました",
 
@@ -210,7 +210,45 @@
   "close":"閉じる",
 
   "totalAssets":"総資産",
-  "assetsDetails":"資産詳細"
+  "assetsDetails":"資産詳細",
+
+
+
+"phone":"電話番号",
+"email":"メールアドレス",
+
+"welcome":"ようこそ",
+"welcomeMessage":"TRUSTへようこそ",
+
+"depositSuccess":"入金成功",
+"depositApproved":"入金が承認されました。",
+
+"depositFailed":"入金失敗",
+"depositRejected":"入金が拒否されました。",
+
+"withdrawSuccess":"出金成功",
+"withdrawApproved":"出金が承認されました。",
+
+"withdrawFailed":"出金失敗",
+"withdrawRejected":"出金が拒否されました。",
+
+"withdrawProcessing":"出金処理中",
+"withdrawProcessingMessage":"出金は現在処理中です。",
+
+"transferReceivedMessage":"送金を受け取りました。",
+"transferCompletedMessage":"送金が正常に完了しました。",
+
+"registerSuccessMessage":"登録が完了しました",
+
+"phoneOrEmailExists":"電話番号またはメールアドレスは既に存在します",
+
+"loginSuccess":"ログイン成功",
+
+"ok":"OK",
+
+"deleteSuccess":"銀行口座を削除しました",
+
+"transfer":"送金"
 
 
 

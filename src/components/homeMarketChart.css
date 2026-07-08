@@ -78,18 +78,21 @@
     height:205px;
 
     background:#182235;
-
     border:1px solid #2d3d5a;
     border-radius:18px;
 
     display:flex;
     flex-direction:column;
-    justify-content:center;
+
+    justify-content:flex-start;   /* เปลี่ยน */
+
     align-items:center;
 
     text-align:center;
 
-    padding:14px;
+    padding:16px 14px;
+
+    gap:0px;                      /* เพิ่ม */
 
     transition:.25s;
 
@@ -108,14 +111,12 @@
     width:44px;
     height:44px;
 
-    object-fit:contain;
-
-    margin-bottom:4px;
+    margin-bottom:2px;
 
 }
 
 .coin-title{
-    margin:0;
+    margin:0 0 -2px 0;
     font-size:18px;
     font-weight:800;
     color:#fff;
@@ -137,11 +138,12 @@
 }
 
 .coin-percent{
-    margin-top:6px;
+    margin-top:0;
+    margin-bottom:4px;
     font-size:14px;
     font-weight:700;
+    line-height:1;
 }
-
 .coin-percent.green{
 
     color:#22c55e;
@@ -155,10 +157,17 @@
 }
 
 .coin-info{
-    margin-top:8px;
+
+    margin-top:auto;
+
     display:flex;
+
     justify-content:center;
-    gap:5px;
+
+    gap:6px;
+
+    width:100%;
+
 }
 
 .coin-info span{
@@ -322,27 +331,64 @@ transform:scale(.8);
 
     display:grid;
 
-    grid-template-columns:repeat(3,1fr);
+    grid-template-columns:repeat(3,minmax(0,1fr));
 
     gap:12px;
+
+    width:100%;
 
 }
 
 .summary-card{
+
     background:#1b2537;
+
     border:1px solid #2f3d57;
-    border-radius:14px;
-    padding:14px;
+
+    border-radius:16px;
+
+    padding:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    min-width:0;
+
+    overflow:hidden;
+
 }
 
 .summary-title{
+
+    display:block;
+
     color:#94a3b8;
-    font-size:11px;
+
+    font-size:12px;
+
+    line-height:1.4;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+
 }
 
 .summary-card h3{
-    margin:8px 0 4px;
-    font-size:20px;
+
+    margin:10px 0 6px;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    line-height:1.25;
+
+    word-break:break-word;
+
+    overflow-wrap:anywhere;
+
 }
 
 .summary-card p{
@@ -389,5 +435,47 @@ transform:scale(.8);
 .chart-wrapper{
     height:420px;
 }
+
+}
+
+@media (max-width:768px){
+
+    .market-summary{
+
+        grid-template-columns:repeat(3,minmax(120px,1fr));
+
+        overflow-x:auto;
+
+        padding-bottom:6px;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .summary-card{
+
+        padding:14px;
+
+    }
+
+    .summary-card h2{
+
+        font-size:16px;
+
+    }
+
+    .summary-card h3{
+
+        font-size:16px;
+
+    }
+
+    .summary-card p{
+
+        font-size:12px;
+
+    }
 
 }

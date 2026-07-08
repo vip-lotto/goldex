@@ -17,7 +17,8 @@ import {
   Info,
   LogOut,
   ChevronRight,
-  Copy
+  Copy,
+  User
 } from "lucide-react";
 
 import "../styles/mine.css";
@@ -132,7 +133,7 @@ navigator.clipboard.writeText(code);
   <div className="mine-header">
 
     <h1 className="mine-title">
-      Mine
+      Trust
     </h1>
 
     <button
@@ -157,9 +158,12 @@ navigator.clipboard.writeText(code);
 
         <div className="avatar">
 
-            {profile?.username?.charAt(0)?.toUpperCase() || "W"}
+    <User
+        size={48}
+        strokeWidth={2.3}
+    />
 
-        </div>
+</div>
 
         <div className="profile-info">
 
@@ -322,7 +326,7 @@ Convert
 
       <History
         size={22}
-        color="#F5C542"
+        color="#429ef5"
       />
 
       <span>{t("transactionRecords")}</span>
@@ -344,7 +348,7 @@ Convert
 
       <CreditCard
         size={22}
-        color="#F5C542"
+        color="#face08"
       />
 
       <span>{t("bankAccounts")}</span>
@@ -366,7 +370,7 @@ Convert
 
       <BadgeCheck
         size={22}
-        color="#F5C542"
+        color="#07f0f8"
       />
 
       <span>{t("kyc")}</span>
@@ -388,7 +392,7 @@ Convert
 
       <Lock
         size={22}
-        color="#F5C542"
+        color="#fa0505b2"
       />
 
       <span>{t("security")}</span>
@@ -410,7 +414,7 @@ Convert
 
       <Languages
         size={22}
-        color="#F5C542"
+        color="#5d42f5"
       />
 
       <span>{t("languages")}</span>
@@ -432,7 +436,7 @@ Convert
 
       <Info
         size={22}
-        color="#F5C542"
+        color="#f57b42b0"
       />
 
       <span>{t("about")}</span>
@@ -442,6 +446,26 @@ Convert
     <ChevronRight size={18}/>
 
   </div>
+
+  {/* Log Out */}
+
+<div
+  className="mine-item logout-item"
+  onClick={logout}
+>
+  <div className="mine-left">
+    <LogOut
+      size={22}
+      color="#ff5b5b"
+    />
+    <span>{t("logout")}</span>
+  </div>
+
+  <ChevronRight
+    size={18}
+    color="#ff5b5b"
+  />
+</div>
 
 </div>
 

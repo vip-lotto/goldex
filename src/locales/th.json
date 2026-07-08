@@ -186,6 +186,44 @@
   "time": "เวลาทำรายการ",
   "close": "ปิด",
 
-  "totalAssets": "สินทรัพย์รวม",
-  "assetsDetails": "รายละเอียดสินทรัพย์"
+ "totalAssets": "สินทรัพย์รวม",
+"assetsDetails": "รายละเอียดสินทรัพย์",
+
+"welcome": "ยินดีต้อนรับ",
+"welcomeMessage": "ยินดีต้อนรับเข้าสู่ TRUST",
+
+"depositSuccess": "ฝากเงินสำเร็จ",
+"depositApproved": "รายการฝากของคุณได้รับการอนุมัติ",
+
+"depositFailed": "ฝากเงินไม่สำเร็จ",
+"depositRejected": "รายการฝากของคุณถูกปฏิเสธ",
+
+"withdrawSuccess": "ถอนเงินสำเร็จ",
+"withdrawApproved": "รายการถอนของคุณได้รับการอนุมัติ",
+
+"withdrawFailed": "ถอนเงินไม่สำเร็จ",
+"withdrawRejected": "รายการถอนของคุณถูกปฏิเสธ",
+
+"withdrawProcessing": "กำลังตรวจสอบรายการถอน",
+"withdrawProcessingMessage": "รายการถอนของคุณกำลังอยู่ระหว่างการตรวจสอบ",
+
+"transferReceived": "ได้รับเงินโอน",
+"transferReceivedMessage": "คุณได้รับเงินโอน",
+
+"transferCompleted": "โอนเงินสำเร็จ",
+"transferCompletedMessage": "คุณโอนเงินสำเร็จ",
+"phone": "เบอร์โทร",
+"email": "อีเมล",
+
+
+"registerSuccessMessage": "สมัครสมาชิกสำเร็จ",
+"phoneOrEmailExists": "เบอร์โทรหรืออีเมลนี้ถูกใช้งานแล้ว",
+"loginSuccess": "เข้าสู่ระบบสำเร็จ",
+"deleteSuccess":"ลบบัญชีธนาคารสำเร็จ",
+
+"ok": "ตกลง"
+
+
+
+
 }

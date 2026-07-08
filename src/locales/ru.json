@@ -199,7 +199,7 @@
   "uploadSelfie":"Загрузить селфи",
   "clickToUpload":"Нажмите для загрузки",
   "submit":"Отправить",
-  "submitting":"Отправка...",
+  
   "uploadAllImages":"Пожалуйста, загрузите все необходимые изображения",
   "kycSubmitted":"Заявка KYC успешно отправлена",
 
@@ -215,8 +215,45 @@
   "close":"Закрыть",
 
   "totalAssets":"Общие активы",
-  "assetsDetails":"Детали активов"
+  "assetsDetails":"Детали активов",
 
+
+  
+"phone":"Телефон",
+"email":"Электронная почта",
+
+"welcome":"Добро пожаловать",
+"welcomeMessage":"Добро пожаловать в TRUST",
+
+"depositSuccess":"Депозит выполнен",
+"depositApproved":"Ваш депозит был одобрен.",
+
+"depositFailed":"Ошибка депозита",
+"depositRejected":"Ваш депозит был отклонён.",
+
+"withdrawSuccess":"Вывод выполнен",
+"withdrawApproved":"Ваш вывод был одобрен.",
+
+"withdrawFailed":"Ошибка вывода",
+"withdrawRejected":"Ваш вывод был отклонён.",
+
+"withdrawProcessing":"Вывод обрабатывается",
+"withdrawProcessingMessage":"Ваш вывод сейчас обрабатывается.",
+
+"transferReceivedMessage":"Вы получили перевод.",
+"transferCompletedMessage":"Ваш перевод успешно завершён.",
+
+"registerSuccessMessage":"Регистрация успешно завершена",
+
+"phoneOrEmailExists":"Номер телефона или адрес электронной почты уже существует",
+
+"loginSuccess":"Вход выполнен успешно",
+
+"ok":"ОК",
+
+"deleteSuccess":"Банковский счёт успешно удалён",
+
+"transfer":"Перевод"
 
 
 

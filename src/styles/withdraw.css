@@ -39,7 +39,7 @@
 
 .withdraw-header h2{
     margin:0;
-    color:#F5C542;
+    color:#1fdff8;
     font-size:32px;
     font-weight:800;
     letter-spacing:.5px;
@@ -77,8 +77,8 @@
 
     background:linear-gradient(
         180deg,
-        #ffd95b,
-        #f5c542
+        #063f8a,
+        #42f5f5
     );
 
     color:#111;
@@ -184,7 +184,7 @@
 .withdraw-select:focus,
 .deposit-input:focus{
 
-    border-color:#F5C542;
+    border-color:#1fdff8;
 
     box-shadow:
         0 0 0 3px rgba(245,197,66,.15);
@@ -231,7 +231,7 @@
 
 .upload-box:hover{
 
-    border-color:#F5C542;
+    border-color:#1fdff8;
 
     background:#1d1d1d;
 
@@ -239,7 +239,7 @@
 
 .upload-box svg{
 
-    color:#F5C542;
+    color:#1fdff8;
 
     font-size:40px;
 
@@ -328,7 +328,7 @@
 
 .receive{
 
-    color:#18d97c;
+    color:#1fdff8;
 
     font-size:30px;
 
@@ -352,8 +352,8 @@
 
     background:linear-gradient(
         180deg,
-        #ffd95b,
-        #f5c542
+        #036ee7,
+        #04d9f5
     );
 
     color:#111;
@@ -550,7 +550,7 @@ background:#555;
 
 ::selection{
 
-background:#F5C542;
+background:#1fdff8;
 
 color:#111;
 
@@ -676,7 +676,7 @@ line-height:1.6;
 }
 
 .custom-select:hover{
-    border-color:#f5c542;
+    border-color:#1fdff8;
 }
 
 .selected-item{
@@ -711,7 +711,7 @@ line-height:1.6;
 }
 
 .dropdown-menu::-webkit-scrollbar-thumb{
-    background:#f5c542;
+    background:#1fdff8;
     border-radius:20px;
 }
 

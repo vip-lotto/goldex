@@ -3,43 +3,44 @@ import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
 import "./TradeReceipt.css";
 import { useTranslation } from "react-i18next";
+import marketData from "../data/marketData";
 
 
-const RULES = {
-  30: {
-    min: 10,
-    max: 999,
-    profit: 5,
-  },
-
-  60: {
-    min: 1000,
-    max: 29999,
-    profit: 10,
-  },
-
-  90: {
-    min: 30000,
-    max: 49999,
-    profit: 12,
-  },
-
-  120: {
-    min: 50000,
-    max: 99999,
-    profit: 15,
-  },
-
-  180: {
-    min: 100000,
-    max: Infinity,
-    profit: 18,
-  },
-};
 
 export default function TradePanel() {
 
-    
+    const TRADE_RULES = [
+  {
+    duration:30,
+    profit:5,
+    min:10,
+    max:999
+  },
+  {
+    duration:60,
+    profit:10,
+    min:1000,
+    max:29999
+  },
+  {
+    duration:90,
+    profit:12,
+    min:30000,
+    max:49999
+  },
+  {
+    duration:120,
+    profit:15,
+    min:50000,
+    max:99999
+  },
+  {
+    duration:180,
+    profit:18,
+    min:100000,
+    max:999999999
+  }
+];
 
   const { showToast } = useToast();  
 
@@ -49,10 +50,13 @@ export default function TradePanel() {
   const [amount, setAmount] = useState("");
   const [side, setSide] = useState(null);
 
+  const [symbol, setSymbol] = useState("XAUUSD");
+
   const [isTrading, setIsTrading] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [tradeId, setTradeId] = useState(null);
   const [receipt, setReceipt] = useState(null);
+  
   const [currentTrade, setCurrentTrade] = useState(null);
 
 
@@ -64,7 +68,10 @@ export default function TradePanel() {
   const [walletBalance, setWalletBalance] = useState(0);
   const [tradeAmount, setTradeAmount] = useState(0);
 
-  const rule = RULES[duration];
+  
+
+
+ 
 
   useEffect(() => {
 
@@ -95,14 +102,20 @@ export default function TradePanel() {
 }, [amount, isTrading]);
 
   useEffect(() => {
+
+  loadTradeRules();
+
   resumeTrade();
+
 }, []);
 
   useEffect(() => {
   if (!isTrading) return;
 
   if (seconds <= 0) {
+
     finishTrade(currentTrade);
+
     return;
   }
 
@@ -111,8 +124,35 @@ export default function TradePanel() {
   }, 1000);
 
   return () => clearTimeout(timer);
+
 }, [seconds, isTrading, currentTrade]);
 
+
+  // ======================================
+// LOAD TRADE RULES
+// ======================================
+
+async function loadTradeRules(){
+
+  const { data, error } = await supabase
+    .from("trade_rules")
+    .select("*")
+    .order("duration");
+
+  if(error){
+
+    showToast(
+      error.message,
+      "error"
+    );
+
+    return;
+
+  }
+
+  setRules(data);
+
+}
 
   async function resumeTrade() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -138,21 +178,11 @@ export default function TradePanel() {
 
   setTradeId(trade.id);
   setCurrentTrade(trade);
-  setSide(trade.side);
-  setTradeAmount(trade.amount);
-  setDuration(trade.duration);
-
-  const { data: wallet } = await supabase
-    .from("wallets")
-    .select("*")
-    .eq("user_id", trade.user_id)
-    .single();
-
-  setWalletBalance(wallet.balance);
 
   await finishTrade(trade);
 
   return;
+
 }
 
   const { data: wallet } = await supabase
@@ -179,36 +209,47 @@ setDuration(trade.duration);
 
   async function startTrade(type) {
 
-    if (amount < rule.min || amount > rule.max) {
-
-  showToast(
-  `Amount ${rule.min.toLocaleString()} - ${rule.max.toLocaleString()} USDT`,
-  "warning"
+const currentRule = TRADE_RULES.find(
+ item => Number(item.duration) === Number(duration)
 );
 
+console.log("START TRADE");
+
+const tradeAmount = Number(amount);
+
+if(
+ !currentRule ||
+ tradeAmount < Number(currentRule.min) ||
+ tradeAmount > Number(currentRule.max)
+){
+
+ showToast(
+ currentRule
+ ? `Amount ${currentRule.min.toLocaleString()} - ${currentRule.max.toLocaleString()} USDT`
+ : "กำลังโหลดกฎการเทรด",
+ "warning"
+ );
+
+ return;
+}
+
+
+
+    const user = JSON.parse(
+  localStorage.getItem("user")
+);
+
+if (!user) {
+  showToast("กรุณาเข้าสู่ระบบ", "warning");
   return;
 }
 
-    const user = JSON.parse(
-      localStorage.getItem("user")
-    );
-
-    console.log("USER =", user);
-    console.log("TYPE =", typeof user.id);
-    console.log("ID =", user.id);
+console.log("USER =", user);
+console.log("TYPE =", typeof user.id);
+console.log("ID =", user.id);
 
 
-    if (!user) {
-
-      showToast(
-  "กรุณาเข้าสู่ระบบ",
-  "warning"
-);
-
-      return;
-
-    }
-
+      
 
     const { data: openedTrade } = await supabase
   .from("trades")
@@ -270,7 +311,7 @@ if (updateWalletError) {
 }
 
 setWalletBalance(wallet.balance);
-setTradeAmount(amount);
+setTradeAmount(tradeAmount);
 
     
 
@@ -287,12 +328,12 @@ const {
 } = await supabase
   .from("trades")
   .insert({
-    user_id: user.id,
-    coin: "XAUUSD",
-    side: type,
-    amount,
-    duration,
-    profit: rule.profit,
+  user_id: user.id,
+  coin: symbol,
+  side: type,
+  amount: tradeAmount,
+  duration,
+  profit: currentRule.profit,
     status: "trading",
 
     open_price: 0,
@@ -337,7 +378,58 @@ showToast(
   `${type} ${amount.toLocaleString()} USDT • ${duration} Seconds`,
   "success"
 );
+}
+
+// ======================================
+// AUTO LOSE
+// ======================================
+
+async function autoLose(trade) {
+
+  const { data: latest } = await supabase
+    .from("trades")
+    .select("status")
+    .eq("id", trade.id)
+    .single();
+
+  if (!latest) return;
+
+  if (latest.status === "finished") {
+    return;
   }
+
+  await supabase
+    .from("trades")
+    .update({
+      status: "finished",
+      result: "lose",
+      payout: 0,
+      profit_amount: 0,
+      finished_at: new Date().toISOString(),
+    })
+    .eq("id", trade.id);
+
+  setReceipt({
+    id: trade.id,
+    amount: trade.amount,
+    duration: trade.duration,
+    side: trade.side,
+    result: "lose",
+    payout: 0,
+    time: new Date().toLocaleString(),
+  });
+
+  setCurrentTrade(null);
+  setTradeId(null);
+  setSeconds(0);
+  setIsTrading(false);
+
+  showToast("คุณแพ้", "error");
+}
+
+// ======================================
+// FINISH TRADE
+// ======================================
 
 async function finishTrade(trade = currentTrade) {
 
@@ -347,80 +439,39 @@ async function finishTrade(trade = currentTrade) {
 
   if (!trade) return;
 
-const { data: latestTrade } = await supabase
-  .from("trades")
-  .select("status")
-  .eq("id", trade.id)
-  .single();
 
-if (!latestTrade) return;
-
-if (latestTrade.status === "finished") {
-  return;
-}
 
   const user = JSON.parse(localStorage.getItem("user"));
 
   // เปลี่ยนเป็น "win" เพื่อทดสอบ
 
- const {
-  data: setting,
-  error: settingError,
-} = await supabase
-  .from("settings")
-  .select("value")
-  .eq("key", "tradeMode")
+ const { data: latestTrade, error: latestTradeError } = await supabase
+  .from("trades")
+  .select("status, result")
+  .eq("id", trade.id)
   .single();
 
-if (settingError) {
-  showToast(settingError.message, "error");
+if (latestTradeError) {
+  showToast(latestTradeError.message, "error");
   return;
 }
 
-const tradeMode = setting.value;
-
-console.log("Trade Mode =", tradeMode);
-
-let result;
-
-switch (tradeMode) {
-  case "lock_win":
-    result = "win";
-    break;
-
-  case "lock_lose":
-    result = "lose";
-    break;
-
-  case "win_once":
-    result = "win";
-
-    await supabase
-      .from("settings")
-      .update({ value: "auto" })
-      .eq("key", "tradeMode");
-
-    break;
-
-  case "lose_once":
-    result = "lose";
-
-    await supabase
-      .from("settings")
-      .update({ value: "auto" })
-      .eq("key", "tradeMode");
-
-    break;
-
-  default:
-    result = Math.random() < 0.5 ? "win" : "lose";
+if (!latestTrade) {
+  return;
 }
 
+const result = latestTrade.result;
 
+if (!result) {
 
+  showToast(
+    "กรุณารอสักครู่ ระบบกำลังประมวลผล",
+    "warning"
+  );
 
-console.log("Trade Mode =", tradeMode);
-console.log("Result =", result);
+  return;
+
+}
 
 
   let payout = 0;
@@ -428,7 +479,16 @@ console.log("Result =", result);
 
   if (result === "win") {
 
-  const tradeRule = RULES[trade.duration];
+  const { data: tradeRule, error: ruleError } = await supabase
+  .from("trade_rules")
+  .select("*")
+  .eq("duration", trade.duration)
+  .single();
+
+if (ruleError) {
+  showToast(ruleError.message, "error");
+  return;
+}
 
   profitAmount =
     (trade.amount * tradeRule.profit) / 100;
@@ -436,11 +496,18 @@ console.log("Result =", result);
   payout =
     trade.amount + profitAmount;
 
-    const { data: wallet } = await supabase
+    const { data: wallet, error: walletError } = await supabase
   .from("wallets")
   .select("*")
- .eq("user_id", trade.user_id)
+  .eq("user_id", trade.user_id)
   .single();
+
+if (walletError) {
+  showToast(walletError.message, "error");
+  return;
+}
+
+
 
 await supabase
   .from("wallets")
@@ -526,6 +593,37 @@ const min = String(
 
       
 
+    <select
+
+value={symbol}
+
+disabled={isTrading}
+
+onChange={(e)=>setSymbol(e.target.value)}
+
+>
+
+{
+marketData.map(item => (
+
+<option
+
+key={item.symbol}
+
+value={item.symbol}
+
+>
+
+{item.name} ({item.symbol})
+
+</option>
+
+))
+
+}
+
+</select>
+
       <div>
 
         <label>{t("duration")}</label>
@@ -560,7 +658,11 @@ const min = String(
 
   <div>
 
-    {t("profit")} : {rule.profit}%
+    {
+ TRADE_RULES.find(
+   r => r.duration === duration
+ )?.profit || 0
+}%
 
   </div>
 

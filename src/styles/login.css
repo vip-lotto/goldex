@@ -1,94 +1,335 @@
-/* ================= Login Page ================= */
+/* ===========================
+   LOGIN PAGE
+=========================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+html,
+body,
+#root{
+    width:100%;
+    min-width:0;
+    min-height:100%;
+    margin:0;
+    padding:0;
+    overflow-x:hidden;
+}
+
+body{
+    background:#050b18;
+}
 
 .login-page{
-    min-height:100vh;
+
     width:100%;
+    min-height:100vh;
+    min-height:100dvh;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    padding:20px;
-    box-sizing:border-box;
+    padding:
+        max(18px,env(safe-area-inset-top))
+        max(18px,env(safe-area-inset-right))
+        max(18px,env(safe-area-inset-bottom))
+        max(18px,env(safe-area-inset-left));
+
+    overflow-x:hidden;
+
+    position:relative;
 
     background:#050b18;
 }
 
-/* ================= Login Card ================= */
+/* ===========================
+   LOGIN CARD
+=========================== */
 
 .login-card{
+
     width:100%;
     max-width:460px;
+
+    min-width:0;
 
     margin:auto;
 
     border-radius:32px;
 
-    padding:40px 30px;
+    padding:clamp(22px,4vw,40px);
 
-    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+
+    overflow:hidden;
+
 }
 
-/* ================= Logo ================= */
+/* ===========================
+   TITLE
+=========================== */
 
 .goldex-title{
+
+    width:100%;
+
+    min-width:0;
+
     text-align:center;
 
-    font-size:60px;
+    font-size:clamp(40px,8vw,60px);
+
+    line-height:1.1;
 
     font-weight:800;
 
-    letter-spacing:2px;
+    letter-spacing:1px;
 
     color:#0a77f3;
 
-    text-shadow:0 0 18px rgba(7, 218, 255, 0.55);
+    text-shadow:0 0 18px rgba(7,218,255,.55);
 
-    line-height:1;
+    overflow-wrap:anywhere;
+    word-break:break-word;
 
-    margin-bottom:8px;
 }
 
 .goldex-subtitle{
+
+    width:100%;
+
+    min-width:0;
+
     text-align:center;
-    margin-bottom:35px;
-}
 
-/* ================= Mobile ================= */
+    font-size:clamp(14px,3vw,16px);
 
-@media (max-width:768px){
+    line-height:1.5;
 
-    .login-card{
-        max-width:430px;
-        padding:34px 24px;
-    }
+    margin-bottom:18px;
 
-    .goldex-title{
-        font-size:56px;
-    }
+    overflow-wrap:anywhere;
+    word-break:break-word;
 
 }
+
+/* ===========================
+   INPUT
+=========================== */
+
+.login-card input{
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+    font-size:16px;
+
+    overflow:hidden;
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
+
+.login-card button{
+
+    width:100%;
+
+    min-width:0;
+
+    max-width:100%;
+
+    white-space:normal;
+
+    overflow-wrap:anywhere;
+
+}
+
+/* ===========================
+   TOP BUTTONS
+=========================== */
 
 .top-buttons{
+
     position:absolute;
-    top:25px;
-    right:25px;
+
+    top:max(18px,env(safe-area-inset-top));
+
+    right:max(18px,env(safe-area-inset-right));
+
     display:flex;
-    gap:12px;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    max-width:calc(100vw - 30px);
+
+    min-width:0;
+
     z-index:100;
+
 }
 
 .language-btn,
 .support-btn{
-    width:52px;
-    height:52px;
+
+    width:50px;
+    height:50px;
+
+    flex:0 0 auto;
+
     border-radius:50%;
+
     border:2px solid #1678d4;
+
     background:#091324;
+
     color:#08b7ec;
-    font-size:22px;
+
     display:flex;
-    justify-content:center;
     align-items:center;
+    justify-content:center;
+
     cursor:pointer;
+
+    transition:.2s;
+
+}
+
+.language-btn:hover,
+.support-btn:hover{
+
+    transform:scale(1.05);
+
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
+.login-card p,
+.login-card span,
+.login-card label,
+.login-card h1,
+.login-card h2,
+.login-card h3,
+.login-card h4{
+
+    min-width:0;
+
+    max-width:100%;
+
+    overflow-wrap:anywhere;
+
+    word-break:break-word;
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media (max-width:768px){
+
+    .login-page{
+
+        align-items:center;
+
+        padding:
+            max(16px,env(safe-area-inset-top))
+            16px
+            max(20px,env(safe-area-inset-bottom))
+            16px;
+
+    }
+
+    .login-card{
+
+        max-width:100%;
+
+        border-radius:24px;
+
+        padding:24px 18px;
+
+    }
+
+    .language-btn,
+    .support-btn{
+
+        width:46px;
+        height:46px;
+
+    }
+
+}
+
+/* ===========================
+   iPhone SE / 7 / 8
+=========================== */
+
+@media (max-width:380px){
+
+    .login-card{
+
+        padding:20px 16px;
+
+    }
+
+    .goldex-title{
+
+        font-size:42px;
+
+    }
+
+    .language-btn,
+    .support-btn{
+
+        width:42px;
+        height:42px;
+
+    }
+
+}
+
+/* ===========================
+   TABLET
+=========================== */
+
+@media (min-width:769px){
+
+    .login-card{
+
+        max-width:480px;
+
+    }
+
+}
+
+/* ===========================
+   DESKTOP LARGE
+=========================== */
+
+@media (min-width:1440px){
+
+    .login-card{
+
+        max-width:500px;
+
+    }
+
 }

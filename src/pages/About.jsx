@@ -1,37 +1,275 @@
+import { ArrowLeft, ShieldCheck } from "lucide-react";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
+import "../styles/about.css";
+
 export default function About() {
+
+  const navigate = useNavigate();
+
+  const { t } = useTranslation();
 
   return (
 
-    <div className="page">
+    <div className="about-page">
 
-      <div className="card">
+      {/* ================= Header ================= */}
 
-        
-        <p>Web3-contract, and/or its affiliates (“we,” “our,” or “us”), offers its software services through our website at web3-contract.com. We also have associated mobile apps and products (collectively, "Services" or "Trust Wallet"). Before using our Services, it’s important to carefully read our Terms of Service (the "Terms") and any other policies or notices related to our website .
+      <div className="about-header">
 
-Agreement to Terms
-By using any of our Services, you confirm that (i) you have read and understand our Terms, (ii) you agree to follow these Terms, and (iii) you are legally allowed to accept these Terms. If you don’t agree with these Terms or any changes we make to them, please don’t use our Services. Please note, WE DO NOT OFFER FINANCIAL OR INVESTMENT ADVICE. WE PROVIDE TECHNOLOGY SERVICES, WITHOUT MAKING ANY RECOMMENDATIONS ABOUT DIGITAL ASSET TRANSACTIONS OR OPERATIONS. Remember, any decision to perform transactions with digital assets should be decided by you.
+        <button
+          className="about-back"
+          onClick={() => navigate(-1)}
+        >
+          <ArrowLeft size={22}/>
+        </button>
 
-Privacy Policy
-To understand how we collect, use and disclose our users’ information, please check our Privacy Notice. By using our Services, you accept and agree that we will manage your information (including any personal data you give us) following the terms in our Privacy Notice.
+        <h2>{t("about")}</h2>
 
+      </div>
 
-Eligibility
-To be eligible to use Web3-contract:
+      {/* ================= Main Card ================= */}
 
-You must be at least eighteen (18) years old and legally competent to enter into these Terms.
+      <div className="about-card">
 
-If you are using our Services on behalf of a legal entity, you further represent and warrant that the legal entity is duly organized and validly existing under the applicable laws of the jurisdiction of its organization; and you are duly authorized by such legal entity to act on its behalf.
+        {/* Logo */}
 
-you must not be located in, or a resident, national, or entity established under the laws of any jurisdiction that is comprehensively sanctioned by the U.S., including but not limited to Cuba, Iran, North Korea, Syria, and the Crimea, Donetsk, and Luhansk regions of Ukraine;
+        <div className="about-logo">
 
-you must not be currently on any list of prohibited or restricted persons maintained by the U.S. government (including the U.S. Treasury Department’s Office of Foreign Assets Control (“OFAC”) Specially Designated Nationals and Blocked Persons List and Foreign Sanctions Evaders List and the U.S. Department of Commerce’s Bureau of Industry and Security (“BIS”) Entity List), the United Nations Security Council, the United Kingdom government, the European Union or its member states, or any other relevant sanctions authority.
+          <div className="about-logo-icon">
 
-you can only use our Services if permitted under the laws of your jurisdiction. For the avoidance of doubt, you may not use our Services if you are located in, or a citizen or resident of any state, country, territory or other jurisdiction where your use of our Services would be illegal or otherwise violate any applicable laws.
+            <ShieldCheck size={60}/>
 
-Please make sure that these Terms are in compliance with all laws, rules, and regulations that apply to you. You agree that you are only using our Services with legally-obtained funds that rightfully belong to you. By using Web3-contract , you represent and warrant that you meet all eligibility requirements that we outline in these Terms.
+          </div>
 
-Notwithstanding the aforementioned conditions, we maintain absolute discretion to prohibit certain individuals from accessing or utilizing  Web3-contract. Additionally, please note that we reserve the right to modify our eligibility criteria at any given time, in accordance with relevant laws, regulations, and company policies.</p>
+          <h1>Trust</h1>
+
+          <span>Version 1.0.0</span>
+
+        </div>
+
+        {/* ================= Agreement ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Agreement to Terms
+          </h3>
+
+          <p>
+
+            Web3-contract and its affiliates provide
+            blockchain technology services through
+            websites and mobile applications.
+
+            By accessing or using our Services you
+            acknowledge that you have read,
+            understood and accepted these Terms.
+
+            If you do not agree with these Terms,
+            please discontinue using our Services.
+
+            We do not provide financial advice,
+            investment advice or trading advice.
+
+            Every cryptocurrency transaction is
+            completely your own responsibility.
+
+          </p>
+
+        </div>
+
+        {/* ================= Privacy ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Privacy Policy
+          </h3>
+
+          <p>
+
+            We respect your privacy.
+
+            Personal information is collected only
+            for providing better services, improving
+            security and complying with applicable
+            laws and regulations.
+
+            We do not sell your personal data.
+
+            Your information is protected using
+            industry-standard security practices.
+
+          </p>
+
+        </div>
+
+        {/* ================= Eligibility ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Eligibility
+          </h3>
+
+          <ul>
+
+            <li>
+              You must be at least 18 years old.
+            </li>
+
+            <li>
+              You must have full legal capacity.
+            </li>
+
+            <li>
+              You agree to comply with the laws of
+              your country.
+            </li>
+
+            <li>
+              You are responsible for protecting
+              your own account.
+            </li>
+
+            <li>
+              Never share your password or wallet
+              credentials.
+            </li>
+
+          </ul>
+
+        </div>
+
+                {/* ================= Digital Assets ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Digital Assets
+          </h3>
+
+          <p>
+
+            Cryptocurrency and digital assets are
+            highly volatile.
+
+            Prices may rise or fall dramatically
+            within a short period of time.
+
+            Blockchain transactions are generally
+            irreversible once confirmed.
+
+            Always verify wallet addresses,
+            blockchain networks and transaction
+            amounts before sending assets.
+
+            Trust is not responsible for losses
+            caused by incorrect wallet addresses,
+            wrong networks or user mistakes.
+
+          </p>
+
+        </div>
+
+        {/* ================= Risk Warning ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Risk Warning
+          </h3>
+
+          <p>
+
+            Trading digital assets involves
+            substantial financial risk.
+
+            The value of cryptocurrencies can
+            increase or decrease rapidly.
+
+            You should carefully evaluate your
+            financial situation before making
+            any investment decisions.
+
+            Never invest more money than you
+            can afford to lose.
+
+          </p>
+
+        </div>
+
+        {/* ================= Disclaimer ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Disclaimer
+          </h3>
+
+          <p>
+
+            Trust provides technology services
+            only.
+
+            We do not guarantee profits,
+            investment returns or future market
+            performance.
+
+            We are not responsible for losses
+            resulting from user mistakes,
+            forgotten passwords, private key
+            loss, phishing attacks, blockchain
+            failures or network congestion.
+
+            Every transaction is initiated
+            entirely by the user.
+
+          </p>
+
+        </div>
+
+        {/* ================= Compliance ================= */}
+
+        <div className="about-section">
+
+          <h3>
+            Compliance
+          </h3>
+
+          <p>
+
+            We reserve the right to suspend,
+            restrict or terminate accounts that
+            violate applicable laws, these Terms
+            of Service or our internal policies.
+
+            Identity verification (KYC) may be
+            required where required by law.
+
+          </p>
+
+        </div>
+
+        {/* ================= Footer ================= */}
+
+        <div className="about-footer">
+
+          <p>
+
+            © 2026 Trust
+
+          </p>
+
+          <span>
+
+            All Rights Reserved
+
+          </span>
+
+        </div>
 
       </div>
 

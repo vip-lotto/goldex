@@ -198,7 +198,7 @@
   "uploadSelfie":"上傳自拍照",
   "clickToUpload":"點擊上傳",
   "submit":"提交",
-  "submitting":"提交中...",
+
   "uploadAllImages":"請上傳所有必要圖片",
   "kycSubmitted":"KYC 已成功提交",
 
@@ -214,11 +214,45 @@
   "close":"關閉",
 
   "totalAssets":"總資產",
-  "assetsDetails":"資產明細"
+  "assetsDetails":"資產明細",
 
 
 
+"phone":"手機號碼",
+"email":"電子郵件",
 
+"welcome":"歡迎",
+"welcomeMessage":"歡迎使用 TRUST",
+
+"depositSuccess":"充值成功",
+"depositApproved":"您的充值已通過審核。",
+
+"depositFailed":"充值失敗",
+"depositRejected":"您的充值已被拒絕。",
+
+"withdrawSuccess":"提款成功",
+"withdrawApproved":"您的提款已通過審核。",
+
+"withdrawFailed":"提款失敗",
+"withdrawRejected":"您的提款已被拒絕。",
+
+"withdrawProcessing":"提款處理中",
+"withdrawProcessingMessage":"您的提款正在處理中。",
+
+"transferReceivedMessage":"您收到了一筆轉帳。",
+"transferCompletedMessage":"您的轉帳已成功完成。",
+
+"registerSuccessMessage":"註冊成功",
+
+"phoneOrEmailExists":"手機號碼或電子郵件已存在",
+
+"loginSuccess":"登入成功",
+
+"ok":"確定",
+
+"deleteSuccess":"銀行帳戶刪除成功",
+
+"transfer":"轉帳"
 
 
 

@@ -22,7 +22,7 @@
   margin: 0;
   font-size: 30px;
   font-weight: 800;
-  color: #f5c542;
+  color: #1fdff8;
 }
 
 .back-btn{
@@ -65,7 +65,7 @@
 }
 
 .tab-btn.active{
-  background: #f5c542;
+  background: #1fdff8;
   color: #000;
   border: none;
 }
@@ -115,7 +115,7 @@
 }
 
 .select-box:hover{
-  border-color:#f5c542;
+  border-color:#1fdff8;
 }
 
 /* ================= VALUE (ICON + TEXT) ================= */

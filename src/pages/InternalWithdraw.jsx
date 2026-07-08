@@ -386,28 +386,7 @@ setLoading(false);
       return;
     }
 
-    await supabase
-  .from("wallets")
-  .update({
-    balance:
-      Number(wallet.balance) - Number(amount)
-  })
-  .eq("user_id", user.id);
-
-  const newBalance =
-Number(wallet.balance)-Number(amount);
-
-localStorage.setItem(
-"wallet",
-JSON.stringify({
-   ...wallet,
-   balance:newBalance
-}));
-
-window.dispatchEvent(
-new Event("walletUpdated")
-);
-
+    
 
 await addTransaction({
   user_id: user.id,

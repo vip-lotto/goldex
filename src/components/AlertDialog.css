@@ -98,3 +98,30 @@
         opacity:1;
     }
 }
+
+.dialog-actions{
+    display:flex;
+    gap:12px;
+    margin-top:20px;
+}
+
+.dialog-cancel,
+.dialog-confirm{
+    flex:1;
+    height:46px;
+    border:none;
+    border-radius:12px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:700;
+}
+
+.dialog-cancel{
+    background:#2d2d2d;
+    color:#fff;
+}
+
+.dialog-confirm{
+    background:#ef4444;
+    color:#fff;
+}

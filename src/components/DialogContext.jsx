@@ -6,36 +6,79 @@ const DialogContext = createContext();
 export function DialogProvider({ children }) {
 
   const [dialog, setDialog] = useState({
-    open: false,
-    type: "info",
-    title: "",
-    message: "",
+    open:false,
+    type:"info",
+    title:"",
+    message:"",
+    confirm:false,
+    onConfirm:null,
   });
 
   function showDialog({
-    type = "info",
-    title = "",
-    message = "",
-  }) {
+    type="info",
+    title="",
+    message="",
+  }){
+
     setDialog({
-      open: true,
+      open:true,
       type,
       title,
       message,
+      confirm:false,
+      onConfirm:null,
     });
+
   }
 
-  function closeDialog() {
-    setDialog((prev) => ({
+  function showConfirm({
+    type="warning",
+    title="",
+    message="",
+    onConfirm,
+  }){
+
+    setDialog({
+      open:true,
+      type,
+      title,
+      message,
+      confirm:true,
+      onConfirm,
+    });
+
+  }
+
+  function closeDialog(){
+
+    setDialog(prev=>({
       ...prev,
-      open: false,
+      open:false,
     }));
+
   }
 
-  return (
+  function confirm(){
+
+    if(dialog.onConfirm){
+
+      dialog.onConfirm();
+
+    }
+
+    closeDialog();
+
+  }
+
+  return(
+
     <DialogContext.Provider
-      value={{ showDialog }}
+      value={{
+        showDialog,
+        showConfirm,
+      }}
     >
+
       {children}
 
       <AlertDialog
@@ -43,13 +86,19 @@ export function DialogProvider({ children }) {
         type={dialog.type}
         title={dialog.title}
         message={dialog.message}
+        confirm={dialog.confirm}
+        onConfirm={confirm}
         onClose={closeDialog}
       />
 
     </DialogContext.Provider>
+
   );
+
 }
 
-export function useDialog() {
+export function useDialog(){
+
   return useContext(DialogContext);
+
 }
