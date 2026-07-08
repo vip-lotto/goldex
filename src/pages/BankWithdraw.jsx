@@ -296,14 +296,10 @@ return (
         {t("amountReceived")}
       </span>
 
-      <strong
-        className="receive"
-      >
-        {receiveAmount > 0
-          ? receiveAmount
-          : 0}
-        USDT
-      </strong>
+      <strong className="receive">
+  {receiveAmount > 0 ? receiveAmount : 0}{" "}
+  <span className="receive-unit">USDT</span>
+</strong>
 
     </div>
 

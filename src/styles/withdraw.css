@@ -326,15 +326,20 @@
 
 /* ================= Receive ================= */
 
+/* ================= Receive ================= */
+
 .receive{
+    color:#fafafa !important;
+    font-size:19px !important;
+    font-weight:500 !important;
+    margin-left:12px;
+}
 
-    color:#1fdff8;
+.receive-unit{
 
-    font-size:30px;
-
-    font-weight:800;
-
-    letter-spacing:.5px;
+    color:#fbfcfb;      /* USDT สีเทาเข้มกว่า */
+    font-size:16px;
+    font-weight:500;
 
 }
 

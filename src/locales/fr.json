@@ -247,7 +247,14 @@
 
 "deleteSuccess":"Compte bancaire supprimé avec succès",
 
-"transfer":"Transfert"
+"transfer":"Transfert",
+
+
+"processing":"Veuillez patienter, le système est en cours de traitement.",
+"resumeTrade":"Reprendre la transaction",
+"loadingTradeRules":"Chargement des règles de trading...",
+"tradeAlreadyRunning":"Vous avez déjà une transaction en cours.",
+"youLose":"Vous avez perdu."
 
 
 

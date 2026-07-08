@@ -245,10 +245,14 @@
 
 "deleteSuccess":"Cuenta bancaria eliminada correctamente",
 
-"transfer":"Transferencia"
+"transfer":"Transferencia",
 
 
-
+"processing":"Por favor espere, el sistema está procesando.",
+"resumeTrade":"Reanudar operación",
+"loadingTradeRules":"Cargando reglas de operación...",
+"tradeAlreadyRunning":"Ya tiene una operación en curso.",
+"youLose":"Ha perdido."
 
 
 

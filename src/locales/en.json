@@ -228,7 +228,20 @@
 "phoneOrEmailExists": "Phone number or email already exists",
 "loginSuccess": "Login successful",
 "ok": "OK",
-"deleteSuccess":"Bank account deleted successfully"
+"deleteSuccess":"Bank account deleted successfully",
+
+"processing":"Please wait, the system is processing.",
+"resumeTrade":"Trade resumed.",
+"loadingTradeRules":"Loading trade rules...",
+
+"tradeAlreadyRunning":"You already have an active trade.",
+
+"youLose":"You lose."
+
+
+  
+
+
 
 }
 

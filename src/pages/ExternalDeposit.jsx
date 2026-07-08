@@ -78,6 +78,23 @@ const NETWORK_LOGO = {
     loadWallets();
   }, []);
 
+  useEffect(() => {
+  const handleClickOutside = (e) => {
+    if (coinRef.current && !coinRef.current.contains(e.target)) {
+      setOpenCoin(false);
+    }
+
+    if (networkRef.current && !networkRef.current.contains(e.target)) {
+      setOpenNetwork(false);
+    }
+  };
+
+  document.addEventListener("mousedown", handleClickOutside);
+
+  return () =>
+    document.removeEventListener("mousedown", handleClickOutside);
+}, []);
+
   const notify = (msg) => {
 
     setToastMsg(msg);
@@ -115,6 +132,10 @@ const NETWORK_LOGO = {
         item.coin === coin &&
         item.network === network
     );
+
+    console.log("wallets =", wallets);
+    console.log("currentWallet =", currentWallet);
+    console.log("address =", currentWallet?.address);
 
   const copyAddress = () => {
 
@@ -353,17 +374,23 @@ const NETWORK_LOGO = {
 
           </div>
 
-          <p>
-            <p>{t("depositAddress")}</p>
-          </p>
+          <p
+  style={{
+    color:"#aaa",
+    marginBottom:"10px"
+  }}
+>
+  {t("depositAddress")}
+</p>
 
           <div
-            className="address-box"
-          >
-            {
-              currentWallet?.address
-            }
-          </div>
+  className="address-box"
+  onClick={copyAddress}
+>
+  <span className="address-text">
+    {currentWallet?.address}
+  </span>
+</div>
 
           <div
             style={{

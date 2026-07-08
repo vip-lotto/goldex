@@ -252,9 +252,15 @@
 
 "deleteSuccess":"銀行帳戶刪除成功",
 
-"transfer":"轉帳"
+"transfer":"轉帳",
 
 
+
+"processing":"請稍候，系統正在處理中。",
+"resumeTrade":"返回交易",
+"loadingTradeRules":"正在載入交易規則...",
+"tradeAlreadyRunning":"您已有一筆進行中的交易。",
+"youLose":"您輸了。"
 
 
 

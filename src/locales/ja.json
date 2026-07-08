@@ -248,10 +248,13 @@
 
 "deleteSuccess":"銀行口座を削除しました",
 
-"transfer":"送金"
 
 
-
+"processing":"しばらくお待ちください。システムが処理中です。",
+"resumeTrade":"取引に戻る",
+"loadingTradeRules":"取引ルールを読み込み中...",
+"tradeAlreadyRunning":"すでに進行中の取引があります。",
+"youLose":"負けました。"
 
 
 

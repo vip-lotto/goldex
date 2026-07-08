@@ -253,8 +253,13 @@
 
 "submit":"Senden",
 
-"deleteSuccess":"Bankkonto erfolgreich gelöscht"
+"deleteSuccess":"Bankkonto erfolgreich gelöscht",
 
 
+"processing":"Bitte warten, das System verarbeitet Ihre Anfrage.",
+"resumeTrade":"Zum Handel zurückkehren",
+"loadingTradeRules":"Handelsregeln werden geladen...",
+"tradeAlreadyRunning":"Sie haben bereits einen aktiven Handel.",
+"youLose":"Sie haben verloren."
 
 }

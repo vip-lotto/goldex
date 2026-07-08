@@ -1054,3 +1054,10 @@ max-width:1100px;
 .transfer-cancel{
     flex:1;
 }
+
+.address-box{
+    border:2px solid #1fdff8;
+    border-radius:16px;
+    background:#111;
+    box-shadow:0 0 12px rgba(31,223,248,.15);
+}

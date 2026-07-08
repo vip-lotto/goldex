@@ -213,7 +213,7 @@
 
 
 
-  
+
 "phone":"전화번호",
 "email":"이메일",
 
@@ -248,7 +248,15 @@
 
 "deleteSuccess":"은행 계좌가 삭제되었습니다.",
 
-"transfer":"송금"
+
+
+"processing":"잠시만 기다려 주세요. 시스템이 처리 중입니다.",
+"resumeTrade":"거래로 돌아가기",
+"loadingTradeRules":"거래 규칙을 불러오는 중...",
+"tradeAlreadyRunning":"이미 진행 중인 거래가 있습니다.",
+"youLose":"패배했습니다."
+
+
 
 
 

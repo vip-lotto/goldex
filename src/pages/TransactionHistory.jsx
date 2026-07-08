@@ -368,9 +368,17 @@ export default function TransactionHistory() {
               <div className="history-detail">
 
                 <h3>
-
-                  {item.description}
-
+                  {
+                    item.type === "deposit"
+                      ? `${t("deposit")} USDT`
+                      : item.type === "withdraw"
+                      ? `${t("withdraw")} USDT`
+                      : item.type === "transfer"
+                      ? `${t("transfer")} USDT`
+                      : item.type === "trade"
+                      ? item.description
+                      : item.description
+                  }
                 </h3>
 
                 <span>

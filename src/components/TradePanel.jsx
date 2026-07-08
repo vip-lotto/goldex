@@ -67,7 +67,7 @@ export default function TradePanel() {
 
   const [walletBalance, setWalletBalance] = useState(0);
   const [tradeAmount, setTradeAmount] = useState(0);
-
+const [rules, setRules] = useState([]);
   
 
 
@@ -203,9 +203,8 @@ setDuration(trade.duration);
 
   setIsTrading(true);
 
-  showToast("กลับเข้าสู่รายการเทรด", "success");
+  showToast(t("resumeTrade"), "success");
 }
-
 
   async function startTrade(type) {
 
@@ -226,7 +225,7 @@ if(
  showToast(
  currentRule
  ? `Amount ${currentRule.min.toLocaleString()} - ${currentRule.max.toLocaleString()} USDT`
- : "กำลังโหลดกฎการเทรด",
+ : t("loadingTradeRules"),
  "warning"
  );
 
@@ -240,7 +239,7 @@ if(
 );
 
 if (!user) {
-  showToast("กรุณาเข้าสู่ระบบ", "warning");
+  showToast(t("pleaseLogin"), "warning");
   return;
 }
 
@@ -259,7 +258,7 @@ console.log("ID =", user.id);
   .maybeSingle();
 
 if (openedTrade) {
-  showToast("คุณมีรายการเทรดที่ยังไม่เสร็จ", "warning");
+  showToast(t("tradeAlreadyRunning"), "warning");
 
   resumeTrade();
 
@@ -285,9 +284,9 @@ if (walletError) {
 if (wallet.balance < amount) {
 
   showToast(
-    "ยอดเงินไม่เพียงพอ",
-    "warning"
-  );
+  t("insufficientBalance"),
+  "warning"
+);
 
   return;
 }
@@ -424,7 +423,7 @@ async function autoLose(trade) {
   setSeconds(0);
   setIsTrading(false);
 
-  showToast("คุณแพ้", "error");
+  showToast(t("youLose"), "error");
 }
 
 // ======================================
@@ -465,9 +464,9 @@ const result = latestTrade.result;
 if (!result) {
 
   showToast(
-    "กรุณารอสักครู่ ระบบกำลังประมวลผล",
-    "warning"
-  );
+  t("processing"),
+  "warning"
+);
 
   return;
 
@@ -572,9 +571,9 @@ setSeconds(0);
   } else {
 
     showToast(
-      "คุณแพ้",
-      "error"
-    );
+  t("youLose"),
+  "error"
+);
 
   }
 }

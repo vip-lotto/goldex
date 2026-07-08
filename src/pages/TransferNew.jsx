@@ -506,42 +506,46 @@ alt=""
     <h3>{t("address")}</h3>
 
     <div
-      style={{
-        border:"2px solid #c99a18d2",
-        borderRadius:"16px",
-        padding:"15px",
-        display:"flex",
-        alignItems:"center",
-        gap:"10px"
-      }}
-    >
+  style={{
+    border:"2px solid #0981f1e3",
+    borderRadius:"16px",
+    padding:"12px",
+    display:"flex",
+    alignItems:"center",
+    gap:"10px"
+  }}
+>
 
       <input
-        value={address}
-        onChange={(e)=>
-          setAddress(
-            e.target.value
-          )
-        }
-        placeholder={t("walletAddress")}
-        style={{
-          flex:1,
-          background:"transparent",
-          border:"none",
-          outline:"none",
-          color:"#fff"
-        }}
-      />
+  value={address}
+  onChange={(e)=>setAddress(e.target.value)}
+  placeholder="Wallet Address"
+  style={{
+    flex:1,
+    minWidth:0,
+    width:"100%",
+    background:"transparent",
+    border:"none",
+    outline:"none",
+    color:"#fff",
+    fontSize:"16px",
+    padding:"8px 4px"
+  }}
+/>
 
       <button
         onClick={pasteAddress}
         style={{
-          background:"none",
-          border:"none",
-          color:"#c99a18d2"
-        }}
+  width:"42px",
+  height:"42px",
+  flexShrink:0,
+  background:"none",
+  border:"none",
+  color:"#06f7e3d2",
+  cursor:"pointer"
+}}
       >
-        <Clipboard />
+        <Clipboard size={18} />
       </button>
 
       <button
@@ -549,12 +553,16 @@ alt=""
           setShowScanner(true)
         }
         style={{
-          background:"none",
-          border:"none",
-          color:"#c99a18d2"
-        }}
+  width:"42px",
+  height:"42px",
+  flexShrink:0,
+  background:"none",
+  border:"none",
+  color:"#0ef5b0d2",
+  cursor:"pointer"
+}}
       >
-        <ScanLine />
+        <ScanLine size={18} />
       </button>
 
     </div>

@@ -357,13 +357,15 @@ setTimeout(() => {
               onChange={(e)=>setUsername(e.target.value)}
               style={{
                 flex:1,
+                minWidth:0,
+                width:"100%",
                 background:"transparent",
                 border:"none",
                 color:"#fff",
-                padding:"18px",
-                fontSize:"18px",
+                padding:"18px 10px",
+                fontSize:"clamp(13px,3.5vw,14px)",
                 outline:"none"
-              }}
+          }}
             />
           </div>
 
@@ -392,13 +394,15 @@ setTimeout(() => {
               onChange={(e)=>setPassword(e.target.value)}
               style={{
                 flex:1,
+                minWidth:0,
+                width:"100%",
                 background:"transparent",
                 border:"none",
                 color:"#fff",
-                padding:"18px",
-                fontSize:"18px",
+                padding:"18px 10px",
+                fontSize:"clamp(13px,3.5vw,14px)",
                 outline:"none"
-              }}
+            }}
             />
 
             <IoEyeOutline
@@ -426,7 +430,7 @@ setTimeout(() => {
               "linear-gradient(90deg,#00b8ff,#006dff)",
               color:"#fff",
               boxShadow:"0 0 25px rgba(0,170,255,.45)",
-              fontSize:"28px",
+              fontSize:"20px",
               fontWeight:"700",
               cursor:"pointer"
             }}
@@ -451,7 +455,7 @@ setTimeout(() => {
               border:"2px solid #1da1ff",
               color:"#4fdcff",
               background:"rgba(12,30,60,.45)",
-              fontSize:"24px",
+              fontSize:"20px",
               fontWeight:"700",
               cursor:"pointer"
             }}

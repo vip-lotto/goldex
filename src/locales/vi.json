@@ -214,7 +214,7 @@
 
 
 
-  
+
 "phone":"Số điện thoại",
 "email":"Email",
 
@@ -249,9 +249,13 @@
 
 "deleteSuccess":"Đã xóa tài khoản ngân hàng thành công",
 
-"transfer":"Chuyển tiền"
+"transfer":"Chuyển tiền",
 
-
+"processing":"Vui lòng chờ, hệ thống đang xử lý.",
+"resumeTrade":"Quay lại giao dịch",
+"loadingTradeRules":"Đang tải quy tắc giao dịch...",
+"tradeAlreadyRunning":"Bạn đã có một giao dịch đang diễn ra.",
+"youLose":"Bạn đã thua."
 
 
 

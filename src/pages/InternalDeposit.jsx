@@ -190,19 +190,25 @@ const networkList = wallets
     return a.network.localeCompare(b.network);
   });
 
-  const copyAddress = () => {
+  const copyAddress = async () => {
+  if (!currentWallet?.address) return;
 
-    if (!currentWallet) return;
-
-    navigator.clipboard.writeText(
-      currentWallet.address
-    );
+  try {
+    await navigator.clipboard.writeText(currentWallet.address);
 
     showToast(
-  t("walletCopied"),
-  "success"
-);
-  };
+      t("walletCopied"),
+      "success"
+    );
+  } catch (err) {
+    console.error("Copy failed:", err);
+
+    showToast(
+      "Copy failed",
+      "error"
+    );
+  }
+};
 
   const saveQR = () => {
 

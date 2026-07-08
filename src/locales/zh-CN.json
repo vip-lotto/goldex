@@ -211,7 +211,7 @@
   "totalAssets":"总资产",
   "assetsDetails":"资产详情",
 
-  
+
 "phone":"手机号",
 "email":"邮箱",
 
@@ -246,10 +246,14 @@
 
 "deleteSuccess":"银行卡删除成功",
 
-"transfer":"转账"
+"transfer":"转账",
 
 
-
+"processing":"请稍候，系统正在处理中。",
+"resumeTrade":"返回交易",
+"loadingTradeRules":"正在加载交易规则...",
+"tradeAlreadyRunning":"您已有一笔正在进行中的交易。",
+"youLose":"您输了。"
 
 
 
