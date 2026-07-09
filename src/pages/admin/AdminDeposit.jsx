@@ -1,844 +1,1087 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 import "./AdminDeposit.css";
 
-import { useNavigate } from "react-router-dom";
 
+export default function AdminDeposit(){
 
-export default function AdminDeposit() {
+const navigate = useNavigate();
 
-  const navigate = useNavigate();
 
-  const [deposits, setDeposits] = useState([]);
-  const [loading, setLoading] = useState(true);
+const [deposits,setDeposits] = useState([]);
 
-  const [search, setSearch] = useState("");
-  const [statusFilter, setStatusFilter] = useState("all");
+const [loading,setLoading] = useState(false);
 
-  const [selectedDeposit, setSelectedDeposit] = useState(null);
+const [processing,setProcessing] = useState(false);
 
-  const [approveLoading, setApproveLoading] =
-    useState(false);
+const [message,setMessage] = useState("");
 
-  const [rejectLoading, setRejectLoading] =
-    useState(false);
 
-  useEffect(() => {
 
-    loadDeposits();
+// ==========================
+// LOAD DEPOSITS
+// ==========================
 
-  }, []);
+useEffect(()=>{
 
-    const loadDeposits = async () => {
+loadDeposits();
 
-    setLoading(true);
+},[]);
 
-    const { data, error } =
-      await supabase
-        .from("deposits")
-        .select(`
-          *,
-          profiles(
-            id,
-            member_id,
-            first_name,
-            last_name,
-            phone,
-            balance
-          )
-        `)
-        .order("id", {
-          ascending: false
-        });
 
-    if (error) {
 
-      console.error(error);
+const loadDeposits = async()=>{
 
-      setLoading(false);
 
-      return;
+setLoading(true);
 
-    }
 
-    setDeposits(data || []);
+const {data,error}=
 
-    setLoading(false);
+await supabase
 
-  };
+.from("deposits")
 
-  const filteredDeposits = useMemo(() => {
+.select(`
 
-    return deposits.filter((item) => {
+*
 
-      const keyword =
-        search
-          .trim()
-          .toLowerCase();
+`)
 
-      const fullname =
-        `${item.profiles?.first_name || ""} ${item.profiles?.last_name || ""}`
-          .toLowerCase();
+.order(
 
-      const phone =
-        item.profiles?.phone || "";
+"created_at",
 
-      const memberId =
-        String(
-          item.profiles?.member_id || ""
-        );
+{
+ascending:false
+}
 
-      const matchKeyword =
+);
 
-        keyword === "" ||
 
-        fullname.includes(keyword) ||
 
-        phone.includes(keyword) ||
+if(error){
 
-        memberId.includes(keyword) ||
+console.log(error);
 
-        String(item.id).includes(keyword) ||
+setMessage(error.message);
 
-        String(item.user_id).includes(keyword);
+setLoading(false);
 
-      const matchStatus =
+return;
 
-        statusFilter === "all"
+}
 
-          ? true
 
-          : item.status === statusFilter;
 
-      return (
+setDeposits(data || []);
 
-        matchKeyword &&
 
-        matchStatus
+setLoading(false);
 
-      );
 
-    });
+};
 
-  }, [
 
-    deposits,
 
-    search,
 
-    statusFilter
 
-  ]);
+// ==========================
+// APPROVE DEPOSIT
+// ==========================
 
-  const totalPending =
-    deposits.filter(
-      item =>
-        item.status === "pending"
-    ).length;
 
-  const totalApproved =
-    deposits.filter(
-      item =>
-        item.status === "approved"
-    ).length;
+const approveDeposit = async(item)=>{
 
-  const totalRejected =
-    deposits.filter(
-      item =>
-        item.status === "rejected"
-    ).length;
 
-  const totalAmount =
-    deposits
-      .filter(
-        item =>
-          item.status === "approved"
-      )
-      .reduce(
+if(processing)return;
 
-        (sum, item) =>
 
-          sum +
-          Number(item.amount || 0),
 
-        0
+if(item.status !== "pending"){
 
-      );
+alert(
+"รายการนี้ดำเนินการแล้ว"
+);
 
-        const approveDeposit = async (item) => {
+return;
 
-    if (
-      item.status !== "pending"
-    ) {
+}
 
-      alert(
-        "รายการนี้ดำเนินการแล้ว"
-      );
 
-      return;
 
-    }
+const confirm = window.confirm(
 
-    const amount = prompt(
-      "กรอกจำนวนเงินที่ต้องการเติม",
-      item.amount || ""
-    );
+`ยืนยันเติมเงิน ${item.amount} ${item.coin}`
 
-    if (amount === null) return;
+);
 
-    const depositAmount =
-      Number(amount);
 
-    if (
-      isNaN(depositAmount) ||
-      depositAmount <= 0
-    ) {
 
-      alert(
-        "จำนวนเงินไม่ถูกต้อง"
-      );
+if(!confirm)return;
 
-      return;
 
-    }
 
-    setApproveLoading(true);
+try{
 
-    const {
-      data: profile,
-      error: profileError
-    } =
-      await supabase
-        .from("profiles")
-        .select("*")
-        .eq(
-          "id",
-          item.user_id
-        )
-        .single();
 
-    if (
-      profileError ||
-      !profile
-    ) {
+setProcessing(true);
 
-      setApproveLoading(false);
 
-      alert(
-        "ไม่พบข้อมูลผู้ใช้"
-      );
 
-      return;
+// LOCK ก่อน
 
-    }
+const {data:locked,error:lockError}=
 
-    const {
-      data: wallet
-    } =
-      await supabase
-        .from("wallets")
-        .select("*")
-        .eq(
-          "user_id",
-          item.user_id
-        )
-        .single();
+await supabase
 
-    const {
-      data: asset
-    } =
-      await supabase
-        .from("user_assets")
-        .select("*")
-        .eq(
-          "user_id",
-          item.user_id
-        )
-        .eq(
-          "symbol",
-          "USDT"
-        )
-        .single();
+.from("deposits")
 
-    const newProfileBalance =
-      Number(profile.balance || 0) +
-      depositAmount;
+.update({
 
-    const newWalletBalance =
-      Number(wallet?.balance || 0) +
-      depositAmount;
+status:"processing"
 
-    const newAssetBalance =
-      Number(asset?.balance || 0) +
-      depositAmount;
+})
 
-    const {
-      error: profileUpdateError
-    } =
-      await supabase
-        .from("profiles")
-        .update({
+.eq(
+"id",
+item.id
+)
 
-          balance:
-            newProfileBalance
+.eq(
+"status",
+"pending"
+)
 
-        })
-        .eq(
-          "id",
-          item.user_id
-        );
+.select();
 
-    if (
-      profileUpdateError
-    ) {
 
-      setApproveLoading(false);
 
-      alert(
-        "อัปเดต Profile ไม่สำเร็จ"
-      );
+if(lockError || !locked?.length){
 
-      return;
+throw new Error(
+"รายการนี้ถูกดำเนินการแล้ว"
+);
 
-    }
+}
 
-    if (wallet) {
 
-      await supabase
-        .from("wallets")
-        .update({
 
-          balance:
-            newWalletBalance
 
-        })
-        .eq(
-          "id",
-          wallet.id
-        );
 
-    }
+// ==========================
+// GET PROFILE
+// ==========================
 
-    if (asset) {
 
-      await supabase
-        .from("user_assets")
-        .update({
+const {data:profile,error:profileError}=
 
-          balance:
-            newAssetBalance
+await supabase
 
-        })
-        .eq(
-          "id",
-          asset.id
-        );
+.from("profiles")
 
-    } else {
+.select("*")
 
-      await supabase
-        .from("user_assets")
-        .insert({
+.eq(
+"id",
+item.user_id
+)
 
-          user_id:
-            item.user_id,
+.single();
 
-          symbol:
-            "USDT",
 
-          balance:
-            depositAmount
 
-        });
+if(profileError || !profile){
 
-    }
+throw new Error(
+"ไม่พบ User"
+);
 
-        await supabase
-      .from("deposits")
-      .update({
+}
 
-        status: "approved",
 
-        amount: depositAmount
 
-      })
-      .eq(
-        "id",
-        item.id
-      );
 
-    await supabase
-  .from("notifications")
-  .insert([
-    {
-      user_id: item.user_id,
 
-      title_key: "depositSuccess",
 
-      message_key: "depositApproved",
+// ==========================
+// GET WALLET
+// ==========================
 
-      coin: item.coin,
 
-      network: item.network,
+const {data:wallet,error:walletError}=
 
-      amount: depositAmount,
+await supabase
 
-      status: "success",
+.from("wallets")
 
-      type: "deposit"
-    }
-  ]);
-    await supabase
-      .from("transactions")
-      .insert([
+.select("*")
 
-        {
+.eq(
+"user_id",
+item.user_id
+)
 
-          user_id:
-            item.user_id,
+.single();
 
-          type:
-            "deposit",
 
-          symbol:
-            "USDT",
 
-          amount:
-            depositAmount,
+if(walletError || !wallet){
 
-          balance:
-            newProfileBalance,
+throw new Error(
+"ไม่พบ Wallet"
+);
 
-          status:
-            "completed",
+}
 
-          remark:
-            `Deposit ${item.coin}`
 
-        }
 
-      ]);
 
-    setApproveLoading(false);
 
-    alert(
-      "อนุมัติสำเร็จ"
-    );
+// ==========================
+// UPDATE WALLET
+// ==========================
 
-    window.dispatchEvent(new Event("walletUpdated"));
 
+const walletBalance =
 
-    loadDeposits();
+Number(wallet.balance || 0)
++
+Number(item.amount);
 
-  };
 
-  const rejectDeposit = async (item) => {
 
-    if (
-      item.status !== "pending"
-    ) {
+const {error:updateWalletError}=
 
-      alert(
-        "รายการนี้ดำเนินการแล้ว"
-      );
+await supabase
 
-      return;
+.from("wallets")
 
-    }
+.update({
 
-    if (
-      !window.confirm(
-        "ยืนยันการปฏิเสธรายการนี้ ?"
-      )
-    ) {
+balance:walletBalance
 
-      return;
+})
 
-    }
+.eq(
+"id",
+wallet.id
+);
 
-    setRejectLoading(true);
 
-    await supabase
-      .from("deposits")
-      .update({
 
-        status:
-          "rejected"
+if(updateWalletError){
 
-      })
-      .eq(
-        "id",
-        item.id
-      );
+throw updateWalletError;
 
-    await supabase
-  .from("notifications")
-  .insert([
-    {
-      user_id: item.user_id,
+}
 
-      title_key: "depositFailed",
+// ==========================
+// UPDATE PROFILE BALANCE
+// ==========================
 
-      message_key: "depositRejected",
 
-      coin: item.coin,
+const profileBalance =
 
-      network: item.network,
+Number(profile.balance || 0)
++
+Number(item.amount);
 
-      amount: Number(item.amount),
 
-      status: "failed",
 
-      type: "deposit"
-    }
-  ]);
+const {error:updateProfileError}=
 
-    setRejectLoading(false);
+await supabase
 
-    alert(
-      "ปฏิเสธสำเร็จ"
-    );
+.from("profiles")
 
-    loadDeposits();
+.update({
 
-  };
+balance:profileBalance
 
-    return (
+})
 
-    <div className="admin-deposit">
+.eq(
+"id",
+item.user_id
+);
 
-      <div className="admin-header">
 
-  <button
-    className="back-btn"
-    onClick={() => navigate(-1)}
-  >
-    ← Back
-  </button>
 
-  <div>
+if(updateProfileError){
 
-    <h2>
-      Deposit Management
-    </h2>
+throw updateProfileError;
 
-    <p>
-      GoldEx Admin Panel
-    </p>
+}
 
-  </div>
+
+
+
+
+// ==========================
+// UPDATE USER ASSET USDT
+// ==========================
+
+
+const {data:asset}=
+
+await supabase
+
+.from("user_assets")
+
+.select("*")
+
+.eq(
+"user_id",
+item.user_id
+)
+
+.eq(
+"symbol",
+"USDT"
+)
+
+.single();
+
+
+
+
+
+if(asset){
+
+
+
+const newAssetBalance =
+
+Number(asset.balance || 0)
++
+Number(item.amount);
+
+
+
+
+const {error:assetError}=
+
+await supabase
+
+.from("user_assets")
+
+.update({
+
+balance:newAssetBalance
+
+})
+
+.eq(
+"id",
+asset.id
+);
+
+
+
+if(assetError){
+
+throw assetError;
+
+}
+
+
+
+}else{
+
+
+
+await supabase
+
+.from("user_assets")
+
+.insert({
+
+user_id:item.user_id,
+
+symbol:"USDT",
+
+balance:Number(item.amount)
+
+});
+
+
+
+}
+
+
+
+
+
+// ==========================
+// CLOSE DEPOSIT
+// ==========================
+
+
+const {error:depositError}=
+
+await supabase
+
+.from("deposits")
+
+.update({
+
+status:"approved"
+
+})
+
+.eq(
+"id",
+item.id
+);
+
+
+
+if(depositError){
+
+throw depositError;
+
+}
+
+
+
+
+
+// ==========================
+// TRANSACTION
+// ==========================
+
+
+await supabase
+
+.from("transactions")
+
+.insert({
+
+user_id:item.user_id,
+
+type:"deposit",
+
+amount:Number(item.amount),
+
+status:"completed",
+
+description:
+
+`Deposit ${item.coin} ${item.network}`
+
+});
+
+
+
+
+
+// ==========================
+// NOTIFICATION
+// ==========================
+
+
+await supabase
+
+.from("notifications")
+
+.insert({
+
+user_id:item.user_id,
+
+title_key:"depositSuccess",
+
+message_key:"depositApproved",
+
+coin:item.coin,
+
+network:item.network,
+
+amount:Number(item.amount),
+
+status:"success",
+
+type:"deposit",
+
+is_read:false
+
+});
+
+
+
+
+
+
+alert(
+"เติมเงินสำเร็จ"
+);
+
+
+
+window.dispatchEvent(
+new Event("walletUpdated")
+);
+
+
+
+loadDeposits();
+
+
+
+}
+catch(error){
+
+
+console.log(error);
+
+
+alert(
+error.message
+);
+
+
+}
+finally{
+
+
+setProcessing(false);
+
+
+}
+
+
+
+};
+
+
+
+
+
+// ==========================
+// REJECT DEPOSIT
+// ==========================
+
+
+const rejectDeposit = async(item)=>{
+
+
+if(item.status !== "pending"){
+
+alert(
+"รายการนี้ดำเนินการแล้ว"
+);
+
+return;
+
+}
+
+
+
+const ok = window.confirm(
+"ยืนยันปฏิเสธรายการฝาก?"
+);
+
+
+
+if(!ok)return;
+
+
+
+const {error}=
+
+await supabase
+
+.from("deposits")
+
+.update({
+
+status:"rejected"
+
+})
+
+.eq(
+"id",
+item.id
+);
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+
+await supabase
+
+.from("notifications")
+
+.insert({
+
+user_id:item.user_id,
+
+title_key:"depositFailed",
+
+message_key:"depositRejected",
+
+coin:item.coin,
+
+network:item.network,
+
+amount:Number(item.amount),
+
+status:"failed",
+
+type:"deposit",
+
+is_read:false
+
+});
+
+
+
+alert(
+"ปฏิเสธสำเร็จ"
+);
+
+
+
+loadDeposits();
+
+
+};
+
+// ==========================
+// UI
+// ==========================
+
+
+return (
+
+<div className="admin-deposit-page">
+
+
+
+<div className="admin-header">
+
+
+<button
+
+onClick={()=>navigate("/admin")}
+
+>
+
+← Back
+
+</button>
+
+
+
+<h1>
+
+Deposit Management
+
+</h1>
+
 
 </div>
 
-      <div className="admin-summary">
 
-        <div className="summary-card">
 
-          <span>Pending</span>
 
-          <h3>
-            {totalPending}
-          </h3>
 
-        </div>
 
-        <div className="summary-card">
 
-          <span>Approved</span>
+{
+message &&
 
-          <h3>
-            {totalApproved}
-          </h3>
+<div className="admin-message">
 
-        </div>
+{message}
 
-        <div className="summary-card">
+</div>
 
-          <span>Rejected</span>
+}
 
-          <h3>
-            {totalRejected}
-          </h3>
 
-        </div>
 
-        <div className="summary-card">
 
-          <span>Total Deposit</span>
 
-          <h3>
-            {totalAmount.toLocaleString()}
-          </h3>
 
-        </div>
 
-      </div>
 
-      <div className="admin-toolbar">
+{
+loading
 
-        <input
+?
 
-          type="text"
+<div className="loading">
 
-          placeholder="Search..."
+Loading...
 
-          value={search}
+</div>
 
-          onChange={(e)=>
 
-            setSearch(
-              e.target.value
-            )
+:
 
-          }
 
-        />
+<table>
 
-        <select
 
-          value={statusFilter}
+<thead>
 
-          onChange={(e)=>
+<tr>
 
-            setStatusFilter(
-              e.target.value
-            )
 
-          }
+<th>
+ID
+</th>
 
-        >
 
-          <option value="all">
-            All
-          </option>
+<th>
+User
+</th>
 
-          <option value="pending">
-            Pending
-          </option>
 
-          <option value="approved">
-            Approved
-          </option>
+<th>
+Coin
+</th>
 
-          <option value="rejected">
-            Rejected
-          </option>
 
-        </select>
+<th>
+Network
+</th>
 
-      </div>
 
-      <div className="table-wrap">
+<th>
+Amount
+</th>
 
-        <table className="admin-table">
 
-          <thead>
+<th>
+Slip
+</th>
 
-            <tr>
 
-              <th>ID</th>
+<th>
+Status
+</th>
 
-              <th>Member</th>
 
-              <th>Name</th>
+<th>
+Date
+</th>
 
-              <th>Phone</th>
 
-              <th>Coin</th>
+<th>
+Action
+</th>
 
-              <th>Network</th>
 
-              <th>Amount</th>
+</tr>
 
-              <th>Slip</th>
+</thead>
 
-              <th>Status</th>
 
-              <th>Date</th>
 
-              <th>Action</th>
 
-            </tr>
 
-          </thead>
+<tbody>
 
-          <tbody>
 
 
-                        {loading && (
+{
 
-              <tr>
+deposits.map(item=>(
 
-                <td
-                  colSpan="11"
-                  className="empty"
-                >
-                  Loading...
-                </td>
 
-              </tr>
 
-            )}
+<tr key={item.id}>
 
-            {!loading &&
-              filteredDeposits.length === 0 && (
 
-              <tr>
+<td>
 
-                <td
-                  colSpan="11"
-                  className="empty"
-                >
-                  No Deposit
-                </td>
+#{item.id}
 
-              </tr>
+</td>
 
-            )}
 
-            {!loading &&
-              filteredDeposits.map((item) => (
 
-                <tr key={item.id}>
 
-                  <td>
-                    #{item.id}
-                  </td>
 
-                  <td>
-                    {item.profiles?.member_id || "-"}
-                  </td>
+<td>
 
-                  <td>
+<div>
 
-                    {item.profiles?.first_name}{" "}
-                    {item.profiles?.last_name}
+User ID:
 
-                  </td>
+{item.user_id}
 
-                  <td>
-                    {item.profiles?.phone || "-"}
-                  </td>
+</div>
 
-                  <td>
-                    {item.coin}
-                  </td>
 
-                  <td>
-                    {item.network}
-                  </td>
+</td>
 
-                  <td>
-                    {Number(
-                      item.amount || 0
-                    ).toLocaleString()}
-                  </td>
 
-                  <td>
 
-                    {item.slip_url ? (
 
-                      <a
-                        href={item.slip_url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="slip-link"
-                      >
-                        View Slip
-                      </a>
 
-                    ) : (
 
-                      "-"
+<td>
 
-                    )}
+{item.coin}
 
-                  </td>
+</td>
 
-                  <td>
 
-                    <span
-                      className={
-                        item.status === "approved"
 
-                          ? "status approved"
 
-                          : item.status === "rejected"
 
-                          ? "status rejected"
+<td>
 
-                          : "status pending"
-                      }
-                    >
-                      {item.status}
-                    </span>
+{item.network}
 
-                  </td>
+</td>
 
-                  <td>
 
-                    {item.created_at
-                      ? new Date(
-                          item.created_at
-                        ).toLocaleString()
-                      : "-"}
 
-                  </td>
 
-                  <td>
 
-                                        {item.status === "pending" ? (
+<td>
 
-                      <div className="action-group">
+{
 
-                        <button
-                          className="approve-btn"
-                          disabled={approveLoading}
-                          onClick={() =>
-                            approveDeposit(item)
-                          }
-                        >
-                          Approve
-                        </button>
+Number(item.amount)
+.toLocaleString()
 
-                        <button
-                          className="reject-btn"
-                          disabled={rejectLoading}
-                          onClick={() =>
-                            rejectDeposit(item)
-                          }
-                        >
-                          Reject
-                        </button>
+}
 
-                      </div>
+</td>
 
-                    ) : (
 
-                      <span className="done-text">
 
-                        Completed
 
-                      </span>
 
-                    )}
+<td>
 
-                  </td>
 
-                </tr>
+{
 
-              ))
+item.slip_url
 
-            }
 
-          </tbody>
+?
 
-        </table>
 
-      </div>
+<a
 
-          </div>
+href={item.slip_url}
 
-  );
+target="_blank"
+
+rel="noreferrer"
+
+className="slip-link"
+
+>
+
+View Slip
+
+</a>
+
+
+:
+
+"-"
+
+
+}
+
+
+
+</td>
+
+
+
+
+
+
+<td>
+
+
+<span>
+
+
+{item.status}
+
+
+</span>
+
+
+</td>
+
+
+
+
+
+
+
+
+<td>
+
+
+{
+
+item.created_at
+
+?
+
+new Date(
+item.created_at
+)
+.toLocaleString()
+
+
+:
+
+"-"
+
+
+}
+
+
+</td>
+
+
+
+
+
+
+
+
+<td>
+
+
+
+{
+
+item.status === "pending"
+
+
+?
+
+
+<>
+
+
+
+<button
+
+
+disabled={processing}
+
+
+onClick={()=>approveDeposit(item)}
+
+
+className="approve-btn"
+
+>
+
+{
+
+processing
+
+?
+
+"Processing..."
+
+:
+
+"Approve"
+
+}
+
+
+</button>
+
+
+
+
+
+
+<button
+
+
+disabled={processing}
+
+
+onClick={()=>rejectDeposit(item)}
+
+
+className="reject-btn"
+
+>
+
+Reject
+
+</button>
+
+
+
+</>
+
+
+:
+
+
+<span>
+
+Completed
+
+</span>
+
+
+}
+
+
+
+</td>
+
+
+
+
+
+</tr>
+
+
+
+))
+
+
+}
+
+
+
+</tbody>
+
+
+</table>
+
+
+}
+
+
+
+</div>
+
+
+);
+
 
 }

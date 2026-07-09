@@ -1564,3 +1564,21 @@ color:#111;
 
 }
 
+/* =========================
+   LOGOUT CENTER
+========================= */
+
+.logout-item .mine-left{
+    justify-content:center;
+    gap:12px;
+}
+
+.logout-item{
+    display:flex;
+    align-items:center;
+}
+
+.logout-item .mine-left{
+    flex:1;
+    justify-content:center;
+}

@@ -31,20 +31,16 @@ export default function AdminDashboard() {
       color: "#2564ebc5"
     },
     {
+      title:"💵 Manual Deposit",
+      path:"/admin/manual-deposit",
+      color:"#0891b2"
+    },
+    {
       title: "📈 Trades",
       path: "/admin/trades",
       color: "#7c3aedb4"
     },
-    {
-      title: "📑 Orders",
-      path: "/admin/orders",
-      color: "#ea5a0cb0"
-    },
-    {
-      title: "⚙️ Settings",
-      path: "/admin/settings",
-      color: "#475569"
-    }
+    
   ];
 
 

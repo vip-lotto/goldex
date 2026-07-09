@@ -1,760 +1,1126 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
-import "./TradeReceipt.css";
-import { useTranslation } from "react-i18next";
-import marketData from "../data/marketData";
+
+
+export default function TradePanel({ market }) {
+
+
+const {showToast}=useToast();
+
+
+const [user,setUser]=useState(null);
+const [wallet,setWallet]=useState(null);
+
+const [amount,setAmount]=useState("");
+const [duration,setDuration]=useState(30);
+
+const [activeTrade,setActiveTrade]=useState(null);
+
+const [seconds,setSeconds]=useState(0);
+
+const [isTrading,setIsTrading]=useState(false);
+
+const [side,setSide]=useState("");
+
+const [receipt,setReceipt]=useState(null);
 
 
 
-export default function TradePanel() {
-
-    const TRADE_RULES = [
-  {
-    duration:30,
-    profit:5,
-    min:10,
-    max:999
-  },
-  {
-    duration:60,
-    profit:10,
-    min:1000,
-    max:29999
-  },
-  {
-    duration:90,
-    profit:12,
-    min:30000,
-    max:49999
-  },
-  {
-    duration:120,
-    profit:15,
-    min:50000,
-    max:99999
-  },
-  {
-    duration:180,
-    profit:18,
-    min:100000,
-    max:999999999
-  }
-];
-
-  const { showToast } = useToast();  
-
-  const { t } = useTranslation();
-
-  const [duration, setDuration] = useState(30);
-  const [amount, setAmount] = useState("");
-  const [side, setSide] = useState(null);
-
-  const [symbol, setSymbol] = useState("XAUUSD");
-
-  const [isTrading, setIsTrading] = useState(false);
-  const [seconds, setSeconds] = useState(0);
-  const [tradeId, setTradeId] = useState(null);
-  const [receipt, setReceipt] = useState(null);
-  
-  const [currentTrade, setCurrentTrade] = useState(null);
 
 
-  useEffect(() => {
-  console.log("Receipt =", receipt);
-  }, [receipt]);
+useEffect(()=>{
+
+loadUser();
+
+},[]);
 
 
-  const [walletBalance, setWalletBalance] = useState(0);
-  const [tradeAmount, setTradeAmount] = useState(0);
-const [rules, setRules] = useState([]);
-  
 
 
- 
 
-  useEffect(() => {
-
-  if (isTrading) return;
-
-  if (amount >= 100000) {
-
-    setDuration(180);
-
-  } else if (amount >= 50000) {
-
-    setDuration(120);
-
-  } else if (amount >= 30000) {
-
-    setDuration(90);
-
-  } else if (amount >= 1000) {
-
-    setDuration(60);
-
-  } else {
-
-    setDuration(30);
-
-  }
-
-}, [amount, isTrading]);
-
-  useEffect(() => {
-
-  loadTradeRules();
-
-  resumeTrade();
-
-}, []);
-
-  useEffect(() => {
-  if (!isTrading) return;
-
-  if (seconds <= 0) {
-
-    finishTrade(currentTrade);
-
-    return;
-  }
-
-  const timer = setTimeout(() => {
-    setSeconds((s) => s - 1);
-  }, 1000);
-
-  return () => clearTimeout(timer);
-
-}, [seconds, isTrading, currentTrade]);
+async function loadUser(){
 
 
-  // ======================================
-// LOAD TRADE RULES
-// ======================================
+const saved =
+localStorage.getItem("user");
 
-async function loadTradeRules(){
 
-  const { data, error } = await supabase
-    .from("trade_rules")
-    .select("*")
-    .order("duration");
+if(!saved){
 
-  if(error){
-
-    showToast(
-      error.message,
-      "error"
-    );
-
-    return;
-
-  }
-
-  setRules(data);
+return;
 
 }
 
-  async function resumeTrade() {
-  const user = JSON.parse(localStorage.getItem("user"));
 
-  if (!user) return;
+const data =
+JSON.parse(saved);
 
-  const { data: trade } = await supabase
-    .from("trades")
-    .select("*")
-    .eq("user_id", user.id)
-    .eq("status", "trading")
-    .order("id", { ascending: false })
-    .limit(1)
-    .single();
 
-  if (!trade) return;
+setUser(data);
 
-  const remain = Math.floor(
-    (new Date(trade.end_at) - new Date()) / 1000
-  );
 
-  if (remain <= 0) {
+await loadWallet(data.id);
 
-  setTradeId(trade.id);
-  setCurrentTrade(trade);
 
-  await finishTrade(trade);
+await loadActiveTrade(data.id);
 
-  return;
 
-}
-
-  const { data: wallet } = await supabase
-    .from("wallets")
-    .select("*")
-    .eq("user_id", user.id)
-    .single();
-
-  setWalletBalance(wallet.balance);
-
-  setTradeId(trade.id);
-setCurrentTrade(trade);   // เพิ่มบรรทัดนี้
-setSide(trade.side);
-setTradeAmount(trade.amount);
-setDuration(trade.duration);
-
-  setSeconds(remain);
-
-  setIsTrading(true);
-
-  showToast(t("resumeTrade"), "success");
-}
-
-  async function startTrade(type) {
-
-const currentRule = TRADE_RULES.find(
- item => Number(item.duration) === Number(duration)
-);
-
-console.log("START TRADE");
-
-const tradeAmount = Number(amount);
-
-if(
- !currentRule ||
- tradeAmount < Number(currentRule.min) ||
- tradeAmount > Number(currentRule.max)
-){
-
- showToast(
- currentRule
- ? `Amount ${currentRule.min.toLocaleString()} - ${currentRule.max.toLocaleString()} USDT`
- : t("loadingTradeRules"),
- "warning"
- );
-
- return;
 }
 
 
 
-    const user = JSON.parse(
-  localStorage.getItem("user")
-);
-
-if (!user) {
-  showToast(t("pleaseLogin"), "warning");
-  return;
-}
-
-console.log("USER =", user);
-console.log("TYPE =", typeof user.id);
-console.log("ID =", user.id);
 
 
-      
 
-    const { data: openedTrade } = await supabase
-  .from("trades")
-  .select("id")
-  .eq("user_id", user.id)
-  .eq("status", "trading")
-  .maybeSingle();
+async function loadWallet(id){
 
-if (openedTrade) {
-  showToast(t("tradeAlreadyRunning"), "warning");
-
-  resumeTrade();
-
-  return;
-}
-
-
-    // ดึง Wallet
-const { data: wallet, error: walletError } = await supabase
-  .from("wallets")
-  .select("*")
-  .eq("user_id", user.id)
-  .single();
-
-if (walletError) {
-
-  showToast(walletError.message, "error");
-
-  return;
-}
-
-// เงินไม่พอ
-if (wallet.balance < amount) {
-
-  showToast(
-  t("insufficientBalance"),
-  "warning"
-);
-
-  return;
-}
-
-// หักเงิน
-const { error: updateWalletError } = await supabase
-  .from("wallets")
-  .update({
-    balance: wallet.balance - amount
-  })
-  .eq("user_id", user.id);
-
-if (updateWalletError) {
-
-  showToast(
-    updateWalletError.message,
-    "error"
-  );
-
-  return;
-}
-
-setWalletBalance(wallet.balance);
-setTradeAmount(tradeAmount);
-
-    
-
-
-    const now = new Date();
-
-const end = new Date(
-  now.getTime() + duration * 1000
-);
 
 const {
-  data: trade,
-  error
-} = await supabase
-  .from("trades")
-  .insert({
-  user_id: user.id,
-  coin: symbol,
-  side: type,
-  amount: tradeAmount,
-  duration,
-  profit: currentRule.profit,
-    status: "trading",
+data
+}=await supabase
 
-    open_price: 0,
+.from("wallets")
 
-    started_at: now.toISOString(),
-    end_at: end.toISOString(),
-  })
-  .select()
-  .single();
-        
+.select("*")
 
-    if (error) {
+.eq(
+"user_id",
+id
+)
 
-  // คืนเงินกลับ Wallet
-  await supabase
-    .from("wallets")
-    .update({
-      balance: wallet.balance
-    })
-    .eq("user_id", user.id);
+.single();
 
-  showToast(
-    error.message,
-    "error"
-  );
 
-  return;
+
+setWallet(data);
+
 
 }
 
-    setSide(type);
-setTradeId(trade.id);
-setCurrentTrade(trade);
-setTradeAmount(trade.amount);
-setDuration(trade.duration);
 
-setSeconds(duration);
+
+
+
+
+async function loadActiveTrade(id){
+
+
+const {
+data
+}=await supabase
+
+.from("trades")
+
+.select("*")
+
+.eq(
+"user_id",
+id
+)
+
+.eq(
+"status",
+"trading"
+)
+
+.order(
+"id",
+{
+ascending:false
+}
+)
+
+.limit(1)
+
+.maybeSingle();
+
+
+
+
+
+if(!data){
+
+return;
+
+}
+
+
+setActiveTrade(data);
+
+setSide(data.side);
 
 setIsTrading(true);
 
-showToast(
-  `${type} ${amount.toLocaleString()} USDT • ${duration} Seconds`,
-  "success"
-);
-}
 
-// ======================================
-// AUTO LOSE
-// ======================================
 
-async function autoLose(trade) {
-
-  const { data: latest } = await supabase
-    .from("trades")
-    .select("status")
-    .eq("id", trade.id)
-    .single();
-
-  if (!latest) return;
-
-  if (latest.status === "finished") {
-    return;
-  }
-
-  await supabase
-    .from("trades")
-    .update({
-      status: "finished",
-      result: "lose",
-      payout: 0,
-      profit_amount: 0,
-      finished_at: new Date().toISOString(),
-    })
-    .eq("id", trade.id);
-
-  setReceipt({
-    id: trade.id,
-    amount: trade.amount,
-    duration: trade.duration,
-    side: trade.side,
-    result: "lose",
-    payout: 0,
-    time: new Date().toLocaleString(),
-  });
-
-  setCurrentTrade(null);
-  setTradeId(null);
-  setSeconds(0);
-  setIsTrading(false);
-
-  showToast(t("youLose"), "error");
-}
-
-// ======================================
-// FINISH TRADE
-// ======================================
-
-async function finishTrade(trade = currentTrade) {
-
-  setIsTrading(false);
-
-  console.log("FINISH TRADE START");
-
-  if (!trade) return;
+const start =
+new Date(data.created_at);
 
 
 
-  const user = JSON.parse(localStorage.getItem("user"));
+const now =
+new Date();
 
-  // เปลี่ยนเป็น "win" เพื่อทดสอบ
 
- const { data: latestTrade, error: latestTradeError } = await supabase
-  .from("trades")
-  .select("status, result")
-  .eq("id", trade.id)
-  .single();
 
-if (latestTradeError) {
-  showToast(latestTradeError.message, "error");
-  return;
-}
-
-if (!latestTrade) {
-  return;
-}
-
-const result = latestTrade.result;
-
-if (!result) {
-
-  showToast(
-  t("processing"),
-  "warning"
+const passed =
+Math.floor(
+(now-start)/1000
 );
 
-  return;
+
+
+setSeconds(
+
+Math.max(
+0,
+data.duration - passed
+)
+
+);
+
+
 
 }
 
 
-  let payout = 0;
-  let profitAmount = 0;
 
-  if (result === "win") {
 
-  const { data: tradeRule, error: ruleError } = await supabase
-  .from("trade_rules")
-  .select("*")
-  .eq("duration", trade.duration)
-  .single();
 
-if (ruleError) {
-  showToast(ruleError.message, "error");
-  return;
+
+function getProfit(){
+
+
+const money =
+Number(amount);
+
+
+
+if(money>=100000)
+return 18;
+
+
+if(money>=50000)
+return 15;
+
+
+if(money>=30000)
+return 12;
+
+
+if(money>=1000)
+return 10;
+
+
+return 5;
+
+
 }
 
-  profitAmount =
-    (trade.amount * tradeRule.profit) / 100;
 
-  payout =
-    trade.amount + profitAmount;
 
-    const { data: wallet, error: walletError } = await supabase
-  .from("wallets")
-  .select("*")
-  .eq("user_id", trade.user_id)
-  .single();
 
-if (walletError) {
-  showToast(walletError.message, "error");
-  return;
+
+
+
+async function getFinalResult(){
+
+
+let result="lose";
+
+
+
+const {
+data
+}=await supabase
+
+.from("trade_control")
+
+.select("*")
+
+.eq(
+"id",
+1
+)
+
+.single();
+
+
+
+
+if(data){
+
+
+if(
+!data.global_until ||
+new Date(data.global_until)>new Date()
+){
+
+result=data.global_result;
+
 }
+
+
+}
+
+
+
+return result;
+
+
+}
+
+
+// =========================
+// START TRADE
+// =========================
+
+
+async function startTrade(type){
+
+
+if(isTrading){
+
+return;
+
+}
+
+
+
+if(!user){
+
+showToast("Please login");
+
+return;
+
+}
+
+
+
+const money = Number(amount);
+
+
+
+if(!money || money<=0){
+
+showToast("Enter amount");
+
+return;
+
+}
+
+
+
+
+const balance =
+Number(wallet?.balance || 0);
+
+
+
+
+if(balance < money){
+
+showToast("Insufficient balance");
+
+return;
+
+}
+
+
+
+
+
+// =========================
+// CUT WALLET
+// =========================
+
+
+const {
+error:cutError
+}=await supabase
+
+.from("wallets")
+
+.update({
+
+balance:
+balance-money
+
+})
+
+.eq(
+
+"user_id",
+
+user.id
+
+);
+
+
+
+
+
+if(cutError){
+
+showToast(cutError.message);
+
+return;
+
+}
+
+
+
+
+
+
+
+// =========================
+// CREATE TRADE
+// =========================
+
+
+const {
+data:trade,
+error
+}=await supabase
+
+.from("trades")
+
+.insert({
+
+user_id:user.id,
+
+coin:market.code,
+
+side:type,
+
+amount:money,
+
+duration:duration,
+
+profit:getProfit(),
+
+
+// สำคัญ
+// ยังไม่ตัดสินผล
+
+result:"pending",
+
+status:"trading",
+
+payout:0
+
+})
+
+.select()
+
+.single();
+
+
+
+
+
+
+
+if(error){
 
 
 
 await supabase
-  .from("wallets")
-  .update({
-    balance: wallet.balance + payout,
-  })
- .eq("user_id", trade.user_id);
-  }
 
-  const { error } = await supabase
-  .from("trades")
-  .update({
+.from("wallets")
 
-    status: "finished",
+.update({
 
-    result: result,
+balance:balance
 
-    payout: payout,
+})
 
-    profit_amount: profitAmount,
+.eq(
 
-    finished_at: new Date().toISOString(),
+"user_id",
 
-    close_price: 0,
+user.id
 
-  })
-  .eq("id", trade.id);
-
-
-
-  if (error) {
-    showToast(error.message, "error");
-    return;
-  }
-
-  console.log("กำลังสร้างใบเสร็จ");
-
-setReceipt({
-  id: trade.id,
- amount: trade.amount,
-duration: trade.duration,
-side: trade.side,
-  result,
-  payout,
-  time: new Date().toLocaleString(),
-});
-
-console.log("สร้างใบเสร็จแล้ว");
-
-setCurrentTrade(null);
-setTradeId(null);
-setSeconds(0);
-
-
-  if (result === "win") {
-
-    showToast(
-  `ชนะ +${payout.toLocaleString()} USDT`,
-  "success"
 );
 
-  } else {
 
-    showToast(
-  t("youLose"),
-  "error"
-);
 
-  }
+showToast(error.message);
+
+return;
+
 }
 
+
+
+
+
+
+setActiveTrade(trade);
+
+setSide(type);
+
+setIsTrading(true);
+
+setSeconds(duration);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// =========================
+// TIMER
+// =========================
+
+
+useEffect(()=>{
+
+
+if(!isTrading){
+
+return;
+
+}
+
+
+
+if(seconds<=0){
+
+finishTrade();
+
+return;
+
+}
+
+
+
+const timer=setTimeout(()=>{
+
+
+setSeconds(
+s=>s-1
+);
+
+
+},1000);
+
+
+
+return ()=>clearTimeout(timer);
+
+
+
+},[
+seconds,
+isTrading
+]);
+
+
+
+
+
+
+
+
+// =========================
+// FINISH
+// =========================
+
+
+async function finishTrade(){
+
+
+if(!activeTrade){
+
+return;
+
+}
+
+
+
+
+
+const {
+
+data:trade
+
+}=await supabase
+
+.from("trades")
+
+.select("*")
+
+.eq(
+
+"id",
+
+activeTrade.id
+
+)
+
+.single();
+
+
+
+
+
+if(!trade){
+
+return;
+
+}
+
+
+
+
+
+const finalResult =
+await getFinalResult();
+
+
+
+
+
+let payout=0;
+
+let profit=0;
+
+
+
+
+
+
+if(finalResult==="win"){
+
+
+profit =
+
+Number(trade.amount)
+
+*
+
+Number(trade.profit)
+
+/
+
+100;
+
+
+
+
+payout =
+
+Number(trade.amount)
+
++
+
+profit;
+
+
+
+
+
+
+const {
+
+data:wallet
+
+}=await supabase
+
+.from("wallets")
+
+.select("*")
+
+.eq(
+
+"user_id",
+
+trade.user_id
+
+)
+
+.single();
+
+
+
+
+
+
+if(wallet){
+
+
+await supabase
+
+.from("wallets")
+
+.update({
+
+balance:
+
+Number(wallet.balance||0)
+
++
+
+payout
+
+})
+
+.eq(
+
+"user_id",
+
+trade.user_id
+
+);
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// UPDATE TRADE
+
+
+await supabase
+
+.from("trades")
+
+.update({
+
+result:finalResult,
+
+status:"finished",
+
+payout:payout,
+
+profit_amount:profit,
+
+finished_at:
+
+new Date()
+
+.toISOString()
+
+})
+
+.eq(
+
+"id",
+
+trade.id
+
+);
+
+
+
+
+
+
+
+
+// TRANSACTION
+
+
+await supabase
+
+.from("transactions")
+
+.insert({
+
+user_id:trade.user_id,
+
+type:"trade",
+
+amount:payout,
+
+status:"completed",
+
+description:
+
+`${trade.coin} ${finalResult}`
+
+});
+
+
+
+
+
+
+
+
+setReceipt({
+
+...trade,
+
+result:finalResult,
+
+payout:payout,
+
+profit:profit
+
+});
+
+
+
+
+
+setIsTrading(false);
+
+setSeconds(0);
+
+setActiveTrade(null);
+
+
+
+showToast(
+
+finalResult==="win"
+
+?
+
+"WIN"
+
+:
+
+"LOSE"
+
+);
+
+
+}
+
+
+
+
+
+
+
+
+
+// =========================
+// DISPLAY TIME
+// =========================
+
+
 const min = String(
-  Math.floor(seconds / 60)
-).padStart(2, "0");
 
-  const sec = String(
-    seconds % 60
-  ).padStart(2, "0");
+Math.floor(seconds/60)
 
-  return (
+).padStart(2,"0");
 
-    <div className="trade-panel">
 
-      
 
-    <select
+const sec = String(
 
-value={symbol}
+seconds%60
+
+).padStart(2,"0");
+
+
+
+
+
+
+
+
+
+return (
+
+<div className="trade-panel">
+
+
+
+<div className="market-title">
+
+<h2>
+
+{market?.name}
+
+</h2>
+
+
+<p>
+
+{market?.code}
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<div className="trade-time-tabs">
+
+
+{
+
+[30,60,90,120,180]
+
+.map(t=>(
+
+
+<button
+
+key={t}
 
 disabled={isTrading}
 
-onChange={(e)=>setSymbol(e.target.value)}
+className={
 
->
+duration===t
 
-{
-marketData.map(item => (
+?
 
-<option
+"time-btn active"
 
-key={item.symbol}
+:
 
-value={item.symbol}
-
->
-
-{item.name} ({item.symbol})
-
-</option>
-
-))
+"time-btn"
 
 }
 
-</select>
+onClick={()=>setDuration(t)}
 
-      <div>
-
-        <label>{t("duration")}</label>
-
-        <div className="trade-time-tabs">
-
-  {[30,60,90,120,180].map(sec => (
-
-    <button
-      key={sec}
-      type="button"
-      disabled={isTrading}
-      onClick={() => setDuration(sec)}
-      className={
-        duration === sec
-          ? "time-btn active"
-          : "time-btn"
-      }
-    >
-
-      {sec === 30 ? "30 sec" : `${sec} sec`}
-
-    </button>
-
-  ))}
-
-</div>
-
-      </div>
-
-      <div className="trade-info">
-
-  <div>
-
-    {
- TRADE_RULES.find(
-   r => r.duration === duration
- )?.profit || 0
-}%
-
-  </div>
-
-</div>
-
-      <div>
-
-        <label>{t("amount")} (USDT)</label>
-
-        <input
-  type="number"
-  value={amount}
-  placeholder="00.00"
-  disabled={isTrading}
-  onChange={(e) => setAmount(e.target.value)}
-/>
-
-      </div>
-
-      <div className="trade-buttons">
-
-        <button
-          className="buy-btn"
-          disabled={isTrading}
-          onClick={() => startTrade("BUY")}
-        >
-          BUY
-        </button>
-
-        <button
-          className="sell-btn"
-          disabled={isTrading}
-          onClick={() => startTrade("SELL")}
-        >
-          SELL
-        </button>
-
-      </div>
-
-      {isTrading && (
-
-        <>
-
-          <div className="countdown">
-
-            {min}:{sec}
-
-          </div>
-
-          <div className="trade-info">
-
-            {t("status")} : {t("trading")}
-
-            <br />
-
-            {t("type")} : {side}
-
-          </div>
-
-        </>
-
-      )}
-
-      {receipt && (
-  <div className="trade-receipt">
-
-    <h3>{t("tradeReceipt")}</h3>
-
-<p><strong>{t("order")} :</strong> #{receipt.id}</p>
-<p><strong>{t("type")} :</strong> {receipt.side}</p>
-<p><strong>{t("amount")} :</strong> {receipt.amount.toLocaleString()} USDT</p>
-<p><strong>{t("duration")} :</strong> {receipt.duration} Seconds</p>
-<p><strong>{t("result")} :</strong> {receipt.result.toUpperCase()}</p>
-<p><strong>{t("payout")} :</strong> {receipt.payout.toLocaleString()} USDT</p>
-<p><strong>{t("time")} :</strong> {receipt.time}</p>
-
-    <button
-  onClick={() => {
-    setReceipt(null);
-    setCurrentTrade(null);
-    setTradeId(null);
-    setIsTrading(false);
-    setSeconds(0);
-  }}
 >
-  {t("close")}
+
+{t}s
+
 </button>
 
-  </div>
-)}
 
-    </div>
+))
 
-  );
+
+}
+
+
+</div>
+
+
+
+
+
+
+
+
+<input
+
+type="number"
+
+value={amount}
+
+disabled={isTrading}
+
+placeholder="Amount USDT"
+
+onChange={e=>
+
+setAmount(e.target.value)
+
+}
+
+/>
+
+
+
+
+
+
+
+
+<div className="trade-buttons">
+
+
+
+<button
+
+className="buy-btn"
+
+disabled={isTrading}
+
+onClick={()=>startTrade("BUY")}
+
+>
+
+BUY
+
+</button>
+
+
+
+
+
+<button
+
+className="sell-btn"
+
+disabled={isTrading}
+
+onClick={()=>startTrade("SELL")}
+
+>
+
+SELL
+
+</button>
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{
+
+isTrading &&
+
+<div className="countdown-box">
+
+
+<h3>
+
+Trading
+
+</h3>
+
+
+<h1>
+
+{min}:{sec}
+
+</h1>
+
+
+<p>
+
+{activeTrade?.coin}
+
+</p>
+
+
+<p>
+
+{side}
+
+</p>
+
+
+</div>
+
+
+}
+
+
+
+
+
+
+
+
+
+{
+
+receipt &&
+
+
+<div className="trade-receipt">
+
+
+<h3>
+
+Transaction Details
+
+</h3>
+
+
+<p>
+
+Order #{receipt.id}
+
+</p>
+
+
+<p>
+
+Market : {receipt.coin}
+
+</p>
+
+
+<p>
+
+Result :
+
+{receipt.result}
+
+</p>
+
+
+<p>
+
+Payout :
+
+{Number(receipt.payout||0).toLocaleString()}
+
+USDT
+
+</p>
+
+
+
+<button
+
+onClick={()=>setReceipt(null)}
+
+>
+
+Close
+
+</button>
+
+
+</div>
+
+
+}
+
+
+
+
+</div>
+
+);
+
 
 }

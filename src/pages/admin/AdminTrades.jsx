@@ -1,538 +1,1330 @@
+import {
+  useEffect,
+  useState
+} from "react";
 
+import {
+  useNavigate
+} from "react-router-dom";
 
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { supabase } from "../../lib/supabase";
+import {
+  supabase
+} from "../../lib/supabase";
+
 import "./AdminTrades.css";
 
 
+export default function AdminTrades(){
 
-export default function AdminTrades() {
 
-  const navigate = useNavigate();
+const navigate = useNavigate();
 
-  const [settings, setSettings] = useState([]);
 
-  const [orders, setOrders] = useState([]);
+const [trades,setTrades] = useState([]);
 
-  const [loading, setLoading] = useState(true);
+const [control,setControl] = useState(null);
 
-const [search, setSearch] = useState("");
+const [users,setUsers] = useState([]);
 
-const [statusFilter, setStatusFilter] = useState("all");
+const [selectedUser,setSelectedUser] = useState("");
 
-  useEffect(() => {
+const [minutes,setMinutes] = useState(10);
 
-  loadSettings();
-  loadOrders();
+const [loading,setLoading] = useState(false);
 
-  const timer = setInterval(() => {
-    loadOrders();
-  }, 3000);
+const [message,setMessage] = useState("");
 
-  return () => clearInterval(timer);
 
-}, []);
 
-  async function loadSettings() {
-    const { data } = await supabase
-      .from("trade_settings")
-      .select("*")
-      .order("duration", { ascending: false });
 
-    setSettings(data || []);
-  }
+// =========================
+// START LOAD
+// =========================
 
-  async function loadOrders() {
-  const { data, error } = await supabase
-    .from("trades")
-    .select("*")
-    .order("created_at", { ascending: false });
 
-  if (error) {
-    console.error(error);
-  }
+useEffect(()=>{
 
-  setOrders(data || []);
-  setLoading(false);
+loadTrades();
+
+loadControl();
+
+loadUsers();
+
+
+},[]);
+
+
+
+
+// =========================
+// LOAD TRADES
+// =========================
+
+
+const loadTrades = async()=>{
+
+
+setLoading(true);
+
+
+const {
+data,
+error
+}= await supabase
+
+.from("trades")
+
+.select("*")
+
+.order(
+"created_at",
+{
+ascending:false
 }
+)
 
-  async function saveSetting(item) {
-    await supabase
-      .from("trade_settings")
-      .update({
-        payout: item.payout,
-        minimum: item.minimum,
-        enabled: item.enabled,
-      })
-      .eq("id", item.id);
+.limit(100);
 
-    alert("Saved");
-  }
 
-  // =====================
-// Force WIN
-// =====================
-// =====================
-// FORCE WIN
-// =====================
 
-async function forceWin(order){
+if(error){
 
-  if(order.result){
+console.log(error);
 
-    alert("Order completed");
+setLoading(false);
 
-    return;
-
-  }
-
-  if(order.status !== "trading"){
-
- alert("Trade already finished");
-
- return;
+return;
 
 }
 
 
-  const profit =
-    Number(order.amount) *
-    Number(order.profit || 0) /
-    100;
+
+setTrades(data || []);
 
 
-  const payout =
-    Number(order.amount) +
-    profit;
+setLoading(false);
 
 
-
-  const { error } = await supabase
-    .from("trades")
-    .update({
-
-      status:"finished",
-
-      result:"win",
-
-      payout:payout,
-
-      profit_amount:profit,
-
-      finished_at:new Date().toISOString()
-
-    })
-    .eq("id",order.id);
+};
 
 
 
-  if(error){
 
-    alert(error.message);
-
-    return;
-
-  }
-
-  const { data: wallet } = await supabase
-  .from("wallets")
-  .select("balance")
-  .eq("user_id", order.user_id)
-  .single();
-
-await supabase
-  .from("wallets")
-  .update({
-    balance:
-      Number(wallet.balance) +
-      payout
-  })
-  .eq("user_id", order.user_id);
+// =========================
+// LOAD CONTROL
+// =========================
 
 
-  loadOrders();
+const loadControl = async()=>{
 
-}
-// =====================
-// Force LOSE
-// =====================
-// =====================
-// FORCE LOSE
-// =====================
-
-async function forceLose(order){
+const { data, error } = await supabase
+.from("trade_control")
+.select("*")
+.limit(1)
+.maybeSingle();
 
 
-  if(order.result){
-
-    alert("Order completed");
-
-    return;
-
-  }
-
-
-  const { error } = await supabase
-    .from("trades")
-    .update({
-
-      status:"finished",
-
-      result:"lose",
-
-      payout:0,
-
-      profit_amount:0,
-
-      finished_at:new Date().toISOString()
-
-    })
-    .eq("id",order.id);
+console.log("NEW CONTROL =",data);
+console.log("NEW ERROR =",error);
 
 
 
-  if(error){
+if(error){
 
-    alert(error.message);
-
-    return;
-
-  }
-
-
-  loadOrders();
+console.log(error);
+return;
 
 }
 
-  const filteredOrders = orders.filter((order) => {
 
-  const keyword = search.toLowerCase();
 
-  const matchSearch =
-  String(order.user_id).includes(keyword) ||
-  order.coin?.toLowerCase().includes(keyword);
+if(!data){
 
-  const matchStatus =
-    statusFilter === "all"
-      ? true
-      : order.status === statusFilter;
+console.log("NO CONTROL DATA");
 
-  return matchSearch && matchStatus;
+return;
+
+}
+
+
+
+setControl(data);
+
+
+};
+
+
+
+
+
+// =========================
+// LOAD USERS
+// =========================
+
+
+const loadUsers = async()=>{
+
+
+const {
+data,
+error
+}= await supabase
+
+.from("profiles")
+
+.select(`
+
+id,
+
+member_id,
+
+first_name,
+
+last_name,
+
+phone
+
+`)
+
+.order(
+"id",
+{
+ascending:false
+}
+);
+
+
+
+if(error){
+
+console.log(error);
+
+return;
+
+}
+
+
+
+setUsers(data || []);
+
+
+};
+
+
+
+
+// =========================
+// REFRESH
+// =========================
+
+
+const refreshAll = ()=>{
+
+
+loadTrades();
+
+loadControl();
+
+loadUsers();
+
+
+};
+
+// =========================
+// GLOBAL WIN / LOSE CONTROL
+// =========================
+
+
+
+
+
+const setGlobalResult = async(result)=>{
+
+
+console.log("CURRENT CONTROL =",control);
+
+
+if(!control){
+
+alert("Control not found");
+
+return;
+
+}
+
+
+let until = null;
+
+
+
+if(minutes > 0){
+
+
+until = new Date(
+
+Date.now()
+
++
+
+minutes * 60 * 1000
+
+)
+
+.toISOString();
+
+
+}
+
+
+
+
+
+const {
+error
+}= await supabase
+
+.from("trade_control")
+
+.update({
+
+global_result:result,
+
+global_until:until
+
+})
+
+.eq(
+"id",
+1
+);
+
+
+
+
+if(error){
+
+console.log(error);
+
+alert(error.message);
+
+return;
+
+}
+
+
+
+
+setMessage(
+`Global ${result} ${minutes} minute`
+);
+
+
+await loadControl();
+
+console.log("UPDATED RESULT =",result);
+
+
+};
+
+
+
+
+
+// =========================
+// RESET GLOBAL
+// =========================
+
+
+const resetGlobal = async()=>{
+
+
+if(!control){
+
+return;
+
+}
+
+
+
+const {
+error
+}= await supabase
+
+.from("trade_control")
+
+.update({
+
+global_result:"lose",
+
+global_until:null
+
+})
+
+.eq(
+
+"id",
+
+control.id
+
+);
+
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+
+setMessage(
+"Reset default lose"
+);
+
+
+
+loadControl();
+
+
+};
+
+
+
+
+
+
+// =========================
+// USER WIN / LOSE CONTROL
+// =========================
+
+
+const setUserResult = async(result)=>{
+
+
+if(!selectedUser){
+
+
+alert(
+"Please select user"
+);
+
+
+return;
+
+
+}
+
+
+
+
+const until = new Date(
+
+Date.now()
+
++
+
+minutes * 60 * 1000
+
+)
+
+.toISOString();
+
+
+
+
+
+
+const {
+data:old
+}= await supabase
+
+.from("trade_user_control")
+
+.select("*")
+
+.eq(
+
+"user_id",
+
+selectedUser
+
+)
+
+.single();
+
+
+
+
+
+
+if(old){
+
+
+
+const {
+error
+}= await supabase
+
+.from("trade_user_control")
+
+.update({
+
+result:result,
+
+until_time:until
+
+})
+
+.eq(
+
+"user_id",
+
+selectedUser
+
+);
+
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+
+}else{
+
+
+
+const {
+error
+}= await supabase
+
+.from("trade_user_control")
+
+.insert({
+
+user_id:selectedUser,
+
+result:result,
+
+until_time:until
 
 });
 
-  if (loading) return <div>Loading...</div>;
 
-  return (
-    <div className="admin-page">
 
-       <button
-        className="back-btn"
-        onClick={() => navigate(-1)}
-      >
-        ← Back
-      </button>
 
-      <div className="trade-dashboard">
+if(error){
 
-<div className="trade-card">
+alert(error.message);
 
-<h3>Total Orders</h3>
-
-<p>{orders.length}</p>
-
-</div>
-
-<div className="trade-card">
-
-<h3>Trading</h3>
-
-<p>
-
-{
-
-orders.filter(o => o.status === "trading").length
+return;
 
 }
 
-</p>
 
-</div>
-
-<div className="trade-card">
-
-<h3>Completed</h3>
-
-<p>
-
-{
-
-orders.filter(o => o.status === "finished").length
 
 }
 
-</p>
 
-</div>
 
-<div className="trade-card">
 
-<h3>Win</h3>
 
-<p>
+setMessage(
 
-{
+`User ${result} ${minutes} minute`
 
-orders.filter(o=>o.result==="win").length
+);
+
+
+};
+
+// =========================
+// GET USER NAME
+// =========================
+
+
+const getUserName = (id)=>{
+
+
+const user = users.find(
+u=>u.id === id
+);
+
+
+
+if(!user){
+
+return id;
 
 }
 
-</p>
 
-</div>
 
-<div className="trade-card">
+return (
 
-<h3>Lose</h3>
+(user.member_id || id)
 
-<p>
++
 
-{
+" "
 
-orders.filter(o=>o.result==="lose").length
++
+
+(user.first_name || "")
+
++
+
+" "
+
++
+
+(user.last_name || "")
+
+);
+
+
+};
+
+
+
+
+
+
+// =========================
+// GET USER CONTROL
+// =========================
+
+
+const getUserControl = async(userId)=>{
+
+
+const {
+data
+}= await supabase
+
+.from("trade_user_control")
+
+.select("*")
+
+.eq(
+
+"user_id",
+
+userId
+
+)
+
+.maybeSingle();
+
+
+
+return data;
+
+
+};
+
+
+
+
+
+
+// =========================
+// REMOVE USER CONTROL
+// =========================
+
+
+const removeUserControl = async(userId)=>{
+
+
+const {
+error
+}= await supabase
+
+.from("trade_user_control")
+
+.delete()
+
+.eq(
+
+"user_id",
+
+userId
+
+);
+
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
 
 }
 
-</p>
 
-</div>
 
-</div>
+setMessage(
+"User control removed"
+);
 
-      <h2>Trade Settings</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Minutes</th>
-            <th>Payout %</th>
-            <th>Minimum</th>
-            <th>Enabled</th>
-            <th></th>
-          </tr>
-        </thead>
+};
 
-        <tbody>
 
-          {settings.map((item) => (
 
-            <tr key={item.id}>
 
-              <td>{item.duration}</td>
 
-              <td>
-                <input
-                  type="number"
-                  value={item.payout}
-                  onChange={(e) => {
-                    item.payout = Number(e.target.value);
-                    setSettings([...settings]);
-                  }}
-                />
-              </td>
 
-              <td>
-                <input
-                  type="number"
-                  value={item.minimum}
-                  onChange={(e) => {
-                    item.minimum = Number(e.target.value);
-                    setSettings([...settings]);
-                  }}
-                />
-              </td>
+// =========================
+// CHECK EXPIRE
+// =========================
 
-              <td>
-                <input
-                  type="checkbox"
-                  checked={item.enabled}
-                  onChange={(e) => {
-                    item.enabled = e.target.checked;
-                    setSettings([...settings]);
-                  }}
-                />
-              </td>
 
-              <td>
-                <button
-                  onClick={() => saveSetting(item)}
-                >
-                  Save
-                </button>
-              </td>
+const checkTime = (time)=>{
 
-            </tr>
 
-          ))}
+if(!time){
 
-        </tbody>
+return "-";
 
-      </table>
+}
 
-      <h2 style={{ marginTop: 40 }}>
-        Orders
-      </h2>
 
-      <div className="trade-toolbar">
 
-<input
+const now = new Date();
 
-placeholder="Search UID / Symbol"
+const end = new Date(time);
 
-value={search}
 
-onChange={(e)=>setSearch(e.target.value)}
 
-/>
+if(end < now){
 
-<select
+return "Expired";
 
-value={statusFilter}
+}
 
-onChange={(e)=>setStatusFilter(e.target.value)}
+
+
+return end.toLocaleString();
+
+
+};
+
+
+
+
+
+
+// =========================
+// FORMAT NUMBER
+// =========================
+
+
+const formatNumber = (num)=>{
+
+
+return Number(num || 0)
+
+.toLocaleString();
+
+
+
+};
+
+return (
+
+<div
+style={{
+minHeight:"100vh",
+background:"#06152d",
+color:"#fff",
+padding:"25px"
+}}
+>
+
+
+<div
+style={{
+display:"flex",
+alignItems:"center",
+gap:"20px",
+marginBottom:"25px"
+}}
+>
+
+
+<button
+
+onClick={()=>navigate("/admin")}
+
+style={{
+padding:"10px 20px",
+borderRadius:10,
+cursor:"pointer"
+}}
 
 >
 
-<option value="all">
-All
-</option>
+← Back
 
-<option value="trading">
-Trading
-</option>
+</button>
 
-<option value="finished">
-Finished
-</option>
 
-</select>
+<h1>
+
+Trade Management
+
+</h1>
+
 
 </div>
 
-      <table>
 
-        <thead>
 
-          <tr>
 
-            <th>User</th>
 
-            <th>Symbol</th>
+{
+message &&
 
-            <th>Side</th>
+<div
+style={{
+background:"#0f766e",
+padding:15,
+borderRadius:10,
+marginBottom:20
+}}
+>
 
-            <th>Amount</th>
+{message}
 
-            <th>Status</th>
+</div>
 
-            <th>Result</th>
+}
 
-            <th>Profit</th>
 
-            <th>Created</th>
 
-            <th>Action</th>
 
-          </tr>
 
-        </thead>
 
-        <tbody>
 
-          {filteredOrders.map((order) => (
+<div
+style={{
+background:"#111d32",
+padding:20,
+borderRadius:15,
+marginBottom:25
+}}
+>
 
-            <tr key={order.id}>
 
-              <td>{order.user_id}</td>
+<h2>
 
-              <td>{order.coin}</td>
+Global Trade Control
 
-              <td>{order.side}</td>
+</h2>
 
-              <td>${order.amount}</td>
 
-              <td>
 
-                <span
+<p>
 
-                className={`status ${order.status}`}
+Current :
 
-                >
+<b>
 
-                {order.status}
+&nbsp;
 
-                </span>
+{
 
-                </td>
+control?.global_result || "-"
 
-              <td>
+}
 
-                <span
+</b>
 
-                className={`result ${order.result}`}
+</p>
 
-                >
 
-                {order.result || "-"}
 
-                </span>
+<p>
 
-                </td>
+Until :
 
-              <td>${order.profit || 0}</td>
+{
 
-              <td>
+control?.global_until
 
-              {
+?
 
-              new Date(
+checkTime(control.global_until)
 
-              order.created_at
+:
 
-              ).toLocaleString()
+"Forever"
 
-              }
+}
 
-              </td>
+</p>
 
-              <td>
 
-                <button
-                className="btn-win"
-                onClick={() => forceWin(order)}
-                >
-                WIN
-                </button>
 
-                <button
-                className="btn-lose"
-                onClick={() => forceLose(order)}
-                style={{marginLeft:8}}
-                >
-                LOSE
-                </button>
 
-                </td>
+<select
 
-            </tr>
+value={minutes}
 
-          ))}
+onChange={
+e=>setMinutes(
+Number(e.target.value)
+)
+}
 
-        </tbody>
+style={{
+padding:10,
+borderRadius:8,
+marginRight:10
+}}
 
-      </table>
+>
 
-    </div>
-  );
+
+<option value={1}>
+1 Minute
+</option>
+
+
+<option value={5}>
+5 Minutes
+</option>
+
+
+<option value={10}>
+10 Minutes
+</option>
+
+
+<option value={30}>
+30 Minutes
+</option>
+
+
+<option value={60}>
+60 Minutes
+</option>
+
+
+</select>
+
+
+
+
+
+<button
+
+onClick={()=>setGlobalResult("win")}
+
+style={{
+background:"#16a34a",
+color:"#fff",
+padding:"12px 25px",
+border:0,
+borderRadius:10,
+marginRight:10,
+cursor:"pointer"
+}}
+
+>
+
+WIN ALL
+
+</button>
+
+
+
+
+
+
+<button
+
+onClick={()=>setGlobalResult("lose")}
+
+style={{
+background:"#dc2626",
+color:"#fff",
+padding:"12px 25px",
+border:0,
+borderRadius:10,
+marginRight:10,
+cursor:"pointer"
+}}
+
+>
+
+LOSE ALL
+
+</button>
+
+
+
+
+
+
+<button
+
+onClick={resetGlobal}
+
+style={{
+background:"#475569",
+color:"#fff",
+padding:"12px 25px",
+border:0,
+borderRadius:10,
+cursor:"pointer"
+}}
+
+>
+
+RESET
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+<div
+style={{
+background:"#111d32",
+padding:20,
+borderRadius:15,
+marginBottom:25
+}}
+>
+
+
+<h2>
+
+User Control
+
+</h2>
+
+
+
+
+<select
+
+value={selectedUser}
+
+onChange={
+e=>setSelectedUser(e.target.value)
+}
+
+style={{
+padding:10,
+borderRadius:8
+}}
+
+>
+
+
+<option value="">
+
+Select User
+
+</option>
+
+
+
+{
+
+users.map(u=>(
+
+
+<option
+
+key={u.id}
+
+value={u.id}
+
+>
+
+{u.member_id}
+
+-
+
+{u.first_name}
+
+{u.last_name}
+
+</option>
+
+
+))
+
+
+}
+
+
+
+</select>
+
+
+
+
+
+<button
+
+onClick={()=>setUserResult("win")}
+
+style={{
+marginLeft:10,
+background:"#16a34a",
+color:"#fff",
+padding:"10px 20px",
+border:0,
+borderRadius:8
+}}
+
+>
+
+USER WIN
+
+</button>
+
+
+
+
+
+<button
+
+onClick={()=>setUserResult("lose")}
+
+style={{
+marginLeft:10,
+background:"#dc2626",
+color:"#fff",
+padding:"10px 20px",
+border:0,
+borderRadius:8
+}}
+
+>
+
+USER LOSE
+
+</button>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<div>
+
+<h2>
+
+Trade List
+
+</h2>
+
+
+
+<table
+
+style={{
+width:"100%",
+background:"#111d32",
+borderCollapse:"collapse"
+}}
+
+>
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>User</th>
+
+<th>Coin</th>
+
+<th>Side</th>
+
+<th>Amount</th>
+
+<th>Duration</th>
+
+<th>Result</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+
+</tr>
+
+</thead>
+
+
+
+<tbody>
+
+
+{
+
+trades.map(item=>(
+
+
+<tr
+
+key={item.id}
+
+>
+
+
+<td>
+
+#{item.id}
+
+</td>
+
+
+
+<td>
+
+{getUserName(item.user_id)}
+
+</td>
+
+
+
+
+<td>
+
+{item.coin}
+
+</td>
+
+
+
+
+<td>
+
+{item.side}
+
+</td>
+
+
+
+
+<td>
+
+{formatNumber(item.amount)}
+
+</td>
+
+
+
+
+<td>
+
+{item.duration} นาที
+
+</td>
+
+
+
+
+<td>
+
+{item.result || "-"}
+
+</td>
+
+
+
+
+<td>
+
+{item.status}
+
+</td>
+
+
+
+
+<td>
+
+{
+
+new Date(
+item.created_at
+)
+.toLocaleString()
+
+}
+
+</td>
+
+
+
+</tr>
+
+
+))
+
+
+}
+
+
+
+</tbody>
+
+
+
+</table>
+
+
+
+</div>
+
+
+
+
+
+</div>
+
+
+);
+
+
 }

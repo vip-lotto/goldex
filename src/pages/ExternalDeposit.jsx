@@ -33,6 +33,9 @@ const networkRef = useRef(null);
   const [slip, setSlip] =
     useState(null);
 
+  const [amount, setAmount] =
+    useState("");
+
   const [showToast, setShowToast] =
     useState(false);
 
@@ -180,6 +183,14 @@ const NETWORK_LOGO = {
     return;
   }
 
+  if(!amount || Number(amount) <= 0){
+
+  notify(t("enterAmount"));
+
+  return;
+
+}
+
   const user =
     JSON.parse(
       localStorage.getItem("user")
@@ -232,17 +243,19 @@ const NETWORK_LOGO = {
     await supabase
   .from("deposits")
   .insert([
-    {
-      user_id: user.id,
-      coin: coin,
-      network: network,
-      wallet_address:
-        currentWallet.address,
-      slip: slip.name,
-      slip_url: slipUrl,
-      status: "pending"
-    }
-  ]);
+{
+ user_id: user.id,
+ coin: coin,
+ network: network,
+
+ amount: Number(amount),
+
+ wallet_address: currentWallet.address,
+ slip: slip.name,
+ slip_url: slipUrl,
+ status:"pending"
+}
+]);
 
   if (error) {
 
@@ -428,7 +441,23 @@ const NETWORK_LOGO = {
 
       <div className="deposit-card">
 
-        <h3>{t("uploadSlip")}</h3>
+  <h3>{t("amount")}</h3>
+
+  <input
+    type="number"
+    placeholder="Enter amount"
+    value={amount}
+    onChange={(e)=>
+      setAmount(e.target.value)
+    }
+  />
+
+</div>
+
+
+<div className="deposit-card">
+
+  <h3>{t("uploadSlip")}</h3>
 
         <label
           className="upload-box"

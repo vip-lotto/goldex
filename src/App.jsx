@@ -48,7 +48,7 @@ import AdminSettings from "./pages/admin/AdminSettings";
 
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRoute from "./pages/admin/AdminRoute";
-
+import AdminManualDeposit from "./pages/admin/AdminManualDeposit";
 
 
 
@@ -177,6 +177,13 @@ function Layout() {
     </AdminRoute>
   }
 />
+
+<Route
+ path="/admin/manual-deposit"
+ element={<AdminManualDeposit />}
+/>
+
+
 
 
       </Routes>
