@@ -26,6 +26,33 @@ const [side,setSide]=useState("");
 const [receipt,setReceipt]=useState(null);
 
 
+useEffect(() => {
+
+  const money = Number(amount);
+
+  if (!money) {
+    setDuration(30);
+    return;
+  }
+
+  if (money > 500000) {
+    setDuration(180);
+
+  } else if (money > 49999) {
+    setDuration(120);
+
+  } else if (money > 29999) {
+    setDuration(90);
+
+  } else if (money > 999) {
+    setDuration(60);
+
+  } else {
+    setDuration(30);
+  }
+
+}, [amount]);
+
 
 
 
@@ -286,7 +313,7 @@ return;
 
 }
 
-
+setReceipt(null);
 
 if(!user){
 
@@ -765,7 +792,11 @@ description:
 
 
 
+setIsTrading(false);
 
+setSeconds(0);
+
+setActiveTrade(null);
 
 
 
@@ -775,9 +806,25 @@ setReceipt({
 
 result:finalResult,
 
+investment:Number(trade.amount),
+
+profit:profit,
+
+loss:finalResult==="lose"
+        ? Number(trade.amount)
+        : 0,
+
 payout:payout,
 
-profit:profit
+duration:trade.duration,
+
+side:trade.side,
+
+market:trade.coin,
+
+openTime:trade.created_at,
+
+closeTime:new Date().toISOString()
 
 });
 
@@ -785,11 +832,7 @@ profit:profit
 
 
 
-setIsTrading(false);
 
-setSeconds(0);
-
-setActiveTrade(null);
 
 
 
@@ -889,7 +932,7 @@ return (
 
 key={t}
 
-disabled={isTrading}
+disabled={isTrading || t !== duration}
 
 className={
 
@@ -1051,72 +1094,120 @@ Trading
 
 {
 
-receipt &&
+receipt && (
 
+<div className="receipt-overlay">
 
 <div className="trade-receipt">
 
+<h2 className="receipt-title">Trade Receipt</h2>
 
-<h3>
+<div className="receipt-table">
 
-Transaction Details
+  <div className="receipt-row">
+    <span>Order</span>
+    <span>#{receipt.id}</span>
+  </div>
 
-</h3>
+  <div className="receipt-row">
+    <span>Market</span>
+    <span>{receipt.market}</span>
+  </div>
 
+  <div className="receipt-row">
+    <span>Side</span>
+    <span>{receipt.side}</span>
+  </div>
 
-<p>
+  <div className="receipt-row">
+    <span>Duration</span>
+    <span>{receipt.duration} Seconds</span>
+  </div>
 
-Order #{receipt.id}
+  <div className="receipt-row">
+    <span>Status</span>
 
-</p>
+    <span
+      className={
+        receipt.result === "win"
+          ? "receipt-win"
+          : "receipt-lose"
+      }
+    >
+      {receipt.result.toUpperCase()}
+    </span>
+  </div>
 
+  <div className="receipt-row">
+    <span>Investment</span>
+    <span>
+      {Number(receipt.investment).toLocaleString()} USDT
+    </span>
+  </div>
 
-<p>
+  {
+    receipt.result === "win"
+      ?
 
-Market : {receipt.coin}
+      <div className="receipt-row">
+        <span>Profit</span>
 
-</p>
+        <span className="receipt-win">
+          +{Number(receipt.profit).toLocaleString()} USDT
+        </span>
+      </div>
 
+      :
 
-<p>
+      <div className="receipt-row">
+        <span>Loss</span>
 
-Result :
+        <span className="receipt-lose">
+          -{Number(receipt.loss).toLocaleString()} USDT
+        </span>
+      </div>
+  }
 
-{receipt.result}
+  <div className="receipt-row">
+    <span>Total Received</span>
 
-</p>
+    <span>
+      {Number(receipt.payout).toLocaleString()} USDT
+    </span>
+  </div>
 
+  <div className="receipt-row">
+    <span>Open Time</span>
 
-<p>
+    <span>
+      {new Date(receipt.openTime).toLocaleString()}
+    </span>
+  </div>
 
-Payout :
+  <div className="receipt-row">
+    <span>Close Time</span>
 
-{Number(receipt.payout||0).toLocaleString()}
-
-USDT
-
-</p>
-
-
-
-<button
-
-onClick={()=>setReceipt(null)}
-
->
-
-Close
-
-</button>
-
+    <span>
+      {new Date(receipt.closeTime).toLocaleString()}
+    </span>
+  </div>
 
 </div>
 
+<button
+className="receipt-close-btn"
+onClick={()=>setReceipt(null)}
+>
+Close
+</button>
+
+</div>     
+
+</div>     
+
+)          
 
 }
-
-
-
 
 </div>
 
@@ -1124,3 +1215,4 @@ Close
 
 
 }
+

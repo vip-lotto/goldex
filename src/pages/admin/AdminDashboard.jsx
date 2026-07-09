@@ -1,11 +1,28 @@
 import { useNavigate } from "react-router-dom";
+import {
+  Users,
+  Wallet,
+  ArrowDownCircle,
+  ArrowUpCircle,
+  CandlestickChart,
+  Landmark,
+  MessageCircle,
+  Settings,
+  LogOut,
+  ShieldCheck,
+  BarChart3,
+  DollarSign,
+  TrendingUp,
+  Activity
+} from "lucide-react";
+
+import "./AdminDashboard.css";
 
 export default function AdminDashboard() {
 
   const navigate = useNavigate();
 
-
-  function logout(){
+  function logout() {
 
     localStorage.removeItem("admin");
 
@@ -13,114 +30,221 @@ export default function AdminDashboard() {
 
   }
 
-
   const menus = [
+
     {
-      title: "💰 Deposit",
+      title: "Deposit",
+      desc: "Approve customer deposits",
+      icon: <ArrowDownCircle size={34}/>,
       path: "/admin/deposit",
-      color: "#16a34a9f"
+      color: "green"
     },
+
     {
-      title: "💸 Withdraw",
+      title: "Withdraw",
+      desc: "Approve withdrawals",
+      icon: <ArrowUpCircle size={34}/>,
       path: "/admin/withdraw",
-      color: "#dc2626b7"
+      color: "red"
     },
+
     {
-      title: "👥 Users",
+      title: "Users",
+      desc: "Manage all users",
+      icon: <Users size={34}/>,
       path: "/admin/users",
-      color: "#2564ebc5"
+      color: "blue"
     },
+
     {
-      title:"💵 Manual Deposit",
-      path:"/admin/manual-deposit",
-      color:"#0891b2"
+      title: "Manual Deposit",
+      desc: "Add balance manually",
+      icon: <DollarSign size={34}/>,
+      path: "/admin/manual-deposit",
+      color: "cyan"
     },
+
     {
-      title: "📈 Trades",
+      title: "Trades",
+      desc: "Trade management",
+      icon: <CandlestickChart size={34}/>,
       path: "/admin/trades",
-      color: "#7c3aedb4"
+      color: "purple"
     },
-    
+
+    {
+      title: "Deposit Wallet",
+      desc: "Wallet Address & QR",
+      icon: <Wallet size={34}/>,
+      path: "/admin/deposit-wallet",
+      color: "orange"
+    },
+
+    {
+      title: "Admin Contact",
+      desc: "LINE / Telegram",
+      icon: <MessageCircle size={34}/>,
+      path: "/admin/contact",
+      color: "pink"
+    },
+
+    {
+      title: "Settings",
+      desc: "System settings",
+      icon: <Settings size={34}/>,
+      path: "/admin/settings",
+      color: "gray"
+    },
+
+    {
+    title:"📞 Contact Admin",
+    path:"/admin/contact",
+    color:"#06b6d4"
+}
+
   ];
 
-
   return (
-    <div
-      style={{
-        minHeight:"100vh",
-        background:"#081223",
-        color:"#fff",
-        padding:30
-      }}
-    >
 
-      <div
-        style={{
-          display:"flex",
-          justifyContent:"space-between",
-          alignItems:"center",
-          marginBottom:30
-        }}
-      >
+<div className="admin-page">
 
-        <h1>
-          GOLDEx Admin Panel
-        </h1>
+    {/* ================= Header ================= */}
 
+    <div className="admin-header">
+
+        <div>
+
+            <h1>Trust Admin</h1>
+
+            <p>Exchange Management System</p>
+
+        </div>
 
         <button
-          onClick={logout}
-          style={{
-            background:"#09f7eba4",
-            color:"#fff",
-            border:"none",
-            padding:"12px 25px",
-            borderRadius:10,
-            fontSize:16,
-            fontWeight:"bold",
-            cursor:"pointer"
-          }}
+            className="logout-btn"
+            onClick={logout}
         >
-          🚪 Logout
+            <LogOut size={18}/>
+            Logout
         </button>
 
+    </div>
 
-      </div>
+    {/* ================= Welcome ================= */}
 
+    <div className="welcome-card">
 
-      <div
-        style={{
-          display:"grid",
-          gridTemplateColumns:"repeat(auto-fill,minmax(240px,1fr))",
-          gap:20
-        }}
-      >
+        <div className="welcome-left">
 
-        {menus.map(menu => (
+            <div className="admin-avatar">
 
-          <div
-            key={menu.path}
-            onClick={()=>navigate(menu.path)}
-            style={{
-              background:menu.color,
-              padding:30,
-              borderRadius:15,
-              cursor:"pointer",
-              fontSize:22,
-              fontWeight:"bold",
-              textAlign:"center"
-            }}
-          >
+                <ShieldCheck size={42}/>
 
-            {menu.title}
+            </div>
 
-          </div>
+            <div>
+
+                <h2>Administrator</h2>
+
+                <span>Full Access Control</span>
+
+            </div>
+
+        </div>
+
+        <div className="welcome-right">
+
+            <Activity size={38}/>
+
+        </div>
+
+    </div>
+
+    {/* ================= Statistics ================= */}
+
+    <div className="stats-grid">
+
+        <div className="stat-card">
+
+            <BarChart3 size={30}/>
+
+            <div>
+
+                <h3>Dashboard</h3>
+
+                <span>Overview</span>
+
+            </div>
+
+        </div>
+
+        <div className="stat-card">
+
+            <TrendingUp size={30}/>
+
+            <div>
+
+                <h3>Trading</h3>
+
+                <span>Manage Orders</span>
+
+            </div>
+
+        </div>
+
+        <div className="stat-card">
+
+            <Wallet size={30}/>
+
+            <div>
+
+                <h3>Wallet</h3>
+
+                <span>Deposit Address</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {/* ================= Menu ================= */}
+
+    <div className="menu-grid">
+
+        {menus.map(menu=>(
+
+            <div
+                key={menu.path}
+                className={`menu-card ${menu.color}`}
+                onClick={()=>navigate(menu.path)}
+            >
+
+                <div className="menu-icon">
+
+                    {menu.icon}
+
+                </div>
+
+                <h3>
+
+                    {menu.title}
+
+                </h3>
+
+                <p>
+
+                    {menu.desc}
+
+                </p>
+
+            </div>
 
         ))}
 
-      </div>
-
-
     </div>
-  );
+
+</div>
+
+);
 }

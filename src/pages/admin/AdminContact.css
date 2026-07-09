@@ -1,0 +1,718 @@
+/* ===========================
+        PAGE
+=========================== */
+
+.admin-contact-page{
+
+    min-height:100vh;
+
+    background:#081223;
+
+    padding:35px;
+
+    color:#fff;
+
+}
+
+/* ===========================
+        HEADER
+=========================== */
+
+.admin-contact-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+.admin-contact-header h1{
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.back-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    border:none;
+
+    background:#1f2937;
+
+    color:#fff;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+.back-btn:hover{
+
+    background:#334155;
+
+}
+
+/* ===========================
+        FORM
+=========================== */
+
+.contact-form{
+
+    background:#111827;
+
+    border:1px solid #1e293b;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    margin-bottom:30px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+    margin-bottom:18px;
+
+}
+
+.form-group label{
+
+    margin-bottom:8px;
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+    font-weight:600;
+
+}
+
+.form-group input{
+
+    height:48px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:12px;
+
+    background:#1e293b;
+
+    color:#fff;
+
+    padding:0 16px;
+
+    font-size:15px;
+
+}
+
+.form-group input[type=file]{
+
+    padding:10px;
+
+    cursor:pointer;
+
+}
+
+/* ===========================
+        PREVIEW
+=========================== */
+
+.preview-image{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:18px;
+
+    object-fit:cover;
+
+    border:2px solid #334155;
+
+    margin-bottom:20px;
+
+}
+
+/* ===========================
+        SWITCH
+=========================== */
+
+.switch{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:25px;
+
+    font-weight:600;
+
+}
+
+.switch input{
+
+    width:18px;
+
+    height:18px;
+
+}
+
+/* ===========================
+        BUTTONS
+=========================== */
+
+.form-buttons{
+
+    display:flex;
+
+    gap:15px;
+
+    margin-top:20px;
+
+}
+
+.save-btn{
+
+    flex:1;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:linear-gradient(135deg,#16a34a,#22c55e);
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.save-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(34,197,94,.35);
+
+}
+
+.reset-btn{
+
+    flex:1;
+
+    height:52px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.reset-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 10px 25px rgba(37,99,235,.35);
+
+}
+
+/* ===========================
+        CONTACT LIST
+=========================== */
+
+.contact-list{
+
+    background:#111827;
+
+    border-radius:20px;
+
+    padding:28px;
+
+    border:1px solid #1e293b;
+
+}
+
+.contact-list h2{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:25px;
+
+    font-size:24px;
+
+    font-weight:700;
+
+}
+
+.loading{
+
+    text-align:center;
+
+    color:#94a3b8;
+
+    padding:40px;
+
+}
+
+/* ===========================
+        CARD
+=========================== */
+
+.contact-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:20px;
+
+    border-radius:16px;
+
+    background:#1e293b;
+
+    margin-bottom:18px;
+
+    transition:.25s;
+
+}
+
+.contact-card:hover{
+
+    transform:translateY(-3px);
+
+    background:#243244;
+
+}
+
+.contact-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.contact-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    object-fit:cover;
+
+    background:#0f172a;
+
+    border:2px solid #334155;
+
+}
+
+.contact-left h3{
+
+    font-size:20px;
+
+    margin-bottom:6px;
+
+}
+
+.contact-left p{
+
+    color:#94a3b8;
+
+    margin-bottom:5px;
+
+    word-break:break-all;
+
+}
+
+.contact-left span{
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+/* ===========================
+        RIGHT
+=========================== */
+
+.contact-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+/* ===========================
+        STATUS
+=========================== */
+
+.status{
+
+    min-width:95px;
+
+    text-align:center;
+
+    padding:8px 14px;
+
+    border-radius:999px;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+.status.on{
+
+    background:rgba(34,197,94,.15);
+
+    color:#22c55e;
+
+    border:1px solid rgba(34,197,94,.35);
+
+}
+
+.status.off{
+
+    background:rgba(239,68,68,.15);
+
+    color:#ef4444;
+
+    border:1px solid rgba(239,68,68,.35);
+
+}
+
+/* ===========================
+        BUTTONS
+=========================== */
+
+.edit-btn,
+.delete-btn{
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:12px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.edit-btn{
+
+    background:#2563eb;
+
+    color:#fff;
+
+}
+
+.edit-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#1d4ed8;
+
+    box-shadow:0 10px 20px rgba(37,99,235,.35);
+
+}
+
+.delete-btn{
+
+    background:#dc2626;
+
+    color:#fff;
+
+}
+
+.delete-btn:hover{
+
+    transform:translateY(-2px);
+
+    background:#b91c1c;
+
+    box-shadow:0 10px 20px rgba(220,38,38,.35);
+
+}
+
+/* ===========================
+        ANIMATION
+=========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.contact-form{
+
+    animation:fadeUp .35s ease;
+
+}
+
+.contact-card{
+
+    animation:fadeUp .45s ease;
+
+}
+
+/* ===========================
+        SCROLLBAR
+=========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#081223;
+
+}
+
+/* ===========================
+        TABLET
+=========================== */
+
+@media(max-width:992px){
+
+.contact-card{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:18px;
+
+}
+
+.contact-right{
+
+    width:100%;
+
+    justify-content:flex-end;
+
+}
+
+}
+
+/* ===========================
+        MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.admin-contact-page{
+
+    padding:18px;
+
+}
+
+.admin-contact-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+.admin-contact-header h1{
+
+    font-size:28px;
+
+}
+
+.contact-form{
+
+    padding:20px;
+
+}
+
+.contact-list{
+
+    padding:20px;
+
+}
+
+.form-buttons{
+
+    flex-direction:column;
+
+}
+
+.save-btn,
+
+.reset-btn{
+
+    width:100%;
+
+}
+
+.contact-left{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.contact-right{
+
+    width:100%;
+
+    justify-content:space-between;
+
+}
+
+.contact-icon{
+
+    width:64px;
+
+    height:64px;
+
+}
+
+.contact-left h3{
+
+    font-size:18px;
+
+}
+
+.contact-left p{
+
+    font-size:13px;
+
+}
+
+}
+
+/* ===========================
+        LARGE DESKTOP
+=========================== */
+
+@media(min-width:1400px){
+
+.admin-contact-page{
+
+    max-width:1400px;
+
+    margin:auto;
+
+}
+
+}

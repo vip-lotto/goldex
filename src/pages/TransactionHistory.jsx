@@ -57,6 +57,8 @@ export default function TransactionHistory() {
     const data =
       await getTransactions(user.id);
 
+      console.log(data);
+
     setTransactions(data || []);
 
     setLoading(false);
@@ -400,84 +402,120 @@ export default function TransactionHistory() {
             <div className="history-right">
 
               <div
-                className={
-                  item.type === "withdraw"
+              className={
+                item.type === "trade"
+                  ? (
+                      item.result === "lose"
+                        ? "amount minus"
+                        : "amount plus"
+                    )
+                  : item.type === "withdraw"
                   ? "amount minus"
                   : "amount plus"
-                }
-              >
+              }
+            >
 
-                {
+            {
+              item.type === "trade"
 
-                  item.type === "withdraw"
+                ? (
+                    item.result === "lose"
+                    ? "-"
+                    : "+"
+                  )
 
-                  ? "-"
+                : item.type === "withdraw"
 
-                  : "+"
+                ? "-"
 
-                }
+                : "+"
+            }
 
-                USDT
+            USDT
 
-                {
+            {Number(item.amount).toLocaleString()}
 
-                  Number(
-                    item.amount
-                  ).toLocaleString()
+            </div>
 
-                }
+              <div
+className={`status ${item.status}`}
+>
 
-              </div>
+{
 
-              <div className={`status ${item.status}`}>
+item.type === "trade"
 
-  {
+?
 
-    ["pending","processing"].includes(item.status)
+(
 
-    ?
+item.result === "lose"
 
-    <Clock3 size={14}/>
+?
 
-    :
+<>
 
-    ["success","approved","finished"].includes(item.status)
+<XCircle size={14}/>
 
-    ?
+<span>LOSE</span>
 
-    <CheckCircle2 size={14}/>
+</>
 
-    :
+:
 
-    <XCircle size={14}/>
+<>
 
-  }
+<CheckCircle2 size={14}/>
 
-  <span>
+<span>WIN</span>
 
-    {
+</>
 
-      ["pending","processing"].includes(item.status)
+)
 
-      ? t("pending")
+:
 
-      :
+(
 
-      ["success","approved","finished"].includes(item.status)
+["pending","processing"].includes(item.status)
 
-      ? t("success")
+?
 
-      :
+<>
 
-      item.status === "rejected"
+<Clock3 size={14}/>
 
-      ? t("rejected")
+<span>{t("pending")}</span>
 
-      : t("failed")
+</>
 
-    }
+:
 
-  </span>
+["success","approved","finished"].includes(item.status)
+
+?
+
+<>
+
+<CheckCircle2 size={14}/>
+
+<span>{t("success")}</span>
+
+</>
+
+:
+
+<>
+
+<XCircle size={14}/>
+
+<span>{t("failed")}</span>
+
+</>
+
+)
+
+}
 
 </div>
 

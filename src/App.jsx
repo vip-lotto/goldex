@@ -49,6 +49,8 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRoute from "./pages/admin/AdminRoute";
 import AdminManualDeposit from "./pages/admin/AdminManualDeposit";
+import AdminDepositWallet from "./pages/admin/AdminDepositWallet";
+import AdminContact from "./pages/admin/AdminContact";
 
 
 
@@ -182,6 +184,19 @@ function Layout() {
  path="/admin/manual-deposit"
  element={<AdminManualDeposit />}
 />
+
+<Route
+    path="/admin/deposit-wallet"
+    element={<AdminDepositWallet />}
+/>
+
+<Route
+  path="/admin/contact"
+  element={<AdminContact/>}
+/>
+
+
+
 
 
 

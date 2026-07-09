@@ -447,25 +447,18 @@ Convert
 
   </div>
 
-  {/* Log Out */}
+  {/* Logout */}
 
 <div
   className="mine-item logout-item"
   onClick={logout}
 >
-  <div className="mine-left">
-    <LogOut
-      size={22}
-      color="#ff5b5b"
-    />
+  <div className="logout-content">
+    <LogOut size={22} color="#ff4d4f" />
     <span>{t("logout")}</span>
   </div>
-
-  <ChevronRight
-    size={18}
-    color="#ff5b5b"
-  />
 </div>
+
 
 </div>
 

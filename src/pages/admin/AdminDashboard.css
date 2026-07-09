@@ -1,0 +1,619 @@
+/* ==========================================
+   GOLDEx Admin Dashboard
+========================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+.admin-page{
+
+    min-height:100vh;
+
+    padding:30px;
+
+    background:
+    linear-gradient(
+        180deg,
+        #08111f,
+        #0d1728,
+        #111c31
+    );
+
+    color:#fff;
+
+}
+
+/* ==========================
+        HEADER
+========================== */
+
+.admin-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:28px;
+
+}
+
+.admin-header h1{
+
+    font-size:34px;
+
+    font-weight:800;
+
+    margin:0;
+
+}
+
+.admin-header p{
+
+    color:#9ca3af;
+
+    margin-top:6px;
+
+}
+
+.logout-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:none;
+
+    cursor:pointer;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    height:50px;
+
+    padding:0 22px;
+
+    border-radius:14px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.logout-btn:hover{
+
+    background:#dc2626;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+        WELCOME
+========================== */
+
+.welcome-card{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:30px;
+
+    border-radius:22px;
+
+    margin-bottom:25px;
+
+    background:
+
+    linear-gradient(
+        135deg,
+        #2563eb,
+        #1d4ed8
+    );
+
+    box-shadow:
+
+    0 20px 45px rgba(0,0,0,.35);
+
+}
+
+.welcome-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.admin-avatar{
+
+    width:72px;
+
+    height:72px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.welcome-card h2{
+
+    margin:0;
+
+    font-size:26px;
+
+}
+
+.welcome-card span{
+
+    color:#dbeafe;
+
+}
+
+/* ==========================
+        Statistics
+========================== */
+
+.stats-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.stat-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:22px;
+
+    border-radius:18px;
+
+    background:#172338;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.25s;
+
+    cursor:pointer;
+
+}
+
+.stat-card:hover{
+
+    transform:translateY(-4px);
+
+    background:#1d2c46;
+
+    box-shadow:0 15px 30px rgba(0,0,0,.35);
+
+}
+
+.stat-card svg{
+
+    color:#38bdf8;
+
+}
+
+.stat-card h3{
+
+    margin:0;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+.stat-card span{
+
+    color:#94a3b8;
+
+    font-size:14px;
+
+}
+
+/* ==========================
+        Menu
+========================== */
+
+.menu-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
+    gap:22px;
+
+}
+
+.menu-card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    padding:28px;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+    border:1px solid rgba(255,255,255,.05);
+
+    min-height:170px;
+
+}
+
+.menu-card:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+
+}
+
+.menu-icon{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:18px;
+
+    background:rgba(255,255,255,.15);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:22px;
+
+}
+
+.menu-card h3{
+
+    margin:0;
+
+    font-size:24px;
+
+    font-weight:800;
+
+}
+
+.menu-card p{
+
+    margin-top:10px;
+
+    color:rgba(255,255,255,.82);
+
+    line-height:1.5;
+
+    font-size:15px;
+
+}
+
+/* ==========================
+      Colors
+========================== */
+
+.menu-card.green{
+
+    background:linear-gradient(135deg,#16a34a,#15803d);
+
+}
+
+.menu-card.red{
+
+    background:linear-gradient(135deg,#ef4444,#b91c1c);
+
+}
+
+.menu-card.blue{
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+}
+
+.menu-card.cyan{
+
+    background:linear-gradient(135deg,#0891b2,#0e7490);
+
+}
+
+.menu-card.purple{
+
+    background:linear-gradient(135deg,#7c3aed,#6d28d9);
+
+}
+
+.menu-card.orange{
+
+    background:linear-gradient(135deg,#f97316,#ea580c);
+
+}
+
+.menu-card.pink{
+
+    background:linear-gradient(135deg,#ec4899,#db2777);
+
+}
+
+.menu-card.gray{
+
+    background:linear-gradient(135deg,#475569,#334155);
+
+}
+
+/* ==========================
+      Animation
+========================== */
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.welcome-card{
+
+    animation:fadeUp .45s ease;
+
+}
+
+.stat-card{
+
+    animation:fadeUp .55s ease;
+
+}
+
+.menu-card{
+
+    animation:fadeUp .65s ease;
+
+}
+
+.menu-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+
+    height:180px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-70px;
+
+    right:-70px;
+
+    transition:.35s;
+
+}
+
+.menu-card:hover::before{
+
+    transform:scale(1.3);
+
+}
+
+/* ==========================
+      Scrollbar
+========================== */
+
+::-webkit-scrollbar{
+
+    width:8px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:#334155;
+
+    border-radius:30px;
+
+}
+
+::-webkit-scrollbar-track{
+
+    background:#111827;
+
+}
+
+/* ==========================
+      Tablet
+========================== */
+
+@media(max-width:991px){
+
+.admin-page{
+
+    padding:20px;
+
+}
+
+.admin-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.menu-grid{
+
+    grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+/* ==========================
+      Mobile
+========================== */
+
+@media(max-width:768px){
+
+.admin-page{
+
+    padding:16px;
+
+}
+
+.admin-header h1{
+
+    font-size:28px;
+
+}
+
+.welcome-card{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+    padding:22px;
+
+}
+
+.welcome-left{
+
+    width:100%;
+
+}
+
+.welcome-right{
+
+    display:none;
+
+}
+
+.stats-grid{
+
+    grid-template-columns:1fr;
+
+    gap:15px;
+
+}
+
+.menu-grid{
+
+    grid-template-columns:1fr;
+
+    gap:16px;
+
+}
+
+.menu-card{
+
+    min-height:145px;
+
+    padding:22px;
+
+}
+
+.menu-card h3{
+
+    font-size:22px;
+
+}
+
+.menu-card p{
+
+    font-size:14px;
+
+}
+
+.logout-btn{
+
+    width:100%;
+
+    justify-content:center;
+
+}
+
+}
+
+/* ==========================
+      Large Desktop
+========================== */
+
+@media(min-width:1500px){
+
+.admin-page{
+
+    max-width:1600px;
+
+    margin:auto;
+
+}
+
+.menu-grid{
+
+    grid-template-columns:repeat(4,1fr);
+
+}
+
+}

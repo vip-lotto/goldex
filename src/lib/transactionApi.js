@@ -114,24 +114,28 @@ export async function getTransactions(userId) {
 
   (tradesRes.data || []).forEach(item => {
 
-    list.push({
+  list.push({
 
-      id: `trade-${item.id}`,
+    id: `trade-${item.id}`,
 
-      type: "trade",
+    type: "trade",
 
-      amount: item.amount,
+    amount:
+      item.result === "win"
+        ? item.payout
+        : item.amount,
 
-      status: item.status,
+    status: item.status,
 
-      description: `${item.side} ${item.coin}`,
+    result: item.result,
 
-      created_at: item.created_at
+    description: `${item.side} ${item.coin}`,
 
-    });
+    created_at: item.created_at
 
   });
 
+});
   // เรียงจากใหม่ไปเก่า
   list.sort((a, b) =>
     new Date(b.created_at) - new Date(a.created_at)

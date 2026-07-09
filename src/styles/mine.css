@@ -1582,3 +1582,19 @@ color:#111;
     flex:1;
     justify-content:center;
 }
+
+.logout-item{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor:pointer;
+}
+
+.logout-content{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    color:#ff4d4f;
+    
+}
