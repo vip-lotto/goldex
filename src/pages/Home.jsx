@@ -42,8 +42,30 @@ const [unreadCount,
 setUnreadCount] =
 useState(0);
 
-const loadNotifications =
-  async () => {
+const [contacts, setContacts] = useState([]);
+
+const [showContacts, setShowContacts] = useState(false);
+
+
+const loadContacts = async () => {
+
+  const { data, error } = await supabase
+  .from("admin_contacts")
+  .select("*")
+  .eq("enabled", true);
+
+  if (error) {
+    console.log(error);
+    return;
+  }
+
+  setContacts(data || []);
+
+};
+
+const loadNotifications = async () => {
+
+
 
     const user =
       JSON.parse(
@@ -186,6 +208,8 @@ const loadProfit = async () => {
 
 useEffect(() => {
 
+loadContacts();
+
 loadMarket();
 loadNotifications();
 loadWallet();
@@ -257,6 +281,7 @@ loadProfit();
 
 
 
+
 const totalAssets = useMemo(() => {
 
   if (!wallet || rates.length === 0) return 0;
@@ -302,13 +327,8 @@ return (
     <div className="header-actions">
 
         <div
-            className="support-btn"
-            onClick={() =>
-                window.open(
-                    "https://lin.ee/nFNwIxfr",
-                    "_blank"
-                )
-            }
+          className="support-btn"
+          onClick={() => setShowContacts(true)}
         >
             <Headset size={24}/>
         </div>
@@ -508,6 +528,68 @@ return (
     ))}
 
 </div>
+
+{showContacts && (
+
+<div
+  className="contact-overlay"
+  onClick={() => setShowContacts(false)}
+>
+
+<div
+  className="contact-modal"
+  onClick={(e) => e.stopPropagation()}
+>
+
+<h3>Customer Service</h3>
+
+{contacts.map(contact => (
+
+<div
+  key={contact.id}
+  className="contact-item"
+  onClick={() => {
+
+    const url =
+      contact.link.startsWith("http")
+        ? contact.link
+        : `https://${contact.link}`;
+
+    window.open(url, "_blank");
+
+  }}
+>
+
+<img
+  src={contact.icon_url}
+  alt=""
+  className="contact-icon"
+/>
+
+<span>
+
+{contact.name}
+
+</span>
+
+</div>
+
+))}
+
+<button
+  className="close-contact"
+  onClick={() => setShowContacts(false)}
+>
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+)}
 
   <BottomNav />
 

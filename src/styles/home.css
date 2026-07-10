@@ -2448,3 +2448,73 @@ ol{
     text-align:right;
     margin-bottom:8px;
 }
+
+/* ===========================
+   Contact Popup
+=========================== */
+
+.contact-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+}
+
+.contact-modal{
+    width:90%;
+    max-width:380px;
+    background:#13233c;
+    border-radius:18px;
+    padding:20px;
+    box-shadow:0 15px 35px rgba(0,0,0,.4);
+}
+
+.contact-modal h3{
+    color:#fff;
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.contact-item{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    padding:14px;
+    border-radius:12px;
+    cursor:pointer;
+    margin-bottom:10px;
+    transition:.25s;
+    background:#1b2d49;
+}
+
+.contact-item:hover{
+    background:#29456d;
+}
+
+.contact-icon{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    object-fit:cover;
+}
+
+.contact-item span{
+    color:#fff;
+    font-size:16px;
+    font-weight:600;
+}
+
+.close-contact{
+    width:100%;
+    margin-top:15px;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+    background:#ef5844c4;
+    color:#fff;
+    font-weight:bold;
+    cursor:pointer;
+}

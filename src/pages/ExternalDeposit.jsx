@@ -4,7 +4,7 @@ import {
   Download,
   Upload
 } from "lucide-react";
-import { QRCodeCanvas } from "qrcode.react";
+
 import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
 import { useTranslation } from "react-i18next";
@@ -112,33 +112,53 @@ const NETWORK_LOGO = {
 
   const loadWallets = async () => {
 
-    const { data } =
-      await supabase
-        .from("deposit_wallets")
-        .select("*")
-        .order("id");
+    const { data, error } = await supabase
+  .from("deposit_wallets")
+  .select("*")
+  .eq("enabled", true)
+  .order("display_order", { ascending: true });
+
+if (error) {
+  console.log(error);
+  return;
+}
 
     if (data?.length > 0) {
 
-      setWallets(data);
+  setWallets(data);
 
-      setCoin(data[0].coin);
+  const firstWallet =
+    data.find(
+      w => w.address && w.qr_url
+    );
 
-      setNetwork(data[0].network);
+  if (firstWallet) {
+    setCoin(firstWallet.coin);
+    setNetwork(firstWallet.network);
+  }
 
-    }
+}
+
+
   };
 
   const currentWallet =
-    wallets.find(
+  wallets
+    .filter(
       item =>
         item.coin === coin &&
-        item.network === network
-    );
+        item.network === network &&
+        item.address &&
+        item.qr_url
+    )
+    .sort((a, b) => b.id - a.id)[0];
 
-    console.log("wallets =", wallets);
-    console.log("currentWallet =", currentWallet);
-    console.log("address =", currentWallet?.address);
+    console.log(currentWallet);
+
+  console.log("wallets =", wallets);
+  console.log(JSON.stringify(currentWallet, null, 2));
+  console.log("address =", currentWallet?.address);
+  console.log("qr_url =", currentWallet?.qr_url);
 
   const copyAddress = () => {
 
@@ -153,28 +173,21 @@ const NETWORK_LOGO = {
 
   const saveQR = () => {
 
-    const canvas =
-      document.querySelector(
-        ".external-qr canvas"
-      );
+  if (!currentWallet?.qr_url) return;
 
-    if (!canvas) return;
+  const link = document.createElement("a");
 
-    const link =
-      document.createElement("a");
+  link.href = currentWallet.qr_url;
 
-    link.href =
-      canvas.toDataURL(
-        "image/png"
-      );
+  link.download = `${coin}-${network}.png`;
 
-    link.download =
-      `${coin}-${network}.png`;
+  link.click();
 
-    link.click();
+  notify(t("qrSaved"));
 
-    notify(t("qrSaved"));
-  };
+};
+
+    
 
   const submitDeposit = async () => {
 
@@ -343,7 +356,11 @@ const NETWORK_LOGO = {
       <div className="select-menu">
         {[...new Set(
           wallets
-            .filter(w => w.coin === coin)
+          .filter(
+            w =>
+              w.coin === coin &&
+              w.enabled
+          )
             .map(w => w.network)
         )].map((n) => (
           <div
@@ -380,9 +397,16 @@ const NETWORK_LOGO = {
             }}
           >
 
-            <QRCodeCanvas
-              value={currentWallet.address}
-              size={220}
+            <img
+              src={currentWallet.qr_url}
+              alt="QR Code"
+              style={{
+                width: 220,
+                height: 220,
+                objectFit: "contain",
+                background: "#fff",
+                borderRadius: 10,
+              }}
             />
 
           </div>
@@ -443,14 +467,22 @@ const NETWORK_LOGO = {
 
   <h3>{t("amount")}</h3>
 
-  <input
-    type="number"
-    placeholder="Enter amount"
-    value={amount}
-    onChange={(e)=>
-      setAmount(e.target.value)
-    }
-  />
+  <div className="amount-input">
+
+    <input
+      type="number"
+      placeholder="0.00"
+      value={amount}
+      onChange={(e) => setAmount(e.target.value)}
+    />
+
+    <span className="amount-unit">
+      {coin}
+    </span>
+
+  </div>
+
+  
 
 </div>
 

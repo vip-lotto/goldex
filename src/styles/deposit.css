@@ -563,3 +563,46 @@
 }
 
 /* ===== FINAL SELECT ===== */
+
+.amount-input{
+    display:flex;
+    align-items:center;
+    background:#17233d;
+    border:1px solid #28466f;
+    border-radius:14px;
+    overflow:hidden;
+    transition:.25s;
+}
+
+.amount-input:focus-within{
+    border-color:#18d8ff;
+    box-shadow:0 0 12px rgba(24,216,255,.25);
+}
+
+.amount-input input{
+    flex:1;
+    background:transparent;
+    border:none;
+    color:#fff;
+    font-size:22px;
+    font-weight:600;
+    padding:16px 18px;
+    outline:none;
+}
+
+.amount-input input::placeholder{
+    color:#6d87aa;
+}
+
+.amount-unit{
+    padding:0 18px;
+    font-size:17px;
+    font-weight:700;
+    color:#eff1f1;
+}
+
+.amount-tip{
+    margin-top:10px;
+    color:#7f95b4;
+    font-size:13px;
+}

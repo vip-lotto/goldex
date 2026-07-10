@@ -171,7 +171,7 @@ export default function AdminDepositWallet() {
     const { data } = await supabase
       .from("deposit_wallets")
       .select("*")
-      .order("sort", {
+      .order("display_order", {
         ascending: true,
       });
 
@@ -210,7 +210,7 @@ export default function AdminDepositWallet() {
       network: item.network,
       address: item.address,
       enabled: item.enabled,
-      sort: item.sort,
+      sort: item.display_order,
     });
 
   }
@@ -232,24 +232,25 @@ export default function AdminDepositWallet() {
         Date.now() + "_" + qrFile.name;
 
       const {
-        error
-      } = await supabase.storage
-        .from("deposit-wallet-qr")
-        .upload(fileName, qrFile);
+  data: uploadData,
+  error: uploadError,
+} = await supabase.storage
+  .from("deposit-wallets")
+  .upload(fileName, qrFile);
 
-      if (error) {
+console.log("UPLOAD DATA:", uploadData);
+console.log("UPLOAD ERROR:", uploadError);
 
-        alert(error.message);
-
-        setSaving(false);
-
-        return;
-
-      }
+if (uploadError) {
+  console.error(uploadError);
+  alert(uploadError.message);
+  setSaving(false);
+  return;
+}
 
       const { data } =
         supabase.storage
-          .from("deposit-wallet-qr")
+          .from("deposit-wallets")
           .getPublicUrl(fileName);
 
       qr_url = data.publicUrl;
@@ -258,26 +259,29 @@ export default function AdminDepositWallet() {
 
     if (editingId) {
 
-      await supabase
-        .from("deposit_wallets")
-        .update({
+      const { data, error } = await supabase
+  .from("deposit_wallets")
+  .insert({
+    coin: form.coin,
+    network: form.network,
+    address: form.address,
+    enabled: form.enabled,
+    display_order: form.sort,
+    qr_url,
+  })
+  .select();
 
-          coin: form.coin,
+console.log("INSERT DATA:", data);
+console.log("INSERT ERROR:", error);
 
-          network: form.network,
+if (error) {
+  console.error(error);
+  alert(error.message);
+  setSaving(false);
+  return;
+}
 
-          address: form.address,
-
-          enabled: form.enabled,
-
-          sort: form.sort,
-
-          qr_url
-
-        })
-        .eq("id", editingId);
-
-      alert("Update Success");
+alert("Save Success");
 
     } else {
 
@@ -293,7 +297,7 @@ export default function AdminDepositWallet() {
 
           enabled: form.enabled,
 
-          sort: form.sort,
+          display_order: form.sort,
 
           qr_url
 
@@ -631,7 +635,7 @@ export default function AdminDepositWallet() {
 
                   <span>
 
-                    Order : {item.sort}
+                    Order : {item.display_order}
 
                   </span>
 

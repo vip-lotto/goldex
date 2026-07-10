@@ -1,0 +1,395 @@
+/* =====================================================
+   GOLDEX PROFESSIONAL TRADE RESULT
+===================================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+.trade-result-overlay{
+
+    position:fixed;
+
+    inset:0;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    padding:
+        max(20px,env(safe-area-inset-top))
+        20px
+        max(20px,env(safe-area-inset-bottom));
+
+    background:rgba(5,12,24,.82);
+
+    backdrop-filter:blur(14px);
+
+    z-index:999999;
+}
+
+.trade-result-card{
+
+    width:min(100%,430px);
+
+    max-height:92vh;
+
+    overflow:auto;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #173554,
+            #102640,
+            #091522
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.55);
+
+    animation:popupShow .35s;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+}
+
+/* ========================= */
+
+.result-circle{
+
+    width:110px;
+
+    height:110px;
+
+    margin-top:34px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:58px;
+
+    font-weight:bold;
+
+    color:#fff;
+}
+
+.result-circle.win{
+
+    background:
+        linear-gradient(
+            135deg,
+            #00d084,
+            #00a76d
+        );
+
+    box-shadow:
+        0 0 40px rgba(0,208,132,.35);
+}
+
+.result-circle.lose{
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff5b74,
+            #ff2b57
+        );
+
+    box-shadow:
+        0 0 40px rgba(255,70,110,.35);
+}
+
+/* ========================= */
+
+.result-title{
+
+    margin-top:18px;
+
+    font-size:26px;
+
+    font-weight:700;
+}
+
+.result-title.win{
+
+    color:#00df84;
+}
+
+.result-title.lose{
+
+    color:#ff5d75;
+}
+
+.result-money{
+
+    margin-top:10px;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#fff;
+}
+
+.result-money span{
+
+    font-size:20px;
+
+    opacity:.9;
+}
+
+.result-money.win{
+
+    color:#00df84;
+}
+
+.result-money.lose{
+
+    color:#ff5d75;
+}
+
+.result-message{
+
+    margin-top:10px;
+
+    margin-bottom:28px;
+
+    color:#8ea6c2;
+
+    font-size:15px;
+}
+
+/* ========================= */
+
+.result-table{
+
+    width:100%;
+
+    padding:0 24px;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.result-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:15px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.result-row:last-child{
+
+    border-bottom:none;
+}
+
+.result-row span{
+
+    color:#8ea6c2;
+
+    font-size:15px;
+}
+
+.result-row strong{
+
+    color:#fff;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    text-align:right;
+
+    word-break:break-word;
+}
+
+/* ========================= */
+
+.result-button{
+
+    width:calc(100% - 48px);
+
+    height:56px;
+
+    margin:26px 24px 24px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2bc8ff,
+            #007dff
+        );
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.result-button:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(0,120,255,.35);
+}
+
+.result-button:active{
+
+    transform:scale(.98);
+}
+
+/* ========================= */
+
+.green{
+
+    color:#00df84!important;
+}
+
+.red{
+
+    color:#ff5d75!important;
+}
+
+.blue{
+
+    color:#2bc8ff!important;
+}
+
+/* ========================= */
+
+.trade-result-card::-webkit-scrollbar{
+
+    width:7px;
+}
+
+.trade-result-card::-webkit-scrollbar-thumb{
+
+    background:#2d4f75;
+
+    border-radius:20px;
+}
+
+/* ========================= */
+
+@keyframes popupShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(30px)
+            scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+
+    }
+
+}
+
+/* ========================= */
+
+@media(max-width:480px){
+
+.trade-result-card{
+
+    border-radius:22px;
+
+}
+
+.result-circle{
+
+    width:90px;
+
+    height:90px;
+
+    font-size:46px;
+
+}
+
+.result-title{
+
+    font-size:22px;
+
+}
+
+.result-money{
+
+    font-size:34px;
+
+}
+
+.result-money span{
+
+    font-size:18px;
+
+}
+
+.result-row{
+
+    padding:13px 0;
+
+}
+
+.result-row span{
+
+    font-size:14px;
+
+}
+
+.result-row strong{
+
+    font-size:14px;
+
+}
+
+.result-button{
+
+    height:52px;
+
+}
+
+}

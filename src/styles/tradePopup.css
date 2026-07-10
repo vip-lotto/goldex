@@ -1,0 +1,892 @@
+/* =====================================================
+   GOLDEX PROFESSIONAL TRADE POPUP
+   Part 1
+===================================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+.trade-popup-overlay{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:
+        max(18px,env(safe-area-inset-top))
+        18px
+        max(18px,env(safe-area-inset-bottom));
+
+    background:
+        radial-gradient(circle at top,#1d3f67 0%,rgba(0,0,0,.82) 55%);
+
+    backdrop-filter:blur(14px);
+
+    z-index:999999;
+
+    animation:overlayShow .25s ease;
+}
+
+.trade-popup{
+
+    width:min(100%,430px);
+
+    background:
+        linear-gradient(
+            180deg,
+            #183556 0%,
+            #112640 45%,
+            #0b1728 100%
+        );
+
+    border-radius:30px;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    overflow:hidden;
+
+    box-shadow:
+        0 25px 80px rgba(0,0,0,.55);
+
+    animation:popupShow .35s cubic-bezier(.2,.9,.2,1);
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+/* ======================= */
+
+.result-popup{
+
+    text-align:center;
+
+    align-items:center;
+}
+
+/* ======================= */
+
+.result-icon{
+
+    width:110px;
+    height:110px;
+
+    margin:35px auto 18px;
+
+    border-radius:50%;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:58px;
+    font-weight:bold;
+
+    color:#fff;
+
+    background:
+        linear-gradient(
+            145deg,
+            #00d084,
+            #009f6f
+        );
+
+    box-shadow:
+        0 0 40px rgba(0,208,132,.35);
+}
+
+.result-money{
+
+    font-size:42px;
+
+    font-weight:700;
+
+    color:#fff;
+
+    margin-bottom:10px;
+
+    word-break:break-word;
+}
+
+.result-money.win{
+
+    color:#00df84;
+}
+
+.result-money.lose{
+
+    color:#ff5575;
+}
+
+.result-money span{
+
+    font-size:20px;
+
+    opacity:.9;
+}
+
+.result-text{
+
+    color:#9cb6d3;
+
+    font-size:17px;
+
+    margin-bottom:28px;
+}
+
+/* ======================= */
+
+.popup-table{
+
+    width:100%;
+
+    padding:0 24px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.popup-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:14px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.popup-row:last-child{
+
+    border-bottom:none;
+}
+
+.popup-row span:first-child{
+
+    color:#8ca3bf;
+
+    font-size:15px;
+}
+
+.popup-row span:last-child{
+
+    color:#fff;
+
+    font-weight:600;
+
+    text-align:right;
+
+    word-break:break-word;
+}
+
+/* =======================
+   BUTTON
+======================= */
+
+.popup-close{
+
+    width:calc(100% - 48px);
+
+    margin:28px 24px 24px;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:16px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    letter-spacing:.4px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2ac7ff,
+            #007bff
+        );
+
+    box-shadow:
+        0 12px 35px rgba(0,132,255,.35);
+
+    transition:.25s;
+}
+
+.popup-close:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 18px 40px rgba(0,132,255,.45);
+}
+
+.popup-close:active{
+
+    transform:scale(.97);
+}
+
+/* =======================
+   COLORS
+======================= */
+
+.green{
+
+    color:#00df84!important;
+}
+
+.red{
+
+    color:#ff5d75!important;
+}
+
+.blue{
+
+    color:#33c8ff!important;
+}
+
+/* =======================
+   SCROLL
+======================= */
+
+.trade-popup::-webkit-scrollbar{
+
+    width:8px;
+}
+
+.trade-popup::-webkit-scrollbar-thumb{
+
+    background:#2f4d73;
+
+    border-radius:10px;
+}
+
+.trade-popup::-webkit-scrollbar-track{
+
+    background:transparent;
+}
+
+/* =======================
+   ANIMATION
+======================= */
+
+@keyframes popupShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(35px)
+            scale(.92);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+@keyframes overlayShow{
+
+    from{
+
+        opacity:0;
+    }
+
+    to{
+
+        opacity:1;
+    }
+
+}
+
+/* =======================
+   MOBILE
+======================= */
+
+@media(max-width:480px){
+
+.trade-popup{
+
+    width:100%;
+
+    border-radius:24px;
+}
+
+.result-icon{
+
+    width:90px;
+    height:90px;
+
+    font-size:46px;
+
+    margin-top:28px;
+}
+
+.result-money{
+
+    font-size:34px;
+}
+
+.result-money span{
+
+    font-size:18px;
+}
+
+.popup-table{
+
+    padding:0 18px;
+}
+
+.popup-row{
+
+    padding:12px 0;
+}
+
+.popup-row span:first-child{
+
+    font-size:14px;
+}
+
+.popup-row span:last-child{
+
+    font-size:15px;
+}
+
+.popup-close{
+
+    height:52px;
+
+    margin:20px 18px 18px;
+}
+
+}
+
+/* =======================
+   TABLET
+======================= */
+
+@media(min-width:768px){
+
+.trade-popup{
+
+    max-width:460px;
+}
+
+}
+
+/* =======================
+   DESKTOP
+======================= */
+
+@media(min-width:1200px){
+
+.trade-popup{
+
+    max-width:500px;
+}
+
+.result-money{
+
+    font-size:48px;
+}
+
+.result-icon{
+
+    width:120px;
+    height:120px;
+
+    font-size:64px;
+}
+
+}
+
+/* =====================================================
+   GOLDEX PROFESSIONAL TRADE POPUP
+===================================================== */
+
+*,
+*::before,
+*::after{
+    box-sizing:border-box;
+}
+
+.trade-popup-overlay{
+    position:fixed;
+    inset:0;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:
+        max(20px,env(safe-area-inset-top))
+        20px
+        max(20px,env(safe-area-inset-bottom));
+
+    background:
+        rgba(4,12,24,.82);
+
+    backdrop-filter:blur(12px);
+
+    z-index:999999;
+}
+
+.trade-popup{
+
+    width:min(100%,430px);
+
+    max-height:95vh;
+
+    overflow:auto;
+
+    border-radius:30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #173554,
+            #102640 45%,
+            #091423
+        );
+
+    border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.55);
+
+    animation:popupShow .3s;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+/* ================= HEADER ================= */
+
+.popup-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:26px;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+}
+
+.popup-market{
+
+    color:#fff;
+
+    font-size:28px;
+
+    font-weight:700;
+}
+
+.popup-subtitle{
+
+    color:#8ea6c2;
+
+    margin-top:6px;
+
+    font-size:14px;
+}
+
+.popup-status{
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-weight:700;
+
+    color:#fff;
+
+    font-size:14px;
+}
+
+.popup-status.buy{
+
+    background:#00c97a;
+}
+
+.popup-status.sell{
+
+    background:#ff4968;
+}
+
+/* ================= TIMER ================= */
+
+.popup-circle{
+
+    position:relative;
+
+    width:220px;
+
+    height:220px;
+
+    margin:35px auto;
+
+}
+
+.popup-circle svg{
+
+    width:220px;
+
+    height:220px;
+
+    transform:rotate(-90deg);
+}
+
+.circle-bg{
+
+    fill:none;
+
+    stroke:#24415d;
+
+    stroke-width:10;
+}
+
+.circle-progress{
+
+    fill:none;
+
+    stroke:#00d987;
+
+    stroke-width:10;
+
+    stroke-linecap:round;
+
+    transition:stroke-dashoffset 1s linear;
+}
+
+.popup-time{
+
+    position:absolute;
+
+    inset:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+}
+
+.popup-time strong{
+
+    color:#fff;
+
+    font-size:42px;
+
+    font-weight:700;
+}
+
+.popup-time small{
+
+    color:#90aac8;
+
+    margin-top:6px;
+
+    font-size:14px;
+}
+
+/* ================= TABLE ================= */
+
+.popup-table{
+
+    width:100%;
+
+    padding:0 26px 10px;
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.popup-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:18px;
+
+    padding:16px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.popup-row:last-child{
+
+    border-bottom:none;
+}
+
+.popup-row span:first-child{
+
+    color:#8ea6c2;
+
+    font-size:15px;
+}
+
+.popup-row span:last-child{
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    text-align:right;
+
+    word-break:break-word;
+}
+
+/* ================= FOOTER ================= */
+
+.popup-footer{
+
+    padding:24px;
+
+    text-align:center;
+
+    color:#9bb5d2;
+
+    font-size:14px;
+
+    border-top:1px solid rgba(255,255,255,.05);
+}
+
+/* ================= BUTTON ================= */
+
+.popup-close{
+
+    width:calc(100% - 48px);
+
+    margin:24px;
+
+    height:56px;
+
+    border:none;
+
+    border-radius:16px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2bc8ff,
+            #0a8dff
+        );
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.popup-close:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 35px rgba(0,140,255,.35);
+}
+
+.popup-close:active{
+
+    transform:scale(.98);
+}
+
+/* ================= COLORS ================= */
+
+.green{
+
+    color:#00df84!important;
+}
+
+.red{
+
+    color:#ff5575!important;
+}
+
+.blue{
+
+    color:#33c9ff!important;
+}
+
+/* ================= SCROLL ================= */
+
+.trade-popup::-webkit-scrollbar{
+
+    width:8px;
+}
+
+.trade-popup::-webkit-scrollbar-thumb{
+
+    background:#28486b;
+
+    border-radius:8px;
+}
+
+/* ================= ANIMATION ================= */
+
+@keyframes popupShow{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateY(35px)
+            scale(.92);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* ================= MOBILE ================= */
+
+@media(max-width:480px){
+
+.trade-popup{
+
+    border-radius:24px;
+}
+
+.popup-header{
+
+    padding:20px;
+}
+
+.popup-market{
+
+    font-size:24px;
+}
+
+.popup-circle{
+
+    width:180px;
+
+    height:180px;
+
+    margin:24px auto;
+}
+
+.popup-circle svg{
+
+    width:180px;
+
+    height:180px;
+}
+
+.popup-time strong{
+
+    font-size:34px;
+}
+
+.popup-row{
+
+    padding:14px 0;
+}
+
+.popup-row span:first-child{
+
+    font-size:14px;
+}
+
+.popup-row span:last-child{
+
+    font-size:15px;
+}
+
+.popup-footer{
+
+    padding:18px;
+}
+
+.popup-close{
+
+    margin:18px;
+
+    width:calc(100% - 36px);
+
+    height:52px;
+}
+
+}
+
+/* ================= TABLET ================= */
+
+@media(min-width:768px){
+
+.trade-popup{
+
+    max-width:460px;
+}
+
+}
+
+/* ================= DESKTOP ================= */
+
+@media(min-width:1200px){
+
+.trade-popup{
+
+    max-width:500px;
+}
+
+.popup-market{
+
+    font-size:30px;
+}
+
+.popup-time strong{
+
+    font-size:46px;
+}
+
+}

@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../lib/supabase";
+import TradePopup from "./TradePopup";
+import TradeResult from "./TradeResult";
+import { supabase, supabaseUrl } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
 
 
@@ -25,40 +27,46 @@ const [side,setSide]=useState("");
 
 const [receipt,setReceipt]=useState(null);
 
+const [tradeSettings,setTradeSettings]=useState([]);
+
 
 useEffect(() => {
 
-  const money = Number(amount);
+    if (tradeSettings.length === 0) return;
 
-  if (!money) {
-    setDuration(30);
-    return;
-  }
+    const money = Number(amount);
 
-  if (money > 500000) {
-    setDuration(180);
+    if (!money) {
 
-  } else if (money > 49999) {
-    setDuration(120);
+        setDuration(Number(tradeSettings[0].duration));
 
-  } else if (money > 29999) {
-    setDuration(90);
+        return;
 
-  } else if (money > 999) {
-    setDuration(60);
+    }
 
-  } else {
-    setDuration(30);
-  }
+    const setting = tradeSettings.find(item =>
 
-}, [amount]);
+    money >= Number(item.min_amount) &&
+    money <= Number(item.max_amount)
 
+);
+
+console.log("Money =", money);
+console.log("Setting =", setting);
+
+if (setting) {
+    setDuration(Number(setting.duration));
+}
+
+}, [amount, tradeSettings]);
 
 
 
 useEffect(()=>{
 
 loadUser();
+
+loadTradeSettings();
 
 },[]);
 
@@ -126,8 +134,20 @@ setWallet(data);
 }
 
 
+async function loadTradeSettings() {
 
+  const session = await supabase.auth.getSession();
+  console.log("SESSION =", session);
 
+  const result = await supabase
+    .from("trade_settings")
+    .select("*");
+
+  console.log("RESULT =", result);
+
+  setTradeSettings(result.data || []);
+
+}
 
 
 async function loadActiveTrade(id){
@@ -216,32 +236,21 @@ data.duration - passed
 
 
 
-function getProfit(){
+function getProfit() {
 
+  const money = Number(amount);
 
-const money =
-Number(amount);
+  const setting = tradeSettings.find(
+    item =>
+      money >= Number(item.min_amount) &&
+      money <= Number(item.max_amount)
+  );
 
+  if (setting) {
+    return Number(setting.profit);
+  }
 
-
-if(money>=100000)
-return 18;
-
-
-if(money>=50000)
-return 15;
-
-
-if(money>=30000)
-return 12;
-
-
-if(money>=1000)
-return 10;
-
-
-return 5;
-
+  return 5;
 
 }
 
@@ -327,16 +336,24 @@ return;
 
 const money = Number(amount);
 
+console.log("tradeSettings =", tradeSettings);
+console.log("money =", money);
 
+const selectedSetting = tradeSettings.find(item => {
+    console.log(item.min_amount, item.max_amount);
 
-if(!money || money<=0){
+    return (
+        money >= Number(item.min_amount) &&
+        money <= Number(item.max_amount)
+    );
+});
 
-showToast("Enter amount");
+console.log("selectedSetting =", selectedSetting);
 
-return;
-
+if (!selectedSetting) {
+    showToast("Invalid amount");
+    return;
 }
-
 
 
 
@@ -424,9 +441,9 @@ side:type,
 
 amount:money,
 
-duration:duration,
+duration:Number(selectedSetting.duration),
 
-profit:getProfit(),
+profit:Number(selectedSetting.profit),
 
 
 // สำคัญ
@@ -491,7 +508,9 @@ setSide(type);
 
 setIsTrading(true);
 
-setSeconds(duration);
+setDuration(Number(selectedSetting.duration));
+
+setSeconds(Number(selectedSetting.duration));
 
 
 
@@ -880,9 +899,13 @@ seconds%60
 
 ).padStart(2,"0");
 
+const currentSetting =
+    tradeSettings.find(item =>
 
+        Number(amount) >= Number(item.min_amount) &&
+        Number(amount) <= Number(item.max_amount)
 
-
+    ) || tradeSettings[0];
 
 
 
@@ -920,85 +943,78 @@ return (
 
 <div className="trade-time-tabs">
 
-
-{
-
-[30,60,90,120,180]
-
-.map(t=>(
-
+{[30,60,90,120,180].map(t => (
 
 <button
-
-key={t}
-
-disabled={isTrading || t !== duration}
-
-className={
-
-duration===t
-
-?
-
-"time-btn active"
-
-:
-
-"time-btn"
-
-}
-
-onClick={()=>setDuration(t)}
-
+    key={t}
+    disabled
+    className={
+        duration === t
+            ? "time-btn active"
+            : "time-btn"
+    }
 >
 
-{t}s
+    {t}s
 
 </button>
 
-
-))
-
-
-}
-
+))}
 
 </div>
 
 
-
-
-
-
-
-
 <input
-
-type="number"
-
+type="text"
+inputMode="numeric"
 value={amount}
-
 disabled={isTrading}
-
 placeholder="Amount USDT"
+onChange={(e) => {
 
-onChange={e=>
+    const value = e.target.value;
 
-setAmount(e.target.value)
+    if (value === "") {
+        setAmount("");
+        return;
+    }
 
-}
+    if (!/^\d+$/.test(value)) {
+        return;
+    }
 
+    let number = Number(value);
+
+    if (number > 1000000) {
+        number = 1000000;
+    }
+
+    setAmount(String(number));
+
+}}
 />
 
 
+<div className="trade-info">
 
+  <div className="trade-info-item">
+    <span>Duration</span>
+    <strong>{duration}s</strong>
+  </div>
 
+  <div className="trade-info-item">
+    <span>Profit</span>
+    <strong>
+      {currentSetting
+        ? currentSetting.profit
+        : 5}
+      %
+    </strong>
+  </div>
 
-
-
+</div>
 
 <div className="trade-buttons">
-
 
 
 <button
@@ -1040,173 +1056,36 @@ SELL
 
 
 
-
-
-
-
 {
+isTrading && (
 
-isTrading &&
+<TradePopup
 
-<div className="countdown-box">
+trade={activeTrade}
 
+seconds={seconds}
 
-<h3>
+side={side}
 
-Trading
+amount={amount}
 
-</h3>
+/>
 
-
-<h1>
-
-{min}:{sec}
-
-</h1>
-
-
-<p>
-
-{activeTrade?.coin}
-
-</p>
-
-
-<p>
-
-{side}
-
-</p>
-
-
-</div>
-
-
+)
 }
 
 
 
 
-
-
-
-
-
 {
-
 receipt && (
 
-<div className="receipt-overlay">
+<TradeResult
+    receipt={receipt}
+    onClose={() => setReceipt(null)}
+/>
 
-<div className="trade-receipt">
-
-<h2 className="receipt-title">Trade Receipt</h2>
-
-<div className="receipt-table">
-
-  <div className="receipt-row">
-    <span>Order</span>
-    <span>#{receipt.id}</span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Market</span>
-    <span>{receipt.market}</span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Side</span>
-    <span>{receipt.side}</span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Duration</span>
-    <span>{receipt.duration} Seconds</span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Status</span>
-
-    <span
-      className={
-        receipt.result === "win"
-          ? "receipt-win"
-          : "receipt-lose"
-      }
-    >
-      {receipt.result.toUpperCase()}
-    </span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Investment</span>
-    <span>
-      {Number(receipt.investment).toLocaleString()} USDT
-    </span>
-  </div>
-
-  {
-    receipt.result === "win"
-      ?
-
-      <div className="receipt-row">
-        <span>Profit</span>
-
-        <span className="receipt-win">
-          +{Number(receipt.profit).toLocaleString()} USDT
-        </span>
-      </div>
-
-      :
-
-      <div className="receipt-row">
-        <span>Loss</span>
-
-        <span className="receipt-lose">
-          -{Number(receipt.loss).toLocaleString()} USDT
-        </span>
-      </div>
-  }
-
-  <div className="receipt-row">
-    <span>Total Received</span>
-
-    <span>
-      {Number(receipt.payout).toLocaleString()} USDT
-    </span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Open Time</span>
-
-    <span>
-      {new Date(receipt.openTime).toLocaleString()}
-    </span>
-  </div>
-
-  <div className="receipt-row">
-    <span>Close Time</span>
-
-    <span>
-      {new Date(receipt.closeTime).toLocaleString()}
-    </span>
-  </div>
-
-</div>
-
-<button
-className="receipt-close-btn"
-onClick={()=>setReceipt(null)}
->
-Close
-</button>
-
-</div>     
-
-</div>     
-
-)          
-
+)
 }
 
 </div>
