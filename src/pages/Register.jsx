@@ -242,11 +242,16 @@ balance: 0
 
   const { error: walletError } =
 await supabase
-  .from("wallets")
-  .insert({
-    user_id: userId,
-    balance: 0
-  });
+.from("wallets")
+.upsert(
+{
+ user_id:userId,
+ balance:0
+},
+{
+ onConflict:"user_id"
+}
+);
 
 if (walletError) {
 
@@ -283,12 +288,24 @@ if (walletError) {
 
 
   if (
-    templates &&
-    templates.length > 0
-  ) {
+  templates &&
+  templates.length > 0
+) {
 
-    const userWallets =
-      templates.map(item => ({
+
+const uniqueTemplates = Array.from(
+  new Map(
+    templates.map(item => [
+      `${item.coin}-${item.network}`,
+      item
+    ])
+  ).values()
+);
+
+
+
+const userWallets =
+  uniqueTemplates.map(item => ({
 
         user_id:
           userId,
@@ -300,10 +317,10 @@ if (walletError) {
           item.network,
 
         address:
-          `TX${userId}${item.coin}${item.network}${Math.random()
-            .toString(36)
-            .substring(2, 8)
-            .toUpperCase()}`
+`TX${userId}${item.coin}${item.network}${Date.now()}${Math.random()
+.toString(36)
+.substring(2,10)
+.toUpperCase()}`
 
       }));
 
@@ -311,9 +328,20 @@ if (walletError) {
   error: walletError
 } = await supabase
   .from("user_wallets")
-  .insert(userWallets);
+  .upsert(
+    userWallets,
+    {
+      onConflict: "user_id,coin,network"
+    }
+  );
 
 if (walletError) {
+
+  await supabase
+    .from("profiles")
+    .delete()
+    .eq("id", userId);
+
 
   showToast(walletError.message,"error");
 

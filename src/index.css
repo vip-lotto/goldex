@@ -1,94 +1,275 @@
 @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700;800&display=swap');
 
-*{
+
+/* =========================
+   RESET
+========================= */
+
+*,
+*::before,
+*::after{
+
   margin:0;
   padding:0;
+
   box-sizing:border-box;
+
+  -webkit-tap-highlight-color:transparent;
+
 }
 
-html,
-body,
-#root{
+
+html{
+
   width:100%;
-  min-height:100vh;
+
+  min-height:100%;
+
+  overflow-x:hidden;
+
+  overscroll-behavior:none;
+
 }
+
 
 body{
+
+  width:100%;
+
+  min-height:100%;
+
   font-family:'Prompt',sans-serif;
+
   background:#050b18;
+
   color:white;
+
   overflow-x:hidden;
+
+  overscroll-behavior:none;
+
+  -webkit-font-smoothing:antialiased;
+
 }
 
-a{
-  text-decoration:none;
-  color:inherit;
+
+/* React root */
+
+#root{
+
+  width:100%;
+
+  min-height:100dvh;
+
+  overflow-x:hidden;
+
 }
 
-button{
-  font-family:'Prompt',sans-serif;
-}
+
+/* =========================
+   MOBILE TOUCH FIX
+========================= */
+
 
 input,
 select,
-textarea{
+textarea,
+button{
+
   font-family:'Prompt',sans-serif;
+
   outline:none;
+
+  font-size:16px;
+
+  touch-action:manipulation;
+
 }
+
+
+/* ป้องกัน iOS input zoom */
+
+input{
+
+  -webkit-user-select:text;
+
+}
+
+
+/* =========================
+   LINK
+========================= */
+
+
+a{
+
+  text-decoration:none;
+
+  color:inherit;
+
+}
+
+
+/* =========================
+   BUTTON
+========================= */
+
+
+button{
+
+  cursor:pointer;
+
+  border:none;
+
+}
+
+
+
+/* =========================
+   SCROLLBAR
+========================= */
+
 
 ::-webkit-scrollbar{
+
   width:6px;
+
 }
+
 
 ::-webkit-scrollbar-track{
+
   background:#050b18;
+
 }
+
 
 ::-webkit-scrollbar-thumb{
+
   background:#d4a017;
+
   border-radius:10px;
+
 }
 
+
+
+/* =========================
+   COLORS
+========================= */
+
+
 .gold-text{
-  background:linear-gradient(
+
+  background:
+
+  linear-gradient(
     90deg,
     #ffe27a,
     #facc15,
     #d4a017
   );
+
   -webkit-background-clip:text;
+
   -webkit-text-fill-color:transparent;
+
 }
+
+
 
 .glass{
-  background:rgba(255,255,255,.05);
+
+  background:
+
+  rgba(255,255,255,.05);
+
   backdrop-filter:blur(12px);
+
   border:1px solid rgba(255,255,255,.08);
+
 }
 
+
+
 .gold-button{
-  background:linear-gradient(
+
+  background:
+
+  linear-gradient(
     90deg,
     #f9d976,
     #f39f06
   );
+
   color:#000;
-  border:none;
+
   font-weight:700;
-  cursor:pointer;
+
 }
+
+
 
 .gold-border{
+
   border:1px solid #d4a017;
+
 }
 
+
+
+/* =========================
+   PAGE BACKGROUND
+========================= */
+
+
 .page-bg{
-  min-height:100vh;
+
+  width:100%;
+
+  min-height:100dvh;
+
+
   background:
+
   linear-gradient(
     rgba(0,0,0,.35),
     rgba(0,0,0,.35)
   );
+
+
   background-size:cover;
+
   background-position:center;
+
+}
+
+
+/* =========================
+   MOBILE SAFETY
+========================= */
+
+
+@media(max-width:768px){
+
+
+html,
+body{
+
+  width:100%;
+
+  max-width:100%;
+
+  overflow-x:hidden;
+
+}
+
+
+#root{
+
+  min-height:100dvh;
+
+}
+
+
 }

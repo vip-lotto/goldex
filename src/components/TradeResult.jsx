@@ -18,16 +18,12 @@ export default function TradeResult({
 
       <div className="trade-result-card">
 
-        <div className={`result-circle ${isWin ? "win" : "lose"}`}>
-
-          {isWin ? "✓" : "✕"}
-
+        <div className="result-circle">
+        i
         </div>
 
-        <div className={`result-title ${isWin ? "win" : "lose"}`}>
-
-          {isWin ? "TRADE WIN" : "TRADE LOSE"}
-
+        <div className="result-title">
+        Transaction Details
         </div>
 
         <div className={`result-money ${isWin ? "win" : "lose"}`}>
@@ -42,9 +38,7 @@ export default function TradeResult({
 
         <div className="result-message">
 
-          {isWin
-            ? "Settlement Completed Successfully"
-            : "Trade Closed"}
+          Transaction Completed
 
         </div>
 
@@ -129,7 +123,7 @@ export default function TradeResult({
           </div>
 
           <div className="result-row">
-            <span>Trade ID</span>
+            <span>Orders</span>
 
             <strong>
               #{receipt.id}

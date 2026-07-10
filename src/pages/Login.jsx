@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock, FaGlobeAsia } from "react-icons/fa";
@@ -29,6 +29,9 @@ export default function Login() {
 
   const [showLang,setShowLang] = useState(false);
 
+  const [contacts,setContacts] = useState([]);
+  const [showContacts,setShowContacts] = useState(false);
+
   const [loading,setLoading] = useState(false);
 
   
@@ -46,6 +49,28 @@ export default function Login() {
   setShowLang(false);
 
 };
+
+const loadContacts = async () => {
+
+  const { data, error } = await supabase
+    .from("admin_contacts")
+    .select("*")
+    .eq("enabled", true);
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  setContacts(data || []);
+
+};
+
+useEffect(()=>{
+
+  loadContacts();
+
+},[]);
 
   const login = async () => {
 
@@ -190,63 +215,41 @@ setTimeout(() => {
 
 
         <button
-  onClick={() =>
-    window.open(
-      "https://lin.ee/nFNwIxfr",
-      "_blank"
-    )
-  }
-  style={{
-    position:"absolute",
-    top:"25px",
-    left:"25px",
-    width:"60px",
-    height:"60px",
-    borderRadius:"50%",
-    border:"2px solid #1578fa",
-    background:"rgba(0,0,0,.45)",
-    color:"#0affff",
-    display:"flex",
-    justifyContent:"center",
-    alignItems:"center",
-    cursor:"pointer",
-    zIndex:999
-  }}
+className="top-support-btn"
+onClick={()=>setShowContacts(true)}
 >
-  <Headset size={24}/>
+
+<Headset size={20}/>
+
+<span>
+Support
+</span>
+
 </button>
 
 
         {/* ภาษา */}
 
-        <div
-  style={{
-    position:"absolute",
-    top:"25px",
-    right:"25px",
-    zIndex:999,
-    display:"flex",
-    gap:"12px"
-  }}
+        {/* ภาษา */}
+<div className="language-box">
+
+<button
+className="top-language-btn"
+
+onClick={() => setShowLang(!showLang)}
 >
 
-  <button
-    onClick={() => setShowLang(!showLang)}
-    style={{
-      width:"60px",
-      height:"60px",
-      borderRadius:"50%",
-      border:"2px solid #0771fc",
-      background:"rgba(0,0,0,.45)",
-      color:"#15f2fa",
-      display:"flex",
-      justifyContent:"center",
-      alignItems:"center",
-      cursor:"pointer"
-    }}
-  >
-    <FaGlobeAsia size={24}/>
-  </button>
+<FaGlobeAsia size={18}/>
+
+<span>
+EN 
+</span>
+
+<span>
+▼
+</span>
+
+</button>
 
   
 
@@ -257,16 +260,19 @@ setTimeout(() => {
           {
             showLang && (
               <div
-                style={{
-                  marginTop:"10px",
-                  width:"240px",
-                  background:"rgba(10,15,30,.96)",
-                  border:"1px solid #158bfa",
-                  borderRadius:"20px",
-                  overflow:"hidden",
-                  backdropFilter:"blur(15px)"
-                }}
-              >
+style={{
+position:"absolute",
+top:"55px",
+right:"0",
+width:"240px",
+background:"rgba(10,15,30,.96)",
+border:"1px solid #158bfa",
+borderRadius:"20px",
+overflow:"hidden",
+backdropFilter:"blur(15px)",
+zIndex:9999
+}}
+>
 
                 {[
                   
@@ -476,6 +482,176 @@ setTimeout(() => {
 
         </div>
       </div>
+
+      {
+showContacts && (
+
+<div
+
+onClick={()=>setShowContacts(false)}
+
+style={{
+position:"fixed",
+inset:0,
+background:"rgba(0,0,0,.65)",
+backdropFilter:"blur(10px)",
+display:"flex",
+justifyContent:"center",
+alignItems:"center",
+zIndex:99999
+}}
+
+>
+
+
+<div
+
+onClick={(e)=>e.stopPropagation()}
+
+style={{
+
+width:"360px",
+maxWidth:"90%",
+background:
+"linear-gradient(180deg,#172b47,#0b1628)",
+borderRadius:"22px",
+padding:"25px"
+
+}}
+
+>
+
+
+<h3
+
+style={{
+color:"#fff",
+textAlign:"center",
+marginBottom:"20px"
+}}
+
+>
+
+Customer Service
+
+</h3>
+
+
+{
+contacts.map(contact=>(
+
+
+<div
+
+key={contact.id}
+
+onClick={()=>{
+
+const url =
+contact.link
+?
+(
+contact.link.startsWith("http")
+?
+contact.link
+:
+`https://${contact.link}`
+)
+:
+"#";
+
+
+window.open(url,"_blank");
+
+}}
+
+style={{
+
+height:"90px",
+background:"rgba(255,255,255,.06)",
+borderRadius:"15px",
+display:"flex",
+alignItems:"center",
+gap:"15px",
+padding:"15px",
+marginBottom:"20px",
+cursor:"pointer"
+
+}}
+
+>
+
+
+<img
+
+src={contact.icon_url}
+
+style={{
+
+width:"60px",
+height:"60px",
+borderRadius:"15px",
+background:"#fff",
+objectFit:"contain"
+
+}}
+
+/>
+
+
+<span
+
+style={{
+color:"#fff",
+fontWeight:"600"
+}}
+
+>
+
+{contact.name}
+
+</span>
+
+
+</div>
+
+
+))
+}
+
+
+
+<button
+
+onClick={()=>setShowContacts(false)}
+
+style={{
+
+width:"100%",
+height:"50px",
+border:"none",
+borderRadius:"12px",
+background:"#c84d43",
+color:"#fff",
+fontWeight:"700",
+fontSize:"16px"
+
+}}
+
+>
+
+Close
+
+</button>
+
+
+</div>
+
+
+</div>
+
+)
+}
 
       
     </>

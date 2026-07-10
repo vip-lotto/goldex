@@ -333,3 +333,376 @@ body{
     }
 
 }
+
+.login-page{
+
+    width:100%;
+
+    height:100dvh;
+
+    overflow:hidden;
+
+    position:fixed;
+
+    inset:0;
+
+}
+
+
+@media(max-width:768px){
+
+body{
+
+    overflow:hidden;
+
+}
+
+}
+/* LOGIN TOP BUTTON */
+
+/* =========================
+ TOP HEADER BUTTON ALIGN
+========================= */
+
+.top-support-btn,
+.top-language-btn{
+
+position:absolute;
+
+top:25px;
+
+height:45px;
+
+width:120px;   /* เพิ่มตรงนี้ */
+
+padding:0;
+
+border-radius:30px;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+background:
+rgba(5,20,45,.75);
+
+border:1px solid #19c8ff;
+
+color:white;
+
+font-size:15px;
+
+font-weight:600;
+
+backdrop-filter:blur(12px);
+
+box-shadow:
+0 0 20px rgba(0,200,255,.5);
+
+cursor:pointer;
+
+z-index:999;
+
+}
+
+
+.top-support-btn{
+
+left:25px;
+
+}
+
+
+.top-language-btn{
+
+right:25px;
+
+}
+
+
+.top-support-btn:hover,
+.top-language-btn:hover{
+
+box-shadow:
+0 0 35px rgba(0,220,255,.8);
+
+}
+
+
+/* มือถือ */
+
+@media(max-width:480px){
+
+.top-support-btn,
+.top-language-btn{
+
+width:110px;
+
+height:42px;
+
+font-size:13px;
+
+}
+
+.top-support-btn{
+left:15px;
+}
+
+
+.top-language-btn{
+right:15px;
+}
+
+}
+
+.top-support-btn,
+.top-language-btn{
+
+position:absolute;
+
+top:25px;
+
+height:45px;
+
+width:auto!important;
+
+padding:0 20px!important;
+
+border-radius:30px!important;
+
+display:flex!important;
+
+align-items:center;
+
+justify-content:center;
+
+gap:8px;
+
+background:
+rgba(5,20,45,.7)!important;
+
+border:
+1px solid #19c8ff!important;
+
+color:white!important;
+
+font-size:15px;
+
+font-weight:600;
+
+backdrop-filter:blur(10px);
+
+box-shadow:
+0 0 20px rgba(0,200,255,.5);
+
+}
+
+
+.top-support-btn{
+left:25px;
+}
+
+
+.top-language-btn{
+right:25px;
+}
+
+
+@media(max-width:480px){
+
+.top-support-btn,
+.top-language-btn{
+
+height:42px;
+
+padding:0 15px!important;
+
+font-size:13px;
+
+}
+
+}
+
+.language-box{
+
+position:absolute;
+
+top:25px;
+
+right:25px;
+
+z-index:999;
+
+}
+
+/* ===========================
+   FINAL TOP BUTTON ALIGN
+=========================== */
+
+.top-support-btn,
+.top-language-btn{
+
+    position:absolute !important;
+
+    top:25px !important;
+
+    height:45px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    border-radius:30px !important;
+
+    padding:0 20px !important;
+
+    margin:0 !important;
+
+    line-height:1 !important;
+
+    box-sizing:border-box !important;
+
+}
+
+
+/* SUPPORT */
+
+.top-support-btn{
+
+    left:25px !important;
+
+}
+
+
+/* LANGUAGE */
+
+.top-language-btn{
+
+    right:25px !important;
+
+}
+
+
+/* icon + text */
+
+.top-support-btn svg,
+.top-language-btn svg{
+
+    display:block;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.top-support-btn,
+.top-language-btn{
+
+    top:18px !important;
+
+    height:42px !important;
+
+    padding:0 16px !important;
+
+    font-size:13px !important;
+
+}
+
+
+.top-support-btn{
+
+    left:15px !important;
+
+}
+
+
+.top-language-btn{
+
+    right:15px !important;
+
+}
+
+}
+
+/* ===========================
+   FORCE HEADER SAME POSITION
+=========================== */
+
+.top-support-btn,
+.top-language-btn{
+
+    position:fixed !important;
+
+    top:20px !important;
+
+    height:44px !important;
+
+    min-height:44px !important;
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    box-sizing:border-box !important;
+
+    padding:0 20px !important;
+
+    margin:0 !important;
+
+    line-height:1 !important;
+
+}
+
+
+.top-support-btn{
+
+    left:25px !important;
+
+}
+
+
+.top-language-btn{
+
+    right:25px !important;
+
+}
+
+
+/* mobile */
+
+@media(max-width:480px){
+
+.top-support-btn,
+.top-language-btn{
+
+    top:20px !important;
+
+    height:42px !important;
+
+}
+
+
+.top-support-btn{
+
+    left:15px !important;
+
+}
+
+
+.top-language-btn{
+
+    right:15px !important;
+
+}
+
+}
