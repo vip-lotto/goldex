@@ -105,31 +105,35 @@ export default function HomeMarketChart() {
       const data = await res.json();
 
       const result = DEFAULT_CARDS.map((coin) => {
-        const symbol = coin.symbol.replace("BINANCE:", "");
 
-        const api = data.find((x) => x.symbol === symbol);
+    const symbol = coin.symbol.replace("BINANCE:", "");
 
-        if (!api) {
-          return {
-            ...coin,
-            price: "--",
-            percent: "--",
-            color: "green",
-          };
-        }
+    const api = data.find(item => item.symbol === symbol);
 
-        const percent = Number(api.priceChangePercent);
+    if (!api){
 
-        return {
-          ...coin,
-          price: Number(api.lastPrice).toLocaleString(undefined, {
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2,
-          }),
-          percent: percent.toFixed(2) + "%",
-          color: percent >= 0 ? "green" : "red",
-        };
-      });
+        return null;
+
+    }
+
+    const percent = Number(api.priceChangePercent);
+
+    return{
+
+        ...coin,
+
+        price:Number(api.lastPrice).toLocaleString(undefined,{
+            minimumFractionDigits:2,
+            maximumFractionDigits:2
+        }),
+
+        percent:percent.toFixed(2)+"%",
+
+        color:percent >= 0 ? "green" : "red"
+
+    };
+
+}).filter(Boolean);
 
       setCards(result);
 

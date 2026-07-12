@@ -156,18 +156,27 @@ const displayAssets = expand
 
     <div className="assets-total-top">
 
+
   <div className="assets-title">
 
     <span>{t("totalAssets")}</span>
 
-    <button
-      className="eye-btn"
-      onClick={() => setShowBalance(!showBalance)}
-    >
-      {showBalance ? <Eye size={20} /> : <EyeOff size={20} />}
-    </button>
-
   </div>
+
+
+
+  <button
+    className="eye-btn"
+    onClick={() => setShowBalance(!showBalance)}
+  >
+
+    {showBalance 
+      ? <Eye size={20} /> 
+      : <EyeOff size={20} />
+    }
+
+  </button>
+
 
 </div>
 

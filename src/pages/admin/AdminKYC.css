@@ -1,0 +1,454 @@
+/* ===============================
+   ADMIN KYC PAGE
+================================ */
+
+
+.admin-kyc-page{
+
+    min-height:100vh;
+    padding:30px;
+    background:#050b18;
+    color:white;
+
+}
+
+
+
+/* HEADER */
+
+.kyc-header{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    margin-bottom:30px;
+
+}
+
+
+.kyc-header h1{
+
+    display:flex;
+    align-items:center;
+    gap:12px;
+
+    font-size:28px;
+    margin:0;
+
+}
+
+
+.kyc-header p{
+
+    color:#94a3b8;
+    margin-top:8px;
+
+}
+
+
+
+.refresh-btn{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    background:#1e293b;
+    color:white;
+
+    border:1px solid #334155;
+
+    padding:12px 20px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+}
+
+
+
+/* LOADING */
+
+.loading,
+.empty{
+
+    background:#111827;
+
+    padding:40px;
+
+    text-align:center;
+
+    border-radius:18px;
+
+    color:#94a3b8;
+
+}
+
+
+
+/* LIST */
+
+
+.kyc-list{
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+
+}
+
+
+
+/* CARD */
+
+
+.kyc-card{
+
+    background:#111827;
+
+    border:1px solid #1e293b;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    display:flex;
+
+    gap:25px;
+
+    align-items:center;
+
+
+}
+
+
+
+/* USER INFO */
+
+
+.kyc-user{
+
+    flex:1;
+
+}
+
+
+.kyc-user h2{
+
+    margin:0 0 15px;
+
+    font-size:22px;
+
+}
+
+
+.kyc-user p{
+
+    color:#cbd5e1;
+
+    margin:8px 0;
+
+}
+
+
+.kyc-user b{
+
+    color:white;
+
+}
+
+
+
+/* STATUS */
+
+
+.status{
+
+    margin-top:15px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    width:max-content;
+
+    padding:8px 15px;
+
+    border-radius:20px;
+
+    font-weight:600;
+
+    text-transform:capitalize;
+
+}
+
+
+.status.pending{
+
+    background:#422006;
+
+    color:#facc15;
+
+}
+
+
+.status.approved{
+
+    background:#052e16;
+
+    color:#22c55e;
+
+}
+
+
+.status.rejected{
+
+    background:#450a0a;
+
+    color:#ef4444;
+
+}
+
+
+
+/* IMAGES */
+
+
+.kyc-images{
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+
+.kyc-images div{
+
+    text-align:center;
+
+}
+
+
+.kyc-images label{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:#94a3b8;
+
+}
+
+
+
+.kyc-images a{
+
+    position:relative;
+
+    display:block;
+
+}
+
+
+
+.kyc-images img{
+
+    width:150px;
+
+    height:110px;
+
+    object-fit:cover;
+
+    border-radius:14px;
+
+    border:2px solid #334155;
+
+}
+
+
+
+.kyc-images span{
+
+    position:absolute;
+
+    bottom:8px;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+
+    background:rgba(0,0,0,.7);
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+}
+
+
+
+/* BUTTONS */
+
+
+.kyc-actions{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+
+
+.kyc-actions button{
+
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+
+    width:130px;
+
+    padding:13px;
+
+    border:0;
+
+    border-radius:12px;
+
+    color:white;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+
+}
+
+
+
+.kyc-actions button:disabled{
+
+    opacity:.5;
+
+    cursor:not-allowed;
+
+}
+
+
+
+.approve-btn{
+
+    background:#00c853;
+
+}
+
+
+
+.reject-btn{
+
+    background:#ef4444;
+
+}
+
+
+
+/* MOBILE */
+
+
+@media(max-width:900px){
+
+
+.kyc-card{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+}
+
+
+
+.kyc-images{
+
+    justify-content:center;
+
+    flex-wrap:wrap;
+
+}
+
+
+
+.kyc-actions{
+
+    flex-direction:row;
+
+}
+
+
+
+.kyc-actions button{
+
+    flex:1;
+
+    width:auto;
+
+}
+
+
+}
+
+
+
+@media(max-width:500px){
+
+
+.admin-kyc-page{
+
+    padding:15px;
+
+}
+
+
+
+.kyc-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:15px;
+
+}
+
+
+.kyc-images img{
+
+    width:130px;
+
+    height:95px;
+
+}
+
+
+}

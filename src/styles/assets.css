@@ -1,39 +1,246 @@
-/* ==========================================
-   ASSETS PAGE
-========================================== */
+/* =====================================
+   ASSETS PAGE FINAL RESPONSIVE
+===================================== */
+
 
 .assets-page{
+
     width:100%;
-    max-width:980px;
-    margin:0 auto;
-    padding:18px;
-    padding-bottom:120px;
+    min-height:100vh;
+
+    padding:16px;
+
+    padding-bottom:90px;
+
     color:#fff;
+
 }
 
-/* ==========================================
-   TOTAL ASSETS CARD
-========================================== */
+
+
+/* desktop */
+
+@media(min-width:768px){
+
+.assets-page{
+
+    max-width:960px;
+
+    margin:auto;
+
+}
+
+}
+
+
+
+
+/* =====================================
+ TOTAL CARD
+===================================== */
+
 
 .assets-total-card{
 
     width:100%;
 
-    background:linear-gradient(135deg,#14386b,#1d467f);
+    background:
+    linear-gradient(
+        135deg,
+        #19427c,
+        #27569a
+    );
 
-    border-radius:24px;
 
-    padding:24px;
+    border-radius:22px;
 
-    box-shadow:0 12px 35px rgba(0,0,0,.28);
+    padding:20px;
 
 }
 
-/* ==========================================
-   TOP
-========================================== */
 
-.assets-total-top{
+
+
+
+/* TITLE */
+
+.assets-total-header{
+
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-bottom:18px;
+
+
+}
+
+
+
+.assets-title{
+
+
+    font-size:20px;
+
+    font-weight:800;
+
+    white-space:nowrap;
+
+    flex-shrink:0;
+
+
+}
+
+
+.eye-btn{
+
+
+    width:18px;
+
+    height:18px;
+
+    color:#ffd54a;
+
+    flex-shrink:0;
+
+}
+
+
+
+
+
+
+/* =====================================
+ MONEY AREA
+===================================== */
+
+
+.total-money{
+
+
+    display:grid;
+
+    grid-template-columns:
+    64px 1fr auto;
+
+
+    align-items:center;
+
+    gap:14px;
+
+
+}
+
+
+
+
+.total-logo{
+
+
+    width:64px;
+
+    height:64px;
+
+    object-fit:contain;
+
+}
+
+
+
+
+
+.total-number{
+
+
+    min-width:0;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+
+    font-size:30px;
+
+    font-weight:800;
+
+
+}
+
+
+
+
+
+.total-unit{
+
+
+    white-space:nowrap;
+
+    font-size:30px;
+
+    font-weight:900;
+
+    color:#ffd43b;
+
+
+}
+
+
+
+
+.total-sub{
+
+
+    grid-column:2;
+
+
+    margin-top:-10px;
+
+
+    font-size:12px;
+
+    color:#c4d3ea;
+
+
+}
+
+
+
+
+
+
+
+/* =====================================
+ ASSETS DETAILS
+===================================== */
+
+
+.assets-card{
+
+
+    margin-top:18px;
+
+
+    background:#171717;
+
+
+    border-radius:22px;
+
+
+    padding:18px;
+
+
+}
+
+
+
+
+.assets-header{
+
 
     display:flex;
 
@@ -41,903 +248,688 @@
 
     align-items:center;
 
-    margin-bottom:22px;
+
+    margin-bottom:8px;
+
 
 }
 
-.assets-title{
+
+
+.assets-header h2{
+
+
+    font-size:20px;
+
+    margin:0;
+
+    white-space:nowrap;
+
+
+}
+
+
+
+
+
+
+/* ROW */
+
+
+.asset-row{
+
+
+    display:grid;
+
+
+    grid-template-columns:
+    70px 1fr auto;
+
+
+    align-items:center;
+
+
+    min-height:95px;
+
+
+    border-bottom:
+    1px solid rgba(255,255,255,.08);
+
+
+}
+
+
+
+
+.asset-left{
+
 
     display:flex;
 
+
+    justify-content:flex-start;
+
+
     align-items:center;
+
+
+}
+
+
+
+.asset-icon{
+
+
+    width:42px;
+
+    height:42px;
+
+
+    object-fit:contain;
+
+
+}
+
+
+
+
+
+.asset-name{
+
+
+    font-size:17px;
+
+    font-weight:700;
+
+
+    margin-left:12px;
+
+
+}
+
+
+
+
+
+.asset-right{
+
+
+    text-align:right;
+
+
+}
+
+
+
+
+
+.asset-amount{
+
+
+    font-size:17px;
+
+    font-weight:800;
+
+
+    white-space:nowrap;
+
+
+}
+
+
+
+.asset-usdt{
+
+
+    margin-top:5px;
+
+
+    font-size:12px;
+
+
+    color:#9aa8bb;
+
+
+    white-space:nowrap;
+
+
+}
+
+
+
+
+
+
+
+
+/* =====================================
+ MOBILE
+===================================== */
+
+
+@media(max-width:480px){
+
+
+
+.assets-page{
+
+    padding:10px;
+
+}
+
+
+
+.assets-total-card{
+
+    padding:18px;
+
+}
+
+
+
+
+.assets-title{
+
+    font-size:19px;
+
+}
+
+
+
+.total-money{
+
+
+    grid-template-columns:
+    56px 1fr auto;
+
 
     gap:10px;
 
 }
 
-.assets-title span{
 
-    font-size:26px;
 
-    font-weight:700;
+.total-logo{
 
-    color:#fff;
+
+    width:56px;
+
+    height:56px;
+
 
 }
 
-/* ==========================================
-   EYE
-========================================== */
 
-.eye-btn{
+
+.total-number{
+
+
+    font-size:23px;
+
+}
+
+
+
+.total-unit{
+
+
+    font-size:23px;
+
+}
+
+
+
+
+.assets-card{
+
+    padding:16px;
+
+}
+
+
+
+.asset-row{
+
+
+    grid-template-columns:
+    55px 1fr auto;
+
+
+    min-height:90px;
+
+
+}
+
+
+
+.asset-icon{
+
 
     width:38px;
 
     height:38px;
 
-    border:none;
-
-    background:transparent;
-
-    border-radius:50%;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#FFD54A;
-
-    cursor:pointer;
-
-    transition:.25s;
 
 }
 
-.eye-btn:hover{
 
-    background:rgba(255,213,74,.12);
+.asset-name{
 
-}
 
-/* ==========================================
-   TOTAL VALUE
-========================================== */
+    font-size:15px;
 
-.assets-total-value{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:24px;
 
 }
 
-/* ==========================================
-   LEFT
-========================================== */
 
-.total-left{
 
-    flex-shrink:0;
+.asset-amount{
 
-}
 
-.total-usdt-logo{
+    font-size:15px;
 
-    width:82px;
-
-    height:82px;
-
-    object-fit:contain;
 
 }
 
-.total-coin-name{
 
-    display:none;
 
-}
+.asset-usdt{
 
-/* ==========================================
-   RIGHT
-========================================== */
 
-.total-right{
+    font-size:10px;
 
-    flex:1;
-
-    min-width:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    overflow:hidden;
 
 }
 
-/* ==========================================
-   MAIN
-========================================== */
 
-.total-main{
-
-    display:flex;
-
-    align-items:flex-end;
-
-    gap:14px;
 
 }
+
+
+
+
+
+
+/* =====================================
+ SMALL PHONE
+===================================== */
+
+
+@media(max-width:350px){
+
+
+
+.total-money{
+
+
+    grid-template-columns:
+    48px 1fr auto;
+
+
+}
+
+
 
 .total-number{
-    flex: 1;
-    min-width: 0;
 
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+
+    font-size:20px;
+
+
 }
+
+
 
 .total-unit{
-    flex-shrink: 0;
-}
 
-.total-number{
-    flex:1;
-    min-width:0;
 
-    font-size:clamp(28px,4vw,46px);
+    font-size:20px;
 
-    font-weight:800;
-    color:#fff;
-    line-height:1;
-
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
-}
-
-.total-unit{
-    font-size:clamp(20px,3vw,34px);
-
-    font-weight:800;
-    color:#FFD54A;
-
-    flex-shrink:0;
-
-    position:relative;
-    top:18px;
-}
-
-/* ==========================================
-   SUB
-========================================== */
-
-.total-sub{
-
-    margin-top:10px;
-
-    font-size:16px;
-
-    color:#A5B3C9;
 
 }
 
-/* ==========================================
-   ASSETS DETAILS
-========================================== */
 
-.assets-card{
 
-    width:100%;
+.total-logo{
 
-    margin-top:22px;
-
-    background:#171717;
-
-    border-radius:22px;
-
-    padding:22px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.28);
-
-}
-
-/* ==========================================
-   HEADER
-========================================== */
-
-.assets-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    cursor:pointer;
-
-    padding-bottom:18px;
-
-}
-
-.assets-header h2{
-
-    font-size:24px;
-
-    font-weight:700;
-
-    color:#fff;
-
-    margin:0;
-
-}
-
-/* ==========================================
-   ROW
-========================================== */
-
-.asset-row{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:22px 0;
-
-    border-bottom:1px solid rgba(255,255,255,.08);
-
-    transition:.25s;
-
-}
-
-.asset-row:last-child{
-
-    border-bottom:none;
-
-}
-
-.asset-row:hover{
-
-    background:rgba(255,255,255,.03);
-
-}
-
-/* ==========================================
-   LEFT
-========================================== */
-
-.asset-left{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:16px;
-
-}
-
-.asset-icon{
 
     width:48px;
 
     height:48px;
 
-    object-fit:contain;
-
-    flex-shrink:0;
 
 }
 
-.asset-symbol{
 
-    font-size:22px;
+.assets-title{
 
-    font-weight:700;
-
-    color:#fff;
+    font-size:17px;
 
 }
 
-/* ==========================================
-   RIGHT
-========================================== */
 
-.asset-right{
-
-    text-align:right;
 
 }
 
-.asset-amount{
+/* =====================================
+   TOTAL ASSETS POSITION FINAL
+===================================== */
 
-    font-size:22px;
 
-    font-weight:700;
+/* หัวข้อ */
 
-    color:#fff;
+/* ===============================
+   TOTAL ASSETS TITLE + EYE FIX
+================================ */
 
-}
 
-.asset-usdt{
+.assets-total-top{
 
-    margin-top:6px;
+    display:flex !important;
 
-    font-size:15px;
+    align-items:center !important;
 
-    color:#9EA8B8;
+    gap:10px !important;
 
-}
-
-/* ==========================================
-   HOVER
-========================================== */
-
-.asset-icon{
-
-    transition:.25s;
+    width:100%;
 
 }
 
-.asset-row:hover .asset-icon{
 
-    transform:scale(1.05);
 
-}
+.assets-title{
 
-.asset-row:hover{
+    font-size:20px;
 
-    transform:translateX(3px);
+    font-weight:800;
 
-}
-
-/* ==========================================
-   DIVIDER
-========================================== */
-
-.asset-row{
-
-    position:relative;
+    white-space:nowrap;
 
 }
 
-.asset-row::after{
 
-    content:"";
 
-    position:absolute;
+.eye-btn{
 
-    left:64px;
+    display:flex;
 
-    right:0;
+    align-items:center;
 
-    bottom:0;
+    justify-content:center;
 
-    height:1px;
+    width:20px;
 
-    background:rgba(255,255,255,.06);
+    height:20px;
 
-}
+    padding:0;
 
-.asset-row:last-child::after{
-
-    display:none;
+    margin:0;
 
 }
 
-/* ==========================================
-   MOBILE
-========================================== */
 
-@media (max-width:390px){
 
-.assets-page{
 
-    padding:14px;
-    padding-bottom:100px;
+
+/* แถวโลโก้ + เงิน */
+
+
+.total-money{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    gap:16px !important;
 
 }
 
-.assets-total-card{
 
-    overflow: hidden;
-    padding:18px;
+
+
+
+/* โลโก้ */
+
+
+.total-usdt-logo,
+.total-logo{
+
+    width:64px !important;
+
+    height:64px !important;
+
+    min-width:64px !important;
+
+    object-fit:contain !important;
+
+}
+
+
+
+
+
+/* ตัวเลข */
+
+.total-right{
+
+    flex:1 !important;
+
+    min-width:0 !important;
+
+}
+
+
+
+
+.total-main{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:space-between !important;
+
+    width:100% !important;
+
+}
+
+
+
+
+
+.total-number{
+
+    font-size:28px !important;
+
+    font-weight:800 !important;
+
+    white-space:nowrap !important;
+
+}
+
+
+
+
+
+.total-unit{
+
+    font-size:28px !important;
+
+    font-weight:900 !important;
+
+    color:#ffd43b !important;
+
+    white-space:nowrap !important;
+
+}
+
+
+
+
+.total-sub{
+
+    margin-top:6px !important;
+
+    font-size:12px !important;
+
+}
+
+/* =====================================
+   TOTAL VALUE LOGO + MONEY FIX
+===================================== */
+
+
+.assets-total-value{
+
+    display:flex !important;
+
+    flex-direction:row !important;
+
+    align-items:center !important;
+
+    gap:6px !important;
+
+    width:100% !important;
+
     
 
 }
 
-.assets-total-value{
 
-    gap:16px;
+
+/* LOGO */
+
+.total-left{
+
+    flex:0 0 auto !important;
 
 }
+
+
 
 .total-usdt-logo{
 
-    width:82px;
-    height:82px;
+    width:46px !important;
+
+    height:46px !important;
+
+    min-width:64px !important;
+
+    max-width:64px !important;
+
+    object-fit:contain !important;
 
 }
+
+
+
+
+
+/* NUMBER AREA */
+
+.total-right{
+
+    flex:1 !important;
+
+    min-width:0 !important;
+
+}
+
+
+
+
+.total-main{
+
+    display:flex !important;
+
+    align-items:center !important;
+
+    justify-content:flex-start !important;
+
+    gap:35px !important;
+
+    width:100% !important;
+
+}
+
+
+
+
 
 .total-number{
 
-    font-size:20px;
+    font-size:24px !important;
+
+    font-weight:700 !important;
+
+    white-space:nowrap !important;
+
+    transform:translateY(8px);
 
 }
+
+
+
+
 
 .total-unit{
 
-    font-size:34px;
+    font-size:22px !important;
+
+    font-weight:900 !important;
+
+    color:#ffd43b !important;
+
+    white-space:nowrap !important;
+
+    transform:translateY(8px);
 
 }
+
+
+
+
 
 .total-sub{
 
-    font-size:13px;
+    margin-top:6px !important;
+
+    font-size:12px !important;
 
 }
 
-.asset-icon{
 
-    width:42px;
-    height:42px;
 
-}
+@media(max-width:480px){
 
-.asset-symbol{
-
-    font-size:18px;
-
-}
-
-.asset-amount{
-
-    font-size:18px;
-
-}
-
-.asset-usdt{
-
-    font-size:13px;
-
-}
-
-}
-
-/* ==========================================
-   NORMAL PHONE
-========================================== */
-
-@media (min-width:391px) and (max-width:767px){
-
-.assets-page{
-
-    padding:16px;
-    padding-bottom:105px;
-
-}
 
 .total-usdt-logo{
 
-    width:72px;
-    height:72px;
+    width:58px !important;
+
+    height:58px !important;
+
+    min-width:58px !important;
 
 }
+
+
 
 .total-number{
 
-    font-size:30px;
+    font-size:24px !important;
 
 }
+
+
 
 .total-unit{
 
-    font-size:40px;
+    font-size:24px !important;
 
 }
 
-}
-
-/* ==========================================
-   IPAD
-========================================== */
-
-@media (min-width:768px) and (max-width:1199px){
-
-.assets-page{
-
-    max-width:760px;
-    margin:auto;
-
-}
-
-.assets-total-card{
-
-    padding:30px;
-
-}
-
-.total-usdt-logo{
-
-    width:84px;
-    height:84px;
-
-}
-
-.total-number{
-
-    font-size:40px;
-
-}
-
-.total-unit{
-
-    font-size:54px;
-
-}
-
-.total-sub{
-
-    font-size:18px;
-
-}
-
-.asset-icon{
-
-    width:54px;
-    height:54px;
-
-}
-
-.asset-symbol{
-
-    font-size:22px;
-
-}
-
-.asset-amount{
-
-    font-size:22px;
-
-}
-
-}
-
-/* ==========================================
-   DESKTOP
-========================================== */
-
-@media (min-width:1200px){
-
-.assets-page{
-
-    max-width:980px;
-    margin:auto;
-
-}
-
-.assets-total-card{
-
-    padding:34px;
-
-}
-
-.total-usdt-logo{
-
-    width:96px;
-    height:96px;
-
-}
-
-.total-number{
-
-    font-size:40px;
-
-}
-
-.total-unit{
-
-    font-size:60px;
-
-}
-
-.total-sub{
-
-    font-size:20px;
-
-}
-
-.asset-icon{
-
-    width:58px;
-    height:58px;
-
-}
-
-.asset-symbol{
-
-    font-size:24px;
-
-}
-
-.asset-amount{
-
-    font-size:24px;
-
-}
-
-}
-
-/* ==========================================
-   SAFE AREA
-========================================== */
-
-.assets-page{
-
-padding-bottom:
-calc(120px + env(safe-area-inset-bottom));
-
-}
-
-/* ==========================================
-   SCROLLBAR
-========================================== */
-
-::-webkit-scrollbar{
-
-width:6px;
-
-}
-
-::-webkit-scrollbar-thumb{
-
-background:#324865;
-border-radius:20px;
-
-}
-
-::-webkit-scrollbar-track{
-
-background:#091220;
-
-}
-
-/* ==========================================
-   CARD ANIMATION
-========================================== */
-
-.assets-total-card{
-
-    animation:fadeDown .35s ease;
-
-}
-
-.assets-card{
-
-    animation:fadeUp .35s ease;
-
-}
-
-@keyframes fadeDown{
-
-    from{
-
-        opacity:0;
-        transform:translateY(-18px);
-
-    }
-
-    to{
-
-        opacity:1;
-        transform:translateY(0);
-
-    }
-
-}
-
-@keyframes fadeUp{
-
-    from{
-
-        opacity:0;
-        transform:translateY(18px);
-
-    }
-
-    to{
-
-        opacity:1;
-        transform:translateY(0);
-
-    }
-
-}
-
-/* ==========================================
-   ROW EFFECT
-========================================== */
-
-.asset-row{
-
-    transition:
-        background .25s,
-        transform .2s;
-
-}
-
-.asset-row:hover{
-
-    background:rgba(255,255,255,.03);
-
-    transform:translateX(5px);
-
-}
-
-.asset-row:active{
-
-    transform:scale(.99);
-
-}
-
-/* ==========================================
-   ICON
-========================================== */
-
-.asset-icon{
-
-    transition:
-        transform .25s;
-
-}
-
-.asset-row:hover .asset-icon{
-
-    transform:scale(1.08);
-
-}
-
-/* ==========================================
-   CARD SHADOW
-========================================== */
-
-.assets-total-card{
-
-    box-shadow:
-        0 15px 45px rgba(0,0,0,.28);
-
-}
-
-.assets-card{
-
-    box-shadow:
-        0 12px 35px rgba(0,0,0,.22);
-
-}
-
-/* ==========================================
-   NUMBER EFFECT
-========================================== */
-
-.total-number{
-
-    letter-spacing:2px;
-
-    text-shadow:
-        0 4px 12px rgba(0,0,0,.25);
-
-}
-
-.total-unit{
-
-    letter-spacing:-1px;
-
-}
-
-/* ==========================================
-   HOVER
-========================================== */
-
-.assets-total-card:hover{
-
-    transform:translateY(-2px);
-
-    transition:.25s;
-
-}
-
-.assets-card:hover{
-
-    transition:.25s;
-
-}
-
-/* ==========================================
-   EYE BUTTON
-========================================== */
-
-.eye-btn{
-
-    transition:
-        background .25s,
-        transform .25s;
-
-}
-
-.eye-btn:hover{
-
-    background:rgba(255,255,255,.08);
-
-    transform:scale(1.08);
-
-}
-
-.eye-btn:active{
-
-    transform:scale(.96);
-
-}
-
-/* ==========================================
-   DIVIDER
-========================================== */
-
-.asset-row::after{
-
-    content:"";
-
-    position:absolute;
-
-    left:70px;
-
-    right:0;
-
-    bottom:0;
-
-    height:1px;
-
-    background:rgba(255,255,255,.05);
-
-}
-
-.asset-row:last-child::after{
-
-    display:none;
-
-}
-
-/* ==========================================
-   SELECT DISABLE
-========================================== */
-
-.assets-page{
-
-    user-select:none;
-
-}
-
-img{
-
-    -webkit-user-drag:none;
-
-}
-
-/* ==========================================
-   SMOOTH FONT
-========================================== */
-
-.assets-page{
-
-    -webkit-font-smoothing:antialiased;
-
-    text-rendering:optimizeLegibility;
 
 }

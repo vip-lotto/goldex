@@ -67,14 +67,7 @@ const marketData = [
     logo: "tesla.png",
   },
 
-  {
-  id: 41,
-  symbol: "MSFT",
-  code: "MSFT",
-  name: "Microsoft",
-  category: "Stocks",
-  logo: "microsoft.png",
-},
+  
 
 {
     id: 17,
@@ -307,18 +300,6 @@ const marketData = [
 
 
 
-
-  
-  {
-    id: 20,
-    symbol: "AMZN",
-    code: "AMZN",
-    name: "Amazon",
-    category: "Stocks",
-    logo: "amazon.png",
-  },
-
-
   
 {
   id: 42,
@@ -365,14 +346,7 @@ const marketData = [
   logo: "intel.png",
 },
 
-{
-  id: 47,
-  symbol: "ORCL",
-  code: "ORCL",
-  name: "Oracle",
-  category: "Stocks",
-  logo: "oracle.png",
-},
+
 
 {
   id: 48,
@@ -383,14 +357,7 @@ const marketData = [
   logo: "uber.png",
 },
 
-{
-  id: 49,
-  symbol: "DIS",
-  code: "DIS",
-  name: "Disney",
-  category: "Stocks",
-  logo: "disney.png",
-},
+
 
 {
   id: 50,
@@ -411,86 +378,9 @@ const marketData = [
   logo: "silver.png",
 },
 
-{
-  id: 22,
-  symbol: "XPTUSD",
-  code: "XPTUSD",
-  name: "Platinum",
-  category: "Commodities",
-  logo: "platinum.png",
-},
 
-{
-  id: 23,
-  symbol: "XPDUSD",
-  code: "XPDUSD",
-  name: "Palladium",
-  category: "Commodities",
-  logo: "palladium.png",
-},
 
-{
-  id: 24,
-  symbol: "COPPER",
-  code: "COPPER",
-  name: "Copper",
-  category: "Commodities",
-  logo: "copper.png",
-},
 
-{
-  id: 25,
-  symbol: "NICKEL",
-  code: "NICKEL",
-  name: "Nickel",
-  category: "Commodities",
-  logo: "nickel.png",
-},
-
-{
-  id: 26,
-  symbol: "ALUMINUM",
-  code: "ALUMINUM",
-  name: "Aluminum",
-  category: "Commodities",
-  logo: "aluminum.png",
-},
-
-{
-  id: 27,
-  symbol: "ZINC",
-  code: "ZINC",
-  name: "Zinc",
-  category: "Commodities",
-  logo: "zinc.png",
-},
-
-{
-  id: 28,
-  symbol: "LEAD",
-  code: "LEAD",
-  name: "Lead",
-  category: "Commodities",
-  logo: "lead.png",
-},
-
-{
-  id: 29,
-  symbol: "TIN",
-  code: "TIN",
-  name: "Tin",
-  category: "Commodities",
-  logo: "tin.png",
-},
-
-{
-  id: 30,
-  symbol: "COBALT",
-  code: "COBALT",
-  name: "Cobalt",
-  category: "Commodities",
-  logo: "cobalt.png",
-},
 
 
 ];

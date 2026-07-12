@@ -21,34 +21,38 @@
 
 html{
 
-  width:100%;
+    width:100%;
 
-  min-height:100%;
+    height:auto;
 
-  overflow-x:hidden;
+    min-height:100%;
 
-  overscroll-behavior:none;
+    overflow-x:hidden;
+
+    overflow-y:auto;
+
+    -webkit-overflow-scrolling:touch;
 
 }
 
 
 body{
 
-  width:100%;
+    width:100%;
 
-  min-height:100%;
+    height:auto;
 
-  font-family:'Prompt',sans-serif;
+    min-height:100vh;
 
-  background:#050b18;
+    overflow-x:hidden;
 
-  color:white;
+    overflow-y:auto;
 
-  overflow-x:hidden;
+    background:#050b18;
 
-  overscroll-behavior:none;
+    color:#fff;
 
-  -webkit-font-smoothing:antialiased;
+    font-family:'Prompt',sans-serif;
 
 }
 
@@ -57,14 +61,15 @@ body{
 
 #root{
 
-  width:100%;
+    width:100%;
 
-  min-height:100dvh;
+    min-height:100vh;
 
-  overflow-x:hidden;
+    overflow-x:hidden;
+
+    overflow-y:visible;
 
 }
-
 
 /* =========================
    MOBILE TOUCH FIX

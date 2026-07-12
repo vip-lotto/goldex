@@ -13,7 +13,8 @@ import {
   BarChart3,
   DollarSign,
   TrendingUp,
-  Activity
+  Activity,
+  BadgeCheck
 } from "lucide-react";
 
 import "./AdminDashboard.css";
@@ -86,6 +87,14 @@ export default function AdminDashboard() {
       icon: <MessageCircle size={34}/>,
       path: "/admin/contact",
       color: "pink"
+    },
+
+    {
+    title:"KYC Verification",
+    desc:"Approve customer identity",
+    icon:<BadgeCheck size={34}/>,
+    path:"/admin/kyc",
+    color:"green"
     },
 
     {

@@ -1,71 +1,83 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import {
-ArrowDownToLine,
-ArrowUpFromLine,
-ArrowLeftRight,
-RefreshCcw,
-Bell,
-Headset
+  ArrowDownToLine,
+  ArrowUpFromLine,
+  ArrowLeftRight,
+  RefreshCcw,
+  Bell,
+  Headset,
 } from "lucide-react";
 
 import { supabase } from "../lib/supabase";
-
 import { getWallet } from "../lib/walletApi";
 import { getExchangeRates } from "../lib/convertApi";
 
-
 import BannerSlider from "../components/BannerSlider";
-import BottomNav from "../components/BottomNav";
 import HomeMarketChart from "../components/HomeMarketChart";
 
 import "../styles/home.css";
-import { useTranslation } from "react-i18next";
 
 export default function Home() {
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
+  const { t } = useTranslation();
 
-const { t } = useTranslation();
+  /* =========================
+      STATE
+  ========================= */
 
-const [coins, setCoins] = useState([]);
-const [activeTab, setActiveTab] =
-useState("trending");
+  const [wallet, setWallet] = useState(null);
 
+  const [rates, setRates] = useState([]);
 
-const [wallet, setWallet] = useState(null);
-const [rates, setRates] = useState([]);
+  const [coins, setCoins] = useState([]);
 
-const [profit, setProfit] = useState(0);
+  const [profit, setProfit] = useState(0);
 
-const [unreadCount,
-setUnreadCount] =
-useState(0);
+  const [activeTab, setActiveTab] =
+    useState("trending");
 
-const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] =
+    useState([]);
 
-const [showContacts, setShowContacts] = useState(false);
+  const [showContacts, setShowContacts] =
+    useState(false);
 
+  const [unreadCount, setUnreadCount] =
+    useState(0);
 
-const loadContacts = async () => {
+  /* =========================
+      LOAD CONTACT
+  ========================= */
 
-  const { data, error } = await supabase
-  .from("admin_contacts")
-  .select("*")
-  .eq("enabled", true);
+  async function loadContacts() {
 
-  if (error) {
-    console.log(error);
-    return;
+    const { data, error } =
+      await supabase
+        .from("admin_contacts")
+        .select("*")
+        .eq("enabled", true);
+
+    if (error) {
+
+      console.log(error);
+
+      return;
+
+    }
+
+    setContacts(data || []);
+
   }
 
-  setContacts(data || []);
+  /* =========================
+      LOAD NOTIFICATION
+  ========================= */
 
-};
-
-const loadNotifications = async () => {
-
-
+  async function loadNotifications() {
 
     const user =
       JSON.parse(
@@ -81,151 +93,150 @@ const loadNotifications = async () => {
           count: "exact",
           head: true,
         })
-        .eq(
-          "user_id",
-          user.id
-        )
-        .eq(
-          "is_read",
-          false
-        );
+        .eq("user_id", user.id)
+        .eq("is_read", false);
 
-    setUnreadCount(
-      count || 0
-    );
+    setUnreadCount(count || 0);
 
-};
-
-const loadMarket =
-async () => {
-
-
-try {
-
-  const res =
-    await fetch(
-      "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true"
-    );
-
-  const data =
-    await res.json();
-
-  setCoins([
-    
-      {
-  symbol: "BTC",
-  name: "Bitcoin",
-  logo: "/coins/btc.png",
-      price:
-        data.bitcoin.usd,
-      change:
-        data.bitcoin.usd_24h_change,
-    },
-    {
-      
-  symbol: "ETH",
-  name: "Ethereum",
-  logo: "/coins/eth.png",
-      price:
-        data.ethereum.usd,
-      change:
-        data.ethereum.usd_24h_change,
-    },
-    {
-  symbol: "SOL",
-  name: "Solana",
-  logo: "/coins/sol.png",
-      price:
-        data.solana.usd,
-      change:
-        data.solana.usd_24h_change,
-    },
-  ]);
-
-} catch (err) {
-
-  console.log(err);
-
-}
-
-
-};
-
-const loadWallet = async () => {
-
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
-
-  if (!user) return;
-
-  const walletData =
-    await getWallet(user.id);
-
-  setWallet(walletData);
-
-};
-
-const loadRates = async () => {
-
-  const rateData =
-    await getExchangeRates();
-
-  setRates(rateData || []);
-
-};
-
-
-const loadProfit = async () => {
-
-  const user = JSON.parse(
-    localStorage.getItem("user")
-  );
-
-  if (!user) return;
-
-  const { data, error } = await supabase
-    .from("trades")
-    .select("profit_amount")
-    .eq("user_id", user.id)
-    .eq("status", "finished");
-
-  if (error) {
-    console.log(error);
-    return;
   }
 
-  const total = (data || []).reduce(
-    (sum, item) =>
-      sum + Number(item.profit_amount || 0),
-    0
-  );
+  /* =========================
+      LOAD WALLET
+  ========================= */
 
-  setProfit(total);
+  async function loadWallet() {
 
-};
+    const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
 
+    if (!user) return;
 
-useEffect(() => {
+    const walletData =
+      await getWallet(user.id);
 
-loadContacts();
+    setWallet(walletData);
 
-loadMarket();
-loadNotifications();
-loadWallet();
-loadRates();
-loadProfit();
+  }
 
-  const user =
-    JSON.parse(
+  /* =========================
+      LOAD RATE
+  ========================= */
+
+  async function loadRates() {
+
+    const rateData =
+      await getExchangeRates();
+
+    setRates(rateData || []);
+
+  }
+
+  /* =========================
+      LOAD PROFIT
+  ========================= */
+
+  async function loadProfit() {
+
+    const user =
+      JSON.parse(
+        localStorage.getItem("user")
+      );
+
+    if (!user) return;
+
+    const { data, error } =
+      await supabase
+        .from("trades")
+        .select("profit_amount")
+        .eq("user_id", user.id)
+        .eq("status", "finished");
+
+    if (error) {
+
+      console.log(error);
+
+      return;
+
+    }
+
+    const total =
+      (data || []).reduce(
+        (sum, item) =>
+          sum +
+          Number(item.profit_amount || 0),
+        0
+      );
+
+    setProfit(total);
+
+  }
+    /* =========================
+      LOAD MARKET
+  ========================= */
+
+  async function loadMarket() {
+
+    try {
+
+      const res = await fetch(
+        "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true"
+      );
+
+      const data = await res.json();
+
+      setCoins([
+        {
+          symbol: "BTC",
+          name: "Bitcoin",
+          logo: "/coins/btc.png",
+          price: data.bitcoin.usd,
+          change: data.bitcoin.usd_24h_change,
+        },
+        {
+          symbol: "ETH",
+          name: "Ethereum",
+          logo: "/coins/eth.png",
+          price: data.ethereum.usd,
+          change: data.ethereum.usd_24h_change,
+        },
+        {
+          symbol: "SOL",
+          name: "Solana",
+          logo: "/coins/sol.png",
+          price: data.solana.usd,
+          change: data.solana.usd_24h_change,
+        },
+      ]);
+
+    } catch (err) {
+
+      console.log(err);
+
+    }
+
+  }
+
+  /* =========================
+      PAGE LOAD
+  ========================= */
+
+  useEffect(() => {
+
+    loadContacts();
+    loadMarket();
+    loadNotifications();
+    loadWallet();
+    loadRates();
+    loadProfit();
+
+    const user = JSON.parse(
       localStorage.getItem("user")
     );
 
-  const channel =
-    supabase
-      .channel(
-        "notifications-realtime"
-      )
+    const channel = supabase
+      .channel("notifications-realtime")
       .on(
         "postgres_changes",
         {
@@ -235,10 +246,7 @@ loadProfit();
         },
         (payload) => {
 
-          if (
-            payload.new.user_id ===
-            user?.id
-          ) {
+          if (payload.new.user_id === user?.id) {
 
             loadNotifications();
 
@@ -248,354 +256,432 @@ loadProfit();
       )
       .subscribe();
 
-  const interval =
-  setInterval(() => {
+    const timer = setInterval(() => {
 
-    loadMarket();
-    loadWallet();
-    loadRates();
-    loadProfit();
+      loadMarket();
+      loadWallet();
+      loadRates();
+      loadProfit();
 
-},30000);
+    }, 30000);
 
-  return () => {
+    return () => {
 
-    clearInterval(
-      interval
-    );
+      clearInterval(timer);
 
-    supabase.removeChannel(
-      channel
-    );
+      supabase.removeChannel(channel);
 
-  };
+    };
 
-}, []);
+  }, []);
 
+  /* =========================
+      TOTAL ASSET
+  ========================= */
 
+  const totalAssets = useMemo(() => {
 
+    if (!wallet || rates.length === 0) {
 
+      return 0;
 
+    }
 
-// ===== เพิ่มตรงนี้ =====
+    const usdtBalance =
+      Number(wallet.balance || 0);
 
+    const otherAssets = rates
+      .filter(rate => rate.symbol !== "USDT")
+      .reduce((sum, rate) => {
 
+        const amount =
+          Number(wallet[rate.symbol] || 0);
 
+        return (
+          sum +
+          amount * Number(rate.rate || 0)
+        );
 
-const totalAssets = useMemo(() => {
+      }, 0);
 
-  if (!wallet || rates.length === 0) return 0;
+    return usdtBalance + otherAssets;
 
-  const usdtBalance = Number(wallet.balance || 0);
+  }, [wallet, rates]);
 
-  const otherAssets = rates
-    .filter(rate => rate.symbol !== "USDT")
-    .reduce((sum, rate) => {
+  /* =========================
+      RENDER
+  ========================= */
 
-      const amount = Number(wallet[rate.symbol] || 0);
+  return (
 
-      return sum + amount * Number(rate.rate || 0);
+    <div className="home-page">
 
-    }, 0);
+      {/* Header */}
 
-  return usdtBalance + otherAssets;
+      <header className="home-header">
 
-}, [wallet, rates]);
+        <div className="brand-area">
 
-// ===== จบที่เพิ่ม =====
+          
 
-return (
+          <h1 className="brand-title">
+            TRUST
+          </h1>
 
-<div className="home-page">
-
-    <div className="home-header">
-
-    <div className="brand-area">
-
-    <img
-        src="/logo.png"
-        alt="TRUST"
-        className="brand-logo"
-    />
-
-    <div className="brand-title">
-        TRUST
-    </div>
-
-</div>
-
-    <div className="header-actions">
-
-        <div
-          className="support-btn"
-          onClick={() => setShowContacts(true)}
-        >
-            <Headset size={24}/>
         </div>
 
-        <div
+        <div className="header-actions">
+
+          <button
+            className="support-btn"
+            onClick={() =>
+              setShowContacts(true)
+            }
+          >
+
+            <Headset size={22} />
+
+          </button>
+
+          <button
             className="notify-btn"
-            onClick={() => navigate("/notifications")}
-        >
-            <Bell size={26}/>
+            onClick={() =>
+              navigate("/notifications")
+            }
+          >
+
+            <Bell size={22} />
 
             {unreadCount > 0 && (
-                <span className="notify-badge">
-                    {unreadCount > 99 ? "99+" : unreadCount}
-                </span>
+
+              <span className="notify-badge">
+
+                {unreadCount > 99
+                  ? "99+"
+                  : unreadCount}
+
+              </span>
+
             )}
 
+          </button>
+
         </div>
 
-    </div>
+      </header>
 
-</div>
+      {/* Banner */}
 
-  <BannerSlider />
+      <BannerSlider />
 
-  <div className="asset-card">
+      {/* Asset */}
 
-    <div>
+      <section className="asset-card">
 
-      <span>
-        {t("assets")}
-      </span>
+                <div className="asset-left">
 
-      <h2>
-  {totalAssets.toLocaleString(undefined,{
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
-  })}{" "}
-  USDT
-</h2>
+          <span className="asset-label">
+            {t("assets")}
+          </span>
 
-    </div>
+          <h2 className="asset-balance">
 
-    <div className="asset-right">
+            {totalAssets.toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+              }
+            )} USDT
 
-  <span className="profit-label">
-    {t("profit")}
-  </span>
+          </h2>
 
-  <h3
-    className={
-      profit >= 0
-        ? "green"
-        : "red"
-    }
-  >
-  {profit >= 0 ? "+" : ""}
-  {profit.toLocaleString(undefined,{
-    minimumFractionDigits:2,
-    maximumFractionDigits:2
-  })} USDT
-</h3>
-
-    </div>
-
-  </div>
-
-  <div className="action-grid">
-
-  <div
-    className="action-box"
-    onClick={() => navigate("/deposit")}
-  >
-    <ArrowDownToLine size={30}/>
-    <p>Deposit</p>
-  </div>
-
-  <div
-    className="action-box"
-    onClick={() => navigate("/withdraw")}
-  >
-    <ArrowUpFromLine size={30}/>
-    <p>Withdraw</p>
-  </div>
-
-  <div
-    className="action-box"
-    onClick={() => navigate("/transfer")}
-  >
-    <ArrowLeftRight size={30}/>
-    <p>Transfer</p>
-  </div>
-
-  <div
-    className="action-box"
-    onClick={() => navigate("/convert")}
-  >
-    <RefreshCcw size={30}/>
-    <p>Convert</p>
-  </div>
-
-</div>
-
-  <div className="gold-section">
-
-  <HomeMarketChart />
-
-</div>
-
-  <div className="market-tabs">
-
-    <button
-      className={
-        activeTab ===
-        "trending"
-          ? "tab-btn active"
-          : "tab-btn"
-      }
-      onClick={() =>
-        setActiveTab(
-          "trending"
-        )
-      }
-    >
-      Trending
-    </button>
-
-    <button
-      className={
-        activeTab ===
-        "hot"
-          ? "tab-btn active"
-          : "tab-btn"
-      }
-      onClick={() =>
-        setActiveTab(
-          "hot"
-        )
-      }
-    >
-      Hot Markets
-    </button>
-
-  </div>
-
-  <div className="market-section">
-
-  {activeTab === "trending" &&
-    coins.map((coin) => (
-
-      <div
-    className="market-row"
-    key={coin.symbol}
->
-
-    <div className="market-left">
-
-        <img
-            src={coin.logo}
-            alt={coin.symbol}
-            className="market-logo"
-        />
-
-        <div className="market-info">
-
-    <div className="market-symbol">
-        {coin.symbol}
-    </div>
-
-    <div className="market-name">
-        {coin.name}
-    </div>
-
-</div>
-
-    </div>
-
-    <div className="market-right">
-
-        <div className="market-price">
-            ${Number(coin.price).toLocaleString()}
         </div>
+
+        <div className="asset-right">
+
+          <span className="profit-label">
+            {t("profit")}
+          </span>
+
+          <h3
+              className={
+                `profit-value ${
+                  profit >= 0
+                    ? "green"
+                    : "red"
+                }`
+              }
+            >
+
+            {profit >= 0 ? "+" : ""}
+
+            {profit.toLocaleString(
+              undefined,
+              {
+                minimumFractionDigits:2,
+                maximumFractionDigits:2
+              }
+            )} USDT
+
+          </h3>
+
+        </div>
+
+      </section>
+
+      {/* =======================
+            ACTION GRID
+      ======================= */}
+
+      <section className="action-grid">
+
+        <button
+          className="action-box"
+          onClick={() => navigate("/deposit")}
+        >
+
+          <ArrowDownToLine size={30} />
+
+          <p>{t("deposit")}</p>
+
+        </button>
+
+        <button
+          className="action-box"
+          onClick={() => navigate("/withdraw")}
+        >
+
+          <ArrowUpFromLine size={30} />
+
+          <p>{t("withdraw")}</p>
+
+        </button>
+
+        <button
+          className="action-box"
+          onClick={() => navigate("/transfer")}
+        >
+
+          <ArrowLeftRight size={30} />
+
+          <p>{t("transfer")}</p>
+
+        </button>
+
+        <button
+          className="action-box"
+          onClick={() => navigate("/convert")}
+        >
+
+          <RefreshCcw size={30} />
+
+          <p>{t("convert")}</p>
+
+        </button>
+
+      </section>
+
+      {/* =======================
+            MARKET WIDGET
+      ======================= */}
+
+      <section className="home-market">
+
+        <HomeMarketChart />
+
+      </section>
+
+      {/* =======================
+            MARKET TAB
+      ======================= */}
+
+      <section className="market-tabs">
+
+        <button
+          className={
+            activeTab === "trending"
+              ? "tab-btn active"
+              : "tab-btn"
+          }
+          onClick={() =>
+            setActiveTab("trending")
+          }
+        >
+          {t("trending")}
+        </button>
+
+        <button
+          className={
+            activeTab === "hot"
+              ? "tab-btn active"
+              : "tab-btn"
+          }
+          onClick={() =>
+            setActiveTab("hot")
+          }
+        >
+          {t("hotMarkets")}
+        </button>
+
+      </section>
+
+      {/* =======================
+            MARKET LIST
+      ======================= */}
+
+      <section className="market-section">
+
+        {activeTab === "trending" &&
+          coins.map((coin) => (
+
+            <div
+              key={coin.symbol}
+              className="market-row"
+            >
+
+              <div className="market-left">
+
+                <img
+                  src={coin.logo}
+                  alt={coin.symbol}
+                  className="market-logo"
+                />
+
+                <div className="market-info">
+
+                  <div className="market-symbol">
+
+                    {coin.symbol}
+
+                  </div>
+
+                  <div className="market-name">
+
+                    {coin.name}
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div className="market-right">
+
+                <div className="market-price">
+
+                  $
+                  {Number(
+                    coin.price
+                  ).toLocaleString()}
+
+                </div>
+
+                <div
+                  className={
+                    coin.change >= 0
+                      ? "market-change green"
+                      : "market-change red"
+                  }
+                >
+
+                  {coin.change >= 0
+                    ? "▲ "
+                    : "▼ "}
+
+                  {coin.change.toFixed(2)}%
+
+                </div>
+
+              </div>
+
+            </div>
+
+          ))}
+
+      </section>
+
+            {/* =======================
+            CONTACT MODAL
+      ======================= */}
+
+      {showContacts && (
 
         <div
-            className={
-                coin.change > 0
-                    ? "market-change green"
-                    : "market-change red"
-            }
+          className="contact-overlay"
+          onClick={() =>
+            setShowContacts(false)
+          }
         >
-            ▲ {coin.change.toFixed(2)}%
+
+          <div
+            className="contact-modal"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          >
+
+            <h3>
+
+              {t("customerService")}
+
+            </h3>
+
+            {contacts.map((contact) => (
+
+              <div
+                key={contact.id}
+                className="contact-item"
+                onClick={() => {
+
+                  const url =
+                    contact.link.startsWith("http")
+                      ? contact.link
+                      : `https://${contact.link}`;
+
+                  window.open(
+                    url,
+                    "_blank"
+                  );
+
+                }}
+              >
+
+                <img
+                  src={contact.icon_url}
+                  alt=""
+                  className="contact-icon"
+                />
+
+                <span>
+
+                  {contact.name}
+
+                </span>
+
+              </div>
+
+            ))}
+
+            <button
+              className="close-contact"
+              onClick={() =>
+                setShowContacts(false)
+              }
+            >
+
+              {t("close")}
+
+            </button>
+
+          </div>
+
         </div>
+
+      )}
 
     </div>
 
-</div>
+  );
 
-    ))}
-
-</div>
-
-{showContacts && (
-
-<div
-  className="contact-overlay"
-  onClick={() => setShowContacts(false)}
->
-
-<div
-  className="contact-modal"
-  onClick={(e) => e.stopPropagation()}
->
-
-<h3>Customer Service</h3>
-
-{contacts.map(contact => (
-
-<div
-  key={contact.id}
-  className="contact-item"
-  onClick={() => {
-
-    const url =
-      contact.link.startsWith("http")
-        ? contact.link
-        : `https://${contact.link}`;
-
-    window.open(url, "_blank");
-
-  }}
->
-
-<img
-  src={contact.icon_url}
-  alt=""
-  className="contact-icon"
-/>
-
-<span>
-
-{contact.name}
-
-</span>
-
-</div>
-
-))}
-
-<button
-  className="close-contact"
-  onClick={() => setShowContacts(false)}
->
-
-Close
-
-</button>
-
-</div>
-
-</div>
-
-)}
-
-  <BottomNav />
-
-</div>
-
-
-);
 }
-

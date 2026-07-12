@@ -41,9 +41,11 @@ const { t } = useTranslation();
 
   async function loadProfile() {
 
-    const user = JSON.parse(
-      localStorage.getItem("user")
-    );
+    const { data: { user } } = await supabase.auth.getUser();
+
+if (!user) {
+  throw new Error("User not logged in");
+}
 
     if (!user) return;
 
@@ -66,10 +68,15 @@ const { t } = useTranslation();
 
   if (!file) return null;
 
-  const fileName =
-    `${Date.now()}-${file.name}`;
+  const ext =
+    file.name.split(".").pop();
 
-  const filePath =
+
+const fileName =
+    `${Date.now()}-${crypto.randomUUID()}.${ext}`;
+
+
+const filePath =
     `${folder}/${fileName}`;
 
   const { error } =
@@ -120,9 +127,27 @@ async function submitKYC() {
 
     setUploading(true);
 
-    const user = JSON.parse(
-      localStorage.getItem("user")
-    );
+const localUser = JSON.parse(
+  localStorage.getItem("user")
+);
+
+if (!localUser) {
+  throw new Error("User not logged in");
+}
+
+
+const { data: profileUser } =
+await supabase
+.from("profiles")
+.select("id")
+.eq("id", localUser.id)
+.single();
+
+
+if (!profileUser) {
+  throw new Error("Profile not found");
+}
+
 
     const idCardUrl =
       await uploadImage(
@@ -141,7 +166,7 @@ async function submitKYC() {
   .from("kyc")
   .insert({
 
-    user_id: user.id,
+    user_id: profileUser.id,
 
     first_name: firstName,
 

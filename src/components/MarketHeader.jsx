@@ -15,9 +15,7 @@ export default function MarketHeader({
 
         <h2>Market</h2>
 
-        <span className="market-count">
-          {total} Markets
-        </span>
+        
 
       </div>
 

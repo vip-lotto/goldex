@@ -25,6 +25,13 @@ console.log(
   "GOLDAPI:",
   process.env.GOLDAPI_API_KEY
 );
+
+console.log(
+  "TWELVEDATA:",
+  process.env.TWELVEDATA_API_KEY
+);
+
+
 // ===============================
 // Home
 // ===============================

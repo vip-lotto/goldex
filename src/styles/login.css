@@ -11,12 +11,16 @@
 html,
 body,
 #root{
+
     width:100%;
-    min-width:0;
     min-height:100%;
+
     margin:0;
     padding:0;
+
     overflow-x:hidden;
+    overflow-y:auto;
+
 }
 
 body{
@@ -26,24 +30,28 @@ body{
 .login-page{
 
     width:100%;
-    min-height:100vh;
-    min-height:100dvh;
+
+    height:100vh;
+    height:100dvh;
 
     display:flex;
+
     justify-content:center;
+
     align-items:center;
 
-    padding:
-        max(18px,env(safe-area-inset-top))
-        max(18px,env(safe-area-inset-right))
-        max(18px,env(safe-area-inset-bottom))
-        max(18px,env(safe-area-inset-left));
-
-    overflow-x:hidden;
+    overflow:hidden;
 
     position:relative;
 
     background:#050b18;
+
+    padding:
+    max(18px,env(safe-area-inset-top))
+    18px
+    max(18px,env(safe-area-inset-bottom))
+    18px;
+
 }
 
 /* ===========================
@@ -334,30 +342,10 @@ body{
 
 }
 
-.login-page{
-
-    width:100%;
-
-    height:100dvh;
-
-    overflow:hidden;
-
-    position:fixed;
-
-    inset:0;
-
-}
 
 
-@media(max-width:768px){
 
-body{
 
-    overflow:hidden;
-
-}
-
-}
 /* LOGIN TOP BUTTON */
 
 /* =========================
@@ -702,6 +690,94 @@ z-index:999;
 .top-language-btn{
 
     right:15px !important;
+
+}
+
+}
+
+/* ===========================
+   LOGIN TOP BUTTON FINAL
+=========================== */
+
+.top-support-btn,
+.top-language-btn{
+
+    position:fixed;
+
+    top:20px;
+
+    height:44px;
+
+    padding:0 20px;
+
+    border-radius:30px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:8px;
+
+    background:rgba(5,20,45,.75);
+
+    border:1px solid #19c8ff;
+
+    color:white;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    z-index:999;
+
+    box-sizing:border-box;
+
+}
+
+
+.top-support-btn{
+
+    left:25px;
+
+}
+
+
+.top-language-btn{
+
+    right:25px;
+
+}
+
+
+
+@media(max-width:480px){
+
+.top-support-btn,
+.top-language-btn{
+
+    top:18px;
+
+    height:42px;
+
+    padding:0 15px;
+
+    font-size:13px;
+
+}
+
+
+.top-support-btn{
+
+    left:15px;
+
+}
+
+
+.top-language-btn{
+
+    right:15px;
 
 }
 

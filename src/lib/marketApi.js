@@ -1,91 +1,63 @@
 import marketData from "../data/marketData";
 
-
-const BINANCE_URL =
-"https://api.binance.com/api/v3/ticker/24hr";
-
+const API_URL = "http://localhost:3000/api/markets";
 
 export async function getMarkets() {
 
-try {
+  try {
 
+    const res = await fetch(API_URL);
 
-const res = await fetch(BINANCE_URL);
+    const json = await res.json();
 
-const binance = await res.json();
+    if (!json.success) {
+      throw new Error("API Error");
+    }
 
+    const backendMarkets = json.data;
 
+    return marketData.map((item) => {
 
-const markets = marketData.map((item)=>{
+      const api = backendMarkets.find(
+        (m) => m.code === item.code
+      );
 
+      if (!api) {
 
-const ticker = binance.find(
-(x)=>x.symbol === item.code
-);
+        return {
 
+          ...item,
 
+          price: 0,
 
-if(ticker){
+          change: 0,
 
-return {
+          status: "offline",
 
-...item,
+        };
 
-price:Number(ticker.lastPrice),
+      }
 
-change:Number(
-ticker.priceChangePercent
-),
+      return {
 
-status:"online"
+        ...item,
 
-};
+        price: api.price,
 
-}
+        change: api.change,
 
+        status: "online",
 
+      };
 
-return {
+    });
 
-...item,
+  } catch (err) {
 
-price:item.price ?? 0,
+    console.error(err);
 
-change:item.change ?? 0,
+    return [];
 
-status:"online"
-
-};
-
-
-});
-
-
-return markets;
-
-
-
-}catch(err){
-
-console.error(
-"Market API Error:",
-err
-);
-
-
-return marketData.map(item=>({
-
-...item,
-
-price:0,
-
-change:0,
-
-status:"offline"
-
-}));
-
-}
-
+  }
 
 }

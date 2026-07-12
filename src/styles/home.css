@@ -1,160 +1,54 @@
-/* ==========================================================
-   TRUST HOME PRO MAX
-   SET 1 : GLOBAL + RESET + RESPONSIVE
-========================================================== */
+/* ======================================================
+   TRUST HOME
+   PART 1
+====================================================== */
 
-*,
-*::before,
-*::after{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
+:root{
 
-html{
-    width:100%;
-    min-width:0;
-    overflow-x:hidden;
-    -webkit-text-size-adjust:100%;
-}
+    --bg:#07111f;
 
-body{
+    --card:#111d31;
 
-    width:100%;
-    min-width:0;
+    --border:#243958;
 
-    overflow-x:hidden;
+    --blue:#2ab8ff;
 
-    background:#07111f;
-    color:#fff;
+    --gold:#1085f1;
 
-    font-family:
-        Inter,
-        "Noto Sans Thai",
-        "Noto Sans SC",
-        "Noto Sans TC",
-        "Noto Sans JP",
-        "Noto Sans KR",
-        sans-serif;
+    --text:#ffffff;
+
+    --sub:#90a6c4;
 
 }
 
-#root{
-
-    width:100%;
-    min-width:0;
-
-    overflow-x:hidden;
-
-}
-
-/* ========================= */
-
-img{
-
-    display:block;
-
-    max-width:100%;
-
-}
-
-/* ========================= */
-
-button{
-
-    border:none;
-
-    outline:none;
-
-    background:none;
-
-    cursor:pointer;
-
-    font:inherit;
-
-}
-
-input,
-textarea,
-select{
-
-    font:inherit;
-
-}
-
-/* ========================= */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-label,
-small,
-strong,
-div{
-
-    min-width:0;
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
-}
-
-/* ==========================================================
-   HOME PAGE
-========================================================== */
+/* ======================================================
+   PAGE
+====================================================== */
 
 .home-page{
 
     width:100%;
 
-    max-width:100%;
-
-    min-width:0;
-
     min-height:100vh;
-    min-height:100dvh;
 
-    overflow-x:hidden;
+    background:var(--bg);
 
     display:flex;
 
     flex-direction:column;
 
-    gap:22px;
+    gap:20px;
 
-    padding:
+    padding:18px;
 
-        max(18px,env(safe-area-inset-top))
+    padding-bottom:95px;
 
-        max(18px,env(safe-area-inset-right))
-
-        calc(95px + env(safe-area-inset-bottom))
-
-        max(18px,env(safe-area-inset-left));
-
+    overflow-x:hidden;
 }
 
-/* ==========================================================
-   CONTAINER
-========================================================== */
-
-.home-page>*{
-
-    width:100%;
-
-    min-width:0;
-
-}
-
-/* ==========================================================
+/* ======================================================
    HEADER
-========================================================== */
+====================================================== */
 
 .home-header{
 
@@ -162,63 +56,52 @@ div{
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
 
-    gap:14px;
+    align-items:center;
 
-    padding:0 8px;
-
+    margin-bottom:4px;
 }
 
-.home-header>*{
+/* ---------- LEFT ---------- */
 
-    min-width:0;
-
-}
-
-/* ==========================================================
-   LEFT
-========================================================== */
-
-.header-left{
+.brand-area{
 
     flex:1;
 
     display:flex;
 
     align-items:center;
-
-    min-width:0;
-
-    overflow:hidden;
-
 }
 
-/* ==========================================================
-   LOGO
-========================================================== */
-
-.home-logo{
+.brand-title{
 
     margin:0;
 
-    font-size:36px;
+    font-size:42px;
 
-    font-weight:800;
+    font-weight:900;
 
-    color:#1fa2ff;
+    line-height:1;
+
+    letter-spacing:-1px;
 
     white-space:nowrap;
 
-    flex-shrink:0;
+    user-select:none;
 
+    background:linear-gradient(
+        90deg,
+        #45dcff,
+        #0ea5ff
+    );
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
 }
 
-/* ==========================================================
-   ACTIONS
-========================================================== */
+/* ---------- RIGHT ---------- */
 
 .header-actions{
 
@@ -226,28 +109,25 @@ div{
 
     align-items:center;
 
-    justify-content:flex-end;
-
-    gap:12px;
-
-    flex-shrink:0;
-
+    gap:15px;         /* ปรับกระดิ่ง */
 }
 
-/* ==========================================================
-   ICON BUTTON
-========================================================== */
+/* ======================================================
+   BUTTON
+====================================================== */
 
-.support-btn,
-.notify-btn{
-
-    position:relative;
+.support-btn{
 
     width:48px;
-
     height:48px;
 
+    margin-left:230px;   /* ← ปรับตรงนี้ */
+
     border-radius:50%;
+
+    background:#0f1b2d;
+
+    border:1px solid var(--border);
 
     display:flex;
 
@@ -255,179 +135,128 @@ div{
 
     align-items:center;
 
-    background:#102846;
+    color:#fff;
 
-    border:1px solid rgba(80,170,255,.35);
-
-    color:#55c8ff;
+    cursor:pointer;
 
     transition:.25s;
+}
 
+.notify-btn{
+
+    width:48px;
+    height:48px;
+
+    border-radius:50%;
+
+    background:#0f1b2d;
+
+    border:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    color:#fff;
+
+    cursor:pointer;
+
+    transition:.25s;
 }
 
 .support-btn:hover,
 .notify-btn:hover{
 
-    background:#163a63;
+    border-color:var(--blue);
+
+    background:#162640;
 
     transform:translateY(-2px);
-
 }
 
-/* ==========================================================
-   BADGE
-========================================================== */
+.notify-btn{
+
+    position:relative;
+}
 
 .notify-badge{
 
     position:absolute;
 
-    top:-4px;
+    top:3px;
 
-    right:-4px;
+    right:3px;
 
-    min-width:20px;
+    min-width:18px;
 
-    height:20px;
+    height:18px;
 
     padding:0 5px;
 
-    border-radius:999px;
+    border-radius:30px;
 
-    background:#ff4242;
-
-    color:#fff;
+    background:#ff3157;
 
     display:flex;
 
-    align-items:center;
-
     justify-content:center;
 
-    font-size:11px;
+    align-items:center;
+
+    font-size:10px;
 
     font-weight:700;
 
+    color:#fff;
 }
 
-/* ==========================================================
-   MOBILE
-========================================================== */
+/* ======================================================
+   BANNER
+====================================================== */
 
-@media(max-width:768px){
-
-.home-page{
-
-    gap:18px;
-
-    padding:
-
-        max(15px,env(safe-area-inset-top))
-
-        15px
-
-        calc(90px + env(safe-area-inset-bottom))
-
-        15px;
-
-}
-
-.home-logo{
-
-    font-size:34px;
-
-}
-
-.support-btn,
-.notify-btn{
-
-    width:44px;
-    height:44px;
-
-}
-
-}
-
-/* ==========================================================
-   iPhone SE / 7 / 8
-========================================================== */
-
-@media(max-width:380px){
-
-.home-logo{
-
-    font-size:30px;
-
-}
-
-.support-btn,
-.notify-btn{
-
-    width:40px;
-    height:40px;
-
-}
-
-.header-actions{
-
-    gap:8px;
-
-}
-
-}
-
-/* ==========================================================
-   Desktop
-========================================================== */
-
-@media(min-width:1400px){
-
-.home-page{
-
-    max-width:1600px;
-
-    margin:auto;
-
-}
-
-}
-
-/* ==========================================================
-   SET 2
-   Banner + Asset Card + Actions
-========================================================== */
-
-/* ===========================
-   Banner
-=========================== */
-
-.banner-slider{
+.banner{
 
     width:100%;
-
-    min-width:0;
-
-    position:relative;
 
     overflow:hidden;
 
     border-radius:22px;
 
+    border:1px solid rgba(255,255,255,.05);
+
+    background:#0f1b2d;
+
+    aspect-ratio:16/6;
+
+    position:relative;
+
+    box-shadow:
+        0 12px 30px rgba(0,0,0,.35);
+}
+
+.banner-track{
+
+    width:100%;
+
+    height:100%;
+
+    display:flex;
+
+    transition:transform .45s ease;
 }
 
 .banner-slide{
 
+    flex:0 0 100%;
+
     width:100%;
 
-    aspect-ratio:16/6;
-
-    overflow:hidden;
-
-    border-radius:22px;
-
+    height:100%;
 }
 
-.banner-slide img{
+.banner-image{
 
     width:100%;
 
@@ -435,25 +264,82 @@ div{
 
     object-fit:cover;
 
+    display:block;
 }
 
-/* ===========================
-   Asset Card
-=========================== */
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:768px){
+
+.home-page{
+
+    padding:16px;
+
+    gap:16px;
+}
+
+.brand-title{
+
+    font-size:34px;
+}
+
+.support-btn,
+.notify-btn{
+
+    width:46px;
+
+    height:46px;
+}
+
+.banner{
+
+    aspect-ratio:16/8;
+
+    border-radius:18px;
+}
+
+}
+
+/* ======================================================
+   SMALL PHONE
+====================================================== */
+
+@media(max-width:430px){
+
+.brand-title{
+
+    font-size:30px;
+}
+
+.header-actions{
+
+    gap:10px;
+}
+
+.banner{
+
+    aspect-ratio:16/9;
+}
+
+}
+
+/* ======================================================
+   ASSET CARD
+====================================================== */
 
 .asset-card{
 
     width:100%;
 
-    min-width:0;
-
     display:flex;
-
-    justify-content:space-between;
 
     align-items:center;
 
-    gap:22px;
+    justify-content:space-between;
+
+    gap:20px;
 
     padding:24px;
 
@@ -461,33 +347,61 @@ div{
 
     background:linear-gradient(
         135deg,
-        #10264d,
-        #0d1d37
+        #12294a,
+        #0d1c33
     );
 
-    border:1px solid rgba(70,170,255,.25);
+    border:1px solid rgba(255,255,255,.06);
 
-    overflow:hidden;
-
+    box-shadow:
+        0 12px 32px rgba(0,0,0,.35);
 }
 
+/* ---------- LEFT ---------- */
 
-
-.asset-card>div{
+.asset-left{
 
     flex:1;
 
     min-width:0;
 
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    justify-content:center;
+
+    text-align:left;
 }
 
-.asset-card span{
+.asset-label{
 
-    display:block;
+    width:100%;
 
-    color:#9fc6ff;
+    color:#8fb5d9;
 
-    font-size:15px;
+    font-size:20px;      /* ← ปรับขนาดตรงนี้ */
+
+    font-weight:800;     /* ← ความหนา */
+
+    text-align:left;
+
+    margin-bottom:6px;
+
+    text-transform:capitalize;
+}
+
+.asset-balance{
+
+    color:#fff;
+
+    font-size:26px;
+
+    font-weight:700;
+
+    line-height:1.1;
 
     white-space:nowrap;
 
@@ -495,57 +409,158 @@ div{
 
     text-overflow:ellipsis;
 
+    text-align:left;
+
+    width:100%;
 }
 
-.asset-card h2{
+/* ---------- RIGHT ---------- */
 
-    margin-top:8px;
+.asset-right{
 
-    color:#fff;
+    display:flex;
 
-    font-size:clamp(26px,5vw,38px);
+    flex-direction:column;
 
-    font-weight:800;
+    align-items:flex-end;
 
-    line-height:1.2;
+    justify-content:center;
 
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
+    min-width:170px;
 }
 
-.asset-card h3{
+.profit-label{
 
-    margin-top:8px;
+    color:#8fb5d9;
 
-    text-align:right;
+    font-size:14px;
 
-    font-size:clamp(22px,4vw,32px);
+    font-weight:500;
 
-    font-weight:700;
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
+    margin-bottom:10px;
 }
 
-.asset-card .green{
+.asset-right h3{
 
-    color:#21df8f;
+    margin:0;
 
+    font-size:24px;
+
+    font-weight:600;
+
+    line-height:1.1;
+
+    white-space:nowrap;
 }
 
-.asset-card .red{
+.green{
+
+    color:#18db73;
+}
+
+.red{
 
     color:#ff5d6d;
+}
+
+/* ---------- Hover ---------- */
+
+.asset-card:hover{
+
+    border-color:#2ab8ff;
+
+    transform:translateY(-2px);
+
+    transition:.25s;
+}
+
+/* ======================================================
+   TABLET
+====================================================== */
+
+@media(max-width:900px){
+
+.asset-card{
+
+    padding:20px;
+}
+
+
+
+.asset-right h3{
+
+    font-size:22px;
+}
 
 }
 
-/* ===========================
-   Action Grid
-=========================== */
+/* ======================================================
+   MOBILE
+====================================================== */
+
+@media(max-width:768px){
+
+.asset-card{
+
+    padding:18px;
+
+    gap:18px;
+}
+
+.asset-label,
+.profit-label{
+
+    font-size:13px;
+}
+
+
+
+.asset-right{
+
+    min-width:140px;
+}
+
+.asset-right h3{
+
+    font-size:22px;
+}
+
+}
+
+/* ======================================================
+   VERY SMALL PHONE
+====================================================== */
+
+@media(max-width:430px){
+
+.asset-card{
+
+    padding:16px;
+}
+
+
+
+.asset-right{
+
+    min-width:120px;
+}
+
+.asset-right h3{
+
+    font-size:18px;
+}
+
+.asset-label,
+.profit-label{
+
+    font-size:12px;
+}
+
+}
+
+/* ======================================================
+   ACTION GRID
+====================================================== */
 
 .action-grid{
 
@@ -553,24 +568,26 @@ div{
 
     display:grid;
 
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
+    grid-template-columns:repeat(4,1fr);
 
     gap:16px;
 
+    margin-top:2px;
 }
+
+/* ==========================================
+   ITEM
+========================================== */
 
 .action-box{
 
-    min-width:0;
+    background:#111d31;
 
-    padding:20px 12px;
+    border:1px solid #243958;
 
     border-radius:20px;
 
-    background:#10233f;
-
-    border:1px solid rgba(70,170,255,.18);
+    height:108px;
 
     display:flex;
 
@@ -582,220 +599,165 @@ div{
 
     gap:12px;
 
-    transition:.25s;
+    cursor:pointer;
 
+    transition:
+        background .25s,
+        border-color .25s,
+        transform .25s,
+        box-shadow .25s;
 }
 
 .action-box:hover{
 
+    background:#152743;
+
+    border-color:#2ab8ff;
+
     transform:translateY(-3px);
 
-    border-color:#2fbfff;
-
-    background:#143055;
-
+    box-shadow:
+        0 10px 28px rgba(0,0,0,.35);
 }
+
+.action-box:active{
+
+    transform:scale(.97);
+}
+
+/* ==========================================
+   ICON
+========================================== */
 
 .action-box svg{
 
-    color:#42c7ff;
+    width:30px;
 
+    height:30px;
+
+    color:#088efc;
+
+    flex-shrink:0;
 }
+
+/* ==========================================
+   TEXT
+========================================== */
 
 .action-box p{
 
-    width:100%;
+    margin:0;
 
-    min-width:0;
+    color:#ffffff;
 
-    text-align:center;
-
-    color:#fff;
-
-    font-size:15px;
+    font-size:14px;
 
     font-weight:600;
 
-    line-height:1.35;
+    line-height:1;
 
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
+    white-space:nowrap;
 }
 
-/* ===========================
-   Mobile
-=========================== */
+/* ==========================================
+   TABLET
+========================================== */
 
-@media(max-width:768px){
-
-.asset-card{
-
-    padding:18px;
-
-    gap:14px;
-
-}
-
-.asset-card h2{
-
-    font-size:30px;
-
-}
-
-.asset-card h3{
-
-    font-size:24px;
-
-}
+@media(max-width:900px){
 
 .action-grid{
 
     gap:12px;
-
 }
 
 .action-box{
 
-    padding:18px 8px;
-
+    height:96px;
 }
 
 .action-box svg{
 
-    width:26px;
+    width:28px;
 
-    height:26px;
-
-}
-
-.action-box p{
-
-    font-size:14px;
-
-}
-
-}
-
-/* ===========================
-   iPhone SE / 7 / 8
-=========================== */
-
-@media(max-width:380px){
-
-.asset-card{
-
-    padding:16px;
-
-}
-
-.asset-card span{
-
-    font-size:13px;
-
-}
-
-.asset-card h2{
-
-    font-size:20px;
-
-}
-
-.asset-card h3{
-
-    font-size:19px;
-
-}
-
-.action-grid{
-
-    grid-template-columns:
-        repeat(2,minmax(0,1fr));
-
-}
-
-.action-box{
-
-    padding:16px 8px;
-
+    height:28px;
 }
 
 .action-box p{
 
     font-size:13px;
-
 }
 
 }
 
-/* ===========================
-   iPad
-=========================== */
+/* ==========================================
+   MOBILE
+========================================== */
 
-@media(min-width:769px){
+@media(max-width:768px){
 
 .action-grid{
 
-    grid-template-columns:
-        repeat(4,minmax(0,1fr));
-
-}
-
-}
-
-/* ===========================
-   Large Desktop
-=========================== */
-
-@media(min-width:1500px){
-
-.action-grid{
-
-    gap:22px;
-
+    gap:10px;
 }
 
 .action-box{
 
-    padding:24px;
+    height:84px;
 
+    border-radius:16px;
+}
+
+.action-box svg{
+
+    width:24px;
+
+    height:24px;
 }
 
 .action-box p{
 
-    font-size:16px;
-
+    font-size:12px;
 }
 
 }
 
-/* ==========================================================
-   SET 3
-   MARKET
-========================================================== */
+/* ==========================================
+   SMALL PHONE
+========================================== */
 
-/* ===========================
-   Market Section
-=========================== */
+@media(max-width:430px){
 
-.market-section{
+.action-grid{
 
-    width:100%;
+    grid-template-columns:repeat(4,1fr);
 
-    min-width:0;
+    gap:8px;
+}
 
-    display:flex;
+.action-box{
 
-    flex-direction:column;
+    height:76px;
 
-    gap:14px;
+    border-radius:14px;
+}
+
+.action-box svg{
+
+    width:22px;
+
+    height:22px;
+}
+
+.action-box p{
+
+    font-size:11px;
+}
 
 }
 
-/* ===========================
-   Tabs
-=========================== */
+/* ======================================================
+   MARKET TABS
+====================================================== */
 
 .market-tabs{
 
@@ -807,101 +769,190 @@ div{
 
     gap:12px;
 
-    min-width:0;
+    margin-top:4px;
 
+    margin-bottom:4px;
 }
+
+/* ==========================================
+   TAB
+========================================== */
 
 .tab-btn{
 
     flex:1;
 
-    min-width:0;
-
     height:48px;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    background:#0d1c35;
+    border:1px solid #243958;
 
-    border:1px solid rgba(80,170,255,.18);
+    background:#111d31;
 
-    color:#86bfff;
+    color:#8ea6c5;
 
-    font-size:15px;
+    font-size:14px;
 
-    font-weight:600;
+    font-weight:700;
 
-    transition:.25s;
+    cursor:pointer;
 
-    overflow:hidden;
-
-    white-space:nowrap;
-
-    text-overflow:ellipsis;
-
+    transition:
+        background .25s,
+        border-color .25s,
+        color .25s,
+        transform .25s;
 }
+
+.tab-btn:hover{
+
+    border-color:#2ab8ff;
+
+    color:#ffffff;
+
+    transform:translateY(-2px);
+}
+
+/* ==========================================
+   ACTIVE
+========================================== */
 
 .tab-btn.active{
 
     background:linear-gradient(
         135deg,
-        #1798ff,
-        #39d0ff
+        #ffd857,
+        #f5c542
     );
 
-    color:#fff;
+    border-color:#f5c542;
 
-    border-color:#39d0ff;
+    color:#111111;
+
+    box-shadow:
+        0 8px 22px rgba(245,197,66,.25);
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media(max-width:900px){
+
+.tab-btn{
+
+    height:46px;
+
+    font-size:13px;
+}
 
 }
 
-/* ===========================
-   Coin Row
-=========================== */
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+.market-tabs{
+
+    gap:10px;
+}
+
+.tab-btn{
+
+    height:42px;
+
+    border-radius:14px;
+
+    font-size:13px;
+}
+
+}
+
+/* ==========================================
+   SMALL PHONE
+========================================== */
+
+@media(max-width:430px){
+
+.market-tabs{
+
+    gap:8px;
+}
+
+.tab-btn{
+
+    height:40px;
+
+    border-radius:12px;
+
+    font-size:12px;
+}
+
+}
+
+/* ======================================================
+   MARKET LIST
+====================================================== */
+
+.market-section{
+
+    width:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:14px;
+}
+
+/* ==========================================
+   ROW
+========================================== */
 
 .market-row{
 
     width:100%;
 
-    min-width:0;
-
     display:flex;
-
-    justify-content:space-between;
 
     align-items:center;
 
-    gap:16px;
+    justify-content:space-between;
 
-    padding:18px;
+    padding:16px 18px;
 
     border-radius:18px;
 
-    background:#101f39;
+    background:#111d31;
 
-    border:1px solid rgba(70,170,255,.15);
+    border:1px solid #243958;
 
-    transition:.2s;
+    transition:
+        .25s;
 
+    cursor:pointer;
 }
 
 .market-row:hover{
 
-    background:#15294a;
+    border-color:#2ab8ff;
 
-    border-color:#2fc4ff;
+    background:#162843;
 
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.35);
 }
 
-/* ===========================
-   Left
-=========================== */
+/* ==========================================
+   LEFT
+========================================== */
 
 .market-left{
-
-    flex:1;
-
-    min-width:0;
 
     display:flex;
 
@@ -909,71 +960,68 @@ div{
 
     gap:14px;
 
-}
-
-/* ===========================
-   Logo
-=========================== */
-
-.market-logo{
-
-    width:46px;
-
-    height:46px;
-
-    flex-shrink:0;
-
-    border-radius:50%;
-
-}
-
-/* ===========================
-   Info
-=========================== */
-
-.market-info{
-
     flex:1;
 
     min-width:0;
+}
 
+.market-logo{
+
+    width:48px;
+
+    height:48px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    background:#1b2b46;
+
+    flex-shrink:0;
+}
+
+.market-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    min-width:0;
 }
 
 .market-symbol{
 
-    color:#fff;
+    color:#ffffff;
 
-    font-size:18px;
+    font-size:16px;
 
     font-weight:700;
 
+    line-height:1.2;
+
     white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
 }
 
 .market-name{
 
-    margin-top:4px;
+    margin-top:3px;
 
-    color:#8ca6d2;
+    color:#8ea6c5;
 
-    font-size:14px;
+    font-size:13px;
 
     overflow:hidden;
 
     text-overflow:ellipsis;
 
     white-space:nowrap;
-
 }
 
-/* ===========================
-   Right
-=========================== */
+/* ==========================================
+   RIGHT
+========================================== */
 
 .market-right{
 
@@ -983,80 +1031,75 @@ div{
 
     align-items:flex-end;
 
-    gap:6px;
+    gap:4px;
 
-    flex-shrink:0;
-
-    min-width:95px;
-
+    margin-left:16px;
 }
 
 .market-price{
 
-    color:#fff;
+    color:#ffffff;
 
-    font-size:18px;
+    font-size:17px;
 
     font-weight:700;
 
     white-space:nowrap;
-
 }
 
 .market-change{
-
-    padding:4px 10px;
-
-    border-radius:999px;
 
     font-size:13px;
 
     font-weight:700;
 
     white-space:nowrap;
-
 }
 
 .market-change.green{
 
-    color:#18d67e;
-
-    background:rgba(24,214,126,.08);
-
+    color:#18db73;
 }
 
 .market-change.red{
 
-    color:#ff5e6d;
-
-    background:rgba(255,94,109,.08);
-
+    color:#ff5b6d;
 }
 
-/* ===========================
-   Mobile
-=========================== */
+/* ==========================================
+   TABLET
+========================================== */
 
-@media(max-width:768px){
-
-.market-tabs{
-
-    gap:10px;
-
-}
-
-.tab-btn{
-
-    font-size:14px;
-
-    height:44px;
-
-}
+@media(max-width:900px){
 
 .market-row{
 
-    padding:16px;
+    padding:14px 16px;
+}
 
+.market-logo{
+
+    width:44px;
+
+    height:44px;
+}
+
+.market-price{
+
+    font-size:16px;
+}
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+.market-row{
+
+    padding:12px;
 }
 
 .market-logo{
@@ -1064,1457 +1107,380 @@ div{
     width:40px;
 
     height:40px;
-
-}
-
-.market-symbol{
-
-    font-size:16px;
-
-}
-
-.market-name{
-
-    font-size:13px;
-
-}
-
-.market-price{
-
-    font-size:16px;
-
-}
-
-}
-
-/* ===========================
-   iPhone SE / 7 / 8
-=========================== */
-
-@media(max-width:380px){
-
-.market-row{
-
-    padding:14px;
-
-    gap:10px;
-
-}
-
-.market-logo{
-
-    width:34px;
-
-    height:34px;
-
 }
 
 .market-symbol{
 
     font-size:15px;
-
 }
 
 .market-name{
 
     font-size:12px;
-
 }
 
 .market-price{
 
     font-size:15px;
+}
 
+.market-change{
+
+    font-size:12px;
+}
+
+}
+
+/* ==========================================
+   VERY SMALL PHONE
+========================================== */
+
+@media(max-width:430px){
+
+.market-logo{
+
+    width:36px;
+
+    height:36px;
+}
+
+.market-symbol{
+
+    font-size:14px;
+}
+
+.market-name{
+
+    font-size:11px;
+}
+
+.market-price{
+
+    font-size:14px;
 }
 
 .market-change{
 
     font-size:11px;
-
-    padding:3px 8px;
-
-}
-
-}
-
-/* ===========================
-   Large Desktop
-=========================== */
-
-@media(min-width:1500px){
-
-.market-row{
-
-    padding:22px;
-
-}
-
-.market-logo{
-
-    width:52px;
-
-    height:52px;
-
-}
-
-.market-symbol{
-
-    font-size:20px;
-
-}
-
-.market-price{
-
-    font-size:20px;
-
-}
-
-}
-
-/* ==========================================================
-   SET 4
-   BOTTOM NAVIGATION
-========================================================== */
-
-.bottom-nav{
-
-    position:fixed;
-
-    left:0;
-    right:0;
-    bottom:0;
-
-    width:100%;
-
-    display:flex;
-
-    justify-content:space-around;
-
-    align-items:center;
-
-    gap:4px;
-
-    padding:
-
-        10px
-
-        max(12px,env(safe-area-inset-right))
-
-        calc(10px + env(safe-area-inset-bottom))
-
-        max(12px,env(safe-area-inset-left));
-
-    background:rgba(7,17,31,.96);
-
-    backdrop-filter:blur(20px);
-
-    -webkit-backdrop-filter:blur(20px);
-
-    border-top:1px solid rgba(80,170,255,.15);
-
-    z-index:9999;
-
-}
-
-/* ========================= */
-
-.bottom-nav a{
-
-    flex:1;
-
-    min-width:0;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:5px;
-
-    color:#8db9ff;
-
-    text-decoration:none;
-
-    transition:.25s;
-
-    padding:8px 2px;
-
-    border-radius:14px;
-
-}
-
-/* ========================= */
-
-.bottom-nav a.active{
-
-    color:#35c5ff;
-
-    background:rgba(55,170,255,.08);
-
-}
-
-/* ========================= */
-
-.bottom-nav svg{
-
-    width:24px;
-
-    height:24px;
-
-    flex-shrink:0;
-
-}
-
-/* ========================= */
-
-.bottom-nav span{
-
-    width:100%;
-
-    min-width:0;
-
-    font-size:12px;
-
-    text-align:center;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-/* ==========================================================
-   SAFE AREA
-========================================================== */
-
-@supports(padding:max(0px)){
-
-.bottom-nav{
-
-    padding-bottom:
-
-        max(10px,env(safe-area-inset-bottom));
-
-}
-
-}
-
-/* ==========================================================
-   iPhone SE
-========================================================== */
-
-@media(max-width:380px){
-
-.bottom-nav{
-
-    gap:2px;
-
-}
-
-.bottom-nav a{
-
-    padding:6px 1px;
-
-}
-
-.bottom-nav svg{
-
-    width:21px;
-
-    height:21px;
-
-}
-
-.bottom-nav span{
-
-    font-size:11px;
-
-}
-
-}
-
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media(min-width:768px){
-
-.bottom-nav{
-
-    max-width:720px;
-
-    left:50%;
-
-    transform:translateX(-50%);
-
-    border-radius:22px 22px 0 0;
-
-}
-
-}
-
-/* ==========================================================
-   DESKTOP
-========================================================== */
-
-@media(min-width:1280px){
-
-.bottom-nav{
-
-    max-width:820px;
-
-}
-
-.bottom-nav span{
-
-    font-size:13px;
-
-}
-
-.bottom-nav svg{
-
-    width:25px;
-
-    height:25px;
-
-}
-
-}
-
-/* ==========================================================
-   SET 5
-   BANNER SLIDER
-========================================================== */
-
-.banner{
-
-    width:100%;
-    overflow:hidden;
-
-    position:relative;
-
-    border-radius:22px;
-
-    background:#0d1830;
-
-}
-
-.banner-track{
-
-    display:flex;
-
-    
-
-    transition:transform .45s ease;
-
-}
-
-.banner-slide{
-
-    flex:0 0 100%;
-
-    min-width:100%;
-
-    max-width:100%;
-
-    aspect-ratio:16/6;
-
-}
-
-.banner-image{
-
-    width:100%;
-
-    height:100%;
-
-    display:block;
-
-    object-fit:cover;
-
-}
-
-
-
-.gold-section{
-
-    width:100%;
-
-    min-width:0;
-
-    overflow:hidden;
-
-}
-
-/* ========================================================== */
-
-
-
-.banner-slide:hover img{
-
-    transform:scale(1.03);
-
-}
-
-/* ========================================================== */
-
-.banner-overlay{
-
-    position:absolute;
-
-    inset:0;
-
-    background:
-
-    linear-gradient(
-
-        rgba(0,0,0,.05),
-
-        rgba(0,0,0,.18)
-
-    );
-
-}
-
-/* ==========================================================
-   DOTS
-========================================================== */
-
-.banner-dots{
-
-    position:absolute;
-
-    left:50%;
-
-    bottom:14px;
-
-    transform:translateX(-50%);
-
-    display:flex;
-
-    gap:8px;
-
-    z-index:10;
-
-}
-
-.banner-dot{
-
-    width:9px;
-
-    height:9px;
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.35);
-
-    transition:.25s;
-
-}
-
-.banner-dot.active{
-
-    width:28px;
-
-    background:#2dc7ff;
-
-}
-
-/* ==========================================================
-   ARROWS
-========================================================== */
-
-.banner-prev,
-.banner-next{
-
-    position:absolute;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    width:42px;
-
-    height:42px;
-
-    border-radius:50%;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:rgba(0,0,0,.25);
-
-    backdrop-filter:blur(12px);
-
-    color:#fff;
-
-    transition:.25s;
-
-    z-index:20;
-
-}
-
-.banner-prev{
-
-    left:14px;
-
-}
-
-.banner-next{
-
-    right:14px;
-
-}
-
-.banner-prev:hover,
-.banner-next:hover{
-
-    background:#189cff;
-
-}
-
-/* ==========================================================
-   MOBILE
-========================================================== */
-
-@media(max-width:768px){
-
-.banner-slide{
-
-    aspect-ratio:16/8;
-
-}
-
-.banner-prev,
-.banner-next{
-
-    width:34px;
-
-    height:34px;
-
-}
-
-.banner-prev{
-
-    left:8px;
-
-}
-
-.banner-next{
-
-    right:8px;
-
-}
-
-.banner-dot{
-
-    width:8px;
-
-    height:8px;
-
-}
-
-.banner-dot.active{
-
-    width:22px;
-
-}
-
-}
-
-/* ==========================================================
-   iPhone SE / 7 / 8
-========================================================== */
-
-@media(max-width:380px){
-
-.banner-slide{
-
-    aspect-ratio:16/9;
-
-}
-
-.banner-prev,
-.banner-next{
-
-    display:none;
-
-}
-
-.banner-dots{
-
-    bottom:8px;
-
-}
-
-}
-
-/* ==========================================================
-   TABLET
-========================================================== */
-
-@media(min-width:769px){
-
-.banner-slide{
-
-    aspect-ratio:16/5.8;
-
-}
-
-}
-
-/* ==========================================================
-   LARGE DESKTOP
-========================================================== */
-
-@media(min-width:1500px){
-
-.banner-slide{
-
-    aspect-ratio:16/5.5;
-
-}
-
-}
-
-/* ==========================================================
-   SET 6
-   GLOBAL FIX + UTILITIES + RESPONSIVE
-========================================================== */
-
-/* ===========================
-   NOTIFICATION BADGE
-=========================== */
-
-.notify-btn{
-
-    position:relative;
-
-    flex-shrink:0;
-
-}
-
-.notify-badge{
-
-    position:absolute;
-
-    top:-5px;
-
-    right:-5px;
-
-    min-width:20px;
-
-    height:20px;
-
-    padding:0 5px;
-
-    border-radius:999px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    background:#ff3b57;
-
-    color:#fff;
-
-    font-size:11px;
-
-    font-weight:700;
-
-    line-height:1;
-
-    box-shadow:0 0 10px rgba(255,60,90,.45);
-
-}
-
-/* ===========================
-   FLEX FIX
-=========================== */
-
-.home-page *,
-.home-page *::before,
-.home-page *::after{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   IMAGE
-=========================== */
-
-.home-page img{
-
-    max-width:100%;
-
-    height:auto;
-
-    display:block;
-
-}
-
-/* ===========================
-   BUTTON
-=========================== */
-
-.home-page button{
-
-    max-width:100%;
-
-    min-width:0;
-
-    white-space:normal;
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
-}
-
-/* ===========================
-   INPUT
-=========================== */
-
-.home-page input,
-.home-page textarea,
-.home-page select{
-
-    width:100%;
-
-    min-width:0;
-
-    max-width:100%;
-
-}
-
-/* ===========================
-   TEXT
-=========================== */
-
-.home-page h1,
-.home-page h2,
-.home-page h3,
-.home-page h4,
-.home-page h5,
-.home-page h6,
-.home-page p,
-.home-page span,
-.home-page label,
-.home-page small,
-.home-page strong{
-
-    max-width:100%;
-
-    min-width:0;
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
-}
-
-/* ===========================
-   LONG USERNAME
-=========================== */
-
-.username,
-.nickname,
-.member-name,
-.account-name{
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-}
-
-/* ===========================
-   LONG INVITE CODE
-=========================== */
-
-.invite-code{
-
-    min-width:0;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
-
-    flex:1;
-
-}
-
-/* ===========================
-   COPY BUTTON
-=========================== */
-
-.copy-btn{
-
-    flex-shrink:0;
-
-    min-width:70px;
-
-    max-width:110px;
-
-    padding:0 12px;
-
-    height:36px;
-
-    border-radius:10px;
-
-}
-
-/* ===========================
-   GRID FIX
-=========================== */
-
-.row,
-.col,
-.grid{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   SCROLL FIX
-=========================== */
-
-.home-page{
-
-    overflow-x:hidden;
-
-}
-
-body{
-
-    overflow-x:hidden;
-
-}
-
-html{
-
-    overflow-x:hidden;
-
-}
-
-/* ===========================
-   TABLET
-=========================== */
-
-@media(max-width:900px){
-
-.copy-btn{
-
-    min-width:60px;
-
-    padding:0 10px;
-
-}
-
-}
-
-/* ===========================
-   MOBILE
-=========================== */
-
-@media(max-width:768px){
-
-.notify-badge{
-
-    min-width:18px;
-
-    height:18px;
-
-    font-size:10px;
-
-}
-
-.copy-btn{
-
-    min-width:55px;
-
-    height:34px;
-
-    font-size:13px;
-
-}
-
-}
-
-/* ===========================
-   iPhone SE
-=========================== */
-
-@media(max-width:380px){
-
-.copy-btn{
-
-    min-width:50px;
-
-    font-size:12px;
-
-}
-
-.notify-badge{
-
-    min-width:16px;
-
-    height:16px;
-
-    font-size:9px;
-
-}
-
-}
-
-/* ===========================
-   LARGE DESKTOP
-=========================== */
-
-@media(min-width:1500px){
-
-.copy-btn{
-
-    height:38px;
-
-    font-size:14px;
-
-}
-
-}
-
-/* ==========================================================
-   SET 7
-   PRO MAX RESPONSIVE FIX
-   FINAL
-========================================================== */
-
-/* ===========================
-   UNIVERSAL FLEX FIX
-=========================== */
-
-.home-page *,
-.home-page *::before,
-.home-page *::after{
-
-    min-width:0;
-    max-width:100%;
-
-}
-
-/* ===========================
-   NO HORIZONTAL SCROLL
-=========================== */
-
-html,
-body,
-#root,
-.home-page{
-
-    overflow-x:hidden;
-
-}
-
-/* ===========================
-   IMAGE
-=========================== */
-
-img{
-
-    max-width:100%;
-    height:auto;
-
-}
-
-/* ===========================
-   SVG
-=========================== */
-
-svg{
-
-    flex-shrink:0;
-
-}
-
-/* ===========================
-   BUTTON
-=========================== */
-
-button{
-
-    min-width:0;
-
-    max-width:100%;
-
-}
-
-/* ===========================
-   INPUT
-=========================== */
-
-input,
-textarea,
-select{
-
-    width:100%;
-
-    max-width:100%;
-
-    min-width:0;
-
-}
-
-/* ===========================
-   TEXT
-=========================== */
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-label,
-strong,
-small,
-a{
-
-    min-width:0;
-
-    max-width:100%;
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
-}
-
-/* ===========================
-   LONG WORD
-=========================== */
-
-.home-page *{
-
-    overflow-wrap:anywhere;
-
-    word-break:break-word;
-
-}
-
-/* ===========================
-   FLEX CHILD
-=========================== */
-
-.home-page>div{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   GRID FIX
-=========================== */
-
-[class*="grid"]{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   ROW FIX
-=========================== */
-
-[class*="row"]{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   COLUMN FIX
-=========================== */
-
-[class*="col"]{
-
-    min-width:0;
-
-}
-
-/* ===========================
-   INVITE CODE
-=========================== */
-
-.invite-code,
-.invite-text,
-.invite-value{
-
-    flex:1;
-
-    min-width:0;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-/* ===========================
-   USERNAME
-=========================== */
-
-.username,
-.user-name,
-.nickname{
-
-    min-width:0;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-}
-
-/* ===========================
-   COPY BUTTON
-=========================== */
-
-.copy-btn{
-
-    flex-shrink:0;
-
-    width:auto;
-
-    max-width:110px;
-
-}
-
-/* ===========================
-   ICON
-=========================== */
-
-.icon{
-
-    flex-shrink:0;
-
-}
-
-/* ===========================
-   CARD
-=========================== */
-
-[class*="card"]{
-
-    min-width:0;
-
-    overflow:hidden;
-
-}
-
-/* ===========================
-   LIST
-=========================== */
-
-ul,
-ol{
-
-    padding-left:20px;
-
-}
-
-/* ===========================
-   TABLET
-=========================== */
-
-@media(max-width:992px){
-
-.home-page{
-
-    padding-bottom:110px;
-
-}
-
-}
-
-/* ===========================
-   MOBILE
-=========================== */
-
-@media(max-width:768px){
-
-.home-page{
-
-    gap:16px;
-
-}
-
-.market-row{
-
-    gap:10px;
-
-}
-
-.asset-card{
-
-    gap:12px;
-
-}
-
-.action-grid{
-
-    gap:10px;
-
-}
-
-}
-
-/* ===========================
-   iPhone SE
-=========================== */
-
-@media(max-width:380px){
-
-.home-page{
-
-    gap:14px;
-
-}
-
-.asset-card{
-
-    padding:14px;
-
-}
-
-.market-row{
-
-    padding:12px;
-
-}
-
-}
-
-/* ===========================
-   Desktop
-=========================== */
-
-@media(min-width:1600px){
-
-.home-page{
-
-    max-width:1700px;
-
-    margin:auto;
-
-}
-
-}
-
-/* ==========================================================
-   END
-========================================================== */
-
-/* ===== FIX HEADER ===== */
-
-.home-header{
-    display:flex !important;
-    align-items:center !important;
-    justify-content:space-between !important;
-
-    width:100%;
-
-    padding:0 8px;
-
-    gap:12px;
-}
-
-.header-left{
-    display:flex !important;
-    align-items:center;
-
-    flex:1;
-
-    min-width:0;
-}
-
-.home-logo-img{
-
-    width:34px;
-
-    height:34px;
-
-    object-fit:contain;
-
-    margin-right:10px;
-
-    flex-shrink:0;
-
-}
-
-.home-logo{
-
-    display:block !important;
-
-    font-size:32px;
-
-    font-weight:800;
-
-    color:#1fa2ff;
-
-    white-space:nowrap;
-
-    margin:0;
-
-    line-height:1;
-
-}
-
-.header-actions{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    flex-shrink:0;
-
-}
-
-/* =========================
-   NEW HEADER BRAND
-========================= */
-
-.brand-area{
-    display:flex;
-    align-items:center;
-    gap:10px;
-    flex:1;
-    min-width:0;
-}
-
-.brand-logo{
-    width:34px;
-    height:34px;
-    object-fit:contain;
-    flex-shrink:0;
-}
-
-.brand-title{
-    font-size:32px;
-    font-weight:800;
-    color:#1fa2ff;
-    line-height:1;
-    white-space:nowrap;
-    text-shadow:0 0 12px rgba(0,170,255,.45);
-}
-
-.header-actions{
-    margin-left:auto;
-    display:flex;
-    align-items:center;
-    gap:10px;
-}
-
-.asset-right{
-    display:flex;
-    flex-direction:column;
-    align-items:flex-end;
 }
 
-.profit-label{
-    width:100%;
-    text-align:right;
-    margin-bottom:8px;
 }
 
-/* ===========================
-   Contact Popup
-=========================== */
+/* ======================================================
+   CONTACT MODAL
+====================================================== */
 
 .contact-overlay{
+
     position:fixed;
+
     inset:0;
-    background:rgba(0,0,0,.55);
+
     display:flex;
-    align-items:center;
+
     justify-content:center;
+
+    align-items:center;
+
+    padding:20px;
+
+    background:rgba(0,0,0,.65);
+
+    backdrop-filter:blur(8px);
+
     z-index:9999;
 }
 
 .contact-modal{
-    width:90%;
-    max-width:380px;
-    background:#13233c;
-    border-radius:18px;
-    padding:20px;
-    box-shadow:0 15px 35px rgba(0,0,0,.4);
+
+    width:100%;
+
+    max-width:420px;
+
+    background:#111d31;
+
+    border:1px solid #243958;
+
+    border-radius:24px;
+
+    padding:24px;
+
+    animation:popup .25s ease;
+}
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
 }
 
 .contact-modal h3{
-    color:#fff;
+
+    margin:0 0 20px;
+
     text-align:center;
-    margin-bottom:20px;
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
 }
 
 .contact-item{
+
     display:flex;
+
     align-items:center;
+
     gap:14px;
+
     padding:14px;
-    border-radius:12px;
+
+    margin-bottom:12px;
+
+    border-radius:16px;
+
+    background:#162843;
+
+    border:1px solid #243958;
+
     cursor:pointer;
-    margin-bottom:10px;
+
     transition:.25s;
-    background:#1b2d49;
 }
 
 .contact-item:hover{
-    background:#29456d;
+
+    border-color:#2ab8ff;
+
+    transform:translateY(-2px);
 }
 
 .contact-icon{
+
     width:42px;
+
     height:42px;
-    border-radius:50%;
-    object-fit:cover;
+
+    object-fit:contain;
+
+    flex-shrink:0;
 }
 
 .contact-item span{
+
     color:#fff;
-    font-size:16px;
+
+    font-size:15px;
+
     font-weight:600;
 }
 
 .close-contact{
+
     width:100%;
-    margin-top:15px;
-    border:none;
-    border-radius:12px;
-    padding:14px;
-    background:#ef5844c4;
-    color:#fff;
-    font-weight:bold;
+
+    height:48px;
+
+    margin-top:10px;
+
+    border-radius:14px;
+
+    background:linear-gradient(
+        135deg,
+        #ffd857,
+        #f5c542
+    );
+
+    color:#111;
+
+    font-size:15px;
+
+    font-weight:700;
+
     cursor:pointer;
+}
+
+/* ======================================================
+   ANIMATION
+====================================================== */
+
+.fade-up{
+
+    animation:fadeUp .45s ease both;
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(18px);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+    }
+
+}
+
+.scale-in{
+
+    animation:scaleIn .35s ease;
+}
+
+@keyframes scaleIn{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.95);
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+    }
+
+}
+
+/* ======================================================
+   GLOBAL EFFECT
+====================================================== */
+
+.home-page *{
+
+    transition:
+        background-color .25s,
+        border-color .25s,
+        color .25s,
+        transform .25s,
+        box-shadow .25s;
+}
+
+/* ======================================================
+   SCROLLBAR
+====================================================== */
+
+.home-page::-webkit-scrollbar{
+
+    width:7px;
+}
+
+.home-page::-webkit-scrollbar-thumb{
+
+    background:#3a5478;
+
+    border-radius:20px;
+}
+
+.home-page::-webkit-scrollbar-track{
+
+    background:transparent;
+}
+
+.home-page{
+
+    scrollbar-width:thin;
+
+    scrollbar-color:#3a5478 transparent;
+}
+
+/* ======================================================
+   SAFE AREA
+====================================================== */
+
+.home-page{
+
+    padding-top:max(18px,env(safe-area-inset-top));
+
+    padding-left:max(18px,env(safe-area-inset-left));
+
+    padding-right:max(18px,env(safe-area-inset-right));
+
+    padding-bottom:calc(
+        90px +
+        env(safe-area-inset-bottom)
+    );
+}
+
+/* ======================================================
+   DESKTOP
+====================================================== */
+
+@media(min-width:1200px){
+
+.home-page{
+
+    max-width:1280px;
+
+    margin:auto;
+}
+
+}
+
+/* ======================================================
+   VERY SMALL PHONE
+====================================================== */
+
+@media(max-width:360px){
+
+.contact-modal{
+
+    padding:18px;
+}
+
+.contact-item span{
+
+    font-size:14px;
+}
+
+.brand-title{
+
+    font-size:26px;
+}
+
+.asset-balance{
+
+    font-size:18px;
+}
+
+.market-price{
+
+    font-size:13px;
+}
+
+}
+
+.asset-balance{
+    font-size:20px !important;
+}
+
+.profit-value{
+
+    font-size:18px !important;
+
+    font-weight:600;
+
+    line-height:1.1;
 }
