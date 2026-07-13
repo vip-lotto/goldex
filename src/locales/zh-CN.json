@@ -253,9 +253,9 @@
 "resumeTrade":"返回交易",
 "loadingTradeRules":"正在加载交易规则...",
 "tradeAlreadyRunning":"您已有一笔正在进行中的交易。",
-"youLose":"您输了。"
+"youLose":"您输了。",
 
-
+"assets": "资产"
 
 
 

@@ -41,15 +41,45 @@ const { t } = useTranslation();
 
   async function loadProfile() {
 
-    const { data: { user } } = await supabase.auth.getUser();
+    const localUser = JSON.parse(
+  localStorage.getItem("user")
+);
 
-if (!user) {
-  throw new Error("User not logged in");
+if (!localUser) {
+  navigate("/login");
+  return;
 }
 
-    if (!user) return;
+const { data: latestKyc } = await supabase
+  .from("kyc")
+  .select("status")
+  .eq("user_id", localUser.id)
+  .order("created_at", { ascending: false })
+  .limit(1)
+  .maybeSingle();
 
-    const data = await getProfile(user.id);
+if (latestKyc) {
+  switch (latestKyc.status) {
+    case "pending":
+      navigate("/kyc/review", { replace: true });
+      return;
+
+    case "approved":
+      navigate("/kyc/approved", { replace: true });
+      return;
+
+    case "rejected":
+      navigate("/kyc/rejected", { replace: true });
+      return;
+
+    default:
+      break;
+  }
+}
+
+    
+
+    const data = await getProfile(localUser.id);
 
     if (data) {
 
@@ -136,16 +166,30 @@ if (!localUser) {
 }
 
 
-const { data: profileUser } =
-await supabase
-.from("profiles")
-.select("id")
-.eq("id", localUser.id)
-.single();
 
 
-if (!profileUser) {
-  throw new Error("Profile not found");
+    const { data: oldKyc } = await supabase
+  .from("kyc")
+  .select("status")
+  .eq("user_id", localUser.id)
+  .order("created_at", { ascending: false })
+  .limit(1)
+  .maybeSingle();
+
+if (
+  oldKyc &&
+  oldKyc.status !== "rejected"
+) {
+
+  showToast(
+    "You have already submitted KYC.",
+    "warning"
+  );
+
+  setUploading(false);
+
+  return;
+
 }
 
 
@@ -166,7 +210,7 @@ if (!profileUser) {
   .from("kyc")
   .insert({
 
-    user_id: profileUser.id,
+    user_id: localUser.id,
 
     first_name: firstName,
 
@@ -189,11 +233,18 @@ if (!profileUser) {
     if (error) throw error;
 
     showToast(
-      t("kycSubmitted"),
-      "success"
-    );
+  t("kycSubmitted"),
+  "success"
+);
 
-    navigate(-1);
+console.log("INSERT SUCCESS");
+console.log("GO TO REVIEW");
+
+navigate("/kyc/review", {
+  replace: true,
+});
+
+return;
 
   } catch (err) {
 
@@ -220,7 +271,7 @@ if (!profileUser) {
 
         <button
           className="back-btn"
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/mine")}
         >
 
           <ArrowLeft size={22}/>

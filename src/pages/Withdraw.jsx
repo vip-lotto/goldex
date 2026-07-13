@@ -22,7 +22,7 @@ export default function Withdraw() {
       <div className="withdraw-header">
 
         <button
-          className="back-btn"
+          className="withdraw-back-btn"
           onClick={() =>
             navigate("/home")
           }

@@ -252,8 +252,8 @@
 "resumeTrade":"Reanudar operación",
 "loadingTradeRules":"Cargando reglas de operación...",
 "tradeAlreadyRunning":"Ya tiene una operación en curso.",
-"youLose":"Ha perdido."
+"youLose":"Ha perdido.",
 
-
+"assets": "Activos"
 
 }

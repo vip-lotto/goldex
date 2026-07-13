@@ -1,54 +1,56 @@
-/* ======================================================
+/* =========================================================
    TRUST HOME
-   PART 1
-====================================================== */
+   Clean Version 2026
+========================================================= */
 
 :root{
 
     --bg:#07111f;
-
     --card:#111d31;
+    --card2:#162843;
 
     --border:#243958;
 
     --blue:#2ab8ff;
+    --blue2:#1085f1;
 
-    --gold:#1085f1;
+    --green:#18db73;
+    --red:#ff5b6d;
 
     --text:#ffffff;
-
-    --sub:#90a6c4;
+    --sub:#8ea6c5;
 
 }
 
-/* ======================================================
+/* =========================================================
    PAGE
-====================================================== */
+========================================================= */
 
 .home-page{
 
     width:100%;
-
     min-height:100vh;
 
     background:var(--bg);
 
     display:flex;
-
     flex-direction:column;
 
     gap:20px;
 
     padding:18px;
 
-    padding-bottom:95px;
+    /* เพิ่มพื้นที่ให้เลื่อนพ้น Bottom Nav */
+    padding-bottom:220px;
 
     overflow-x:hidden;
+    overflow-y:auto;
+
 }
 
-/* ======================================================
+/* =========================================================
    HEADER
-====================================================== */
+========================================================= */
 
 .home-header{
 
@@ -60,10 +62,13 @@
 
     align-items:center;
 
-    margin-bottom:4px;
+    margin-bottom:6px;
+
 }
 
-/* ---------- LEFT ---------- */
+/* =======================
+   LEFT
+======================= */
 
 .brand-area{
 
@@ -72,6 +77,7 @@
     display:flex;
 
     align-items:center;
+
 }
 
 .brand-title{
@@ -88,20 +94,21 @@
 
     white-space:nowrap;
 
-    user-select:none;
-
     background:linear-gradient(
         90deg,
-        #45dcff,
-        #0ea5ff
+        #47dfff,
+        #139cff
     );
 
     -webkit-background-clip:text;
 
     -webkit-text-fill-color:transparent;
+
 }
 
-/* ---------- RIGHT ---------- */
+/* =======================
+   RIGHT
+======================= */
 
 .header-actions{
 
@@ -109,39 +116,17 @@
 
     align-items:center;
 
-    gap:15px;         /* ปรับกระดิ่ง */
+    justify-content:flex-end;
+
+    gap:12px;
+
 }
 
-/* ======================================================
+/* =========================================================
    BUTTON
-====================================================== */
+========================================================= */
 
-.support-btn{
-
-    width:48px;
-    height:48px;
-
-    margin-left:230px;   /* ← ปรับตรงนี้ */
-
-    border-radius:50%;
-
-    background:#0f1b2d;
-
-    border:1px solid var(--border);
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    color:#fff;
-
-    cursor:pointer;
-
-    transition:.25s;
-}
-
+.support-btn,
 .notify-btn{
 
     width:48px;
@@ -149,9 +134,11 @@
 
     border-radius:50%;
 
+    border:1px solid var(--border);
+
     background:#0f1b2d;
 
-    border:1px solid var(--border);
+    color:#fff;
 
     display:flex;
 
@@ -159,26 +146,25 @@
 
     align-items:center;
 
-    color:#fff;
-
     cursor:pointer;
 
     transition:.25s;
+
 }
 
 .support-btn:hover,
 .notify-btn:hover{
 
+    background:#162843;
+
     border-color:var(--blue);
 
-    background:#162640;
-
-    transform:translateY(-2px);
 }
 
 .notify-btn{
 
     position:relative;
+
 }
 
 .notify-badge{
@@ -186,7 +172,6 @@
     position:absolute;
 
     top:3px;
-
     right:3px;
 
     min-width:18px;
@@ -195,7 +180,7 @@
 
     padding:0 5px;
 
-    border-radius:30px;
+    border-radius:20px;
 
     background:#ff3157;
 
@@ -205,46 +190,46 @@
 
     align-items:center;
 
+    color:#fff;
+
     font-size:10px;
 
     font-weight:700;
 
-    color:#fff;
 }
 
-/* ======================================================
+/* =========================================================
    BANNER
-====================================================== */
+========================================================= */
 
 .banner{
 
     width:100%;
 
+    max-width:1400px;
+
+    margin:0 auto;
+
+    aspect-ratio:1.6/1;
+
+    height:auto;
+
     overflow:hidden;
 
     border-radius:22px;
 
-    border:1px solid rgba(255,255,255,.05);
-
-    background:#0f1b2d;
-
-    aspect-ratio:16/6;
-
-    position:relative;
-
-    box-shadow:
-        0 12px 30px rgba(0,0,0,.35);
 }
 
 .banner-track{
+
+    display:flex;
 
     width:100%;
 
     height:100%;
 
-    display:flex;
-
     transition:transform .45s ease;
+
 }
 
 .banner-slide{
@@ -254,6 +239,7 @@
     width:100%;
 
     height:100%;
+
 }
 
 .banner-image{
@@ -264,70 +250,13 @@
 
     object-fit:cover;
 
-    display:block;
-}
-
-/* ======================================================
-   MOBILE
-====================================================== */
-
-@media(max-width:768px){
-
-.home-page{
-
-    padding:16px;
-
-    gap:16px;
-}
-
-.brand-title{
-
-    font-size:34px;
-}
-
-.support-btn,
-.notify-btn{
-
-    width:46px;
-
-    height:46px;
-}
-
-.banner{
-
-    aspect-ratio:16/8;
-
-    border-radius:18px;
-}
+    object-position:center center;
 
 }
 
-/* ======================================================
-   SMALL PHONE
-====================================================== */
-
-@media(max-width:430px){
-
-.brand-title{
-
-    font-size:30px;
-}
-
-.header-actions{
-
-    gap:10px;
-}
-
-.banner{
-
-    aspect-ratio:16/9;
-}
-
-}
-
-/* ======================================================
+/* =========================================================
    ASSET CARD
-====================================================== */
+========================================================= */
 
 .asset-card{
 
@@ -335,9 +264,9 @@
 
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
+
+    align-items:center;
 
     gap:20px;
 
@@ -354,7 +283,8 @@
     border:1px solid rgba(255,255,255,.06);
 
     box-shadow:
-        0 12px 32px rgba(0,0,0,.35);
+        0 12px 30px rgba(0,0,0,.35);
+
 }
 
 /* ---------- LEFT ---------- */
@@ -374,44 +304,41 @@
     justify-content:center;
 
     text-align:left;
+
 }
 
 .asset-label{
 
     width:100%;
 
-    color:#8fb5d9;
-
-    font-size:20px;      /* ← ปรับขนาดตรงนี้ */
-
-    font-weight:800;     /* ← ความหนา */
-
     text-align:left;
 
-    margin-bottom:6px;
+    color:var(--sub);
 
-    text-transform:capitalize;
+    font-size:20px;
+
+    font-weight:700;
+
+    margin-bottom:8px;
+
 }
 
 .asset-balance{
 
-    color:#fff;
-
-    font-size:26px;
-
-    font-weight:700;
-
-    line-height:1.1;
-
-    white-space:nowrap;
-
-    overflow:hidden;
-
-    text-overflow:ellipsis;
+    width:100%;
 
     text-align:left;
 
-    width:100%;
+    color:#fff;
+
+    font-size:28px;
+
+    font-weight:700;
+
+    line-height:1.2;
+
+    white-space:nowrap;
+
 }
 
 /* ---------- RIGHT ---------- */
@@ -424,143 +351,41 @@
 
     align-items:flex-end;
 
-    justify-content:center;
-
-    min-width:170px;
 }
 
 .profit-label{
 
-    color:#8fb5d9;
+    color:var(--sub);
 
     font-size:14px;
 
-    font-weight:500;
+    margin-bottom:8px;
 
-    margin-bottom:10px;
 }
 
-.asset-right h3{
-
-    margin:0;
+.profit-value{
 
     font-size:24px;
 
-    font-weight:600;
+    font-weight:700;
 
-    line-height:1.1;
-
-    white-space:nowrap;
 }
 
 .green{
 
-    color:#18db73;
+    color:var(--green);
+
 }
 
 .red{
 
-    color:#ff5d6d;
-}
-
-/* ---------- Hover ---------- */
-
-.asset-card:hover{
-
-    border-color:#2ab8ff;
-
-    transform:translateY(-2px);
-
-    transition:.25s;
-}
-
-/* ======================================================
-   TABLET
-====================================================== */
-
-@media(max-width:900px){
-
-.asset-card{
-
-    padding:20px;
-}
-
-
-
-.asset-right h3{
-
-    font-size:22px;
-}
+    color:var(--red);
 
 }
 
-/* ======================================================
-   MOBILE
-====================================================== */
-
-@media(max-width:768px){
-
-.asset-card{
-
-    padding:18px;
-
-    gap:18px;
-}
-
-.asset-label,
-.profit-label{
-
-    font-size:13px;
-}
-
-
-
-.asset-right{
-
-    min-width:140px;
-}
-
-.asset-right h3{
-
-    font-size:22px;
-}
-
-}
-
-/* ======================================================
-   VERY SMALL PHONE
-====================================================== */
-
-@media(max-width:430px){
-
-.asset-card{
-
-    padding:16px;
-}
-
-
-
-.asset-right{
-
-    min-width:120px;
-}
-
-.asset-right h3{
-
-    font-size:18px;
-}
-
-.asset-label,
-.profit-label{
-
-    font-size:12px;
-}
-
-}
-
-/* ======================================================
+/* =========================================================
    ACTION GRID
-====================================================== */
+========================================================= */
 
 .action-grid{
 
@@ -572,22 +397,17 @@
 
     gap:16px;
 
-    margin-top:2px;
 }
-
-/* ==========================================
-   ITEM
-========================================== */
 
 .action-box{
 
-    background:#111d31;
-
-    border:1px solid #243958;
+    height:108px;
 
     border-radius:20px;
 
-    height:108px;
+    background:var(--card);
+
+    border:1px solid var(--border);
 
     display:flex;
 
@@ -601,33 +421,19 @@
 
     cursor:pointer;
 
-    transition:
-        background .25s,
-        border-color .25s,
-        transform .25s,
-        box-shadow .25s;
+    transition:.25s;
+
 }
 
 .action-box:hover{
 
-    background:#152743;
+    background:#162843;
 
-    border-color:#2ab8ff;
+    border-color:var(--blue);
 
     transform:translateY(-3px);
 
-    box-shadow:
-        0 10px 28px rgba(0,0,0,.35);
 }
-
-.action-box:active{
-
-    transform:scale(.97);
-}
-
-/* ==========================================
-   ICON
-========================================== */
 
 .action-box svg{
 
@@ -635,76 +441,104 @@
 
     height:30px;
 
-    color:#088efc;
+    color:var(--blue);
 
-    flex-shrink:0;
 }
-
-/* ==========================================
-   TEXT
-========================================== */
 
 .action-box p{
 
     margin:0;
 
-    color:#ffffff;
+    color:#fff;
 
     font-size:14px;
 
     font-weight:600;
 
-    line-height:1;
-
-    white-space:nowrap;
 }
 
-/* ==========================================
+/* =========================================================
    TABLET
-========================================== */
+========================================================= */
 
-@media(max-width:900px){
+@media (max-width:900px){
 
-.action-grid{
+.asset-card{
 
-    gap:12px;
+    padding:20px;
+
+}
+
+.asset-balance{
+
+    font-size:24px;
+
+}
+
+.profit-value{
+
+    font-size:20px;
+
 }
 
 .action-box{
 
-    height:96px;
-}
+    height:95px;
 
-.action-box svg{
-
-    width:28px;
-
-    height:28px;
-}
-
-.action-box p{
-
-    font-size:13px;
 }
 
 }
 
-/* ==========================================
+/* =========================================================
    MOBILE
-========================================== */
+========================================================= */
 
-@media(max-width:768px){
+@media (max-width:768px){
+
+.home-page{
+
+    padding:16px;
+
+    gap:16px;
+
+}
+
+.brand-title{
+
+    font-size:34px;
+
+}
+
+.asset-card{
+
+    padding:18px;
+
+}
+
+.asset-balance{
+
+    font-size:22px;
+
+}
+
+.profit-value{
+
+    font-size:18px;
+
+}
 
 .action-grid{
 
     gap:10px;
+
 }
 
 .action-box{
 
-    height:84px;
+    height:82px;
 
     border-radius:16px;
+
 }
 
 .action-box svg{
@@ -712,33 +546,55 @@
     width:24px;
 
     height:24px;
+
 }
 
 .action-box p{
 
     font-size:12px;
-}
 
 }
 
-/* ==========================================
+}
+
+/* =========================================================
    SMALL PHONE
-========================================== */
+========================================================= */
 
-@media(max-width:430px){
+@media (max-width:430px){
+
+.brand-title{
+
+    font-size:30px;
+
+}
+
+.asset-card{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+}
+
+.asset-right{
+
+    align-items:flex-start;
+
+}
 
 .action-grid{
 
     grid-template-columns:repeat(4,1fr);
 
     gap:8px;
+
 }
 
 .action-box{
 
-    height:76px;
+    height:74px;
 
-    border-radius:14px;
 }
 
 .action-box svg{
@@ -746,211 +602,119 @@
     width:22px;
 
     height:22px;
+
 }
 
 .action-box p{
 
     font-size:11px;
-}
 
 }
 
-/* ======================================================
+}
+
+/* =========================================================
+   MARKET WIDGET
+========================================================= */
+
+.home-market{
+    width:100%;
+    border-radius:22px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    background:var(--card);
+}
+
+/* =========================================================
    MARKET TABS
-====================================================== */
+========================================================= */
 
 .market-tabs{
-
-    width:100%;
-
     display:flex;
-
-    align-items:center;
-
     gap:12px;
-
     margin-top:4px;
-
-    margin-bottom:4px;
 }
 
-/* ==========================================
-   TAB
-========================================== */
-
 .tab-btn{
-
     flex:1;
-
     height:48px;
+
+    border:none;
+    outline:none;
 
     border-radius:16px;
 
-    border:1px solid #243958;
+    background:var(--card);
 
-    background:#111d31;
-
-    color:#8ea6c5;
+    color:var(--sub);
 
     font-size:14px;
-
     font-weight:700;
 
     cursor:pointer;
 
-    transition:
-        background .25s,
-        border-color .25s,
-        color .25s,
-        transform .25s;
+    transition:.25s;
 }
 
 .tab-btn:hover{
-
-    border-color:#2ab8ff;
-
-    color:#ffffff;
-
-    transform:translateY(-2px);
+    border:1px solid var(--blue);
 }
 
-/* ==========================================
-   ACTIVE
-========================================== */
-
 .tab-btn.active{
-
     background:linear-gradient(
         135deg,
         #ffd857,
         #f5c542
     );
 
-    border-color:#f5c542;
-
-    color:#111111;
-
-    box-shadow:
-        0 8px 22px rgba(245,197,66,.25);
+    color:#111;
 }
 
-/* ==========================================
-   TABLET
-========================================== */
-
-@media(max-width:900px){
-
-.tab-btn{
-
-    height:46px;
-
-    font-size:13px;
-}
-
-}
-
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media(max-width:768px){
-
-.market-tabs{
-
-    gap:10px;
-}
-
-.tab-btn{
-
-    height:42px;
-
-    border-radius:14px;
-
-    font-size:13px;
-}
-
-}
-
-/* ==========================================
-   SMALL PHONE
-========================================== */
-
-@media(max-width:430px){
-
-.market-tabs{
-
-    gap:8px;
-}
-
-.tab-btn{
-
-    height:40px;
-
-    border-radius:12px;
-
-    font-size:12px;
-}
-
-}
-
-/* ======================================================
+/* =========================================================
    MARKET LIST
-====================================================== */
+========================================================= */
 
 .market-section{
-
-    width:100%;
 
     display:flex;
 
     flex-direction:column;
 
     gap:14px;
-}
 
-/* ==========================================
-   ROW
-========================================== */
+}
 
 .market-row{
 
-    width:100%;
-
     display:flex;
 
-    align-items:center;
-
     justify-content:space-between;
+
+    align-items:center;
 
     padding:16px 18px;
 
     border-radius:18px;
 
-    background:#111d31;
+    background:var(--card);
 
-    border:1px solid #243958;
-
-    transition:
-        .25s;
+    border:1px solid var(--border);
 
     cursor:pointer;
+
+    transition:.25s;
+
 }
 
 .market-row:hover{
 
-    border-color:#2ab8ff;
-
-    background:#162843;
+    border-color:var(--blue);
 
     transform:translateY(-2px);
 
-    box-shadow:
-        0 12px 28px rgba(0,0,0,.35);
-}
+    background:#162843;
 
-/* ==========================================
-   LEFT
-========================================== */
+}
 
 .market-left{
 
@@ -963,6 +727,7 @@
     flex:1;
 
     min-width:0;
+
 }
 
 .market-logo{
@@ -975,200 +740,77 @@
 
     object-fit:cover;
 
-    background:#1b2b46;
-
     flex-shrink:0;
+
 }
 
 .market-info{
 
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
     min-width:0;
+
 }
 
 .market-symbol{
 
-    color:#ffffff;
+    color:#fff;
 
     font-size:16px;
 
     font-weight:700;
 
-    line-height:1.2;
-
-    white-space:nowrap;
 }
 
 .market-name{
 
     margin-top:3px;
 
-    color:#8ea6c5;
+    color:var(--sub);
 
     font-size:13px;
 
-    overflow:hidden;
-
-    text-overflow:ellipsis;
-
-    white-space:nowrap;
 }
-
-/* ==========================================
-   RIGHT
-========================================== */
 
 .market-right{
 
-    display:flex;
+    text-align:right;
 
-    flex-direction:column;
-
-    align-items:flex-end;
-
-    gap:4px;
-
-    margin-left:16px;
 }
 
 .market-price{
 
-    color:#ffffff;
+    color:#fff;
 
     font-size:17px;
 
     font-weight:700;
 
-    white-space:nowrap;
 }
 
 .market-change{
+
+    margin-top:4px;
 
     font-size:13px;
 
     font-weight:700;
 
-    white-space:nowrap;
 }
 
 .market-change.green{
 
-    color:#18db73;
+    color:var(--green);
+
 }
 
 .market-change.red{
 
-    color:#ff5b6d;
-}
-
-/* ==========================================
-   TABLET
-========================================== */
-
-@media(max-width:900px){
-
-.market-row{
-
-    padding:14px 16px;
-}
-
-.market-logo{
-
-    width:44px;
-
-    height:44px;
-}
-
-.market-price{
-
-    font-size:16px;
-}
+    color:var(--red);
 
 }
 
-/* ==========================================
-   MOBILE
-========================================== */
-
-@media(max-width:768px){
-
-.market-row{
-
-    padding:12px;
-}
-
-.market-logo{
-
-    width:40px;
-
-    height:40px;
-}
-
-.market-symbol{
-
-    font-size:15px;
-}
-
-.market-name{
-
-    font-size:12px;
-}
-
-.market-price{
-
-    font-size:15px;
-}
-
-.market-change{
-
-    font-size:12px;
-}
-
-}
-
-/* ==========================================
-   VERY SMALL PHONE
-========================================== */
-
-@media(max-width:430px){
-
-.market-logo{
-
-    width:36px;
-
-    height:36px;
-}
-
-.market-symbol{
-
-    font-size:14px;
-}
-
-.market-name{
-
-    font-size:11px;
-}
-
-.market-price{
-
-    font-size:14px;
-}
-
-.market-change{
-
-    font-size:11px;
-}
-
-}
-
-/* ======================================================
+/* =========================================================
    CONTACT MODAL
-====================================================== */
+========================================================= */
 
 .contact-overlay{
 
@@ -1182,13 +824,12 @@
 
     align-items:center;
 
-    padding:20px;
-
     background:rgba(0,0,0,.65);
 
     backdrop-filter:blur(8px);
 
     z-index:9999;
+
 }
 
 .contact-modal{
@@ -1197,32 +838,17 @@
 
     max-width:420px;
 
-    background:#111d31;
+    margin:20px;
 
-    border:1px solid #243958;
+    background:var(--card);
+
+    border:1px solid var(--border);
 
     border-radius:24px;
 
     padding:24px;
 
     animation:popup .25s ease;
-}
-
-@keyframes popup{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.92);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-    }
 
 }
 
@@ -1230,13 +856,10 @@
 
     margin:0 0 20px;
 
-    text-align:center;
-
     color:#fff;
 
-    font-size:22px;
+    text-align:center;
 
-    font-weight:700;
 }
 
 .contact-item{
@@ -1255,18 +878,18 @@
 
     background:#162843;
 
-    border:1px solid #243958;
+    border:1px solid var(--border);
 
     cursor:pointer;
 
     transition:.25s;
+
 }
 
 .contact-item:hover{
 
-    border-color:#2ab8ff;
+    border-color:var(--blue);
 
-    transform:translateY(-2px);
 }
 
 .contact-icon{
@@ -1277,16 +900,14 @@
 
     object-fit:contain;
 
-    flex-shrink:0;
 }
 
 .contact-item span{
 
     color:#fff;
 
-    font-size:15px;
-
     font-weight:600;
+
 }
 
 .close-contact{
@@ -1295,9 +916,17 @@
 
     height:48px;
 
-    margin-top:10px;
+    margin-top:12px;
+
+    border:none;
 
     border-radius:14px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:700;
 
     background:linear-gradient(
         135deg,
@@ -1307,20 +936,36 @@
 
     color:#111;
 
-    font-size:15px;
-
-    font-weight:700;
-
-    cursor:pointer;
 }
 
-/* ======================================================
+/* =========================================================
    ANIMATION
-====================================================== */
+========================================================= */
+
+@keyframes popup{
+
+    from{
+
+        opacity:0;
+
+        transform:scale(.92);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:scale(1);
+
+    }
+
+}
 
 .fade-up{
 
-    animation:fadeUp .45s ease both;
+    animation:fadeUp .4s ease;
+
 }
 
 @keyframes fadeUp{
@@ -1329,7 +974,8 @@
 
         opacity:0;
 
-        transform:translateY(18px);
+        transform:translateY(16px);
+
     }
 
     to{
@@ -1337,54 +983,19 @@
         opacity:1;
 
         transform:translateY(0);
+
     }
 
 }
 
-.scale-in{
-
-    animation:scaleIn .35s ease;
-}
-
-@keyframes scaleIn{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.95);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-    }
-
-}
-
-/* ======================================================
-   GLOBAL EFFECT
-====================================================== */
-
-.home-page *{
-
-    transition:
-        background-color .25s,
-        border-color .25s,
-        color .25s,
-        transform .25s,
-        box-shadow .25s;
-}
-
-/* ======================================================
+/* =========================================================
    SCROLLBAR
-====================================================== */
+========================================================= */
 
 .home-page::-webkit-scrollbar{
 
     width:7px;
+
 }
 
 .home-page::-webkit-scrollbar-thumb{
@@ -1392,95 +1003,87 @@
     background:#3a5478;
 
     border-radius:20px;
-}
 
-.home-page::-webkit-scrollbar-track{
-
-    background:transparent;
 }
 
 .home-page{
 
     scrollbar-width:thin;
 
-    scrollbar-color:#3a5478 transparent;
+    padding-bottom:220px;
+
+    overflow-y:auto;
+
 }
 
-/* ======================================================
-   SAFE AREA
-====================================================== */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:768px){
+
+@media(max-width:768px){
 
 .home-page{
 
-    padding-top:max(18px,env(safe-area-inset-top));
+    padding:14px;
+    padding-bottom:100px;
 
-    padding-left:max(18px,env(safe-area-inset-left));
-
-    padding-right:max(18px,env(safe-area-inset-right));
-
-    padding-bottom:calc(
-        90px +
-        env(safe-area-inset-bottom)
-    );
-}
-
-/* ======================================================
-   DESKTOP
-====================================================== */
-
-@media(min-width:1200px){
-
-.home-page{
-
-    max-width:1280px;
-
-    margin:auto;
 }
 
 }
 
-/* ======================================================
-   VERY SMALL PHONE
-====================================================== */
+.banner{
 
-@media(max-width:360px){
+    aspect-ratio:2.5/1;
 
-.contact-modal{
+}
+
+.asset-card{
 
     padding:18px;
+
 }
 
-.contact-item span{
+.action-grid{
 
-    font-size:14px;
+    gap:10px;
+
 }
 
-.brand-title{
+.action-box{
 
-    font-size:26px;
-}
+    height:82px;
 
-.asset-balance{
-
-    font-size:18px;
-}
-
-.market-price{
-
-    font-size:13px;
 }
 
 }
 
-.asset-balance{
-    font-size:20px !important;
+@media(max-width:430px){
+
+.home-page{
+
+    padding:12px;
+
 }
 
-.profit-value{
+.banner{
 
-    font-size:18px !important;
+    aspect-ratio:2.2/1;
 
-    font-weight:600;
-
-    line-height:1.1;
 }
+
+.action-grid{
+
+    gap:8px;
+
+}
+
+.action-box{
+
+    height:72px;
+
+}
+
+}
+

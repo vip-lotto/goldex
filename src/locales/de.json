@@ -260,6 +260,8 @@
 "resumeTrade":"Zum Handel zurückkehren",
 "loadingTradeRules":"Handelsregeln werden geladen...",
 "tradeAlreadyRunning":"Sie haben bereits einen aktiven Handel.",
-"youLose":"Sie haben verloren."
+"youLose":"Sie haben verloren.",
+
+"assets": "Vermögenswerte"
 
 }

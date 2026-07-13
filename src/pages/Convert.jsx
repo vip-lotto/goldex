@@ -549,7 +549,7 @@ if(error1)
       <div className="convert-header">
 
         <button
-          className="back-btn"
+          className="convert-back-btn"
           onClick={() => navigate(-1)}
         >
           <ArrowLeft size={22}/>

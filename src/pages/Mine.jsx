@@ -112,6 +112,62 @@ navigator.clipboard.writeText(code);
 
   }
 
+  async function openKYC() {
+
+  const user = JSON.parse(
+    localStorage.getItem("user")
+  );
+
+  if (!user) {
+    navigate("/login");
+    return;
+  }
+
+  const { data, error } = await supabase
+  .from("kyc")
+  .select("*")
+  .eq("user_id", user.id)
+  .order("created_at", { ascending: false })
+  .limit(1)
+  .maybeSingle();
+
+console.log("USER =", user.id);
+console.log("DATA =", data);
+console.log("ERROR =", error);
+
+  if (error) {
+    console.log(error);
+    navigate("/kyc-form");
+    return;
+  }
+
+  if (!data) {
+    navigate("/kyc-form");
+    return;
+  }
+
+  switch (data.status) {
+
+    case "pending":
+      navigate("/kyc/review");
+      break;
+
+    case "approved":
+      navigate("/kyc/approved");
+      break;
+
+    case "rejected":
+      navigate("/kyc/rejected");
+      break;
+
+    default:
+      navigate("/kyc-form");
+      break;
+
+  }
+
+}
+
   if(loading){
 
     return(
@@ -362,9 +418,9 @@ Convert
   {/* KYC */}
 
   <div
-    className="mine-item"
-    onClick={() => navigate("/kyc")}
-  >
+  className="mine-item"
+  onClick={openKYC}
+>
 
     <div className="mine-left">
 

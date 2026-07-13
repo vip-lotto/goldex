@@ -261,9 +261,9 @@
 "resumeTrade":"Вернуться к сделке",
 "loadingTradeRules":"Загрузка правил торговли...",
 "tradeAlreadyRunning":"У вас уже есть активная сделка.",
-"youLose":"Вы проиграли."
+"youLose":"Вы проиграли.",
 
-
+"assets": "Активы"
 
 
 

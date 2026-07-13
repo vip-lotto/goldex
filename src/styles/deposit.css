@@ -25,19 +25,26 @@
   color: #1fdff8;
 }
 
-.back-btn{
-  width: 46px;
-  height: 46px;
-  border: none;
-  border-radius: 12px;
-  background: #161616;
-  color: #fff;
-  cursor: pointer;
-  transition: .2s;
+.deposit-back-btn{
+  width:46px;
+  height:46px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  flex-shrink:0;
+
+  border:none;
+  border-radius:12px;
+  background:#161616;
+  color:#fff;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.back-btn:hover{
-  background: #222;
+.deposit-back-btn:hover{
+  background:#222;
 }
 
 /* ================= TABS ================= */

@@ -254,7 +254,9 @@
 "resumeTrade":"Reprendre la transaction",
 "loadingTradeRules":"Chargement des règles de trading...",
 "tradeAlreadyRunning":"Vous avez déjà une transaction en cours.",
-"youLose":"Vous avez perdu."
+"youLose":"Vous avez perdu.",
+
+"assets": "Actifs"
 
 
 

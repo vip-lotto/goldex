@@ -216,7 +216,7 @@ const displayAssets = expand
       ? `≈ ${totalAssets.toLocaleString(undefined, {
           minimumFractionDigits: 2,
           maximumFractionDigits: 2
-        })} USDT`
+        })} USD`
       : "******"}
   </div>
 

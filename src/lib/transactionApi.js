@@ -34,31 +34,39 @@ export async function getTransactions(userId) {
 
   ]);
 
+  console.log("USER ID:", userId);
+
+console.log("Deposits:", depositsRes.data);
+console.log("Withdrawals:", withdrawalsRes.data);
+console.log("Transfers:", transfersRes.data);
+console.log("Transfer Error:", transfersRes.error);
+console.log("Trades:", tradesRes.data);
+
   let list = [];
 
-  // =========================
-  // Deposit
-  // =========================
+ // =========================
+// Deposit
+// =========================
 
-  (depositsRes.data || []).forEach(item => {
+(depositsRes.data || []).forEach(item => {
 
-    list.push({
+  list.push({
 
-      id: `deposit-${item.id}`,
+    id: `deposit-${item.id}`,
 
-      type: "deposit",
+    type: "deposit",
 
-      amount: item.amount,
+    amount: item.amount,
 
-      status: item.status,
+    status: item.status,
 
-      description: `ฝาก ${item.coin}`,
+    description: `Deposit ${item.coin}`,
 
-      created_at: item.created_at
-
-    });
+    created_at: item.created_at
 
   });
+
+});
 
   // =========================
   // Withdraw
@@ -85,28 +93,40 @@ export async function getTransactions(userId) {
   });
 
   // =========================
-  // Transfer
-  // =========================
+// Transfer
+// =========================
 
-  (transfersRes.data || []).forEach(item => {
+(transfersRes.data || []).forEach(item => {
 
-    list.push({
+  list.push({
 
-      id: `transfer-${item.id}`,
+    id: `transfer-${item.id}`,
 
-      type: "transfer",
+    type: "transfer",
 
-      amount: item.amount,
+    amount: item.amount,
 
-      status: item.status,
+    status: item.status,
 
-      description: `โอน ${item.coin}`,
+    sender_id: item.sender_id,
 
-      created_at: item.created_at
+    receiver_id: item.receiver_id,
 
-    });
+    direction:
+      Number(item.sender_id) === Number(userId)
+        ? "send"
+        : "receive",
+
+    description:
+      Number(item.sender_id) === Number(userId)
+        ? `Send ${item.coin}`
+        : `Receive ${item.coin}`,
+
+    created_at: item.created_at
 
   });
+
+});
 
   // =========================
   // Trade

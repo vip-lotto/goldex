@@ -161,39 +161,53 @@ if (!address) {
 
 }
 
-const { data: senderWallet } =
+const {
+  data: senderWallet,
+  error: senderWalletError
+} =
 await supabase
   .from("wallets")
   .select("*")
   .eq("user_id", user.id)
   .single();
 
-if (!senderWallet) {
+if (
+  senderWalletError ||
+  !senderWallet
+) {
 
   showToast(
-  t("senderWalletNotFound"),
-  "error"
-);
+    t("senderWalletNotFound"),
+    "error"
+  );
 
   return;
 
 }
 
+const walletColumn =
+coin === "USDT"
+  ? "balance"
+  : coin;
+
+const senderBalance =
+Number(senderWallet[walletColumn] || 0);
+
 if (
-  Number(senderWallet.balance)
-  <
+  senderBalance <
   Number(amount)
 ) {
+
   showToast(
-  t("insufficientBalance"),
-  "error"
-);
+    t("insufficientBalance"),
+    "error"
+  );
 
+  return;
 
-
-return;
-  
 }
+
+
 
 const {
   data: receiverAddress
@@ -201,7 +215,7 @@ const {
 await supabase
   .from("user_wallets")
   .select("*")
-  .eq("address", address)
+  .eq("address", address.trim())
   .eq("coin", coin)
   .eq("network", network)
   .single();
@@ -236,18 +250,21 @@ if (
 }
 
 const {
-  data: receiverWallet
+  data: receiverWallet,
+  error: receiverWalletError
 } = await supabase
   .from("wallets")
   .select("*")
   .eq("user_id", receiverId)
   .single();
 
-  
-  if (!receiverWallet) {
+if (
+  receiverWalletError ||
+  !receiverWallet
+) {
 
   showToast(
-     t("receiverWalletNotFound"),
+    t("receiverWalletNotFound"),
     "error"
   );
 
@@ -256,42 +273,16 @@ const {
 }
 
 
-  
-
-
-const { data, error } = await supabase
-  .from("transfers")
-  .insert([
-    {
-      sender_id: user.id,
-      receiver_id: receiverId,
-      amount: Number(amount),
-      coin,
-      network,
-      status: "success",
-    },
-  ]);
-
-console.log("Transfer Data:", data);
-console.log("Transfer Error:", error);
-if (error) {
-
-  showToast(
-    error.message,
-    "error"
-  );
-
-  return;
-
-}
 
 const { error: senderError } =
 await supabase
   .from("wallets")
   .update({
-    balance:
-      Number(senderWallet.balance)
-      - Number(amount)
+
+    [walletColumn]:
+      senderBalance -
+      Number(amount)
+
   })
   .eq("user_id", user.id);
 
@@ -306,13 +297,35 @@ if (senderError) {
 
 }
 
+const receiverBalance =
+Number(
+  receiverWallet[
+    walletColumn
+  ] || 0
+);
+
+if (
+  receiverWallet[walletColumn] === undefined
+) {
+
+  showToast(
+    "Receiver wallet does not support this coin",
+    "error"
+  );
+
+  return;
+
+}
+
 const { error: receiverError } =
 await supabase
   .from("wallets")
   .update({
-    balance:
-      Number(receiverWallet.balance)
-      + Number(amount)
+
+    [walletColumn]:
+      receiverBalance +
+      Number(amount)
+
   })
   .eq("user_id", receiverId);
 
@@ -324,6 +337,56 @@ if (receiverError) {
   );
 
   return;
+
+}
+
+const { data, error } = await supabase
+
+  .from("transfers")
+
+  .insert([
+
+    {
+
+      sender_id: user.id,
+
+      receiver_id: receiverId,
+
+      amount: Number(amount),
+
+      coin,
+
+      network,
+
+      status: "success",
+
+    },
+
+  ]);
+
+
+
+console.log("Transfer Data:", data);
+
+console.log("Transfer Error:", error);
+
+if (error) {
+
+
+
+  showToast(
+
+    error.message,
+
+    "error"
+
+  );
+
+
+
+  return;
+
+
 
 }
 
@@ -398,30 +461,45 @@ return (
 >
 
   <div
+  style={{
+    display:"flex",
+    alignItems:"center",
+    gap:"14px",
+    marginBottom:"30px"
+  }}
+>
+
+  <button
+    onClick={() => navigate(-1)}
     style={{
+      width:"46px",
+      height:"46px",
       display:"flex",
+      justifyContent:"center",
       alignItems:"center",
-      gap:"12px",
-      marginBottom:"30px"
+      flexShrink:0,
+      border:"none",
+      borderRadius:"12px",
+      background:"#161616",
+      color:"#fff",
+      cursor:"pointer"
     }}
   >
+    <ArrowLeft size={22}/>
+  </button>
 
-    <ArrowLeft
-      onClick={() => navigate(-1)}
-      style={{
-        cursor:"pointer"
-      }}
-    />
+  <h2
+    style={{
+      margin:0,
+      color:"#1fdff8",
+      fontSize:"30px",
+      fontWeight:"800"
+    }}
+  >
+    Send Crypto
+  </h2>
 
-    <h2
-      style={{
-        margin:0
-      }}
-    >
-      {t("sendCrypto")}
-    </h2>
-
-  </div>
+</div>
 
   <div>
 

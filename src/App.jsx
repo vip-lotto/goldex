@@ -45,6 +45,10 @@ import AdminTradeOrders from "./pages/admin/AdminTradeOrders";
 import AdminTrades from "./pages/admin/AdminTrades";
 import AdminSettings from "./pages/admin/AdminSettings";
 
+import KYCUnderReview from "./pages/KYCUnderReview";
+import KYCApproved from "./pages/KYCApproved";
+import KYCRejected from "./pages/KYCRejected";
+
 
 import AdminLogin from "./pages/admin/AdminLogin";
 import AdminRoute from "./pages/admin/AdminRoute";
@@ -52,6 +56,7 @@ import AdminManualDeposit from "./pages/admin/AdminManualDeposit";
 import AdminDepositWallet from "./pages/admin/AdminDepositWallet";
 import AdminContact from "./pages/admin/AdminContact";
 import AdminKYC from "./pages/admin/AdminKYC";
+import KYCRouter from "./pages/KYCRouter";
 
 
 function Layout() {
@@ -95,11 +100,21 @@ function Layout() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/order/:id" element={<OrderDetail />} />
         <Route path="/change-password" element={<ChangePassword />} />
-        <Route path="/kyc" element={<KYC />} />
+        
         <Route path="/convert" element={<Convert />} />
         <Route path="/referral" element={<Referral />} />
         <Route path="/about" element={<About />} />
         <Route path="/notifications" element={<Notifications />} />
+
+        <Route path="/kyc" element={<KYC />} />
+
+        <Route path="/kyc-form" element={<KYC />} />
+
+        <Route path="/kyc/review" element={<KYCUnderReview />} />
+
+        <Route path="/kyc/approved" element={<KYCApproved />} />
+
+        <Route path="/kyc/rejected" element={<KYCRejected />} />
 
         
         

@@ -260,7 +260,9 @@
 "resumeTrade":"返回交易",
 "loadingTradeRules":"正在載入交易規則...",
 "tradeAlreadyRunning":"您已有一筆進行中的交易。",
-"youLose":"您輸了。"
+"youLose":"您輸了。",
+
+"assets": "資產"
 
 
 

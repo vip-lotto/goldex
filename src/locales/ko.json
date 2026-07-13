@@ -254,9 +254,9 @@
 "resumeTrade":"거래로 돌아가기",
 "loadingTradeRules":"거래 규칙을 불러오는 중...",
 "tradeAlreadyRunning":"이미 진행 중인 거래가 있습니다.",
-"youLose":"패배했습니다."
+"youLose":"패배했습니다.",
 
-
+"assets": "자산"
 
 
 

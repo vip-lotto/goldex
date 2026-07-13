@@ -372,14 +372,18 @@ export default function TransactionHistory() {
                 <h3>
                   {
                     item.type === "deposit"
-                      ? `${t("deposit")} USDT`
-                      : item.type === "withdraw"
-                      ? `${t("withdraw")} USDT`
-                      : item.type === "transfer"
-                      ? `${t("transfer")} USDT`
-                      : item.type === "trade"
-                      ? item.description
-                      : item.description
+                    ? `${t("deposit")} USDT`
+                    : item.type === "withdraw"
+                    ? `${t("withdraw")} USDT`
+                    : item.type === "transfer"
+                    ? (
+                        item.direction === "send"
+                          ? `Send ${item.coin}`
+                          : `Receive ${item.coin}`
+                      )
+                    : item.type === "trade"
+                    ? item.description
+                    : item.description
                   }
                 </h3>
 
@@ -411,6 +415,12 @@ export default function TransactionHistory() {
                     )
                   : item.type === "withdraw"
                   ? "amount minus"
+                  : item.type === "transfer"
+                  ? (
+                      item.direction === "send"
+                        ? "amount minus"
+                        : "amount plus"
+                    )
                   : "amount plus"
               }
             >
@@ -420,13 +430,21 @@ export default function TransactionHistory() {
 
                 ? (
                     item.result === "lose"
-                    ? "-"
-                    : "+"
+                      ? "-"
+                      : "+"
                   )
 
                 : item.type === "withdraw"
 
                 ? "-"
+
+                : item.type === "transfer"
+
+                ? (
+                    item.direction === "send"
+                      ? "-"
+                      : "+"
+                  )
 
                 : "+"
             }

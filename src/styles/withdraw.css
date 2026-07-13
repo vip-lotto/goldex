@@ -760,3 +760,26 @@ line-height:1.6;
     z-index:999;
     box-shadow:0 10px 35px rgba(0,0,0,.45);
 }
+
+.withdraw-back-btn{
+  width:46px;
+  height:46px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  flex-shrink:0;
+
+  border:none;
+  border-radius:12px;
+
+  background:#161616;
+  color:#fff;
+
+  cursor:pointer;
+}
+
+.withdraw-back-btn:hover{
+  background:#222;
+}

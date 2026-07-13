@@ -590,3 +590,24 @@ select{
 .coin-arrow.rotate{
     transform:rotate(180deg);
 }
+
+.convert-back-btn{
+  width:46px;
+  height:46px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  flex-shrink:0;
+
+  border:none;
+  border-radius:12px;
+
+  background:#161616;
+  color:#fff;
+}
+
+.convert-back-btn:hover{
+  background:#222;
+}

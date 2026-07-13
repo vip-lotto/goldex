@@ -55,23 +55,22 @@ export default function Home() {
 
   async function loadContacts() {
 
-    const { data, error } =
-      await supabase
-        .from("admin_contacts")
-        .select("*")
-        .eq("enabled", true);
+  const { data, error } =
+    await supabase
+      .from("admin_contacts")
+      .select("*")
+      .order("sort", { ascending: true });
 
-    if (error) {
-
-      console.log(error);
-
-      return;
-
-    }
-
-    setContacts(data || []);
-
+  if (error) {
+    console.log(error);
+    return;
   }
+
+  console.log(data);
+
+  setContacts(data || []);
+
+}
 
   /* =========================
       LOAD NOTIFICATION
@@ -320,55 +319,36 @@ export default function Home() {
 
       <header className="home-header">
 
-        <div className="brand-area">
+  <div className="brand-area">
+    <h1 className="brand-title">TRUST</h1>
+  </div>
 
-          
+  <div className="header-actions">
 
-          <h1 className="brand-title">
-            TRUST
-          </h1>
+    <button
+      className="support-btn"
+      onClick={() => setShowContacts(true)}
+    >
+      <Headset size={22} />
+    </button>
 
-        </div>
+    <button
+      className="notify-btn"
+      onClick={() => navigate("/notifications")}
+    >
+      <Bell size={22} />
 
-        <div className="header-actions">
+      {unreadCount > 0 && (
+        <span className="notify-badge">
+          {unreadCount > 99 ? "99+" : unreadCount}
+        </span>
+      )}
 
-          <button
-            className="support-btn"
-            onClick={() =>
-              setShowContacts(true)
-            }
-          >
+    </button>
 
-            <Headset size={22} />
+  </div>
 
-          </button>
-
-          <button
-            className="notify-btn"
-            onClick={() =>
-              navigate("/notifications")
-            }
-          >
-
-            <Bell size={22} />
-
-            {unreadCount > 0 && (
-
-              <span className="notify-badge">
-
-                {unreadCount > 99
-                  ? "99+"
-                  : unreadCount}
-
-              </span>
-
-            )}
-
-          </button>
-
-        </div>
-
-      </header>
+</header>
 
       {/* Banner */}
 
@@ -443,7 +423,7 @@ export default function Home() {
 
           <ArrowDownToLine size={30} />
 
-          <p>{t("deposit")}</p>
+          <p>Deposit</p>
 
         </button>
 
@@ -454,7 +434,7 @@ export default function Home() {
 
           <ArrowUpFromLine size={30} />
 
-          <p>{t("withdraw")}</p>
+          <p>Withdraw</p>
 
         </button>
 
@@ -465,7 +445,7 @@ export default function Home() {
 
           <ArrowLeftRight size={30} />
 
-          <p>{t("transfer")}</p>
+          <p>Transfer</p>
 
         </button>
 
@@ -476,7 +456,7 @@ export default function Home() {
 
           <RefreshCcw size={30} />
 
-          <p>{t("convert")}</p>
+          <p>Convert</p>
 
         </button>
 
@@ -508,7 +488,7 @@ export default function Home() {
             setActiveTab("trending")
           }
         >
-          {t("trending")}
+          Trending
         </button>
 
         <button
@@ -521,7 +501,7 @@ export default function Home() {
             setActiveTab("hot")
           }
         >
-          {t("hotMarkets")}
+          Hot Markets
         </button>
 
       </section>

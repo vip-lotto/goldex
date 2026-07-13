@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import {
-  CheckCircle,
-  XCircle,
-  RefreshCw,
-  Eye,
-  Clock,
-  ShieldCheck
+  Check,
+  X,
+  ArrowLeft,
+  RefreshCw
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
 
 import "./AdminKYC.css";
@@ -15,18 +14,43 @@ import "./AdminKYC.css";
 
 export default function AdminKYC(){
 
+const navigate = useNavigate();
 
-const [kycs,setKycs] = useState([]);
+const [kycs,setKycs]=useState([]);
 
-const [loading,setLoading] = useState(true);
+const [loading,setLoading]=useState(true);
 
-const [updating,setUpdating] = useState(null);
+const [updating,setUpdating]=useState(null);
 
 
 
 useEffect(()=>{
 
-    loadKYC();
+loadKYC();
+
+
+const channel=supabase
+.channel("admin-kyc")
+.on(
+"postgres_changes",
+{
+event:"*",
+schema:"public",
+table:"kyc"
+},
+()=>{
+loadKYC();
+}
+)
+.subscribe();
+
+
+return()=>{
+
+supabase.removeChannel(channel);
+
+};
+
 
 },[]);
 
@@ -34,37 +58,31 @@ useEffect(()=>{
 
 async function loadKYC(){
 
-
-    setLoading(true);
-
-
-    const {data,error}=await supabase
-
-    .from("kyc")
-
-    .select("*")
-
-    .order(
-        "created_at",
-        {
-            ascending:false
-        }
-    );
+setLoading(true);
 
 
-    if(error){
+const {data,error}=await supabase
 
-        console.log(error);
+.from("kyc")
 
-    }
-    else{
+.select("*")
 
-        setKycs(data || []);
+.order(
+"created_at",
+{
+ascending:false
+}
+);
 
-    }
+
+if(!error){
+
+setKycs(data || []);
+
+}
 
 
-    setLoading(false);
+setLoading(false);
 
 }
 
@@ -74,82 +92,96 @@ async function loadKYC(){
 async function updateKYC(id,status){
 
 
-    try{
+const ok=window.confirm(
+status==="approved"
+?
+"Approve KYC?"
+:
+"Reject KYC?"
+);
 
 
-        setUpdating(id);
+if(!ok)return;
 
 
-
-        const {error}=await supabase
-
-        .from("kyc")
-
-        .update({
-
-            status:status
-
-        })
-
-        .eq(
-            "id",
-            id
-        );
+setUpdating(id);
 
 
 
-        if(error)
-            throw error;
+const {error}=await supabase
+
+.from("kyc")
+
+.update({
+status
+})
+
+.eq(
+"id",
+id
+);
 
 
 
-        await loadKYC();
+if(!error){
+
+setKycs(prev=>
+
+prev.map(item=>
+
+item.id===id
+
+?
+{
+...item,
+status
+}
+
+:
+
+item
+
+)
+
+);
+
+
+}
 
 
 
-    }
-    catch(err){
+setUpdating(null);
 
-        console.log(err);
-
-        alert(err.message);
-
-    }
-    finally{
-
-        setUpdating(null);
-
-    }
 
 }
 
 
 
 
-
-return (
-
+return(
 
 <div className="admin-kyc-page">
 
 
-<div className="kyc-header">
+<div className="kyc-topbar">
 
 
-<div>
+<button
+className="back-btn"
+onClick={()=>navigate(-1)}
+>
+
+<ArrowLeft size={18}/>
+
+Back
+
+</button>
+
+
 
 <h1>
-<ShieldCheck size={30}/>
 KYC Verification
 </h1>
-
-
-<p>
-Review customer identity documents
-</p>
-
-
-</div>
 
 
 
@@ -165,233 +197,207 @@ Refresh
 </button>
 
 
+
 </div>
 
 
 
+<div className="kyc-table-box">
+
+
+<table>
+
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>User</th>
+
+<th>Document</th>
+
+<th>ID Number</th>
+
+<th>Country</th>
+
+<th>ID Card</th>
+
+<th>Selfie</th>
+
+<th>Status</th>
+
+<th>Date</th>
+
+<th>Action</th>
+
+
+</tr>
+
+</thead>
+
+
+
+<tbody>
+
 
 {
+
 loading ?
 
+<tr>
 
-<div className="loading">
+<td colSpan="10">
 
-Loading KYC...
+Loading...
 
-</div>
+</td>
 
-
-:
-
-
-kycs.length === 0 ?
-
-
-<div className="empty">
-
-No KYC Request
-
-</div>
+</tr>
 
 
 :
 
 
-<div className="kyc-list">
+kycs.map(item=>(
 
 
-{
-
-kycs.map((item)=>(
+<tr key={item.id}>
 
 
-<div
-className="kyc-card"
-key={item.id}
->
+<td>
+#{item.id}
+</td>
 
 
 
-<div className="kyc-user">
+<td>
 
+User ID:{item.user_id}
 
-<h2>
+<br/>
 
 {item.first_name} {item.last_name}
 
-</h2>
+</td>
 
 
-<p>
 
-Document :
-<b>
+<td>
+
 {item.document_type}
-</b>
 
-</p>
-
+</td>
 
 
-<p>
 
-ID Number :
+<td>
+
 {item.id_number}
 
-</p>
+</td>
 
 
 
-<p>
+<td>
 
-Country :
 {item.country}
 
-</p>
+</td>
 
 
 
-
-<div className={`status ${item.status}`}>
-
-{
-item.status === "pending"
-
-?
-
-<Clock size={16}/>
-
-:
-
-item.status === "approved"
-
-?
-
-<CheckCircle size={16}/>
-
-:
-
-<XCircle size={16}/>
-
-}
-
-
-{item.status}
-
-
-</div>
-
-
-</div>
-
-
-
-
-
-<div className="kyc-images">
-
-
-
-<div>
-
-<label>
-ID Card
-</label>
-
+<td>
 
 <a
 href={item.id_card_image}
 target="_blank"
-rel="noreferrer"
 >
 
-<img
-src={item.id_card_image}
-alt="ID Card"
-/>
-
-
-<span>
-
-<Eye size={16}/>
-
-View
-
-</span>
-
+View ID
 
 </a>
 
-
-</div>
-
+</td>
 
 
 
-
-<div>
-
-
-<label>
-Selfie
-</label>
-
-
+<td>
 
 <a
 href={item.selfie_image}
 target="_blank"
-rel="noreferrer"
 >
 
-<img
-src={item.selfie_image}
-alt="Selfie"
-/>
+View Selfie
+
+</a>
+
+</td>
 
 
-<span>
 
-<Eye size={16}/>
 
-View
+<td>
+
+
+<span
+className={
+`kyc-status ${item.status}`
+}
+>
+
+{item.status}
 
 </span>
 
 
-</a>
-
-
-</div>
-
-
-</div>
+</td>
 
 
 
+<td>
+
+{
+new Date(item.created_at)
+.toLocaleString()
+}
+
+
+</td>
 
 
 
-<div className="kyc-actions">
+<td>
+
+
+{
+
+item.status==="pending"
+
+?
+
+
+<div className="action">
 
 
 <button
 
-className="approve-btn"
+className="approve"
 
-disabled={
-updating===item.id
-}
+disabled={updating===item.id}
 
 onClick={()=>
 updateKYC(
 item.id,
 "approved"
-)}
+)
+}
 
 >
 
-<CheckCircle size={18}/>
+<Check size={16}/>
 
 Approve
 
@@ -399,25 +405,22 @@ Approve
 
 
 
-
-
 <button
 
-className="reject-btn"
+className="reject"
 
-disabled={
-updating===item.id
-}
+disabled={updating===item.id}
 
 onClick={()=>
 updateKYC(
 item.id,
 "rejected"
-)}
+)
+}
 
 >
 
-<XCircle size={18}/>
+<X size={16}/>
 
 Reject
 
@@ -427,26 +430,42 @@ Reject
 </div>
 
 
+:
 
-</div>
+<span className="done">
+
+Completed
+
+</span>
+
+
+}
+
+
+
+</td>
+
+
+
+</tr>
 
 
 ))
 
-
 }
+
+
+</tbody>
+
+
+</table>
 
 
 </div>
 
 
-}
-
-
 </div>
 
-
-);
-
+)
 
 }

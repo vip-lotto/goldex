@@ -1,202 +1,1101 @@
-.kyc-page{
-    min-height:100vh;
-    background:#0b1220;
-    color:#fff;
+/* ==================================================
+   RESET
+================================================== */
 
-    padding:20px;
-    padding-bottom:140px;
-
+*,
+*::before,
+*::after{
     box-sizing:border-box;
 }
 
+html,
+body,
+#root{
+    width:100%;
+    min-height:100%;
+    margin:0;
+    padding:0;
+}
+
+body{
+    background:#07111f;
+    color:#fff;
+    font-family:inherit;
+    overflow-x:hidden;
+}
+
+/* ==================================================
+   PAGE
+================================================== */
+
+.kyc-page{
+
+    width:100%;
+    min-height:100vh;
+
+    background:
+        radial-gradient(circle at top,#18365d 0%,#07111f 55%);
+
+    padding:28px 22px 140px;
+
+    overflow-x:hidden;
+
+}
+
+.kyc-page *{
+
+    min-width:0;
+
+}
+
+/* ==================================================
+   CONTAINER
+================================================== */
+
+.kyc-card{
+
+    width:100%;
+    max-width:760px;
+
+    margin:0 auto;
+
+    background:#121b2d;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    border-radius:28px;
+
+    padding:34px;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35);
+
+}
+
+/* ==================================================
+   HEADER
+================================================== */
+
 .kyc-header{
+
+    position:relative;
+
+    width:100%;
+    max-width:760px;
+
+    margin:0 auto 30px;
+
+    height:60px;
+
     display:flex;
     align-items:center;
-    gap:15px;
-    margin-bottom:25px;
+    justify-content:center;
+
 }
 
 .back-btn{
-    width:42px;
-    height:42px;
+
+    position:absolute;
+    left:0;
+
+    width:52px;
+    height:52px;
+
+    flex-shrink:0;
+
     border:none;
-    border-radius:50%;
-    background:#1c2940;
+
+    border-radius:16px;
+
+    background:#1a2940;
+
     color:#fff;
+
     display:flex;
-    align-items:center;
+
     justify-content:center;
+
+    align-items:center;
+
     cursor:pointer;
+
+    transition:.25s;
+
 }
 
-.kyc-card{
-    background:#171b22c9;
-    border-radius:18px;
-    padding:20px;
+.back-btn:hover{
+
+    background:#28405f;
+
+    transform:translateY(-2px);
+
 }
+
+.kyc-header h2{
+
+    margin:0;
+
+    width:100%;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:42px;
+
+    font-weight:800;
+
+    line-height:1.2;
+
+}
+
+/* ==================================================
+   FORM LAYOUT
+================================================== */
+
+.kyc-form{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:22px;
+
+}
+
+/* ==================================================
+   INPUT GROUP
+================================================== */
 
 .input-group{
+
+    width:100%;
+
     display:flex;
+
     flex-direction:column;
-    margin-bottom:18px;
+
+    gap:10px;
+
+    margin-bottom:22px;
+
 }
 
 .input-group label{
-    margin-bottom:8px;
-    color:#c7c7c7;
-    font-size:14px;
+
+    color:#c8d6ef;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    letter-spacing:.3px;
+
+    line-height:1.4;
+
+    word-break:keep-all;
+
 }
+
+/* ==================================================
+   INPUT
+================================================== */
 
 .input-group input{
-    height:46px;
+
+    width:100%;
+
+    height:58px;
+
+    padding:0 18px;
+
     border:none;
+
     outline:none;
-    border-radius:10px;
-    background:#24324a;
-    color:white;
-    padding:0 15px;
-}
 
-.upload-box{
-    margin-top:20px;
-    padding:20px;
-    border:2px dashed #49556d;
-    border-radius:14px;
-    text-align:center;
-}
+    border-radius:16px;
 
-.upload-box h3{
-    margin:10px 0;
-}
+    background:#273a59;
 
-.upload-box input{
-    margin-top:10px;
-    width:100%;
-}
+    color:#fff;
 
-.submit-btn{
-    width:100%;
-    height:52px;
-    margin-top:25px;
-    border:none;
-    border-radius:12px;
-    background:#00c853;
-    color:white;
-    font-size:17px;
-    font-weight:bold;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:10px;
-    cursor:pointer;
-}
+    font-size:16px;
 
-.submit-btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
+    font-weight:500;
 
-.upload-area{
-    width:100%;
-    min-height:170px;
-    border:2px dashed rgba(255,255,255,.18);
-    border-radius:18px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    cursor:pointer;
     transition:.25s;
-    padding:20px;
-    background:rgba(255,255,255,.02);
+
 }
 
-.upload-area:hover{
-    border-color:#18d46b;
-    background:rgba(24,212,107,.08);
-    transform:translateY(-2px);
+.input-group input::placeholder{
+
+    color:#8fa8cf;
+
 }
 
-.upload-area svg{
-    color:#18d46b;
-    margin-bottom:15px;
+.input-group input:hover{
+
+    background:#2d4468;
+
 }
 
-.upload-area h4{
-    margin:0;
-    color:white;
-    font-size:20px;
-    font-weight:700;
+.input-group input:focus{
+
+    background:#324b73;
+
+    box-shadow:
+        0 0 0 3px rgba(37,177,255,.15);
+
 }
 
-.upload-area p{
-    margin-top:10px;
-    color:#a7b5cf;
-    line-height:1.6;
-    font-size:14px;
+/* ==================================================
+   SELECT
+================================================== */
+
+.kyc-select{
+
+    width:100%;
+
+    height:58px;
+
+    margin-bottom:14px;
+
+    padding:0 18px;
+
+    border:none;
+
+    outline:none;
+
+    border-radius:16px;
+
+    background:#273a59;
+
+    color:#fff;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+
 }
+
+.kyc-select:hover{
+
+    background:#2d4468;
+
+}
+
+.kyc-select:focus{
+
+    background:#324b73;
+
+    box-shadow:
+        0 0 0 3px rgba(37,177,255,.15);
+
+}
+
+.kyc-select option{
+
+    background:#273a59;
+
+    color:#fff;
+
+}
+
+/* ==================================================
+   DISABLE AUTOFILL
+================================================== */
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus{
+
+    -webkit-text-fill-color:#fff;
+
+    transition:background-color 9999s ease-in-out 0s;
+
+}
+
+/* ==================================================
+   FILE NAME
+================================================== */
 
 .file-name{
-    margin-top:18px;
-    padding:8px 16px;
-    border-radius:25px;
-    background:#18d46b;
-    color:white;
+
+    display:block;
+
+    width:100%;
+
+    margin-top:16px;
+
+    padding:10px 16px;
+
+    border-radius:30px;
+
+    background:#1fd267;
+
+    color:#fff;
+
     font-size:14px;
-    font-weight:600;
-    max-width:90%;
+
+    font-weight:700;
+
+    text-align:center;
+
     overflow:hidden;
+
     white-space:nowrap;
+
     text-overflow:ellipsis;
+
+}
+
+.upload-box p{
+
+    margin-top:14px;
+
+    color:#91a7ca;
+
+    font-size:13px;
+
+    text-align:center;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+    white-space:nowrap;
+
+}
+
+/* ==================================================
+   UPLOAD BOX
+================================================== */
+
+.upload-box{
+
+    width:100%;
+
+    margin-top:28px;
+
+    padding:28px;
+
+    border-radius:24px;
+
+    background:#1b2b43;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.25s;
+
+}
+
+.upload-box:hover{
+
+    transform:translateY(-2px);
+
+    border-color:rgba(255,255,255,.15);
+
 }
 
 .id-card-box{
-    border:1px solid rgba(24,212,107,.35);
+
+    border-color:rgba(32,212,104,.35);
+
 }
 
 .selfie-box{
-    border:1px solid rgba(70,140,255,.35);
+
+    border-color:rgba(70,158,255,.35);
+
 }
 
-.id-card-box svg{
-    color:#18d46b;
+/* ==================================================
+   ICON
+================================================== */
+
+.upload-box>svg{
+
+    display:block;
+
+    margin:0 auto;
+
+    width:38px;
+
+    height:38px;
+
 }
 
-.selfie-box svg{
+.id-card-box>svg{
+
+    color:#1fd267;
+
+}
+
+.selfie-box>svg{
+
     color:#4e9eff;
+
 }
 
-@media (max-width:768px){
+/* ==================================================
+   TITLE
+================================================== */
+
+.upload-box h3{
+
+    margin:18px 0 22px;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:26px;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    word-break:keep-all;
+
+}
+
+/* ==================================================
+   CLICK AREA
+================================================== */
+
+.upload-area{
+
+    width:100%;
+
+    min-height:240px;
+
+    border:2px dashed rgba(255,255,255,.18);
+
+    border-radius:22px;
+
+    padding:26px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    background:rgba(255,255,255,.02);
+
+}
+
+.upload-area:hover{
+
+    border-color:#1fd267;
+
+    background:rgba(31,210,103,.06);
+
+}
+
+.selfie-box .upload-area:hover{
+
+    border-color:#4e9eff;
+
+    background:rgba(78,158,255,.06);
+
+}
+
+/* ==================================================
+   UPLOAD ICON
+================================================== */
+
+.upload-area svg{
+
+    width:56px;
+
+    height:56px;
+
+    margin-bottom:18px;
+
+}
+
+.id-card-box .upload-area svg{
+
+    color:#1fd267;
+
+}
+
+.selfie-box .upload-area svg{
+
+    color:#4e9eff;
+
+}
+
+/* ==================================================
+   CLICK TEXT
+================================================== */
+
+.upload-area h4{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:32px;
+
+    font-weight:800;
+
+    line-height:1.35;
+
+    word-break:keep-all;
+
+    overflow-wrap:anywhere;
+
+}
+
+.upload-area h3{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:30px;
+
+    font-weight:800;
+
+    line-height:1.35;
+
+}
+
+/* ==================================================
+   SUBMIT BUTTON
+================================================== */
+
+.submit-btn{
+
+    width:100%;
+
+    height:60px;
+
+    margin-top:34px;
+
+    border:none;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+        135deg,
+        #20d468,
+        #10b857
+    );
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:800;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:12px;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.submit-btn svg{
+
+    flex-shrink:0;
+
+}
+
+.submit-btn:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:
+        0 15px 35px rgba(32,212,104,.35);
+
+}
+
+.submit-btn:active{
+
+    transform:scale(.98);
+
+}
+
+.submit-btn:disabled{
+
+    opacity:.55;
+
+    cursor:not-allowed;
+
+    transform:none;
+
+    box-shadow:none;
+
+}
+
+/* ==================================================
+   TABLET
+================================================== */
+
+@media (max-width:992px){
 
     .kyc-page{
-        padding:15px;
-        padding-bottom:140px;
-        box-sizing:border-box;
+
+        padding:22px;
+
+        padding-bottom:120px;
+
+    }
+
+    .kyc-card{
+
+        max-width:720px;
+
+        padding:28px;
+
     }
 
 }
 
-.kyc-select{
+/* ==================================================
+   MOBILE
+================================================== */
+
+@media (max-width:768px){
+
+    .kyc-page{
+
+        padding:16px;
+
+        padding-bottom:110px;
+
+    }
+
+    .kyc-header{
+
+        margin-bottom:24px;
+
+        gap:14px;
+
+    }
+
+    .back-btn{
+
+        width:46px;
+
+        height:46px;
+
+    }
+
+    .kyc-header h2{
+
+        font-size:26px;
+
+    }
+
+    .kyc-card{
+
+        padding:22px;
+
+        border-radius:22px;
+
+    }
+
+    .input-group{
+
+        margin-bottom:18px;
+
+    }
+
+    .input-group label{
+
+        font-size:14px;
+
+    }
+
+    .input-group input,
+    .kyc-select{
+
+        height:52px;
+
+        font-size:15px;
+
+    }
+
+    .upload-box{
+
+        padding:22px;
+
+    }
+
+    .upload-box h3{
+
+        font-size:22px;
+
+    }
+
+    .upload-area{
+
+        min-height:180px;
+
+        padding:20px;
+
+    }
+
+    .upload-area svg{
+
+        width:48px;
+
+        height:48px;
+
+    }
+
+    .upload-area h4{
+
+        font-size:20px;
+
+    }
+
+    .upload-area h3{
+
+        font-size:20px;
+
+    }
+
+    .submit-btn{
+
+        height:56px;
+
+        font-size:16px;
+
+    }
+
+}
+
+/* ==================================================
+   SMALL MOBILE
+================================================== */
+
+@media (max-width:480px){
+
+    .kyc-page{
+
+        padding:14px;
+
+        padding-bottom:100px;
+
+    }
+
+    .back-btn{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .kyc-header{
+
+        gap:12px;
+
+    }
+
+    .kyc-header h2{
+
+        font-size:20px;
+
+    }
+
+    .kyc-card{
+
+        padding:18px;
+
+        border-radius:20px;
+
+    }
+
+    .upload-area{
+
+        min-height:155px;
+
+    }
+
+    .upload-area svg{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .upload-area h4{
+
+        font-size:17px;
+
+    }
+
+    .upload-area h3{
+
+        font-size:17px;
+
+    }
+
+    .submit-btn{
+
+        height:52px;
+
+        font-size:15px;
+
+    }
+
+}
+
+/* ==================================================
+   HOVER EFFECT
+================================================== */
+
+.kyc-card:hover{
+
+    border-color:rgba(255,255,255,.10);
+
+}
+
+.upload-box:hover{
+
+    box-shadow:
+        0 12px 28px rgba(0,0,0,.22);
+
+}
+
+.input-group input:hover,
+.kyc-select:hover{
+
+    border-color:rgba(255,255,255,.10);
+
+}
+
+.input-group input:focus,
+.kyc-select:focus{
+
+    box-shadow:
+        0 0 0 3px rgba(42,184,255,.16);
+
+}
+
+/* ==================================================
+   FILE NAME
+================================================== */
+
+.file-name{
+
+    display:inline-flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-top:16px;
+
+    max-width:100%;
+
+    padding:10px 18px;
+
+    border-radius:999px;
+
+    background:#20d468;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.upload-box p{
+
+    margin-top:12px;
+
+    color:#9db2cf;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    text-align:center;
+
+    word-break:break-all;
+
+}
+
+/* ==================================================
+   ANIMATION
+================================================== */
+
+.kyc-card{
+
+    animation:kycFade .35s ease;
+
+}
+
+.upload-box{
+
+    animation:kycFade .45s ease;
+
+}
+
+@keyframes kycFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(14px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==================================================
+   LARGE DESKTOP
+================================================== */
+
+@media (min-width:1200px){
+
+    .kyc-page{
+
+        padding-top:36px;
+
+        padding-bottom:140px;
+
+    }
+
+    .kyc-card{
+
+        width:100%;
+
+        max-width:760px;
+
+        margin:auto;
+
+    }
+
+    .kyc-header{
+
+        max-width:760px;
+
+        margin:0 auto 30px;
+
+    }
+
+}
+
+/* ==================================================
+   EXTRA LARGE DESKTOP
+================================================== */
+
+@media (min-width:1600px){
+
+    .kyc-card{
+
+        max-width:760px;
+
+    }
+
+}
+
+/* ==================================================
+   LOCK LAYOUT
+================================================== */
+
+.kyc-card,
+.input-group,
+.upload-box,
+.upload-area{
+
     width:100%;
-    height:46px;
-    margin-bottom:12px;
 
-    border:none;
-    outline:none;
-
-    border-radius:10px;
-
-    background:#24324a;
-    color:#fff;
-
-    padding:0 15px;
-
-    font-size:15px;
 }
 
-.kyc-select option{
-    background:#24324a;
-    color:#fff;
+.kyc-card{
+
+    display:block !important;
+
 }
 
+.input-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.upload-box{
+
+    display:block;
+
+}
+
+.upload-area{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+img{
+
+    max-width:100%;
+
+}
+
+button,
+input,
+select{
+
+    font-family:inherit;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+/* ==================================================
+   END
+================================================== */

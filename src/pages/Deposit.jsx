@@ -17,7 +17,7 @@ export default function Deposit() {
 
       <div className="deposit-header">
         <button
-          className="back-btn"
+          className="deposit-back-btn"
           onClick={() => navigate(-1)}
         >
           <ArrowLeft size={22} />

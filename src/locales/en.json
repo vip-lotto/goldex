@@ -74,7 +74,7 @@
   "enterAddress": "Please enter a wallet address or upload a QR code",
   "walletNotFound": "Wallet not found",
   "insufficientBalance": "Insufficient balance",
-  "withdrawSubmitted": "Withdrawal request submitted successfully",
+  "withdrawSubmitted": "Withdrawal submitted",
 
   "noBankAccount": "No bank account",
   "addBankAccountMessage": "Please add a bank account on the Mine page",
@@ -235,6 +235,8 @@
 "loadingTradeRules":"Loading trade rules...",
 
 "tradeAlreadyRunning":"You already have an active trade.",
+
+"assets": "Assets",
 
 "youLose":"You lose."
 
