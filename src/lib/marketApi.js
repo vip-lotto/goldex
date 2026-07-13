@@ -1,6 +1,6 @@
 import marketData from "../data/marketData";
 
-const API_URL = "http://localhost:3000/api/markets";
+const API_URL = "/api/markets";
 
 export async function getMarkets() {
 
@@ -25,15 +25,10 @@ export async function getMarkets() {
       if (!api) {
 
         return {
-
           ...item,
-
           price: 0,
-
           change: 0,
-
           status: "offline",
-
         };
 
       }
