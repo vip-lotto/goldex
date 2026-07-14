@@ -256,6 +256,12 @@
 "tradeAlreadyRunning":"Vous avez déjà une transaction en cours.",
 "youLose":"Vous avez perdu.",
 
+"typeMessage": "Tapez un message...",
+
+"forgotPassword": "Mot de passe oublié ?",
+
+"contactSupport": "Contactez le support pour obtenir de l'aide",
+
 "assets": "Actifs"
 
 

@@ -40,11 +40,6 @@ export default function Home() {
   const [activeTab, setActiveTab] =
     useState("trending");
 
-  const [contacts, setContacts] =
-    useState([]);
-
-  const [showContacts, setShowContacts] =
-    useState(false);
 
   const [unreadCount, setUnreadCount] =
     useState(0);
@@ -53,24 +48,7 @@ export default function Home() {
       LOAD CONTACT
   ========================= */
 
-  async function loadContacts() {
-
-  const { data, error } =
-    await supabase
-      .from("admin_contacts")
-      .select("*")
-      .order("sort", { ascending: true });
-
-  if (error) {
-    console.log(error);
-    return;
-  }
-
-  console.log(data);
-
-  setContacts(data || []);
-
-}
+  
 
   /* =========================
       LOAD NOTIFICATION
@@ -223,12 +201,12 @@ export default function Home() {
 
   useEffect(() => {
 
-    loadContacts();
     loadMarket();
     loadNotifications();
     loadWallet();
     loadRates();
     loadProfit();
+
 
     const user = JSON.parse(
       localStorage.getItem("user")
@@ -317,36 +295,40 @@ export default function Home() {
 
       {/* Header */}
 
-      <header className="home-header">
+      <header className="trust-header">
 
-  <div className="brand-area">
-    <h1 className="brand-title">TRUST</h1>
-  </div>
+<div className="trust-brand">
+    <h1 className="trust-name">
+        TRUST
+    </h1>
+</div>
 
-  <div className="header-actions">
 
-    <button
-      className="support-btn"
-      onClick={() => setShowContacts(true)}
-    >
-      <Headset size={22} />
-    </button>
+<div className="trust-tools">
 
-    <button
-      className="notify-btn"
-      onClick={() => navigate("/notifications")}
-    >
-      <Bell size={22} />
+<button
+className="trust-support"
+onClick={() => navigate("/support-chat")}
+>
+<Headset size={22}/>
+</button>
 
-      {unreadCount > 0 && (
-        <span className="notify-badge">
-          {unreadCount > 99 ? "99+" : unreadCount}
-        </span>
-      )}
 
-    </button>
+<button
+className="trust-notify"
+onClick={() => navigate("/notifications")}
+>
+<Bell size={22}/>
 
-  </div>
+{unreadCount > 0 && (
+<span className="notify-badge">
+{unreadCount > 99 ? "99+" : unreadCount}
+</span>
+)}
+
+</button>
+
+</div>
 
 </header>
 
@@ -356,15 +338,15 @@ export default function Home() {
 
       {/* Asset */}
 
-      <section className="asset-card">
+      <section className="trust-assets">
 
-                <div className="asset-left">
+<div className="assets-left">
 
-          <span className="asset-label">
-            {t("assets")}
-          </span>
+<span className="assets-title">
+    {t("assets")}
+</span>
 
-          <h2 className="asset-balance">
+<h2 className="assets-number">
 
             {totalAssets.toLocaleString(
               undefined,
@@ -378,15 +360,15 @@ export default function Home() {
 
         </div>
 
-        <div className="asset-right">
+        <div className="profit-side">
 
-          <span className="profit-label">
+          <span className="profit-title">
             {t("profit")}
           </span>
 
           <h3
               className={
-                `profit-value ${
+                `profit-number ${
                   profit >= 0
                     ? "green"
                     : "red"
@@ -585,80 +567,7 @@ export default function Home() {
             CONTACT MODAL
       ======================= */}
 
-      {showContacts && (
-
-        <div
-          className="contact-overlay"
-          onClick={() =>
-            setShowContacts(false)
-          }
-        >
-
-          <div
-            className="contact-modal"
-            onClick={(e) =>
-              e.stopPropagation()
-            }
-          >
-
-            <h3>
-
-              {t("customerService")}
-
-            </h3>
-
-            {contacts.map((contact) => (
-
-              <div
-                key={contact.id}
-                className="contact-item"
-                onClick={() => {
-
-                  const url =
-                    contact.link.startsWith("http")
-                      ? contact.link
-                      : `https://${contact.link}`;
-
-                  window.open(
-                    url,
-                    "_blank"
-                  );
-
-                }}
-              >
-
-                <img
-                  src={contact.icon_url}
-                  alt=""
-                  className="contact-icon"
-                />
-
-                <span>
-
-                  {contact.name}
-
-                </span>
-
-              </div>
-
-            ))}
-
-            <button
-              className="close-contact"
-              onClick={() =>
-                setShowContacts(false)
-              }
-            >
-
-              {t("close")}
-
-            </button>
-
-          </div>
-
-        </div>
-
-      )}
+      
 
     </div>
 

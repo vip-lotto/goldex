@@ -256,6 +256,12 @@
 "tradeAlreadyRunning":"이미 진행 중인 거래가 있습니다.",
 "youLose":"패배했습니다.",
 
+"typeMessage": "메시지를 입력하세요...",
+
+"forgotPassword": "비밀번호를 잊으셨나요?",
+
+"contactSupport": "도움이 필요하면 고객센터로 문의하세요",
+
 "assets": "자산"
 
 

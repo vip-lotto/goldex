@@ -262,6 +262,12 @@
 "tradeAlreadyRunning":"Sie haben bereits einen aktiven Handel.",
 "youLose":"Sie haben verloren.",
 
+"typeMessage": "Type a message...",
+
+"forgotPassword": "Forgot Password?",
+
+"contactSupport": "Contact Support For Help",
+
 "assets": "Vermögenswerte"
 
 }

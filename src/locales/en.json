@@ -238,6 +238,20 @@
 
 "assets": "Assets",
 
+"tradeWin": "Trade Won",
+"tradeWinMessage": "Congratulations! Your trade was successful.",
+
+"tradeLose": "Trade Lost",
+"tradeLoseMessage": "Unfortunately, your trade ended in a loss.",
+
+
+  
+    "typeMessage": "Type a message...",
+    
+    "forgotPassword": "Forgot Password?",
+    "contactSupport": "Contact Support For Help",
+  
+
 "youLose":"You lose."
 
 

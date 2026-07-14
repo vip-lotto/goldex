@@ -262,6 +262,12 @@
 "tradeAlreadyRunning":"您已有一筆進行中的交易。",
 "youLose":"您輸了。",
 
+"typeMessage": "輸入訊息...",
+
+"forgotPassword": "忘記密碼？",
+
+"contactSupport": "請聯絡客服尋求協助",
+
 "assets": "資產"
 
 

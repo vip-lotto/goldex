@@ -397,8 +397,16 @@ await supabase
   .insert([
     {
       user_id: receiverId,
-      title: t("moneyReceived"),
-      message: `${t("received")} ${amount} ${coin}`
+
+      title_key: "transferReceived",
+      message_key: "transferReceivedMessage",
+
+      coin,
+      network,
+      amount: Number(amount),
+      status: "success",
+
+      is_read: false
     }
   ]);
 
@@ -414,8 +422,16 @@ await supabase
   .insert([
     {
       user_id: user.id,
-      title: t("transferSuccess"),
-      message: `${t("transferred")} ${amount} ${coin}\n${t("toAddress")} ${address}`
+
+      title_key: "transferCompleted",
+      message_key: "transferCompletedMessage",
+
+      coin,
+      network,
+      amount: Number(amount),
+      status: "success",
+
+      is_read: false
     }
   ]);
 

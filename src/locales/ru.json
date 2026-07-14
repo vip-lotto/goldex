@@ -263,6 +263,12 @@
 "tradeAlreadyRunning":"У вас уже есть активная сделка.",
 "youLose":"Вы проиграли.",
 
+"typeMessage": "Введите сообщение...",
+
+"forgotPassword": "Забыли пароль?",
+
+"contactSupport": "Обратитесь в службу поддержки",
+
 "assets": "Активы"
 
 

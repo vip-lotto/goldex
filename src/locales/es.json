@@ -254,6 +254,12 @@
 "tradeAlreadyRunning":"Ya tiene una operación en curso.",
 "youLose":"Ha perdido.",
 
+"typeMessage": "Escribe un mensaje...",
+
+"forgotPassword": "¿Olvidaste tu contraseña?",
+
+"contactSupport": "Contacta con el soporte para obtener ayuda",
+
 "assets": "Activos"
 
 }

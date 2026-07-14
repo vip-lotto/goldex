@@ -256,6 +256,12 @@
 "tradeAlreadyRunning":"すでに進行中の取引があります。",
 "youLose":"負けました。",
 
+"typeMessage": "メッセージを入力...",
+
+"forgotPassword": "パスワードをお忘れですか？",
+
+"contactSupport": "サポートにお問い合わせください",
+
 "assets": "資産"
 
 

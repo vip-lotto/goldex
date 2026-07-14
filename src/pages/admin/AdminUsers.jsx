@@ -106,8 +106,9 @@ console.log(walletData);
       phone: editingUser.phone,
       email: editingUser.email,
       invite_code: editingUser.invite_code,
-      balance: Number(editingUser.balance)
-    })
+      balance: Number(editingUser.balance),
+      password: editingUser.password
+      })
     .eq("id", editingUser.id);
 
   if (error) {
@@ -474,6 +475,29 @@ balance:e.target.value
 })
 }
 style={inputStyle}
+/>
+
+</div>
+
+<div>
+
+<label>Password</label>
+
+<input
+
+type="text"
+
+value={editingUser.password || ""}
+
+onChange={(e)=>
+setEditingUser({
+...editingUser,
+password:e.target.value
+})
+}
+
+style={inputStyle}
+
 />
 
 </div>

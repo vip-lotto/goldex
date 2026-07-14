@@ -48,6 +48,12 @@ import AdminSettings from "./pages/admin/AdminSettings";
 import KYCUnderReview from "./pages/KYCUnderReview";
 import KYCApproved from "./pages/KYCApproved";
 import KYCRejected from "./pages/KYCRejected";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
+
+import SupportChat from "./pages/SupportChat";
+import AdminSupportChat from "./pages/admin/AdminSupportChat";
+
 
 
 import AdminLogin from "./pages/admin/AdminLogin";
@@ -63,7 +69,39 @@ function Layout() {
 
   const location = useLocation();
 
+
+  useEffect(()=>{
+
+    if(window.ssq){
+
+      window.ssq("hide");
+      window.ssq("close");
+
+    }
+
+
+    document
+    .querySelectorAll("iframe")
+    .forEach((item)=>{
+
+      if(
+        item.src.includes("salesmartly") ||
+        item.src.includes("ssq")
+      ){
+
+        item.remove();
+
+      }
+
+    });
+
+
+  },[location.pathname]);
+
+
+
   const showBottomNav = [
+
     "/home",
     "/market",
     "/trade",
@@ -116,7 +154,36 @@ function Layout() {
 
         <Route path="/kyc/rejected" element={<KYCRejected />} />
 
-        
+        <Route
+path="/forgot-password"
+element={<ForgotPassword/>}
+/>
+
+<Route
+path="/reset-password"
+element={<ResetPassword/>}
+/>
+
+<Route
+ path="/support-chat"
+ element={<SupportChat/>}
+/>
+
+<Route
+ path="/admin/support-chat"
+ element={
+   <AdminRoute>
+     <AdminSupportChat />
+   </AdminRoute>
+ }
+/>
+
+
+
+
+
+
+
         
         
 

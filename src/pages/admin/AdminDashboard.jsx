@@ -98,6 +98,14 @@ export default function AdminDashboard() {
     },
 
     {
+    title: "Support Chat",
+    desc: "Chat with customers",
+    icon: <MessageCircle size={34}/>,
+    path: "/admin/support-chat",
+    color: "blue"
+    },
+
+    {
       title: "Settings",
       desc: "System settings",
       icon: <Settings size={34}/>,

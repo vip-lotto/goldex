@@ -6,6 +6,10 @@ import { IoEyeOutline } from "react-icons/io5";
 import { useTranslation } from "react-i18next";
 
 
+
+import { Link } from "react-router-dom";
+
+
 import loginBg from "../assets/login01.png";
 
 import "../styles/login.css";
@@ -21,6 +25,8 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  
+
   const { showToast } = useToast();
 
   const [username,setUsername] = useState("");
@@ -29,10 +35,8 @@ export default function Login() {
 
   const [showLang,setShowLang] = useState(false);
 
-  const [contacts,setContacts] = useState([]);
-  const [showContacts,setShowContacts] = useState(false);
 
-  const [loading,setLoading] = useState(false);
+const [loading,setLoading] = useState(false);
 
   
 
@@ -50,27 +54,9 @@ export default function Login() {
 
 };
 
-const loadContacts = async () => {
 
-  const { data, error } = await supabase
-    .from("admin_contacts")
-    .select("*")
-    .eq("enabled", true);
 
-  if(error){
-    console.log(error);
-    return;
-  }
 
-  setContacts(data || []);
-
-};
-
-useEffect(()=>{
-
-  loadContacts();
-
-},[]);
 
   const login = async () => {
 
@@ -198,8 +184,10 @@ setTimeout(() => {
   };
 
   return (
-    <>
-      <div
+<>
+
+
+<div
         style={{
           minHeight:"100vh",
           backgroundImage:`url(${loginBg})`,
@@ -215,8 +203,12 @@ setTimeout(() => {
 
 
         <button
-className="top-support-btn"
-onClick={()=>setShowContacts(true)}
+ className="top-support-btn"
+ onClick={()=>{
+
+   navigate("/support-chat");
+
+ }}
 >
 
 <Headset size={20}/>
@@ -424,6 +416,29 @@ zIndex:9999
           {/* LOGIN */}
 
           <button
+
+onClick={()=>{
+
+showToast(
+t("login.contactSupport"),
+"warning"
+);
+
+}}
+
+style={{
+background:"none",
+border:"none",
+color:"#4fdcff",
+fontSize:"16px",
+cursor:"pointer"
+}}
+
+>
+{t("forgotPassword")}
+</button>
+
+          <button
             onClick={login}
             disabled={loading}
             style={{
@@ -483,175 +498,7 @@ zIndex:9999
         </div>
       </div>
 
-      {
-showContacts && (
-
-<div
-
-onClick={()=>setShowContacts(false)}
-
-style={{
-position:"fixed",
-inset:0,
-background:"rgba(0,0,0,.65)",
-backdropFilter:"blur(10px)",
-display:"flex",
-justifyContent:"center",
-alignItems:"center",
-zIndex:99999
-}}
-
->
-
-
-<div
-
-onClick={(e)=>e.stopPropagation()}
-
-style={{
-
-width:"360px",
-maxWidth:"90%",
-background:
-"linear-gradient(180deg,#172b47,#0b1628)",
-borderRadius:"22px",
-padding:"25px"
-
-}}
-
->
-
-
-<h3
-
-style={{
-color:"#fff",
-textAlign:"center",
-marginBottom:"20px"
-}}
-
->
-
-Customer Service
-
-</h3>
-
-
-{
-contacts.map(contact=>(
-
-
-<div
-
-key={contact.id}
-
-onClick={()=>{
-
-const url =
-contact.link
-?
-(
-contact.link.startsWith("http")
-?
-contact.link
-:
-`https://${contact.link}`
-)
-:
-"#";
-
-
-window.open(url,"_blank");
-
-}}
-
-style={{
-
-height:"90px",
-background:"rgba(255,255,255,.06)",
-borderRadius:"15px",
-display:"flex",
-alignItems:"center",
-gap:"15px",
-padding:"15px",
-marginBottom:"20px",
-cursor:"pointer"
-
-}}
-
->
-
-
-<img
-
-src={contact.icon_url}
-
-style={{
-
-width:"60px",
-height:"60px",
-borderRadius:"15px",
-background:"#fff",
-objectFit:"contain"
-
-}}
-
-/>
-
-
-<span
-
-style={{
-color:"#fff",
-fontWeight:"600"
-}}
-
->
-
-{contact.name}
-
-</span>
-
-
-</div>
-
-
-))
-}
-
-
-
-<button
-
-onClick={()=>setShowContacts(false)}
-
-style={{
-
-width:"100%",
-height:"50px",
-border:"none",
-borderRadius:"12px",
-background:"#c84d43",
-color:"#fff",
-fontWeight:"700",
-fontSize:"16px"
-
-}}
-
->
-
-Close
-
-</button>
-
-
-</div>
-
-
-</div>
-
-)
-}
+      
 
       
     </>

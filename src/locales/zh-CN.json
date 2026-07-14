@@ -255,6 +255,12 @@
 "tradeAlreadyRunning":"您已有一笔正在进行中的交易。",
 "youLose":"您输了。",
 
+"typeMessage": "输入消息...",
+
+"forgotPassword": "忘记密码？",
+
+"contactSupport": "请联系客服获取帮助",
+
 "assets": "资产"
 
 
