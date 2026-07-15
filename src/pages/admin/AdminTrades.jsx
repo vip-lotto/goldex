@@ -109,7 +109,7 @@ const loadTrades = async()=>{
         }
     )
 
-    .limit(100);
+    .limit(30);
 
     if(error){
 
