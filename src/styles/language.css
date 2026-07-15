@@ -133,3 +133,77 @@
     color:#fff;
 
 }
+
+/* ===================================
+   FIX HEADER MOBILE
+=================================== */
+
+.language-header{
+
+    display:flex !important;
+
+    align-items:center;
+
+    padding:20px;
+
+    gap:16px;
+
+}
+
+.language-title{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.language-title h1{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:40px;
+
+    line-height:1.2;
+
+}
+
+.language-header .back-btn{
+
+    position:static !important;
+
+    width:46px;
+
+    height:46px;
+
+    min-width:46px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#3568e6;
+
+    color:#fff;
+
+    flex-shrink:0;
+
+}
+
+.header-space{
+
+    width:46px;
+
+    min-width:46px;
+
+}

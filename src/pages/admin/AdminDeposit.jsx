@@ -244,74 +244,83 @@ throw new Error(
 // ==========================
 
 
-const walletBalance =
+let updateData = {};
 
-Number(wallet.balance || 0)
-+
-Number(item.amount);
+switch (item.coin) {
 
+  case "USDT":
+    updateData.balance =
+      Number(wallet.balance || 0) + Number(item.amount);
+    break;
 
+  case "BTC":
+    updateData.BTC =
+      Number(wallet.BTC || 0) + Number(item.amount);
+    break;
 
-const {error:updateWalletError}=
+  case "ETH":
+    updateData.ETH =
+      Number(wallet.ETH || 0) + Number(item.amount);
+    break;
 
-await supabase
+  case "BNB":
+    updateData.BNB =
+      Number(wallet.BNB || 0) + Number(item.amount);
+    break;
 
-.from("wallets")
+  case "TRX":
+    updateData.TRX =
+      Number(wallet.TRX || 0) + Number(item.amount);
+    break;
 
-.update({
+  case "ADA":
+    updateData.ADA =
+      Number(wallet.ADA || 0) + Number(item.amount);
+    break;
 
-balance:walletBalance
-
-})
-
-.eq(
-"id",
-wallet.id
-);
-
-
-
-if(updateWalletError){
-
-throw updateWalletError;
-
+  default:
+    throw new Error("ไม่รองรับเหรียญนี้");
 }
+
+const { error: updateWalletError } =
+await supabase
+  .from("wallets")
+  .update(updateData)
+  .eq("id", wallet.id);
+
+if (updateWalletError) {
+  throw updateWalletError;
+}
+
+
+
 
 // ==========================
 // UPDATE PROFILE BALANCE
 // ==========================
 
 
-const profileBalance =
+// ==========================
+// UPDATE PROFILE BALANCE (เฉพาะ USDT)
+// ==========================
 
-Number(profile.balance || 0)
-+
-Number(item.amount);
+if (item.coin === "USDT") {
 
+  const profileBalance =
+    Number(profile.balance || 0) +
+    Number(item.amount);
 
+  const { error: updateProfileError } =
+    await supabase
+      .from("profiles")
+      .update({
+        balance: profileBalance
+      })
+      .eq("id", item.user_id);
 
-const {error:updateProfileError}=
-
-await supabase
-
-.from("profiles")
-
-.update({
-
-balance:profileBalance
-
-})
-
-.eq(
-"id",
-item.user_id
-);
-
-
-
-if(updateProfileError){
-
-throw updateProfileError;
+  if (updateProfileError) {
+    throw updateProfileError;
+  }
 
 }
 
@@ -339,7 +348,7 @@ item.user_id
 
 .eq(
 "symbol",
-"USDT"
+item.coin
 )
 
 .single();
@@ -400,7 +409,7 @@ await supabase
 
 user_id:item.user_id,
 
-symbol:"USDT",
+symbol:item.coin,
 
 balance:Number(item.amount)
 
@@ -526,6 +535,8 @@ new Event("walletUpdated")
 
 
 loadDeposits();
+
+setProcessing(false);
 
 
 

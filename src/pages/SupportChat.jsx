@@ -9,7 +9,6 @@ import { supabase } from "../lib/supabase";
 import {
 ArrowLeft,
 Send,
-Clock
 } from "lucide-react";
 
 import { useTranslation } from "react-i18next";
@@ -30,6 +29,8 @@ const [messages,setMessages] = useState([]);
 const [text,setText] = useState("");
 
 const bottomRef = useRef(null);
+
+const inputRef = useRef(null);
 
 
 
@@ -457,13 +458,9 @@ return (
 
 
 <button
-
-className="back-btn"
-
+className="support-back-btn"
 onClick={()=>window.history.back()}
-
 >
-
 <ArrowLeft size={22}/>
 
 </button>
@@ -538,49 +535,6 @@ style={{
 >
 {msg.message}
 </div>
-
-
-<div className="message-time">
-
-<Clock size={12}/>
-
-{
-msg.created_at
-?
-new Date(msg.created_at).toLocaleString(
-"th-TH",
-{
-day:"2-digit",
-month:"2-digit",
-year:"numeric",
-hour:"2-digit",
-minute:"2-digit"
-}
-)
-:
-""
-}
-
-{
-msg.sender==="user" && (
-
-<span className="read-status">
-
-{
-msg.is_read === true
-?
-"✓✓ "
-:
-"✓ "
-}
-
-</span>
-
-)
-}
-
-</div>
-
 
 
 </div>

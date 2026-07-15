@@ -245,68 +245,68 @@ function getProfit() {
       money >= Number(item.min_amount) &&
       money <= Number(item.max_amount)
   );
-
   if (setting) {
     return Number(setting.profit);
   }
-
   return 5;
+}
+
+async function getFinalResult(userId){
+
+    // =========================
+    // 1. เช็กการควบคุมรายบุคคล
+    // =========================
+    const { data:userControl } =
+    await supabase
+    .from("trade_user_control")
+    .select("*")
+    .eq("user_id", userId)
+    .maybeSingle();
+    
+// หมดเวลาควบคุมแล้ว
+// =========================
+// USER CONTROL
+// =========================
+
+if(userControl){
+
+    if(userControl.mode==="win"){
+        return "win";
+    }
+
+    if(userControl.mode==="lose"){
+        return "lose";
+    }
 
 }
 
 
+// <<<<<< แทรกตรงนี้ >>>>>>
 
-
-
-
-
-async function getFinalResult(){
-
-
-let result="lose";
-
-
-
-const {
-data
-}=await supabase
-
+const { data:control } =
+await supabase
 .from("trade_control")
-
 .select("*")
+.eq("id",1)
+.maybeSingle();
 
-.eq(
-"id",
-1
-)
+if(control){
 
-.single();
+    if(control.global_result==="win"){
+        return "win";
+    }
 
-
-
-
-if(data){
-
-
-if(
-!data.global_until ||
-new Date(data.global_until)>new Date()
-){
-
-result=data.global_result;
+    if(control.global_result==="lose"){
+        return "lose";
+    }
 
 }
 
+// <<<<<< จบตรงนี้ >>>>>>
+
+return "lose";
 
 }
-
-
-
-return result;
-
-
-}
-
 
 // =========================
 // START TRADE
@@ -592,10 +592,6 @@ return;
 
 }
 
-
-
-
-
 const {
 
 data:trade
@@ -616,103 +612,51 @@ activeTrade.id
 
 .single();
 
-
-
-
-
 if(!trade){
-
 return;
-
 }
 
-
-
-
-
 const finalResult =
-await getFinalResult();
-
-
-
-
+await getFinalResult(
+    trade.user_id
+);
 
 let payout=0;
-
 let profit=0;
 
-
-
-
-
-
 if(finalResult==="win"){
-
-
 profit =
-
 Number(trade.amount)
 
 *
 
 Number(trade.profit)
-
 /
-
 100;
 
-
-
-
 payout =
-
 Number(trade.amount)
 
 +
 
 profit;
 
-
-
-
-
-
 const {
-
 data:wallet
-
 }=await supabase
-
 .from("wallets")
-
 .select("*")
-
 .eq(
-
 "user_id",
-
 trade.user_id
-
 )
-
 .single();
 
-
-
-
-
-
 if(wallet){
-
-
 await supabase
-
 .from("wallets")
-
 .update({
-
 balance:
-
 Number(wallet.balance||0)
 
 +

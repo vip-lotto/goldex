@@ -783,3 +783,29 @@ line-height:1.6;
 .withdraw-back-btn:hover{
   background:#222;
 }
+
+/* ===== Submit button ===== */
+
+.submit-btn {
+  width: 100%;
+  height: 56px;
+  border: none;
+  border-radius: 14px;
+  background: #22c55e;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #16a34a;
+}
+
+.submit-btn:disabled {
+  background: #6b7280;
+  color: #ffffff;
+  opacity: 1;
+  cursor: not-allowed;
+}

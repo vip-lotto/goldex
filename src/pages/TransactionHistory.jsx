@@ -146,24 +146,24 @@ export default function TransactionHistory() {
 
       <div className="transaction-header">
 
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeft size={22} />
-        </button>
+  <button
+    className="back-btn"
+    onClick={() => navigate(-1)}
+  >
+    <ArrowLeft size={22}/>
+  </button>
 
-        <div>
+  <div className="transaction-title">
 
-          <h2>{t("transactionHistory")}</h2>
+    <h2>{t("transactionHistory")}</h2>
 
-<span>
-  {transactions.length} {t("records")}
-</span>
+    <span>
+      {transactions.length} {t("records")}
+    </span>
 
-        </div>
+  </div>
 
-      </div>
+</div>
 
       {/* ================= Dashboard ================= */}
 
@@ -372,18 +372,26 @@ export default function TransactionHistory() {
                 <h3>
                   {
                     item.type === "deposit"
-                    ? `${t("deposit")} USDT`
-                    : item.type === "withdraw"
-                    ? `${t("withdraw")} USDT`
-                    : item.type === "transfer"
-                    ? (
-                        item.direction === "send"
-                          ? `Send ${item.coin}`
-                          : `Receive ${item.coin}`
-                      )
-                    : item.type === "trade"
-                    ? item.description
-                    : item.description
+
+                      ? `${t("deposit")} ${item.coin || ""}`
+
+                      : item.type === "withdraw"
+
+                      ? `${t("withdraw")} ${item.coin || ""}`
+
+                      : item.type === "transfer"
+
+                      ? (
+                          item.direction === "send"
+                            ? `Send ${item.coin || ""}`
+                            : `Receive ${item.coin || ""}`
+                        )
+
+                      : item.type === "trade"
+
+                      ? `${item.side || ""} ${item.coin || ""}`
+
+                      : item.description
                   }
                 </h3>
 
@@ -398,6 +406,20 @@ export default function TransactionHistory() {
                   }
 
                 </span>
+
+                {
+                  item.network && (
+                    <div
+                      style={{
+                        fontSize: 12,
+                        color: "#94a3b8",
+                        marginTop: 4,
+                      }}
+                    >
+                      Network : {item.network}
+                    </div>
+                  )
+                }
 
               </div>
 
@@ -449,9 +471,13 @@ export default function TransactionHistory() {
                 : "+"
             }
 
-            USDT
+            
 
             {Number(item.amount).toLocaleString()}
+
+            {" "}
+
+            {item.coin || ""}
 
             </div>
 

@@ -21,7 +21,7 @@ const languages = [
 export default function Language() {
 
   const navigate = useNavigate();
-const { i18n } = useTranslation();
+const { t, i18n } = useTranslation();
 
 const current = i18n.language;
 
@@ -48,22 +48,22 @@ console.log("Current Language =", current);
 
       <div className="language-header">
 
-        <button
-          className="back-btn"
-          onClick={()=>navigate(-1)}
-        >
+  <button
+    className="back-btn"
+    onClick={() => navigate(-1)}
+  >
+    <ArrowLeft size={22}/>
+  </button>
 
-          <ArrowLeft size={22}/>
+  <div className="language-title">
 
-        </button>
+    <h1>{t("language")}</h1>
 
-        <h2>
+  </div>
 
-          Language
+  <div className="header-space"></div>
 
-        </h2>
-
-      </div>
+</div>
 
       <div className="language-card">
 

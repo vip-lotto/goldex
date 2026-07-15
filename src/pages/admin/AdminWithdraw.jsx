@@ -27,35 +27,21 @@ loadWithdraws();
 
 
 
-const loadWithdraws = async()=>{
+const loadWithdraws = async () => {
 
+  const { data: withdrawData, error } = await supabase
+    .from("withdrawals")
+    .select("*")
+    .order("created_at", {
+      ascending: false,
+    });
 
-const {data,error}=await supabase
+  if (error) {
+    console.log(error);
+    return;
+  }
 
-.from("withdrawals")
-
-.select("*")
-
-.order(
-"created_at",
-{
-ascending:false
-}
-);
-
-
-
-if(error){
-
-console.log(error);
-
-return;
-
-}
-
-
-setWithdraws(data || []);
-
+  setWithdraws(withdrawData || []);
 
 };
 
@@ -87,20 +73,12 @@ setLoading(true);
 
 // wallet
 
-const {data:wallet,error:walletError}=
-
+const { data: wallet, error: walletError } =
 await supabase
-
-.from("wallets")
-
-.select("*")
-
-.eq(
-"user_id",
-item.user_id
-)
-
-.single();
+  .from("wallets")
+  .select("*")
+  .eq("user_id", item.user_id)
+  .single();
 
 
 
@@ -118,9 +96,37 @@ return;
 
 
 
-const oldBalance =
-Number(wallet.balance || 0);
+let oldBalance = 0;
 
+switch (item.coin) {
+
+  case "USDT":
+    oldBalance = Number(wallet.balance || 0);
+    break;
+
+  case "BTC":
+    oldBalance = Number(wallet.BTC || 0);
+    break;
+
+  case "ETH":
+    oldBalance = Number(wallet.ETH || 0);
+    break;
+
+  case "BNB":
+    oldBalance = Number(wallet.BNB || 0);
+    break;
+
+  case "TRX":
+    oldBalance = Number(wallet.TRX || 0);
+    break;
+
+  case "ADA":
+    oldBalance = Number(wallet.ADA || 0);
+    break;
+
+  default:
+    oldBalance = 0;
+}
 
 
 const withdrawAmount =
@@ -151,22 +157,44 @@ oldBalance - withdrawAmount;
 
 // update wallet
 
-const {error:updateError}=
+let updateData = {};
 
-await supabase
+switch (item.coin) {
 
-.from("wallets")
+  case "USDT":
+    updateData.balance = newBalance;
+    break;
 
-.update({
+  case "BTC":
+    updateData.BTC = newBalance;
+    break;
 
-balance:newBalance
+  case "ETH":
+    updateData.ETH = newBalance;
+    break;
 
-})
+  case "BNB":
+    updateData.BNB = newBalance;
+    break;
 
-.eq(
-"id",
-wallet.id
-);
+  case "TRX":
+    updateData.TRX = newBalance;
+    break;
+
+  case "ADA":
+    updateData.ADA = newBalance;
+    break;
+
+  default:
+    alert("ไม่รองรับเหรียญนี้");
+    setLoading(false);
+    return;
+}
+
+const { error: updateError } = await supabase
+  .from("wallets")
+  .update(updateData)
+  .eq("id", wallet.id);
 
 
 
@@ -189,19 +217,17 @@ return;
 
 
 await supabase
-
 .from("withdrawals")
-
 .update({
 
-status:"approved"
+status:"approved",
+
+admin_message:"Approved"
 
 })
+.eq("id",item.id);
 
-.eq(
-"id",
-item.id
-);
+
 
 
 
@@ -310,20 +336,15 @@ return;
 
 
 await supabase
-
 .from("withdrawals")
-
 .update({
 
-status:"rejected"
+status: "rejected",
+
+admin_message: "Rejected"
 
 })
-
-.eq(
-"id",
-item.id
-);
-
+.eq("id", item.id);
 
 
 
@@ -467,13 +488,19 @@ background:"#162544"
 
 <th>ID</th>
 
-<th>User</th>
+<th>UID</th>
+
+<th>Name</th>
 
 <th>Coin</th>
 
 <th>Network</th>
 
 <th>Amount</th>
+
+<th>Address</th>
+
+<th>QR</th>
 
 <th>Status</th>
 
@@ -513,7 +540,15 @@ borderBottom:"1px solid #334155"
 
 
 <td>
-{item.user_id}
+
+{item.member_id || "-"}
+
+</td>
+
+<td>
+
+{item.first_name} {item.last_name}
+
 </td>
 
 
@@ -531,23 +566,87 @@ borderBottom:"1px solid #334155"
 {item.amount}
 </td>
 
+{/* Address */}
+<td
+style={{
+maxWidth:220,
+wordBreak:"break-all"
+}}
+>
 
+<div>
+{item.address || "-"}
+</div>
+
+{
+item.address && (
+
+<button
+style={{
+marginTop:5,
+padding:"4px 10px",
+cursor:"pointer"
+}}
+onClick={()=>{
+navigator.clipboard.writeText(item.address);
+alert("Copy Address แล้ว");
+}}
+>
+
+Copy
+
+</button>
+
+)
+
+}
+
+</td>
+
+{/* QR */}
+<td>
+
+{
+item.qr_image
+
+?
+
+<img
+src={item.qr_image}
+alt="QR"
+style={{
+width:70,
+height:70,
+borderRadius:8,
+cursor:"pointer",
+objectFit:"cover"
+}}
+onClick={()=>
+window.open(item.qr_image,"_blank")
+}
+/>
+
+:
+
+"-"
+
+}
+
+</td>
+
+{/* Status */}
 <td>
 
 {item.status}
 
 </td>
 
-
-
+{/* Date */}
 <td>
 
 {
-new Date(
-item.created_at
-)
+new Date(item.created_at)
 .toLocaleString()
-
 }
 
 </td>

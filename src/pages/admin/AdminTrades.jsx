@@ -13,538 +13,317 @@ import {
 
 import "./AdminTrades.css";
 
-
 export default function AdminTrades(){
-
 
 const navigate = useNavigate();
 
-
 const [trades,setTrades] = useState([]);
-
-const [control,setControl] = useState(null);
 
 const [users,setUsers] = useState([]);
 
 const [selectedUser,setSelectedUser] = useState("");
 
-const [minutes,setMinutes] = useState(10);
-
 const [loading,setLoading] = useState(false);
 
 const [message,setMessage] = useState("");
 
-
-
+const [search,setSearch] = useState("");
 
 // =========================
 // START LOAD
 // =========================
 
-
 useEffect(()=>{
 
-loadTrades();
+    loadTrades();
 
-loadControl();
-
-loadUsers();
-
+    loadUsers();
 
 },[]);
-
-
-
 
 // =========================
 // LOAD TRADES
 // =========================
 
-
 const loadTrades = async()=>{
 
+    setLoading(true);
 
-setLoading(true);
+    const {
 
+        data,
 
-const {
-data,
-error
-}= await supabase
+        error
 
-.from("trades")
+    } = await supabase
 
-.select("*")
+    .from("trades")
 
-.order(
-"created_at",
-{
-ascending:false
-}
-)
+    .select("*")
 
-.limit(100);
+    .order(
+        "created_at",
+        {
+            ascending:false
+        }
+    )
 
+    .limit(100);
 
+    if(error){
 
-if(error){
+        console.log(error);
 
-console.log(error);
+        setLoading(false);
 
-setLoading(false);
+        return;
 
-return;
+    }
 
-}
+    setTrades(data || []);
 
-
-
-setTrades(data || []);
-
-
-setLoading(false);
-
+    setLoading(false);
 
 };
-
-
-
-
-// =========================
-// LOAD CONTROL
-// =========================
-
-
-const loadControl = async()=>{
-
-const { data, error } = await supabase
-.from("trade_control")
-.select("*")
-.limit(1)
-.maybeSingle();
-
-
-console.log("NEW CONTROL =",data);
-console.log("NEW ERROR =",error);
-
-
-
-if(error){
-
-console.log(error);
-return;
-
-}
-
-
-
-if(!data){
-
-console.log("NO CONTROL DATA");
-
-return;
-
-}
-
-
-
-setControl(data);
-
-
-};
-
-
-
-
 
 // =========================
 // LOAD USERS
 // =========================
 
-
 const loadUsers = async()=>{
 
+    const {
 
-const {
-data,
-error
-}= await supabase
+        data,
 
-.from("profiles")
+        error
 
-.select(`
+    } = await supabase
 
-id,
+    .from("profiles")
 
-member_id,
+    .select(`
+        id,
+        member_id,
+        first_name,
+        last_name,
+        phone
+    `)
 
-first_name,
+    .order(
+        "id",
+        {
+            ascending:false
+        }
+    );
 
-last_name,
+    if(error){
 
-phone
+        console.log(error);
 
-`)
+        return;
 
-.order(
-"id",
-{
-ascending:false
-}
-);
+    }
 
-
-
-if(error){
-
-console.log(error);
-
-return;
-
-}
-
-
-
-setUsers(data || []);
-
+    setUsers(data || []);
 
 };
-
-
-
 
 // =========================
 // REFRESH
 // =========================
 
-
 const refreshAll = ()=>{
 
+    loadTrades();
 
-loadTrades();
-
-loadControl();
-
-loadUsers();
-
+    loadUsers();
 
 };
 
 // =========================
-// GLOBAL WIN / LOSE CONTROL
+// WIN ALL / LOSE ALL
 // =========================
 
+const setAllResult = async(mode)=>{
 
+    const { data:old } = await supabase
 
+    .from("trade_control")
 
+    .select("*")
 
-const setGlobalResult = async(result)=>{
+    .eq("id",1)
 
+    .maybeSingle();
 
-console.log("CURRENT CONTROL =",control);
+    if(old){
 
+        const { error } = await supabase
 
-if(!control){
+        .from("trade_control")
 
-alert("Control not found");
+        .update({
 
-return;
+            global_result: mode
+
+        })
+
+        .eq("id",1);
+
+        if(error){
+
+            alert(error.message);
+
+            return;
+
+        }
+
+    }else{
+
+        const { error } = await supabase
+
+        .from("trade_control")
+
+        .insert({
+
+            id:1,
+
+            global_result: mode
+
+        })
+
+        if(error){
+
+            alert(error.message);
+
+            return;
+
+        }
+
+    }
+
+    // ======================================
+// อัปเดตทุกคนใน trade_user_control
+// ======================================
+
+const { data: allUsers } = await supabase
+.from("profiles")
+.select("id");
+
+for (const user of (allUsers || [])) {
+
+    const { data: oldUser } = await supabase
+    .from("trade_user_control")
+    .select("id")
+    .eq("user_id", user.id)
+    .maybeSingle();
+
+    if (oldUser) {
+
+        await supabase
+        .from("trade_user_control")
+        .update({
+            mode: mode
+        })
+        .eq("user_id", user.id);
+
+    } else {
+
+        await supabase
+        .from("trade_user_control")
+        .insert({
+            user_id: user.id,
+            mode: mode
+        });
+
+    }
 
 }
 
+    setMessage(
 
-let until = null;
+        `ALL ${mode.toUpperCase()}`
 
-
-
-if(minutes > 0){
-
-
-until = new Date(
-
-Date.now()
-
-+
-
-minutes * 60 * 1000
-
-)
-
-.toISOString();
-
-
-}
-
-
-
-
-
-const {
-error
-}= await supabase
-
-.from("trade_control")
-
-.update({
-
-global_result:result,
-
-global_until:until
-
-})
-
-.eq(
-"id",
-1
-);
-
-
-
-
-if(error){
-
-console.log(error);
-
-alert(error.message);
-
-return;
-
-}
-
-
-
-
-setMessage(
-`Global ${result} ${minutes} minute`
-);
-
-
-await loadControl();
-
-console.log("UPDATED RESULT =",result);
-
+    );
 
 };
 
-
-
-
-
 // =========================
-// RESET GLOBAL
+// USER WIN / LOSE
 // =========================
 
+const setUserResult = async(mode)=>{
 
-const resetGlobal = async()=>{
+    if(!selectedUser){
 
+        alert("Please select user");
 
-if(!control){
+        return;
 
-return;
+    }
 
-}
+    const { data:old } = await supabase
 
+    .from("trade_user_control")
 
+    .select("*")
 
-const {
-error
-}= await supabase
+    .eq("user_id",selectedUser)
 
-.from("trade_control")
+    .maybeSingle();
 
-.update({
+    if(old){
 
-global_result:"lose",
+        const { error } = await supabase
 
-global_until:null
+        .from("trade_user_control")
 
-})
+        .update({
 
-.eq(
+            mode
 
-"id",
+        })
 
-control.id
+        .eq("user_id",selectedUser);
 
-);
+        if(error){
 
+            alert(error.message);
 
+            return;
 
+        }
 
-if(error){
+    }else{
 
-alert(error.message);
+        const { error } = await supabase
 
-return;
+        .from("trade_user_control")
 
-}
+        .insert({
 
+            user_id:selectedUser,
 
+            mode
 
-setMessage(
-"Reset default lose"
-);
+        });
 
+        if(error){
 
+            alert(error.message);
 
-loadControl();
+            return;
 
+        }
 
-};
+    }
 
+    setMessage(
 
+        `USER ${mode.toUpperCase()}`
 
-
-
-
-// =========================
-// USER WIN / LOSE CONTROL
-// =========================
-
-
-const setUserResult = async(result)=>{
-
-
-if(!selectedUser){
-
-
-alert(
-"Please select user"
-);
-
-
-return;
-
-
-}
-
-
-
-
-const until = new Date(
-
-Date.now()
-
-+
-
-minutes * 60 * 1000
-
-)
-
-.toISOString();
-
-
-
-
-
-
-const {
-data:old
-}= await supabase
-
-.from("trade_user_control")
-
-.select("*")
-
-.eq(
-
-"user_id",
-
-selectedUser
-
-)
-
-.single();
-
-
-
-
-
-
-if(old){
-
-
-
-const {
-error
-}= await supabase
-
-.from("trade_user_control")
-
-.update({
-
-result:result,
-
-until_time:until
-
-})
-
-.eq(
-
-"user_id",
-
-selectedUser
-
-);
-
-
-
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-
-
-}else{
-
-
-
-const {
-error
-}= await supabase
-
-.from("trade_user_control")
-
-.insert({
-
-user_id:selectedUser,
-
-result:result,
-
-until_time:until
-
-});
-
-
-
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-
-
-}
-
-
-
-
-
-setMessage(
-
-`User ${result} ${minutes} minute`
-
-);
-
+    );
 
 };
 
@@ -552,227 +331,128 @@ setMessage(
 // GET USER NAME
 // =========================
 
-
 const getUserName = (id)=>{
 
+    const user = users.find(
 
-const user = users.find(
-u=>u.id === id
-);
+        u=>u.id===id
 
+    );
 
+    if(!user){
 
-if(!user){
+        return id;
 
-return id;
+    }
 
-}
+    return(
 
+        (user.member_id || id)
 
+        +
 
-return (
+        " "
 
-(user.member_id || id)
+        +
 
-+
+        (user.first_name || "")
 
-" "
+        +
 
-+
+        " "
 
-(user.first_name || "")
+        +
 
-+
+        (user.last_name || "")
 
-" "
-
-+
-
-(user.last_name || "")
-
-);
-
+    );
 
 };
-
-
-
-
-
-
-// =========================
-// GET USER CONTROL
-// =========================
-
-
-const getUserControl = async(userId)=>{
-
-
-const {
-data
-}= await supabase
-
-.from("trade_user_control")
-
-.select("*")
-
-.eq(
-
-"user_id",
-
-userId
-
-)
-
-.maybeSingle();
-
-
-
-return data;
-
-
-};
-
-
-
-
-
-
-// =========================
-// REMOVE USER CONTROL
-// =========================
-
-
-const removeUserControl = async(userId)=>{
-
-
-const {
-error
-}= await supabase
-
-.from("trade_user_control")
-
-.delete()
-
-.eq(
-
-"user_id",
-
-userId
-
-);
-
-
-
-
-if(error){
-
-alert(error.message);
-
-return;
-
-}
-
-
-
-setMessage(
-"User control removed"
-);
-
-
-};
-
-
-
-
-
-
-// =========================
-// CHECK EXPIRE
-// =========================
-
-
-const checkTime = (time)=>{
-
-
-if(!time){
-
-return "-";
-
-}
-
-
-
-const now = new Date();
-
-const end = new Date(time);
-
-
-
-if(end < now){
-
-return "Expired";
-
-}
-
-
-
-return end.toLocaleString();
-
-
-};
-
-
-
-
-
 
 // =========================
 // FORMAT NUMBER
 // =========================
 
+const filteredUsers = users.filter(user => {
+
+    const keyword = search.toLowerCase();
+
+    return (
+
+        String(user.member_id || "")
+        .toLowerCase()
+        .includes(keyword)
+
+        ||
+
+        `${user.first_name || ""} ${user.last_name || ""}`
+        .toLowerCase()
+        .includes(keyword)
+
+    );
+
+});
 
 const formatNumber = (num)=>{
 
+    return Number(
 
-return Number(num || 0)
+        num || 0
 
-.toLocaleString();
-
-
+    ).toLocaleString();
 
 };
 
-return (
+// =========================
+// UI
+// =========================
+
+return(
 
 <div
+
 style={{
+
 minHeight:"100vh",
-background:"#06152d",
-color:"#fff",
-padding:"25px"
-}}
->
 
+background:"#06152d",
+
+color:"#fff",
+
+padding:"25px"
+
+}}
+
+>
 
 <div
-style={{
-display:"flex",
-alignItems:"center",
-gap:"20px",
-marginBottom:"25px"
-}}
->
 
+style={{
+
+display:"flex",
+
+alignItems:"center",
+
+gap:"20px",
+
+marginBottom:"25px"
+
+}}
+
+>
 
 <button
 
 onClick={()=>navigate("/admin")}
 
 style={{
+
 padding:"10px 20px",
+
 borderRadius:10,
+
 cursor:"pointer"
+
 }}
 
 >
@@ -781,30 +461,32 @@ cursor:"pointer"
 
 </button>
 
-
 <h1>
 
 Trade Management
 
 </h1>
 
-
 </div>
 
-
-
-
-
 {
+
 message &&
 
 <div
+
 style={{
+
 background:"#0f766e",
+
 padding:15,
+
 borderRadius:10,
+
 marginBottom:20
+
 }}
+
 >
 
 {message}
@@ -813,135 +495,49 @@ marginBottom:20
 
 }
 
-
-
-
-
-
-
 <div
-style={{
-background:"#111d32",
-padding:20,
-borderRadius:15,
-marginBottom:25
-}}
->
 
+style={{
+
+background:"#111d32",
+
+padding:20,
+
+borderRadius:15,
+
+marginBottom:25
+
+}}
+
+>
 
 <h2>
 
-Global Trade Control
+ALL USER CONTROL
 
 </h2>
 
 
-
-<p>
-
-Current :
-
-<b>
-
-&nbsp;
-
-{
-
-control?.global_result || "-"
-
-}
-
-</b>
-
-</p>
-
-
-
-<p>
-
-Until :
-
-{
-
-control?.global_until
-
-?
-
-checkTime(control.global_until)
-
-:
-
-"Forever"
-
-}
-
-</p>
-
-
-
-
-<select
-
-value={minutes}
-
-onChange={
-e=>setMinutes(
-Number(e.target.value)
-)
-}
-
-style={{
-padding:10,
-borderRadius:8,
-marginRight:10
-}}
-
->
-
-
-<option value={1}>
-1 Minute
-</option>
-
-
-<option value={5}>
-5 Minutes
-</option>
-
-
-<option value={10}>
-10 Minutes
-</option>
-
-
-<option value={30}>
-30 Minutes
-</option>
-
-
-<option value={60}>
-60 Minutes
-</option>
-
-
-</select>
-
-
-
-
-
 <button
 
-onClick={()=>setGlobalResult("win")}
+onClick={()=>setAllResult("win")}
 
 style={{
-background:"#16a34a",
-color:"#fff",
-padding:"12px 25px",
+
+background:"#16a34a98",
+
+color:"#ffffff9c",
+
+padding:"12px 24px",
+
 border:0,
+
 borderRadius:10,
+
 marginRight:10,
+
 cursor:"pointer"
+
 }}
 
 >
@@ -950,23 +546,24 @@ WIN ALL
 
 </button>
 
-
-
-
-
-
 <button
 
-onClick={()=>setGlobalResult("lose")}
+onClick={()=>setAllResult("lose")}
 
 style={{
-background:"#dc2626",
-color:"#fff",
-padding:"12px 25px",
+
+background:"#dc262691",
+
+color:"#ffffff9c",
+
+padding:"12px 24px",
+
 border:0,
+
 borderRadius:10,
-marginRight:10,
+
 cursor:"pointer"
+
 }}
 
 >
@@ -975,76 +572,71 @@ LOSE ALL
 
 </button>
 
-
-
-
-
-
-<button
-
-onClick={resetGlobal}
-
-style={{
-background:"#475569",
-color:"#fff",
-padding:"12px 25px",
-border:0,
-borderRadius:10,
-cursor:"pointer"
-}}
-
->
-
-RESET
-
-</button>
-
-
-
-
 </div>
 
-
-
-
-
-
-
-
 <div
-style={{
-background:"#111d32",
-padding:20,
-borderRadius:15,
-marginBottom:25
-}}
->
 
+style={{
+
+background:"#111d32",
+
+padding:20,
+
+borderRadius:15,
+
+marginBottom:25
+
+}}
+
+>
 
 <h2>
 
-User Control
+USER CONTROL
 
 </h2>
 
-
-
+<input
+    type="text"
+    placeholder="Search UID / Name..."
+    value={search}
+    onChange={(e)=>setSearch(e.target.value)}
+    style={{
+        width:"100%",
+        padding:"10px",
+        marginBottom:"15px",
+        borderRadius:"8px",
+        border:"1px solid #555",
+        background:"#1c2740",
+        color:"#fff"
+    }}
+/>
 
 <select
 
 value={selectedUser}
 
 onChange={
-e=>setSelectedUser(e.target.value)
+
+e=>setSelectedUser(
+
+e.target.value
+
+)
+
 }
 
 style={{
+
 padding:10,
-borderRadius:8
+
+borderRadius:8,
+
+minWidth:260
+
 }}
 
 >
-
 
 <option value="">
 
@@ -1052,56 +644,56 @@ Select User
 
 </option>
 
-
-
 {
 
-users.map(u=>(
-
+filteredUsers.map(user=>(
 
 <option
 
-key={u.id}
+key={user.id}
 
-value={u.id}
+value={user.id}
 
 >
 
-{u.member_id}
+{user.member_id}
 
 -
 
-{u.first_name}
+{user.first_name}
 
-{u.last_name}
+{" "}
+
+{user.last_name}
 
 </option>
 
-
 ))
-
 
 }
 
-
-
 </select>
-
-
-
-
 
 <button
 
 onClick={()=>setUserResult("win")}
 
 style={{
+
 marginLeft:10,
+
 background:"#16a34a",
+
 color:"#fff",
+
 padding:"10px 20px",
+
 border:0,
-borderRadius:8
+
+borderRadius:8,
+
+cursor:"pointer"
+
 }}
 
 >
@@ -1110,21 +702,26 @@ USER WIN
 
 </button>
 
-
-
-
-
 <button
 
 onClick={()=>setUserResult("lose")}
 
 style={{
+
 marginLeft:10,
+
 background:"#dc2626",
+
 color:"#fff",
+
 padding:"10px 20px",
+
 border:0,
-borderRadius:8
+
+borderRadius:8,
+
+cursor:"pointer"
+
 }}
 
 >
@@ -1133,18 +730,7 @@ USER LOSE
 
 </button>
 
-
-
-
 </div>
-
-
-
-
-
-
-
-
 
 <div>
 
@@ -1154,18 +740,19 @@ Trade List
 
 </h2>
 
-
-
 <table
 
 style={{
+
 width:"100%",
+
 background:"#111d32",
+
 borderCollapse:"collapse"
+
 }}
 
 >
-
 
 <thead>
 
@@ -1189,20 +776,15 @@ borderCollapse:"collapse"
 
 <th>Date</th>
 
-
 </tr>
 
 </thead>
 
-
-
 <tbody>
-
 
 {
 
 trades.map(item=>(
-
 
 <tr
 
@@ -1210,14 +792,11 @@ key={item.id}
 
 >
 
-
 <td>
 
 #{item.id}
 
 </td>
-
-
 
 <td>
 
@@ -1225,17 +804,11 @@ key={item.id}
 
 </td>
 
-
-
-
 <td>
 
 {item.coin}
 
 </td>
-
-
-
 
 <td>
 
@@ -1243,17 +816,11 @@ key={item.id}
 
 </td>
 
-
-
-
 <td>
 
 {formatNumber(item.amount)}
 
 </td>
-
-
-
 
 <td>
 
@@ -1261,17 +828,11 @@ key={item.id}
 
 </td>
 
-
-
-
 <td>
 
 {item.result || "-"}
 
 </td>
-
-
-
 
 <td>
 
@@ -1279,52 +840,34 @@ key={item.id}
 
 </td>
 
-
-
-
 <td>
 
 {
 
 new Date(
+
 item.created_at
-)
-.toLocaleString()
+
+).toLocaleString()
 
 }
 
 </td>
 
-
-
 </tr>
-
 
 ))
 
-
 }
-
-
 
 </tbody>
 
-
-
 </table>
 
-
-
 </div>
 
-
-
-
-
 </div>
-
 
 );
-
 
 }

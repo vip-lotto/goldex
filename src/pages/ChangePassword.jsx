@@ -109,18 +109,24 @@ export default function ChangePassword() {
 
     <div className="change-password-page">
 
-      <div className="change-header">
+      <div className="change-password-header">
 
-        <button
-          className="back-btn"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeft size={22}/>
-        </button>
+  <button
+    className="back-btn"
+    onClick={() => navigate(-1)}
+  >
+    <ArrowLeft size={22} />
+  </button>
 
-        <h2>{t("changePassword")}</h2>
+  <div className="change-password-title">
 
-      </div>
+    <h1>{t("changePassword")}</h1>
+
+  </div>
+
+  <div className="header-space"></div>
+
+</div>
 
       <div className="change-card">
 

@@ -52,19 +52,22 @@ console.log("Trades:", tradesRes.data);
 
   list.push({
 
-    id: `deposit-${item.id}`,
+  id: `deposit-${item.id}`,
 
-    type: "deposit",
+  type: "deposit",
 
-    amount: item.amount,
+  coin: item.coin,
+  network: item.network,
 
-    status: item.status,
+  amount: item.amount,
 
-    description: `Deposit ${item.coin}`,
+  status: item.status,
 
-    created_at: item.created_at
+  description: `Deposit ${item.coin}`,
 
-  });
+  created_at: item.created_at
+
+});
 
 });
 
@@ -76,19 +79,22 @@ console.log("Trades:", tradesRes.data);
 
     list.push({
 
-      id: `withdraw-${item.id}`,
+  id: `withdraw-${item.id}`,
 
-      type: "withdraw",
+  type: "withdraw",
 
-      amount: item.amount,
+  coin: item.coin,
+  network: item.network,
 
-      status: item.status,
+  amount: item.amount,
 
-      description: `ถอน ${item.coin}`,
+  status: item.status,
 
-      created_at: item.created_at
+  description: `Withdraw ${item.coin}`,
 
-    });
+  created_at: item.created_at
+
+});
 
   });
 
@@ -100,31 +106,34 @@ console.log("Trades:", tradesRes.data);
 
   list.push({
 
-    id: `transfer-${item.id}`,
+    id:`transfer-${item.id}`,
 
-    type: "transfer",
+    type:"transfer",
 
-    amount: item.amount,
+    coin:item.coin,
+    network:item.network,
 
-    status: item.status,
+    amount:item.amount,
 
-    sender_id: item.sender_id,
+    status:item.status,
 
-    receiver_id: item.receiver_id,
+    sender_id:item.sender_id,
+
+    receiver_id:item.receiver_id,
 
     direction:
-      Number(item.sender_id) === Number(userId)
-        ? "send"
-        : "receive",
+      Number(item.sender_id)===Number(userId)
+      ? "send"
+      : "receive",
 
     description:
-      Number(item.sender_id) === Number(userId)
-        ? `Send ${item.coin}`
-        : `Receive ${item.coin}`,
+      Number(item.sender_id)===Number(userId)
+      ? `Send ${item.coin}`
+      : `Receive ${item.coin}`,
 
-    created_at: item.created_at
+    created_at:item.created_at
 
-  });
+});
 
 });
 
@@ -136,24 +145,30 @@ console.log("Trades:", tradesRes.data);
 
   list.push({
 
-    id: `trade-${item.id}`,
+    id:`trade-${item.id}`,
 
-    type: "trade",
+    type:"trade",
+
+    coin:item.coin,
+
+    symbol:item.coin,
+
+    side:item.side,
+
+    result:item.result,
 
     amount:
-      item.result === "win"
-        ? item.payout
-        : item.amount,
+      item.result==="win"
+      ? item.payout
+      : item.amount,
 
-    status: item.status,
+    status:item.status,
 
-    result: item.result,
+    description:`${item.side} ${item.coin}`,
 
-    description: `${item.side} ${item.coin}`,
+    created_at:item.created_at
 
-    created_at: item.created_at
-
-  });
+});
 
 });
   // เรียงจากใหม่ไปเก่า

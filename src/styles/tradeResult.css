@@ -34,13 +34,17 @@
 
 .trade-result-card{
 
-    width:min(100%,430px);
+    width:min(94vw,430px);
 
     max-height:92vh;
 
     overflow:auto;
 
-    border-radius:30px;
+    margin:12px;
+
+    padding-bottom:20px;
+
+    border-radius:28px;
 
     background:
         linear-gradient(
@@ -55,12 +59,8 @@
     box-shadow:
         0 30px 80px rgba(0,0,0,.55);
 
-    animation:popupShow .35s;
-
     display:flex;
-
     flex-direction:column;
-
     align-items:center;
 }
 
@@ -232,32 +232,44 @@
 
 .result-button{
 
-    width:calc(100% - 48px);
+    appearance:none;
+    -webkit-appearance:none;
 
-    height:56px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-    margin:26px 24px 24px;
+    width:calc(100% - 32px);
+
+    height:62px;
+
+    margin:30px 16px 18px;
+
+    padding:0;
 
     border:none;
 
-    border-radius:16px;
+    border-radius:18px;
 
-    background:
-        linear-gradient(
-            135deg,
-            #2bc8ff,
-            #007dff
-        );
+    background:linear-gradient(
+        135deg,
+        #33d3ff,
+        #1688ff
+    );
 
     color:#fff;
 
-    font-size:17px;
+    font-size:22px;
 
     font-weight:700;
 
+    line-height:1;
+
+    letter-spacing:.5px;
+
     cursor:pointer;
 
-    transition:.25s;
+    flex-shrink:0;
 }
 
 .result-button:hover{
@@ -332,9 +344,13 @@
 
 /* ========================= */
 
-@media(max-width:480px){
+@media (max-width:480px){
 
 .trade-result-card{
+
+    width:95vw;
+
+    margin:8px;
 
     border-radius:22px;
 
@@ -342,11 +358,10 @@
 
 .result-circle{
 
-    width:90px;
-
-    height:90px;
-
-    font-size:46px;
+    width:86px;
+    height:86px;
+    font-size:42px;
+    margin-top:24px;
 
 }
 
@@ -368,9 +383,15 @@
 
 }
 
+.result-table{
+
+    padding:0 18px;
+
+}
+
 .result-row{
 
-    padding:13px 0;
+    padding:12px 0;
 
 }
 
@@ -388,7 +409,19 @@
 
 .result-button{
 
-    height:52px;
+    width:calc(100% - 24px);
+
+    margin:24px 12px 16px;
+
+    height:58px;
+
+    padding:0;
+
+    font-size:20px;
+
+    line-height:1;
+
+    border-radius:18px;
 
 }
 

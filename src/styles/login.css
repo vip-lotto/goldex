@@ -139,7 +139,7 @@ body{
 
     max-width:100%;
 
-    font-size:16px;
+    font-size:10px;
 
     overflow:hidden;
 
@@ -780,5 +780,17 @@ z-index:999;
     right:15px;
 
 }
+
+}
+
+/* ===========================
+   LOGIN PLACEHOLDER
+=========================== */
+
+.login-card input::placeholder{
+
+    font-size:8px !important;
+
+    color:#8c8c8c;
 
 }

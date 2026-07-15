@@ -361,7 +361,7 @@ zIndex:9999
                 border:"none",
                 color:"#fff",
                 padding:"18px 10px",
-                fontSize:"clamp(13px,3.5vw,14px)",
+                fontSize:"12px",
                 outline:"none"
           }}
             />
@@ -398,7 +398,7 @@ zIndex:9999
                 border:"none",
                 color:"#fff",
                 padding:"18px 10px",
-                fontSize:"clamp(13px,3.5vw,14px)",
+                fontSize:"12px",
                 outline:"none"
             }}
             />

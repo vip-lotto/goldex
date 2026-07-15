@@ -310,3 +310,55 @@
 }
 
 }
+
+/* ===============================
+   FIX HEADER
+================================ */
+
+.transaction-header{
+    display:flex !important;
+    align-items:flex-start !important;
+    gap:16px;
+    padding:20px;
+}
+
+.transaction-title{
+    flex:1;
+}
+
+.transaction-title h2{
+    margin:0;
+    font-size:34px;
+    line-height:1.2;
+    color:#fff;
+}
+
+.transaction-title span{
+    display:block;
+    margin-top:6px;
+    color:#9fb3d9;
+    font-size:18px;
+}
+
+.back-btn{
+    position:static !important;
+
+    width:46px;
+    height:46px;
+
+    min-width:46px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    border:none;
+    border-radius:14px;
+
+    background:#3568e6;
+    color:#fff;
+
+    cursor:pointer;
+
+    flex-shrink:0;
+}

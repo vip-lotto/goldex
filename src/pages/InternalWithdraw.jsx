@@ -57,6 +57,8 @@ export default function InternalWithdraw() {
 
   const [loading, setLoading] = useState(false);
 
+  const [hasPendingWithdraw, setHasPendingWithdraw] = useState(false);
+
   const [openCoin,setOpenCoin]=useState(false);
 const [openNetwork,setOpenNetwork]=useState(false);
 
@@ -86,8 +88,18 @@ const [openNetwork,setOpenNetwork]=useState(false);
   
 
   useEffect(() => {
+
     loadWallets();
-  }, []);
+
+    checkPendingWithdraw();
+
+    const timer = setInterval(() => {
+        checkPendingWithdraw();
+    }, 3000);
+
+    return () => clearInterval(timer);
+
+}, []);
 
   const loadWallets = async () => {
 
@@ -157,6 +169,32 @@ if (usdtNetworks.length > 0) {
 
 };
 
+const checkPendingWithdraw = async () => {
+
+    const user = JSON.parse(
+        localStorage.getItem("user")
+    );
+
+    if (!user) return;
+
+    const { data } = await supabase
+        .from("withdrawals")
+        .select("id")
+        .eq("user_id", user.id)
+        .eq("status", "pending")
+        .limit(1);
+
+    const hasPending =
+    data && data.length > 0;
+
+setHasPendingWithdraw(hasPending);
+
+
+
+
+
+};
+
   const handleCoinChange = (e) => {
 
     const value =
@@ -187,12 +225,33 @@ setNetwork(
 
       if (loading) return;
 
+      if (hasPendingWithdraw) {
+
+  showToast(
+     t("submitting"),
+    "warning"
+  );
+
+  return;
+
+}
+
 setLoading(true);
 
     const user =
-      JSON.parse(
-        localStorage.getItem("user")
-      );
+  JSON.parse(
+    localStorage.getItem("user")
+  );
+
+// โหลดข้อมูลสมาชิก
+const { data: profile } = await supabase
+  .from("profiles")
+  .select("member_id, first_name, last_name")
+  .eq("id", user.id)
+  .single();
+
+console.log("USER =", user);
+console.log("PROFILE =", profile);
 
 
       const {
@@ -215,55 +274,71 @@ if (
   t("pendingWithdraw"),
   "warning"
 );
-
 setLoading(false);
-
   return;
 }
 
-
-      
-
-
-      const { data: wallet } =
-  await supabase
-    .from("wallets")
-    .select("*")
-    .eq(
-      "user_id",
-      user.id
-    )
-    .single();
+      const { data: wallet } = await supabase
+  .from("wallets")
+  .select("*")
+  .eq("user_id", user.id)
+  .single();
 
 if (!wallet) {
 
   showToast(
-  t("walletNotFound"),
-  "error"
-);
+    `${coin} Wallet not found`,
+    "error"
+  );
 
-setLoading(false);
+  setLoading(false);
 
   return;
 }
 
-if (
-  Number(amount) >
-  Number(wallet.balance)
-) {
+let currentBalance = 0;
+
+switch (coin) {
+
+  case "USDT":
+    currentBalance = Number(wallet.balance || 0);
+    break;
+
+  case "BTC":
+    currentBalance = Number(wallet.BTC || 0);
+    break;
+
+  case "ETH":
+    currentBalance = Number(wallet.ETH || 0);
+    break;
+
+  case "BNB":
+    currentBalance = Number(wallet.BNB || 0);
+    break;
+
+  case "TRX":
+    currentBalance = Number(wallet.TRX || 0);
+    break;
+
+  case "ADA":
+    currentBalance = Number(wallet.ADA || 0);
+    break;
+
+  default:
+    currentBalance = 0;
+}
+
+if (Number(amount) > currentBalance) {
 
   showToast(
-  t("insufficientBalance"),
-  "error"
-);
+    "Insufficient funds.",
+    "error"
+  );
 
-setLoading(false);
+  setLoading(false);
 
   return;
 }
-
-    
-
     if (!amount) {
       showToast(
   t("enterAmount"),
@@ -271,23 +346,17 @@ setLoading(false);
 );
 
 setLoading(false);
-
       return;
     }
-
-
 
     if (!address && !qrFile) {
   showToast(
   t("enterAddress"),
   "warning"
 );
-
 setLoading(false);
-
   return;
 }
-
     if (Number(amount) < 1) {
 
   showToast(
@@ -300,68 +369,99 @@ setLoading(false);
   return;
 }
 
+    
+
+    
+
     let qrUrl = "";
 
-    /*
+if (qrFile) {
 
-    const fileName =
-      `${Date.now()}-${qrFile.name}`;
+  const fileName = `${Date.now()}-${qrFile.name}`;
 
-    const upload =
-      await supabase.storage
-        .from("withdraw-qr")
-        .upload(
-          fileName,
-          qrFile
-        );
+  const { data: sessionData } = await supabase.auth.getSession();
 
-    if (!upload.error) {
+console.log("SESSION =", sessionData.session);
+console.log("USER =", sessionData.session?.user);
+console.log("ROLE =", sessionData.session?.user?.role);
+console.log("USER ID =", sessionData.session?.user?.id);
 
-      const { data } =
-        supabase.storage
-          .from("withdraw-qr")
-          .getPublicUrl(
-            fileName
-          );
+  const { data: uploadData, error: uploadError } =
+await supabase.storage
+    .from("withdraw-qr")
+    .upload(fileName, qrFile);
 
-      qrUrl =
-        data.publicUrl;
-    }
+    console.log("UPLOAD DATA =", uploadData);
+console.log("UPLOAD ERROR =", uploadError);
 
-    */
+  if (uploadError) {
+
+  console.log(uploadError);
+
+  alert(uploadError.message);
+
+  showToast(uploadError.message, "error");
+
+  setLoading(false);
+
+  return;
+}
+
+  const { data } = supabase.storage
+    .from("withdraw-qr")
+    .getPublicUrl(fileName);
+
+  qrUrl = data.publicUrl;
+}
+
+    
 
     const { data, error } =
   await supabase
-  .from("withdrawals")
-  .insert({
+.from("withdrawals")
+.insert({
 
     user_id:
       user.id,
 
+    member_id:
+      profile?.member_id,
+
+    first_name:
+      profile?.first_name,
+
+    last_name:
+      profile?.last_name,
+
     type:
       "crypto",
 
-      coin,
+    coin,
 
-      network,
+    network,
 
-      address,
+    address,
 
-      amount:
-        Number(amount),
+    amount:
+      Number(amount),
 
-      fee,
+    fee,
 
-      receive_amount:
-        receiveAmount,
+    receive_amount:
+      receiveAmount,
 
-      qr_image:
-        qrUrl,
+    qr_image:
+      qrUrl,
 
-      status:
-        "pending"
-    })
+    status:
+      "pending"
+
+})
+
     .select();
+
+    console.log("WITHDRAW DATA =", data);
+    console.log("WITHDRAW ERROR =", error);
 
 console.log(
   "INSERT DATA =",
@@ -375,53 +475,55 @@ console.log(
 
     if (error) {
 
-      showToast(
-  error.message,
-  "error"
-);
+  console.error("WITHDRAW INSERT ERROR:", error);
 
-setLoading(false);
+  alert(JSON.stringify(error));
 
+  showToast(
+    error.message,
+    "error"
+  );
 
-      return;
-    }
+  setLoading(false);
+
+  return;
+}
 
     
 
-await addTransaction({
-  user_id: user.id,
-  type: "withdraw",
-  amount: Number(amount),
-  status: "pending",
-  description: `ถอน ${amount} ${coin}`
-});
+try {
+  await addTransaction({
+    user_id: user.id,
+    type: "withdraw",
+    amount: Number(amount),
+    status: "pending",
+    description: `ถอน ${amount} ${coin}`
+  });
+} catch (e) {
+  console.error("TRANSACTION ERROR", e);
+}
 
-    await supabase
+    const { error: notifyError } = await supabase
   .from("notifications")
   .insert({
-
-    user_id:
-      user.id,
-
-    title:
-      "ส่งคำขอถอนสำเร็จ",
-
-    message:
-`ถอน ${amount} ${coin}
+    user_id: user.id,
+    title: "ส่งคำขอถอนสำเร็จ",
+    message: `ถอน ${amount} ${coin}
 
 Network : ${network}
 
 สถานะ : รออนุมัติ`,
-
-    is_read:
-      false
-
+    is_read: false
   });
+
+console.log("NOTIFICATION ERROR", notifyError);
 
     showToast(
 t("withdrawSubmitted"),
 "success"
 );
+
+setHasPendingWithdraw(true);
 
 setLoading(false);
 
@@ -716,9 +818,11 @@ onClick={submitWithdraw}
 disabled={loading}
 >
 
-{loading
+{
+loading
 ? t("submitting")
-: t("submitWithdraw")}
+: t("submitWithdraw")
+}
 
 </button>
 

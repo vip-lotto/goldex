@@ -253,20 +253,31 @@ if (error) {
     publicData.publicUrl;
 
   const { error } =
-    await supabase
-  .from("deposits")
-  .insert([
+await supabase
+.from("deposits")
+.insert([
 {
- user_id: user.id,
- coin: coin,
- network: network,
+  user_id: user.id,
 
- amount: Number(amount),
+  member_id: user.member_id,
 
- wallet_address: currentWallet.address,
- slip: slip.name,
- slip_url: slipUrl,
- status:"pending"
+  first_name: user.first_name,
+
+  last_name: user.last_name,
+
+  coin: coin,
+
+  network: network,
+
+  amount: Number(amount),
+
+  wallet_address: currentWallet.address,
+
+  slip: slip.name,
+
+  slip_url: slipUrl,
+
+  status: "pending"
 }
 ]);
 
