@@ -1,0 +1,487 @@
+/* ===========================================
+   TRUST ADMIN ACCOUNTS
+=========================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+.admin-accounts-page{
+
+    min-height:100vh;
+
+    background:#0f1117;
+
+    padding:32px;
+
+    color:#fff;
+}
+
+/* ================= Header ================= */
+
+.admin-accounts-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+    flex-wrap:wrap;
+}
+
+.admin-accounts-header h1{
+
+    margin:0;
+
+    font-size:40px;
+
+    font-weight:700;
+}
+
+/* ================= Back ================= */
+
+.back-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    border:none;
+
+    background:#1f2937;
+
+    color:#fff;
+
+    padding:12px 22px;
+
+    border-radius:12px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.back-btn:hover{
+
+    background:#2563eb;
+
+    transform:translateY(-2px);
+}
+
+/* ================= Card ================= */
+
+.admin-card{
+
+    background:#1b2433;
+
+    border-radius:18px;
+
+    padding:28px;
+
+    margin-bottom:28px;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+.admin-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:20px;
+}
+
+.admin-title svg{
+
+    color:#ffffff;
+}
+
+.admin-title h2{
+
+    margin:0;
+
+    font-size:34px;
+}
+
+.admin-title p{
+
+    margin-top:6px;
+
+    color:#94a3b8;
+
+    font-size:16px;
+}
+
+/* ================= Add Button ================= */
+
+.admin-actions{
+
+    margin-top:28px;
+}
+
+.add-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    width:220px;
+
+    height:54px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#22c55e;
+
+    color:#fff;
+
+    font-size:17px;
+
+    font-weight:700;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.add-btn:hover{
+
+    background:#16a34a;
+
+    transform:translateY(-2px);
+}
+
+/* ================= Table ================= */
+
+.table-card{
+
+    background:#1b2433;
+
+    border-radius:18px;
+
+    overflow-x:auto;
+
+    box-shadow:0 10px 35px rgba(0,0,0,.25);
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    min-width:900px;
+}
+
+thead{
+
+    background:#111827;
+}
+
+th{
+
+    padding:18px;
+
+    color:#facc15;
+
+    font-size:15px;
+
+    font-weight:700;
+
+    text-align:left;
+}
+
+td{
+
+    padding:18px;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    font-size:15px;
+
+    color:#fff;
+}
+
+tbody tr{
+
+    transition:.2s;
+}
+
+tbody tr:hover{
+
+    background:#202b3d;
+}
+
+/* ================= Password ================= */
+
+.password{
+
+    letter-spacing:3px;
+
+    color:#cbd5e1;
+}
+
+/* ================= Action ================= */
+
+.action-buttons{
+
+    display:flex;
+
+    gap:10px;
+
+    flex-wrap:wrap;
+}
+
+.edit-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:170px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#2563eb;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.edit-btn:hover{
+
+    background:#1d4ed8;
+}
+
+.delete-btn{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:120px;
+
+    height:42px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#dc2626;
+
+    color:#fff;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.25s;
+}
+
+.delete-btn:hover{
+
+    background:#b91c1c;
+}
+
+/* ================= Responsive ================= */
+
+@media(max-width:768px){
+
+.admin-accounts-page{
+
+    padding:18px;
+}
+
+.admin-accounts-header{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+}
+
+.admin-accounts-header h1{
+
+    font-size:28px;
+}
+
+.admin-card{
+
+    padding:20px;
+}
+
+.admin-title{
+
+    align-items:flex-start;
+}
+
+.admin-title h2{
+
+    font-size:24px;
+}
+
+.admin-title p{
+
+    font-size:14px;
+}
+
+.add-btn{
+
+    width:100%;
+}
+
+.edit-btn,
+.delete-btn{
+
+    width:100%;
+}
+
+.action-buttons{
+
+    flex-direction:column;
+}
+
+table{
+
+    min-width:760px;
+}
+
+}
+
+/* popup */
+
+.popup-overlay{
+
+position:fixed;
+
+inset:0;
+
+background:rgba(0,0,0,.65);
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+z-index:99999;
+
+}
+
+.popup-card{
+
+width:420px;
+
+max-width:95%;
+
+background:#1b2433;
+
+border-radius:18px;
+
+padding:30px;
+
+}
+
+.popup-card h2{
+
+margin-bottom:20px;
+
+}
+
+.popup-input{
+
+width:100%;
+
+height:48px;
+
+margin-bottom:15px;
+
+padding:0 15px;
+
+background:#0f172a;
+
+border:1px solid #334155;
+
+color:white;
+
+border-radius:10px;
+
+}
+
+.popup-buttons{
+
+display:flex;
+
+justify-content:flex-end;
+
+gap:10px;
+
+margin-top:10px;
+
+}
+
+.cancel-btn{
+
+background:#374151;
+
+color:white;
+
+border:none;
+
+padding:12px 22px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.save-btn{
+
+background:#16a34a;
+
+color:white;
+
+border:none;
+
+padding:12px 22px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}

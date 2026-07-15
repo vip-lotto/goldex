@@ -63,6 +63,7 @@ import AdminDepositWallet from "./pages/admin/AdminDepositWallet";
 import AdminContact from "./pages/admin/AdminContact";
 import AdminKYC from "./pages/admin/AdminKYC";
 import KYCRouter from "./pages/KYCRouter";
+import AdminAccounts from "./pages/admin/AdminAccounts";
 
 
 function Layout() {
@@ -282,7 +283,10 @@ path="/admin/kyc"
 element={<AdminKYC />}
 />
 
-
+<Route
+  path="/admin/admin-accounts"
+  element={<AdminAccounts />}
+/>
 
 
 

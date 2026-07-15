@@ -251,18 +251,24 @@ function getProfit() {
   return 5;
 }
 
-async function getFinalResult(userId){
+async function getFinalResult(trade){
+
+
+    if(trade.admin_result){
+
+        return trade.admin_result;
+
+    }
 
     // =========================
     // 1. เช็กการควบคุมรายบุคคล
     // =========================
     const { data:userControl } =
-    await supabase
-    .from("trade_user_control")
-    .select("*")
-    .eq("user_id", userId)
-    .maybeSingle();
-    
+await supabase
+.from("trade_user_control")
+.select("*")
+.eq("user_id", trade.user_id)
+.maybeSingle();
 // หมดเวลาควบคุมแล้ว
 // =========================
 // USER CONTROL
@@ -519,7 +525,76 @@ setSeconds(Number(selectedSetting.duration));
 
 
 
+// =========================
+// CHECK ADMIN FORCE RESULT
+// =========================
 
+useEffect(()=>{
+
+
+if(!isTrading || !activeTrade){
+
+    return;
+
+}
+
+
+const channel = supabase
+
+.channel(
+    "trade-result-" + activeTrade.id
+)
+
+.on(
+
+"postgres_changes",
+
+{
+
+event:"UPDATE",
+
+schema:"public",
+
+table:"trades",
+
+filter:
+`id=eq.${activeTrade.id}`
+
+},
+
+(payload)=>{
+
+
+const updatedTrade = payload.new;
+
+
+if(updatedTrade.admin_result){
+
+    setActiveTrade(updatedTrade);
+
+}
+
+
+}
+
+)
+
+.subscribe();
+
+
+
+return ()=>{
+
+supabase.removeChannel(channel);
+
+};
+
+
+
+},[
+isTrading,
+activeTrade
+]);
 
 
 
@@ -527,7 +602,6 @@ setSeconds(Number(selectedSetting.duration));
 // =========================
 // TIMER
 // =========================
-
 
 useEffect(()=>{
 
@@ -539,12 +613,11 @@ return;
 }
 
 
+if(seconds <= 0){
 
-if(seconds<=0){
+    finishTrade();
 
-finishTrade();
-
-return;
+    return;
 
 }
 
@@ -570,11 +643,6 @@ return ()=>clearTimeout(timer);
 seconds,
 isTrading
 ]);
-
-
-
-
-
 
 
 
@@ -616,9 +684,8 @@ if(!trade){
 return;
 }
 
-const finalResult =
-await getFinalResult(
-    trade.user_id
+const finalResult = await getFinalResult(
+    trade
 );
 
 let payout=0;

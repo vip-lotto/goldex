@@ -69,7 +69,23 @@ return;
 
 setLoading(true);
 
+// เช็คสถานะล่าสุดอีกรอบ
+const {data:checkWithdraw}=await supabase
+.from("withdrawals")
+.select("status")
+.eq("id",item.id)
+.single();
 
+
+if(!checkWithdraw || checkWithdraw.status !== "pending"){
+
+alert("รายการนี้ถูกทำแล้ว");
+
+setLoading(false);
+
+return;
+
+}
 
 // wallet
 
@@ -92,11 +108,16 @@ return;
 
 }
 
-
-
-
-
 let oldBalance = 0;
+
+console.log(
+  "Withdraw Check:",
+  item.coin,
+  "Amount:",
+  item.amount,
+  "Wallet:",
+  wallet
+);
 
 switch (item.coin) {
 
@@ -128,12 +149,8 @@ switch (item.coin) {
     oldBalance = 0;
 }
 
-
 const withdrawAmount =
 Number(item.amount);
-
-
-
 
 if(oldBalance < withdrawAmount){
 
@@ -194,9 +211,12 @@ switch (item.coin) {
 const { error: updateError } = await supabase
   .from("wallets")
   .update(updateData)
-  .eq("id", wallet.id);
+  .eq("user_id", item.user_id);
 
-
+console.log(
+"Wallet updated:",
+updateData
+);
 
 
 if(updateError){
@@ -216,7 +236,7 @@ return;
 // update withdrawal
 
 
-await supabase
+const {error:withdrawError}=await supabase
 .from("withdrawals")
 .update({
 
@@ -226,6 +246,18 @@ admin_message:"Approved"
 
 })
 .eq("id",item.id);
+
+
+
+if(withdrawError){
+
+alert(withdrawError.message);
+
+setLoading(false);
+
+return;
+
+}
 
 
 
@@ -248,7 +280,8 @@ user_id:item.user_id,
 
 type:"withdraw",
 
-amount:withdrawAmount,
+amount:
+withdrawAmount,
 
 status:"completed",
 

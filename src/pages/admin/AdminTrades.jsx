@@ -19,6 +19,8 @@ const navigate = useNavigate();
 
 const [trades,setTrades] = useState([]);
 
+const [currentTrades,setCurrentTrades] = useState([]);
+
 const [users,setUsers] = useState([]);
 
 const [selectedUser,setSelectedUser] = useState("");
@@ -38,6 +40,45 @@ useEffect(()=>{
     loadTrades();
 
     loadUsers();
+
+
+    const channel = supabase
+    .channel("admin-trades-live")
+
+
+    .on(
+        "postgres_changes",
+        {
+            event:"*",
+            schema:"public",
+            table:"trades"
+        },
+        (payload)=>{
+
+
+            console.log(
+                "TRADE UPDATE",
+                payload
+            );
+
+
+            loadTrades();
+
+
+        }
+    )
+
+
+    .subscribe();
+
+
+
+    return()=>{
+
+        supabase.removeChannel(channel);
+
+    };
+
 
 },[]);
 
@@ -82,7 +123,27 @@ const loadTrades = async()=>{
 
     setTrades(data || []);
 
-    setLoading(false);
+
+setCurrentTrades(
+
+(data || [])
+
+.filter(
+trade =>
+trade.status === "trading"
+)
+
+.sort(
+(a,b)=>
+new Date(b.created_at)
+-
+new Date(a.created_at)
+)
+
+);
+
+
+setLoading(false);
 
 };
 
@@ -324,6 +385,64 @@ const setUserResult = async(mode)=>{
         `USER ${mode.toUpperCase()}`
 
     );
+
+};
+
+// =========================
+// FORCE RESULT
+// =========================
+const forceResult = async(trade,result)=>{
+
+
+if(trade.status !== "trading"){
+
+alert("Trade already finished");
+
+return;
+
+}
+
+
+
+const {error}=await supabase
+
+.from("trades")
+
+.update({
+
+admin_result: result
+
+})
+
+.eq(
+"id",
+trade.id
+)
+
+.eq(
+"status",
+"trading"
+);
+
+
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+
+
+alert(
+`ROUND ${trade.id} ${result.toUpperCase()}`
+);
+
+
+await loadTrades();
+
 
 };
 
@@ -729,6 +848,155 @@ cursor:"pointer"
 USER LOSE
 
 </button>
+
+</div>
+
+<div>
+
+<h2>
+🔥 Current Trading
+</h2>
+
+
+<table
+
+style={{
+
+width:"100%",
+background:"#111d32",
+borderCollapse:"collapse"
+
+}}
+
+>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>User</th>
+
+<th>Coin</th>
+
+<th>Amount</th>
+
+<th>Duration</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+{
+currentTrades.map(item=>(
+
+
+<tr key={item.id}>
+
+
+<td>
+#{item.id}
+</td>
+
+
+<td>
+{getUserName(item.user_id)}
+</td>
+
+
+<td>
+{item.coin}
+</td>
+
+
+<td>
+{formatNumber(item.amount)}
+</td>
+
+
+<td>
+{item.duration} นาที
+</td>
+
+
+<td>
+Running
+</td>
+
+
+<td>
+
+
+<button
+
+onClick={()=>forceResult(item,"win")}
+
+style={{
+
+background:"#16a34a",
+color:"#fff",
+padding:"8px 15px",
+border:0,
+borderRadius:8,
+marginRight:8
+
+}}
+
+>
+
+WIN
+
+</button>
+
+
+
+<button
+
+onClick={()=>forceResult(item,"lose")}
+
+style={{
+
+background:"#dc2626",
+color:"#fff",
+padding:"8px 15px",
+border:0,
+borderRadius:8
+
+}}
+
+>
+
+LOSE
+
+</button>
+
+
+
+</td>
+
+
+</tr>
+
+
+))
+
+}
+
+
+</tbody>
+
+
+</table>
+
 
 </div>
 

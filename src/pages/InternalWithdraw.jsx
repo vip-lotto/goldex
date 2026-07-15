@@ -68,13 +68,17 @@ const [openNetwork,setOpenNetwork]=useState(false);
 
   
 
-  const fee = 1;
+  let fee = 0;
 
-  const receiveAmount =
-  Math.max(
-    Number(amount || 0) - fee,
-    0
-  );
+if (coin === "USDT") {
+  fee = 1;
+}
+
+const receiveAmount =
+Math.max(
+  Number(amount || 0) - fee,
+  0
+);
 
   
   const currentWallet =
@@ -110,6 +114,16 @@ const [openNetwork,setOpenNetwork]=useState(false);
 
   const { data } =
     await supabase
+      .from("wallets")
+      .select("*")
+      .eq(
+        "user_id",
+        user.id
+      );
+
+
+const { data: walletNetworks } =
+    await supabase
       .from("user_wallets")
       .select("*")
       .eq(
@@ -117,11 +131,28 @@ const [openNetwork,setOpenNetwork]=useState(false);
         user.id
       );
 
-  if (data?.length > 0) {
+  if (data?.length > 0 && walletNetworks?.length > 0) {
 
-    setWallets(data);
+    setWallets(
+  walletNetworks.map(item => {
 
-    const usdtNetworks = data.filter(
+    const balanceWallet =
+      data[0] || {};
+
+    return {
+      ...item,
+      balance: balanceWallet.balance,
+      BTC: balanceWallet.BTC,
+      ETH: balanceWallet.ETH,
+      BNB: balanceWallet.BNB,
+      TRX: balanceWallet.TRX,
+      ADA: balanceWallet.ADA
+    };
+
+  })
+);
+
+    const usdtNetworks = walletNetworks.filter(
   item => item.coin === "USDT"
 );
 
@@ -144,11 +175,11 @@ if (usdtNetworks.length > 0) {
 
 } else {
 
-  setCoin(data[0].coin);
+  setCoin(walletNetworks[0].coin);
 
-  const firstNetworks = data.filter(
-    item => item.coin === data[0].coin
-  );
+  const firstNetworks = walletNetworks.filter(
+  item => item.coin === walletNetworks[0].coin
+);
 
   const trc = firstNetworks.find(
     item =>
@@ -278,16 +309,21 @@ setLoading(false);
   return;
 }
 
-      const { data: wallet } = await supabase
-  .from("wallets")
-  .select("*")
-  .eq("user_id", user.id)
-  .single();
+    const currentWallet = wallets.find(
+  item =>
+    item.coin === coin &&
+    item.network === network
+);
 
-if (!wallet) {
+console.log("Wallets =", wallets);
+console.log("Selected Coin =", coin);
+console.log("Selected Network =", network);
+console.log("Current Wallet =", currentWallet);
+
+if (!currentWallet) {
 
   showToast(
-    `${coin} Wallet not found`,
+    "Wallet not found",
     "error"
   );
 
@@ -301,32 +337,35 @@ let currentBalance = 0;
 switch (coin) {
 
   case "USDT":
-    currentBalance = Number(wallet.balance || 0);
+    currentBalance = Number(currentWallet.balance || 0);
     break;
 
   case "BTC":
-    currentBalance = Number(wallet.BTC || 0);
+    currentBalance = Number(currentWallet.BTC || 0);
     break;
 
   case "ETH":
-    currentBalance = Number(wallet.ETH || 0);
+    currentBalance = Number(currentWallet.ETH || 0);
     break;
 
   case "BNB":
-    currentBalance = Number(wallet.BNB || 0);
+    currentBalance = Number(currentWallet.BNB || 0);
     break;
 
   case "TRX":
-    currentBalance = Number(wallet.TRX || 0);
+    currentBalance = Number(currentWallet.TRX || 0);
     break;
 
   case "ADA":
-    currentBalance = Number(wallet.ADA || 0);
+    currentBalance = Number(currentWallet.ADA || 0);
     break;
 
   default:
     currentBalance = 0;
 }
+
+  console.log("Balance =", currentBalance);
+console.log("Withdraw =", amount);
 
 if (Number(amount) > currentBalance) {
 
@@ -339,6 +378,7 @@ if (Number(amount) > currentBalance) {
 
   return;
 }
+
     if (!amount) {
       showToast(
   t("enterAmount"),
@@ -357,14 +397,14 @@ setLoading(false);
 setLoading(false);
   return;
 }
-    if (Number(amount) < 1) {
+    if (Number(amount) <= 0) {
 
   showToast(
-  t("minimumWithdraw"),
-  "warning"
-);
+    t("minimumWithdraw"),
+    "warning"
+  );
 
-setLoading(false);
+  setLoading(false);
 
   return;
 }
@@ -448,7 +488,11 @@ console.log("UPLOAD ERROR =", uploadError);
     fee,
 
     receive_amount:
-      receiveAmount,
+coin === "USDT"
+?
+Number(amount) - fee
+:
+Number(amount),
 
     qr_image:
       qrUrl,
@@ -797,18 +841,18 @@ const bIndex = priority.indexOf(bn);
       <div className="deposit-card">
 
         <p>
-          {t("transferFee")} :
-          {fee} USDT
-        </p>
+{t("transferFee")} :
+{fee} {coin}
+</p>
 
-        <p>
-          {t("amountReceived")} :
-          {receiveAmount > 0
-            ? receiveAmount
-            : 0}
-          {" "}
-          USDT
-        </p>
+<p>
+{t("amountReceived")} :
+{receiveAmount > 0
+? receiveAmount
+: 0}
+{" "}
+{coin}
+</p>
 
       </div>
 

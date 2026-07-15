@@ -89,28 +89,25 @@ export default function AdminLogin(){
 
 
       localStorage.setItem(
-        "admin",
-        JSON.stringify(data)
-      );
+  "admin",
+  JSON.stringify(data)
+);
 
+setLoading(false);
 
-
-      navigate("/admin");
+navigate("/admin");
 
 
 
     }catch(err){
 
+  console.log(err);
 
-      console.log(err);
+  setLoading(false);
 
+  alert("Login Error");
 
-      alert(
-        "Login Error"
-      );
-
-
-    }
+}
 
 
     setLoading(false);

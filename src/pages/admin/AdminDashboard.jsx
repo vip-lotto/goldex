@@ -114,6 +114,13 @@ export default function AdminDashboard() {
     },
 
     {
+  title: "Add Admin",
+  desc: "Administrator Account",
+  icon: <ShieldCheck size={34} />,
+  path: "/admin/admin-accounts",
+  color: "indigo"
+},
+    {
     title:"📞 Contact Admin",
     path:"/admin/contact",
     color:"#06b6d4"
@@ -195,7 +202,11 @@ export default function AdminDashboard() {
 
         </div>
 
-        <div className="stat-card">
+        <div 
+            className="stat-card"
+            onClick={()=>navigate("/admin/trades")}
+            style={{cursor:"pointer"}}
+        >
 
             <TrendingUp size={30}/>
 
