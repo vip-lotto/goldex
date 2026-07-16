@@ -30,6 +30,10 @@ const [messages,setMessages] = useState([]);
 
 const [text,setText] = useState("");
 
+const [customerTag,setCustomerTag] = useState("");
+const [adminNote,setAdminNote] = useState("");
+const [editingCustomer,setEditingCustomer] = useState(false);
+
 const [search,setSearch] = useState("");
 
 const bottomRef = useRef(null);
@@ -149,6 +153,8 @@ ascending:false
 if(error){
 
 console.log(error);
+
+alert(error.message);
 
 return;
 
@@ -288,6 +294,9 @@ async function openRoom(room){
 
 setSelectedRoom(room);
 
+setCustomerTag(room.customer_tag || "");
+setAdminNote(room.admin_note || "");
+setEditingCustomer(false);
 
 selectedRoomRef.current = room;
 
@@ -512,6 +521,39 @@ if(roomData){
 
 }
 
+async function saveCustomerInfo(){
+
+  if(!selectedRoom) return;
+
+  const { error } = await supabase
+    .from("chat_rooms")
+    .update({
+      customer_tag: customerTag,
+      admin_note: adminNote
+    })
+    .eq("id", selectedRoom.id);
+
+  if(error){
+    console.log(error);
+    return;
+  }
+
+  await loadRooms();
+
+  const { data } = await supabase
+    .from("chat_rooms")
+    .select("*")
+    .eq("id", selectedRoom.id)
+    .single();
+
+  if(data){
+    setSelectedRoom(data);
+    selectedRoomRef.current = data;
+    setEditingCustomer(false);
+  }
+
+}
+
 /*
 ========================
 ค้นหาห้อง
@@ -651,7 +693,17 @@ ID : {room.member_id}
 
 </div>
 
-
+{room.customer_tag && (
+  <div
+    style={{
+      fontSize:12,
+      color:"#030f74",
+      marginTop:4
+    }}
+  >
+    🏷️ {room.customer_tag}
+  </div>
+)}
 
 <div className="last-message">
 
@@ -727,34 +779,125 @@ selectedRoom ?
 
 <div className="chat-header">
 
-
 <div>
 
-
 <div className="chat-customer-name">
-
 {selectedRoom.customer_name}
-
 </div>
-
-
 
 <div className="chat-customer-id">
-
 ID : {selectedRoom.member_id}
+</div>
+
+{selectedRoom.customer_tag && (
+  <div className="customer-tag">
+    🏷️ {selectedRoom.customer_tag}
+  </div>
+)}
+
+<div className="customer-note">
+📝 {selectedRoom.admin_note}
+</div>
+
+</div>
+
+{!editingCustomer && (
+  <button
+    onClick={() => setEditingCustomer(true)}
+    style={{
+      padding:"8px 16px",
+      borderRadius:8,
+      cursor:"pointer"
+    }}
+  >
+    ✏️ แก้ไข
+  </button>
+)}
 
 </div>
 
 
+{
+editingCustomer && (
+
+<div
+style={{
+padding:20,
+background:"#132a5c",
+borderBottom:"1px solid #28457f"
+}}
+>
+
+
+
+<input
+value={customerTag}
+onChange={(e)=>setCustomerTag(e.target.value)}
+placeholder="Tag"
+style={{
+width:"100%",
+padding:10,
+marginBottom:10,
+borderRadius:8
+}}
+/>
+
+<textarea
+value={adminNote}
+onChange={(e)=>setAdminNote(e.target.value)}
+rows={3}
+placeholder="หมายเหตุ"
+style={{
+width:"100%",
+padding:10,
+borderRadius:8
+}}
+/>
+
+<div
+style={{
+display:"flex",
+gap:10,
+marginTop:15
+}}
+>
+
+<button
+onClick={saveCustomerInfo}
+style={{
+padding:"10px 20px",
+background:"#2b82ff",
+color:"#fff",
+border:"none",
+borderRadius:8
+}}
+>
+
+บันทึก
+
+</button>
+
+<button
+onClick={()=>setEditingCustomer(false)}
+style={{
+padding:"10px 20px",
+background:"#777",
+color:"#fff",
+border:"none",
+borderRadius:8
+}}
+>
+
+ยกเลิก
+
+</button>
+
 </div>
 
-
 </div>
 
-
-
-
-
+)
+}
 
 {/* MESSAGE AREA */}
 

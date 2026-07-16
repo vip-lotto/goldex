@@ -220,19 +220,23 @@ export default function AdminDashboard() {
 
         </div>
 
-        <div className="stat-card">
+        <div
+    className="stat-card"
+    onClick={() => navigate("/admin/support-chat")}
+    style={{ cursor: "pointer" }}
+>
 
-            <Wallet size={30}/>
+    <MessageCircle size={30}/>
 
-            <div>
+    <div>
 
-                <h3>Wallet</h3>
+        <h3>Support Chat</h3>
 
-                <span>Deposit Address</span>
+        <span>Chat with customers</span>
 
-            </div>
+    </div>
 
-        </div>
+</div>
 
     </div>
 

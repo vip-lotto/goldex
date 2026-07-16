@@ -547,20 +547,7 @@ try {
   console.error("TRANSACTION ERROR", e);
 }
 
-    const { error: notifyError } = await supabase
-  .from("notifications")
-  .insert({
-    user_id: user.id,
-    title: "ส่งคำขอถอนสำเร็จ",
-    message: `ถอน ${amount} ${coin}
-
-Network : ${network}
-
-สถานะ : รออนุมัติ`,
-    is_read: false
-  });
-
-console.log("NOTIFICATION ERROR", notifyError);
+    
 
     showToast(
 t("withdrawSubmitted"),
