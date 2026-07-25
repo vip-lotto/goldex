@@ -116,39 +116,62 @@ export default function Home() {
 
   async function loadProfit() {
 
-    const user =
-      JSON.parse(
-        localStorage.getItem("user")
-      );
+  const user =
+    JSON.parse(localStorage.getItem("user"));
 
-    if (!user) return;
+  if (!user) return;
 
-    const { data, error } =
-      await supabase
-        .from("trades")
-        .select("profit_amount")
-        .eq("user_id", user.id)
-        .eq("status", "finished");
+  // เวลาเริ่มของวันนี้
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
 
-    if (error) {
+  // เวลาเริ่มของวันพรุ่งนี้
+  const tomorrow = new Date(today);
+  tomorrow.setDate(today.getDate() + 1);
 
-      console.log(error);
+  const { data, error } =
+    await supabase
+      .from("trades")
+      .select(`
+        result,
+        amount,
+        profit_amount,
+        finished_at
+      `)
+      .eq("user_id", user.id)
+      .eq("status", "finished")
+      .gte("finished_at", today.toISOString())
+      .lt("finished_at", tomorrow.toISOString());
 
-      return;
+  if (error) {
+
+    console.log(error);
+
+    return;
+
+  }
+
+  let total = 0;
+
+  data.forEach((trade) => {
+
+    if (trade.result === "win") {
+
+      total += Number(trade.profit_amount || 0);
 
     }
 
-    const total =
-      (data || []).reduce(
-        (sum, item) =>
-          sum +
-          Number(item.profit_amount || 0),
-        0
-      );
+    if (trade.result === "lose") {
 
-    setProfit(total);
+      total -= Number(trade.amount || 0);
 
-  }
+    }
+
+  });
+
+  setProfit(total);
+
+}
     /* =========================
       LOAD MARKET
   ========================= */
@@ -363,7 +386,7 @@ onClick={() => navigate("/notifications")}
         <div className="profit-side">
 
           <span className="profit-title">
-            {t("profit")}
+            {t("profit")}  P/L 
           </span>
 
           <h3
