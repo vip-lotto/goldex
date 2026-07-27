@@ -56,11 +56,14 @@
 
 .dashboard-card{
     border-radius:15px;
-    padding:16px;
-    min-height:50px;
+    padding:18px 20px;
+    min-height:70px;
+
     display:flex;
-    flex-direction:column;
-    justify-content:center;
+    flex-direction:row;      /* เปลี่ยนจาก column เป็น row */
+
+    justify-content:space-between;
+    align-items:center;
 }
 
 .dashboard-card:hover{

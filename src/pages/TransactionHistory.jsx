@@ -171,44 +171,43 @@ export default function TransactionHistory() {
 
         <div className="dashboard-card deposit">
 
-          <span>{t("deposit")}</span>
+  <span>{t("deposit")}</span>
 
-          <h3>
-            USDT{summary.deposit.toLocaleString()}
-          </h3>
+  <span className="dashboard-value">
+    USDT   {summary.deposit.toLocaleString()}
+  </span>
 
-        </div>
+</div>
 
-        <div className="dashboard-card withdraw">
+<div className="dashboard-card withdraw">
 
-          <span>{t("withdraw")}</span>
+  <span>{t("withdraw")}</span>
 
-          <h3>
-            USDT{summary.withdraw.toLocaleString()}
-          </h3>
+  <span className="dashboard-value">
+    USDT   {summary.withdraw.toLocaleString()}
+  </span>
 
-        </div>
+</div>
 
-        <div className="dashboard-card transfer">
+<div className="dashboard-card transfer">
 
-          <span>{t("transfer")}</span>
+  <span>{t("transfer")}</span>
 
-          <h3>
-            USDT{summary.transfer.toLocaleString()}
-          </h3>
+  <span className="dashboard-value">
+    USDT   {summary.transfer.toLocaleString()}
+  </span>
 
-        </div>
+</div>
 
-        <div className="dashboard-card trade">
+<div className="dashboard-card trade">
 
-          <span>{t("trade")}</span>
+  <span>{t("trade")}</span>
 
-          <h3>
-            USDT{summary.trade.toLocaleString()}
-          </h3>
+  <span className="dashboard-value">
+    USDT   {summary.trade.toLocaleString()}
+  </span>
 
-        </div>
-
+</div>
       </div>
 
       {/* ================= Search ================= */}
