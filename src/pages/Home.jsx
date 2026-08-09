@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { SITE_ID } from "../config/site";
 
 import {
   ArrowDownToLine,
@@ -64,14 +65,15 @@ export default function Home() {
     if (!user) return;
 
     const { count } =
-      await supabase
-        .from("notifications")
-        .select("*", {
-          count: "exact",
-          head: true,
-        })
-        .eq("user_id", user.id)
-        .eq("is_read", false);
+  await supabase
+    .from("notifications")
+    .select("*", {
+      count: "exact",
+      head: true,
+    })
+    .eq("user_id", user.id)
+    .eq("site_id", SITE_ID)
+    .eq("is_read", false);
 
     setUnreadCount(count || 0);
 
@@ -139,6 +141,7 @@ export default function Home() {
         finished_at
       `)
       .eq("user_id", user.id)
+      .eq("site_id", SITE_ID)
       .eq("status", "finished")
       .gte("finished_at", today.toISOString())
       .lt("finished_at", tomorrow.toISOString());
@@ -246,11 +249,14 @@ export default function Home() {
         },
         (payload) => {
 
-          if (payload.new.user_id === user?.id) {
+          if (
+    payload.new.user_id === user?.id &&
+    payload.new.site_id === SITE_ID
+) {
 
-            loadNotifications();
+    loadNotifications();
 
-          }
+}
 
         }
       )
@@ -318,19 +324,19 @@ export default function Home() {
 
       {/* Header */}
 
-      <header className="trust-header">
+      <header className="GoldTrust-header">
 
-<div className="trust-brand">
-    <h1 className="trust-name">
-        TRUST
+<div className="GoldTrust-brand">
+    <h1 className="GoldTrust-name">
+        GoldTrust
     </h1>
 </div>
 
 
-<div className="trust-tools">
+<div className="GoldTrust-tools">
 
 <button
-className="trust-support"
+className="GoldTrust-support"
 onClick={() => navigate("/support-chat")}
 >
 <Headset size={22}/>
@@ -338,7 +344,7 @@ onClick={() => navigate("/support-chat")}
 
 
 <button
-className="trust-notify"
+className="GoldTrust-notify"
 onClick={() => navigate("/notifications")}
 >
 <Bell size={22}/>
@@ -361,7 +367,7 @@ onClick={() => navigate("/notifications")}
 
       {/* Asset */}
 
-      <section className="trust-assets">
+      <section className="GoldTrust-assets">
 
 <div className="assets-left">
 

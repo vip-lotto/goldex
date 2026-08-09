@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { SITE_ID } from "../config/site";
 
 import { useNavigate } from "react-router-dom";
 import { FaUserAlt, FaLock, FaGlobeAsia } from "react-icons/fa";
@@ -70,9 +71,10 @@ const [loading,setLoading] = useState(false);
 
     setLoading(true);
 
-    const { data,error } = await supabase
-      .from("profiles")
-      .select("*");
+    const { data, error } = await supabase
+  .from("profiles")
+  .select("*")
+  .eq("site_id", SITE_ID);
 
     if(error){
       setLoading(false);
@@ -84,17 +86,16 @@ const [loading,setLoading] = useState(false);
     }
 
     const user = data.find(
-      item =>
-      (
-        item.phone === username ||
-        item.email === username ||
-        item.first_name === username ||
-        `${item.first_name} ${item.last_name}` === username ||
-        String(item.member_id) === username
-      )
-      &&
-      item.password === password
-    );
+  item =>
+    (
+      item.phone === username ||
+      item.email === username ||
+      item.first_name === username ||
+      `${item.first_name} ${item.last_name}` === username ||
+      String(item.member_id) === username
+    ) &&
+    item.password === password
+);
 
     if(!user){
       setLoading(false);
@@ -118,6 +119,7 @@ const { data: wallet } = await supabase
   .from("wallets")
   .select("*")
   .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
   .single();
 
 localStorage.setItem(
@@ -129,7 +131,8 @@ localStorage.setItem(
 const { data: userWallets } = await supabase
   .from("user_wallets")
   .select("*")
-  .eq("user_id", user.id);
+  .eq("user_id", user.id)
+  .eq("site_id", SITE_ID);
 
 localStorage.setItem(
   "user_wallets",
@@ -140,7 +143,8 @@ localStorage.setItem(
 const { data: bankAccounts } = await supabase
   .from("bank_accounts")
   .select("*")
-  .eq("user_id", user.id);
+  .eq("user_id", user.id)
+  .eq("site_id", SITE_ID);
 
 localStorage.setItem(
   "bank_accounts",
@@ -152,6 +156,7 @@ const { data: settings } = await supabase
   .from("settings")
   .select("*")
   .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
   .single();
 
 localStorage.setItem(
@@ -164,6 +169,7 @@ const { data: notifications } = await supabase
   .from("notifications")
   .select("*")
   .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
   .order("created_at", { ascending: false });
 
 localStorage.setItem(
@@ -320,7 +326,7 @@ zIndex:9999
         >
 
           <div className="goldex-title">
-            TRUST
+            GoldTrust
           </div>
 
           <div

@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { SITE_ID } from "../config/site";
 
 export async function getExchangeRates() {
 
@@ -17,8 +18,9 @@ export async function getUserAssets(userId) {
 
   const { data, error } = await supabase
     .from("user_assets")
-    .select("*")
-    .eq("member_id", userId);
+.select("*")
+.eq("member_id", userId)
+.eq("site_id", SITE_ID);
 
   if (error) throw error;
 

@@ -264,28 +264,48 @@ element={<ResetPassword/>}
 />
 
 <Route
- path="/admin/manual-deposit"
- element={<AdminManualDeposit />}
+  path="/admin/manual-deposit"
+  element={
+    <AdminRoute>
+      <AdminManualDeposit />
+    </AdminRoute>
+  }
 />
 
 <Route
-    path="/admin/deposit-wallet"
-    element={<AdminDepositWallet />}
+  path="/admin/deposit-wallet"
+  element={
+    <AdminRoute>
+      <AdminDepositWallet />
+    </AdminRoute>
+  }
 />
 
 <Route
   path="/admin/contact"
-  element={<AdminContact/>}
+  element={
+    <AdminRoute>
+      <AdminContact />
+    </AdminRoute>
+  }
 />
 
 <Route
-path="/admin/kyc"
-element={<AdminKYC />}
+  path="/admin/kyc"
+  element={
+    <AdminRoute>
+      <AdminKYC />
+    </AdminRoute>
+  }
 />
 
 <Route
   path="/admin/admin-accounts"
-  element={<AdminAccounts />}
+  element={
+    <AdminRoute>
+      <AdminAccounts />
+    </AdminRoute>
+  }
 />
 
 

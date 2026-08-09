@@ -138,7 +138,7 @@ export default function AdminDashboard() {
 
         <div>
 
-            <h1>Trust Admin</h1>
+            <h1>GoldTrust Admin</h1>
 
             <p>Exchange Management System</p>
 

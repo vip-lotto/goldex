@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SITE_ID } from "../config/site";
 import { Upload } from "lucide-react";
 import { supabase } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
@@ -115,21 +116,17 @@ Math.max(
   const { data } =
     await supabase
       .from("wallets")
-      .select("*")
-      .eq(
-        "user_id",
-        user.id
-      );
+.select("*")
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID)
 
 
 const { data: walletNetworks } =
     await supabase
       .from("user_wallets")
-      .select("*")
-      .eq(
-        "user_id",
-        user.id
-      );
+.select("*")
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID)
 
   if (data?.length > 0 && walletNetworks?.length > 0) {
 
@@ -209,11 +206,12 @@ const checkPendingWithdraw = async () => {
     if (!user) return;
 
     const { data } = await supabase
-        .from("withdrawals")
-        .select("id")
-        .eq("user_id", user.id)
-        .eq("status", "pending")
-        .limit(1);
+  .from("withdrawals")
+  .select("id")
+  .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
+  .eq("status", "pending")
+  .limit(1);
 
     const hasPending =
     data && data.length > 0;
@@ -277,8 +275,9 @@ setLoading(true);
 // โหลดข้อมูลสมาชิก
 const { data: profile } = await supabase
   .from("profiles")
-  .select("member_id, first_name, last_name")
-  .eq("id", user.id)
+.select("member_id, first_name, last_name")
+.eq("id", user.id)
+.eq("site_id", SITE_ID)
   .single();
 
 console.log("USER =", user);
@@ -289,12 +288,10 @@ console.log("PROFILE =", profile);
   data: pendingWithdraw
 } = await supabase
   .from("withdrawals")
-  .select("id")
-  .eq("user_id", user.id)
-  .in(
-    "status",
-    ["pending", "processing"]
-  );
+.select("id")
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID)
+.in("status", ["pending","processing"])
 
 if (
   pendingWithdraw &&
@@ -461,17 +458,15 @@ console.log("UPLOAD ERROR =", uploadError);
 .from("withdrawals")
 .insert({
 
-    user_id:
-      user.id,
+    site_id: SITE_ID,
 
-    member_id:
-      profile?.member_id,
+    user_id: user.id,
 
-    first_name:
-      profile?.first_name,
+    member_id: profile?.member_id,
 
-    last_name:
-      profile?.last_name,
+    first_name: profile?.first_name,
+
+    last_name: profile?.last_name,
 
     type:
       "crypto",
@@ -537,12 +532,20 @@ console.log(
 
 try {
   await addTransaction({
+
+    site_id: SITE_ID,
+
     user_id: user.id,
+
     type: "withdraw",
+
     amount: Number(amount),
+
     status: "pending",
+
     description: `ถอน ${amount} ${coin}`
-  });
+
+});
 } catch (e) {
   console.error("TRANSACTION ERROR", e);
 }

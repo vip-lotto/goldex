@@ -3,6 +3,7 @@ import TradePopup from "./TradePopup";
 import TradeResult from "./TradeResult";
 import { supabase, supabaseUrl } from "../lib/supabase";
 import { useToast } from "../context/ToastContext";
+import { SITE_ID } from "../config/site";
 
 
 export default function TradePanel({ market }) {
@@ -116,14 +117,9 @@ data
 }=await supabase
 
 .from("wallets")
-
 .select("*")
-
-.eq(
-"user_id",
-id
-)
-
+.eq("user_id", id)
+.eq("site_id", SITE_ID)
 .single();
 
 
@@ -136,12 +132,12 @@ setWallet(data);
 
 async function loadTradeSettings() {
 
-  const session = await supabase.auth.getSession();
-  console.log("SESSION =", session);
+  
 
   const result = await supabase
     .from("trade_settings")
-    .select("*");
+.select("*")
+.eq("site_id", SITE_ID);
 
   console.log("RESULT =", result);
 
@@ -158,18 +154,10 @@ data
 }=await supabase
 
 .from("trades")
-
 .select("*")
-
-.eq(
-"user_id",
-id
-)
-
-.eq(
-"status",
-"trading"
-)
+.eq("user_id", id)
+.eq("site_id", SITE_ID)
+.eq("status","trading")
 
 .order(
 "id",
@@ -268,6 +256,7 @@ await supabase
 .from("trade_user_control")
 .select("*")
 .eq("user_id", trade.user_id)
+.eq("site_id", SITE_ID)
 .maybeSingle();
 // หมดเวลาควบคุมแล้ว
 // =========================
@@ -293,6 +282,7 @@ const { data:control } =
 await supabase
 .from("trade_control")
 .select("*")
+.eq("site_id", SITE_ID)
 .eq("id",1)
 .maybeSingle();
 
@@ -332,7 +322,7 @@ setReceipt(null);
 
 if(!user){
 
-showToast("Please login");
+showToast("Please login", "warning");
 
 return;
 
@@ -357,7 +347,7 @@ const selectedSetting = tradeSettings.find(item => {
 console.log("selectedSetting =", selectedSetting);
 
 if (!selectedSetting) {
-    showToast("Invalid amount");
+    showToast("Invalid amount", "warning");
     return;
 }
 
@@ -371,7 +361,7 @@ Number(wallet?.balance || 0);
 
 if(balance < money){
 
-showToast("Insufficient balance");
+showToast("Insufficient balance", "error");
 
 return;
 
@@ -393,19 +383,10 @@ error:cutError
 .from("wallets")
 
 .update({
-
-balance:
-balance-money
-
+  balance: balance - money
 })
-
-.eq(
-
-"user_id",
-
-user.id
-
-);
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -439,9 +420,11 @@ error
 
 .insert({
 
-user_id:user.id,
+  site_id: SITE_ID,
 
-coin:market.code,
+  user_id:user.id,
+
+  coin:market.code,
 
 side:type,
 
@@ -475,31 +458,23 @@ payout:0
 
 if(error){
 
+  await supabase
 
+  .from("wallets")
 
-await supabase
+  .update({
 
-.from("wallets")
+    balance: balance
 
-.update({
+  })
 
-balance:balance
+  .eq("user_id", user.id)
 
-})
+  .eq("site_id", SITE_ID);
 
-.eq(
+  showToast(error.message, "error");
 
-"user_id",
-
-user.id
-
-);
-
-
-
-showToast(error.message);
-
-return;
+  return;
 
 }
 
@@ -667,16 +642,9 @@ data:trade
 }=await supabase
 
 .from("trades")
-
 .select("*")
-
-.eq(
-
-"id",
-
-activeTrade.id
-
-)
+.eq("id", activeTrade.id)
+.eq("site_id", SITE_ID)
 
 .single();
 
@@ -713,32 +681,21 @@ data:wallet
 }=await supabase
 .from("wallets")
 .select("*")
-.eq(
-"user_id",
-trade.user_id
-)
+.eq("user_id", trade.user_id)
+.eq("site_id", SITE_ID)
 .single();
 
 if(wallet){
 await supabase
 .from("wallets")
 .update({
-balance:
-Number(wallet.balance||0)
-
-+
-
-payout
-
+  balance:
+    Number(wallet.balance || 0)
+    +
+    payout
 })
-
-.eq(
-
-"user_id",
-
-trade.user_id
-
-);
+.eq("user_id", trade.user_id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -760,34 +717,18 @@ trade.user_id
 
 
 await supabase
-
 .from("trades")
-
 .update({
 
-result:finalResult,
-
-status:"finished",
-
-payout:payout,
-
-profit_amount:profit,
-
-finished_at:
-
-new Date()
-
-.toISOString()
+  result: finalResult,
+  status: "finished",
+  payout: payout,
+  profit_amount: profit,
+  finished_at: new Date().toISOString()
 
 })
-
-.eq(
-
-"id",
-
-trade.id
-
-);
+.eq("id", trade.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -800,22 +741,20 @@ trade.id
 
 
 await supabase
-
 .from("transactions")
-
 .insert({
 
-user_id:trade.user_id,
+  site_id: SITE_ID,
 
-type:"trade",
+  user_id: trade.user_id,
 
-amount:payout,
+  type: "trade",
 
-status:"completed",
+  amount: payout,
 
-description:
+  status: "completed",
 
-`${trade.coin} ${finalResult}`
+  description: `${trade.coin} ${finalResult}`
 
 });
 
@@ -867,17 +806,8 @@ closeTime:new Date().toISOString()
 
 
 showToast(
-
-finalResult==="win"
-
-?
-
-"WIN"
-
-:
-
-"LOSE"
-
+    finalResult === "win" ? "WIN" : "LOSE",
+    finalResult === "win" ? "success" : "error"
 );
 
 

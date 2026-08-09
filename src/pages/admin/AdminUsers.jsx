@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 import { useNavigate } from "react-router-dom";
+import { SITE_ID } from "../../config/site";
 import { supabase } from "../../lib/supabase";
 
 export default function AdminUsers() {
@@ -34,8 +35,9 @@ const detailRef = useRef(null);
 
     const { data, error } = await supabase
       .from("profiles")
-      .select("*")
-      .order("id", { ascending: true });
+.select("*")
+.eq("site_id", SITE_ID)
+.order("id", { ascending: true });
 
     if (!error) {
       setUsers(data || []);
@@ -53,9 +55,10 @@ const detailRef = useRef(null);
 
   const { data: walletData } = await supabase
     .from("wallets")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
+.select("*")
+.eq("user_id", userId)
+.eq("site_id", SITE_ID)
+.single();
 
   setWallet(walletData);
 
@@ -63,33 +66,35 @@ console.log(walletData);
 
   const { data: bankData } = await supabase
     .from("bank_accounts")
-    .select("*")
-    .eq("user_id", userId)
-    .single();
-
+.select("*")
+.eq("user_id", userId)
+.eq("site_id", SITE_ID)
+.single();
   setBank(bankData);
 
   const { data: depositData } = await supabase
     .from("deposits")
-    .select("*")
-    .eq("user_id", userId)
-    .order("id", { ascending: false });
-
+.select("*")
+.eq("user_id", userId)
+.eq("site_id", SITE_ID)
+.order("id", { ascending:false });
   setDeposits(depositData || []);
 
   const { data: withdrawData } = await supabase
     .from("withdrawals")
-    .select("*")
-    .eq("user_id", userId)
-    .order("id", { ascending: false });
+.select("*")
+.eq("user_id", userId)
+.eq("site_id", SITE_ID)
+.order("id",{ascending:false});
 
   setWithdrawals(withdrawData || []);
 
   const { data: tradeData } = await supabase
     .from("trade_history")
-    .select("*")
-    .eq("user_id", userId)
-    .order("id", { ascending: false });
+.select("*")
+.eq("user_id", userId)
+.eq("site_id", SITE_ID)
+.order("id",{ascending:false});
 
   setTradeHistory(tradeData || []);
 
@@ -109,7 +114,8 @@ console.log(walletData);
       balance: Number(editingUser.balance),
       password: editingUser.password
       })
-    .eq("id", editingUser.id);
+    .eq("id", editingUser.id)
+.eq("site_id", SITE_ID);
 
   if (error) {
     alert(error.message);
@@ -144,7 +150,8 @@ async function saveWallet() {
     const { error } = await supabase
         .from("wallets")
         .update(updateData)
-        .eq("user_id", selectedUser.id);
+        .eq("user_id", selectedUser.id)
+.eq("site_id", SITE_ID);
 
     if (error) {
         alert(error.message);

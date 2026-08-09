@@ -516,7 +516,7 @@ msg.sender==="admin" && (
 
 <div className="admin-name">
 
- TRUST Support
+ GoldTrust Support
 
 </div>
 

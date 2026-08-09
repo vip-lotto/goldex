@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { SITE_ID } from "../config/site";
 
 import {
   ArrowLeft,
@@ -44,15 +45,16 @@ export default function Orders() {
     setLoading(true);
 
     const {
-      data,
-      error
-    } = await supabase
-      .from("trades")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("id", {
-        ascending: false
-      });
+  data,
+  error
+} = await supabase
+  .from("trades")
+  .select("*")
+  .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
+  .order("id", {
+    ascending: false
+  });
 
     if (error) {
 

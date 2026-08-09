@@ -34,7 +34,7 @@ export default function KYCApproved() {
 
         <p>
 
-          You can now enjoy all features of TRUST without restrictions.
+          You can now enjoy all features of GoldTrust without restrictions.
 
         </p>
 

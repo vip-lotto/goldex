@@ -1,5 +1,6 @@
 
 import { useEffect, useState, useRef } from "react";
+import { SITE_ID } from "../config/site";
 import { Copy, Download } from "lucide-react";
 import { QRCodeCanvas } from "qrcode.react";
 import { supabase } from "../lib/supabase";
@@ -104,9 +105,10 @@ const NETWORK_LOGO = {
   const user = JSON.parse(localStorage.getItem("user"));
 
   const { data, error } = await supabase
-    .from("user_wallets")
-    .select("*")
-    .eq("user_id", user.id);
+  .from("user_wallets")
+  .select("*")
+  .eq("user_id", user.id)
+  .eq("site_id", SITE_ID);
 
   console.log("DATA =", data);
 

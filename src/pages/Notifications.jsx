@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { supabase } from "../lib/supabase";
+import { SITE_ID } from "../config/site";
 import { useTranslation } from "react-i18next";
 
 
@@ -52,6 +53,7 @@ export default function Notifications() {
   "user_id",
   Number(user.id)
 )
+.eq("site_id", SITE_ID)
 .select();
 
     console.log(
@@ -80,6 +82,7 @@ export default function Notifications() {
           "user_id",
           Number(user.id)
         )
+        .eq("site_id", SITE_ID)
         .order("id", {
           ascending: false,
         });

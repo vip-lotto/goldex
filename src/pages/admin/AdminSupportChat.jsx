@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 
 import { supabase } from "../../lib/supabase";
+import { SITE_ID } from "../../config/site";
 
 import "../../styles/adminSupportChat.css";
 import { useNavigate } from "react-router-dom";
@@ -133,14 +134,9 @@ const {data,error}
 await supabase
 
 .from("chat_rooms")
-
 .select("*")
-
-.order(
-
-"last_time",
-
-{
+.eq("site_id", SITE_ID)
+.order("last_time",{
 
 ascending:false
 
@@ -194,8 +190,8 @@ error
 await supabase
 
 .from("chat_messages")
-
 .select("*")
+.eq("site_id", SITE_ID)
 
 .eq(
 
@@ -241,6 +237,8 @@ await supabase
 
 .eq("room_id", roomId)
 
+.eq("site_id", SITE_ID)
+
 .eq("sender","user")
 
 .eq("is_read",false);
@@ -253,14 +251,13 @@ const { data: newData } = await supabase
 
 .select("*")
 
+.eq("site_id", SITE_ID)
+
 .eq("room_id", roomId)
 
 .order("created_at",{
-
     ascending:true
-
 });
-
 setMessages(newData || []);
 
 requestAnimationFrame(()=>{
@@ -309,18 +306,11 @@ selectedRoomRef.current = room;
 await supabase
 
 .from("chat_rooms")
-
 .update({
-
-unread_admin:0
-
+    unread_admin:0
 })
-
-.eq(
-
-"id",
-
-room.id
+.eq("id",room.id)
+.eq("site_id", SITE_ID
 
 );
 
@@ -328,11 +318,9 @@ room.id
 const { data: adminMessages } = await supabase
 
 .from("chat_messages")
-
 .select("id")
-
 .eq("room_id", room.id)
-
+.eq("site_id", SITE_ID)
 .eq("sender", "admin");
 
 
@@ -342,8 +330,9 @@ if ((adminMessages || []).length === 0) {
     await supabase
 
     .from("chat_messages")
+.insert({
 
-    .insert({
+    site_id: SITE_ID,
 
     room_id: room.id,
 
@@ -352,7 +341,7 @@ if ((adminMessages || []).length === 0) {
     sender: "admin",
 
     message:
-"Hello, welcome to Trust. If you have any questions, please leave a message and our staff will get back to you shortly.",
+"Hello, welcome to GoldTrust. If you have any questions, please leave a message and our staff will get back to you shortly.",
 
     is_read:false
 
@@ -365,13 +354,14 @@ if ((adminMessages || []).length === 0) {
 .update({
 
 last_message:
-"Hello, welcome to Trust. If you have any questions, please leave a message and our staff will get back to you shortly.",
+"Hello, welcome to GoldTrust. If you have any questions, please leave a message and our staff will get back to you shortly.",
 
 last_time:new Date()
 
 })
 
-.eq("id",room.id);
+.eq("id", room.id)
+.eq("site_id", SITE_ID);
 
 }
 
@@ -382,11 +372,9 @@ await loadRooms();
 const { data: roomData } = await supabase
 
 .from("chat_rooms")
-
 .select("*")
-
 .eq("id", room.id)
-
+.eq("site_id", SITE_ID)
 .single();
 
 if(roomData){
@@ -441,10 +429,11 @@ const {error}
 await supabase
 
 .from("chat_messages")
-
 .insert({
 
-room_id:selectedRoom.id,
+    site_id: SITE_ID,
+
+    room_id:selectedRoom.id,
 
 user_id:selectedRoom.user_id,
 
@@ -485,7 +474,8 @@ unread_admin:0
 
 })
 
-.eq("id",selectedRoom.id);
+.eq("id", selectedRoom.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -503,11 +493,9 @@ await loadRooms();
 const { data: roomData } = await supabase
 
 .from("chat_rooms")
-
 .select("*")
-
 .eq("id", selectedRoom.id)
-
+.eq("site_id", SITE_ID)
 .single();
 
 if(roomData){
@@ -531,7 +519,8 @@ async function saveCustomerInfo(){
       customer_tag: customerTag,
       admin_note: adminNote
     })
-    .eq("id", selectedRoom.id);
+    .eq("id", selectedRoom.id)
+.eq("site_id", SITE_ID);
 
   if(error){
     console.log(error);
@@ -542,9 +531,10 @@ async function saveCustomerInfo(){
 
   const { data } = await supabase
     .from("chat_rooms")
-    .select("*")
-    .eq("id", selectedRoom.id)
-    .single();
+.select("*")
+.eq("id", selectedRoom.id)
+.eq("site_id", SITE_ID)
+.single();
 
   if(data){
     setSelectedRoom(data);

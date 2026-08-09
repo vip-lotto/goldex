@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SITE_ID } from "../../config/site";
 import { supabase } from "../../lib/supabase";
 import "./admin.css";
 
@@ -36,17 +37,12 @@ export default function AdminLogin(){
 
 
       const { data, error } = await supabase
-
-        .from("admin_users")
-
-        .select("*")
-
-        .eq("username", username.trim())
-
-        .eq("password", password.trim())
-
-        .maybeSingle();
-
+  .from("admin_users")
+  .select("*")
+  .eq("username", username.trim())
+  .eq("password", password.trim())
+  .eq("site_id", SITE_ID)
+  .maybeSingle();
 
 
       console.log(
@@ -128,7 +124,7 @@ navigate("/admin");
 
 
         <h1>
-          TRUST Admin
+          GoldTrust Admin
         </h1>
 
 

@@ -10,7 +10,7 @@ import {
 import {
   supabase
 } from "../../lib/supabase";
-
+import { SITE_ID } from "../../config/site";
 import "./AdminTrades.css";
 
 export default function AdminTrades(){
@@ -102,6 +102,8 @@ const loadTrades = async()=>{
 
     .select("*")
 
+    .eq("site_id", SITE_ID)
+
     .order(
         "created_at",
         {
@@ -170,6 +172,7 @@ const loadUsers = async()=>{
         last_name,
         phone
     `)
+    .eq("site_id", SITE_ID)
 
     .order(
         "id",
@@ -208,15 +211,17 @@ const refreshAll = ()=>{
 
 const setAllResult = async(mode)=>{
 
-    const { data:old } = await supabase
+    const { data: old } = await supabase
 
-    .from("trade_control")
+.from("trade_control")
 
-    .select("*")
+.select("*")
 
-    .eq("id",1)
+.eq("id",1)
 
-    .maybeSingle();
+.eq("site_id", SITE_ID)
+
+.maybeSingle();
 
     if(old){
 
@@ -224,13 +229,15 @@ const setAllResult = async(mode)=>{
 
         .from("trade_control")
 
-        .update({
+.update({
 
-            global_result: mode
+global_result: mode
 
-        })
+})
 
-        .eq("id",1);
+.eq("id",1)
+
+.eq("site_id", SITE_ID);
 
         if(error){
 
@@ -248,12 +255,13 @@ const setAllResult = async(mode)=>{
 
         .insert({
 
-            id:1,
+id:1,
 
-            global_result: mode
+site_id: SITE_ID,
 
-        })
+global_result: mode
 
+})
         if(error){
 
             alert(error.message);
@@ -269,34 +277,41 @@ const setAllResult = async(mode)=>{
 // ======================================
 
 const { data: allUsers } = await supabase
+
 .from("profiles")
-.select("id");
+
+.select("id")
+
+.eq("site_id", SITE_ID);
 
 for (const user of (allUsers || [])) {
 
     const { data: oldUser } = await supabase
-    .from("trade_user_control")
-    .select("id")
-    .eq("user_id", user.id)
-    .maybeSingle();
+.from("trade_user_control")
+.select("id")
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID)
+.maybeSingle();
 
     if (oldUser) {
 
         await supabase
-        .from("trade_user_control")
-        .update({
-            mode: mode
-        })
-        .eq("user_id", user.id);
+.from("trade_user_control")
+.update({
+    mode: mode
+})
+.eq("user_id", user.id)
+.eq("site_id", SITE_ID);
 
     } else {
 
         await supabase
-        .from("trade_user_control")
-        .insert({
-            user_id: user.id,
-            mode: mode
-        });
+.from("trade_user_control")
+.insert({
+    site_id: SITE_ID,
+    user_id: user.id,
+    mode: mode
+});
 
     }
 
@@ -326,13 +341,15 @@ const setUserResult = async(mode)=>{
 
     const { data:old } = await supabase
 
-    .from("trade_user_control")
+.from("trade_user_control")
 
-    .select("*")
+.select("*")
 
-    .eq("user_id",selectedUser)
+.eq("user_id", selectedUser)
 
-    .maybeSingle();
+.eq("site_id", SITE_ID)
+
+.maybeSingle();
 
     if(old){
 
@@ -340,13 +357,15 @@ const setUserResult = async(mode)=>{
 
         .from("trade_user_control")
 
-        .update({
+.update({
 
-            mode
+mode
 
-        })
+})
 
-        .eq("user_id",selectedUser);
+.eq("user_id", selectedUser)
+
+.eq("site_id", SITE_ID);
 
         if(error){
 
@@ -364,11 +383,13 @@ const setUserResult = async(mode)=>{
 
         .insert({
 
-            user_id:selectedUser,
+site_id: SITE_ID,
 
-            mode
+user_id: selectedUser,
 
-        });
+mode
+
+});
 
         if(error){
 
@@ -405,24 +426,13 @@ return;
 
 
 const {error}=await supabase
-
 .from("trades")
-
 .update({
-
-admin_result: result
-
+    admin_result: result
 })
-
-.eq(
-"id",
-trade.id
-)
-
-.eq(
-"status",
-"trading"
-);
+.eq("id", trade.id)
+.eq("site_id", SITE_ID)
+.eq("status", "trading");
 
 
 

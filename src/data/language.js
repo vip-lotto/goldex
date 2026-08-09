@@ -82,10 +82,10 @@ export const language = {
     backLogin: "Back to Login",
 
     loading: "Loading...",
-    secure: "Secure • Stable • Trustworthy",
+    secure: "Secure • Stable • GoldTrustworthy",
 
     createAccount: "CREATE YOUR TRADING ACCOUNT",
-    goldPlatform: "TRUST TRADING PLATFORM"
+    goldPlatform: "GoldTrust TRADING PLATFORM"
   },
 
   vi: {

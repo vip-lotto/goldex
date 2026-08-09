@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { SITE_ID } from "../config/site";
 import { ArrowLeft } from "lucide-react";
 import "../styles/order-detail.css";
 
@@ -24,6 +25,7 @@ export default function OrderDetail() {
       .from("trades")
       .select("*")
       .eq("id", id)
+      .eq("site_id", SITE_ID)
       .single();
 
     if (!error) {

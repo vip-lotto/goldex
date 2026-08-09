@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { SITE_ID } from "../config/site";
 
 // โหลดบัญชีธนาคารทั้งหมด
 export async function getBank(userId) {
@@ -6,6 +7,7 @@ export async function getBank(userId) {
     .from("bank_accounts")
     .select("*")
     .eq("user_id", userId)
+    .eq("site_id", SITE_ID)
     .order("id", { ascending: true });
 
   if (error) throw error;
@@ -17,7 +19,10 @@ export async function getBank(userId) {
 export async function addBank(values) {
   const { data, error } = await supabase
     .from("bank_accounts")
-    .insert(values)
+    .insert({
+  ...values,
+  site_id: SITE_ID
+})
     .select()
     .single();
 
@@ -32,6 +37,7 @@ export async function updateBank(id, values) {
     .from("bank_accounts")
     .update(values)
     .eq("id", id)
+    .eq("site_id", SITE_ID)
     .select()
     .single();
 
@@ -45,7 +51,8 @@ export async function deleteBank(id) {
   const { error } = await supabase
     .from("bank_accounts")
     .delete()
-    .eq("id", id);
+    .eq("id", id)
+    .eq("site_id", SITE_ID);
 
   if (error) throw error;
 }
@@ -57,13 +64,15 @@ export async function setPrimaryBank(userId, bankId) {
   await supabase
     .from("bank_accounts")
     .update({ is_default: false })
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .eq("site_id", SITE_ID);
 
   // ตั้งบัญชีใหม่เป็นหลัก
   const { error } = await supabase
     .from("bank_accounts")
     .update({ is_default: true })
-    .eq("id", bankId);
+    .eq("id", bankId)
+    .eq("site_id", SITE_ID);
 
   if (error) throw error;
 
@@ -75,7 +84,8 @@ export async function validateBank(userId, bankName, fullName, accountNumber) {
   const { data, error } = await supabase
     .from("bank_accounts")
     .select("*")
-    .eq("user_id", userId);
+    .eq("user_id", userId)
+    .eq("site_id", SITE_ID);
 
   if (error) throw error;
 
@@ -116,7 +126,8 @@ export async function getPrimaryBank(userId) {
     .from("bank_accounts")
     .select("*")
     .eq("user_id", userId)
-    .eq("is_default", true)
+.eq("site_id", SITE_ID)
+.eq("is_default", true)
     .single();
 
   if (error) throw error;

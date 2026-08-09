@@ -8,6 +8,7 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import { SITE_ID } from "../../config/site";
 
 import "./AdminKYC.css";
 
@@ -61,18 +62,13 @@ async function loadKYC(){
 setLoading(true);
 
 
-const {data,error}=await supabase
-
-.from("kyc")
-
-.select("*")
-
-.order(
-"created_at",
-{
-ascending:false
-}
-);
+const { data, error } = await supabase
+  .from("kyc")
+  .select("*")
+  .eq("site_id", SITE_ID)
+  .order("created_at", {
+    ascending: false
+  });
 
 
 if(!error){
@@ -109,17 +105,12 @@ setUpdating(id);
 
 
 const {error}=await supabase
-
-.from("kyc")
-
-.update({
-status
-})
-
-.eq(
-"id",
-id
-);
+  .from("kyc")
+  .update({
+    status
+  })
+  .eq("id", id)
+  .eq("site_id", SITE_ID);
 
 
 

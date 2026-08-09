@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SITE_ID } from "../../config/site";
 import { supabase } from "../../lib/supabase";
 import "./AdminWithdraw.css";
 
@@ -30,11 +31,12 @@ loadWithdraws();
 const loadWithdraws = async () => {
 
   const { data: withdrawData, error } = await supabase
-    .from("withdrawals")
-    .select("*")
-    .order("created_at", {
-      ascending: false,
-    });
+  .from("withdrawals")
+  .select("*")
+  .eq("site_id", SITE_ID)
+  .order("created_at", {
+  ascending: false,
+});
 
   if (error) {
     console.log(error);
@@ -69,23 +71,26 @@ return;
 
 setLoading(true);
 
-// เช็คสถานะล่าสุดอีกรอบ
-const {data:checkWithdraw}=await supabase
-.from("withdrawals")
-.select("status")
-.eq("id",item.id)
-.single();
+const { data: locked } = await supabase
+  .from("withdrawals")
+  .update({
+    status: "processing"
+  })
+  .eq("id", item.id)
+  .eq("site_id", SITE_ID)
+  .eq("status", "pending")
+  .select();
 
+if (!locked?.length) {
 
-if(!checkWithdraw || checkWithdraw.status !== "pending"){
+  alert("รายการนี้ถูกดำเนินการแล้ว");
 
-alert("รายการนี้ถูกทำแล้ว");
+  setLoading(false);
 
-setLoading(false);
-
-return;
+  return;
 
 }
+
 
 // wallet
 
@@ -94,6 +99,7 @@ await supabase
   .from("wallets")
   .select("*")
   .eq("user_id", item.user_id)
+  .eq("site_id", SITE_ID)
   .single();
 
 
@@ -211,7 +217,9 @@ switch (item.coin) {
 const { error: updateError } = await supabase
   .from("wallets")
   .update(updateData)
-  .eq("user_id", item.user_id);
+  .eq("user_id", item.user_id)
+  .eq("site_id", SITE_ID);
+  
 
 console.log(
 "Wallet updated:",
@@ -245,7 +253,8 @@ status:"approved",
 admin_message:"Approved"
 
 })
-.eq("id",item.id);
+.eq("id", item.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -276,6 +285,8 @@ await supabase
 
 .insert({
 
+site_id: SITE_ID,
+
 user_id:item.user_id,
 
 type:"withdraw",
@@ -304,6 +315,8 @@ await supabase
 .from("notifications")
 
 .insert({
+
+site_id: SITE_ID,
 
 user_id:item.user_id,
 
@@ -372,12 +385,13 @@ await supabase
 .from("withdrawals")
 .update({
 
-status: "rejected",
+status:"rejected",
 
-admin_message: "Rejected"
+admin_message:"Rejected"
 
 })
-.eq("id", item.id);
+.eq("id", item.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -387,6 +401,8 @@ await supabase
 .from("notifications")
 
 .insert({
+
+site_id: SITE_ID,
 
 user_id:item.user_id,
 

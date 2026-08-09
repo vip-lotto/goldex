@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { SITE_ID } from "../config/site";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
 
@@ -90,6 +91,7 @@ while (memberExist) {
 } = await supabase
   .from("profiles")
   .select("id")
+  .eq("site_id", SITE_ID)
   .eq("member_id", memberId);
 
 if (error) {
@@ -110,7 +112,8 @@ memberExist = data.length > 0;
 
     let query = supabase
   .from("profiles")
-  .select("id");
+  .select("id")
+  .eq("site_id", SITE_ID);
 
 if (email) {
 
@@ -168,19 +171,20 @@ let inviteExist = true;
 while (inviteExist) {
 
   myInviteCode =
-    "GX" +
+  "GT" +
     Math.random()
       .toString(36)
       .substring(2, 8)
       .toUpperCase();
 
-  const {
-    data,
-    error
-  } = await supabase
-    .from("profiles")
-    .select("id")
-    .eq("invite_code", myInviteCode);
+ const {
+  data,
+  error
+} = await supabase
+  .from("profiles")
+  .select("id")
+  .eq("site_id", SITE_ID)
+  .eq("invite_code", myInviteCode);
 
   if (error) {
 
@@ -205,7 +209,8 @@ const {
 } = await supabase
     .from("profiles")
     .insert([
-  {
+{
+    site_id: SITE_ID,
     member_id: memberId,
     first_name: firstName,
     last_name: lastName,
@@ -213,12 +218,9 @@ const {
     email,
     password,
     invite_code: myInviteCode,
-
-referrer_code:
-  inviteCode.trim() || null,
-
-balance: 0
-  }
+    referrer_code: inviteCode.trim() || null,
+    balance: 0
+}
 ])
     .select()
     .single();
@@ -245,8 +247,9 @@ await supabase
 .from("wallets")
 .upsert(
 {
- user_id:userId,
- balance:0
+ user_id: userId,
+ site_id: SITE_ID,
+ balance: 0
 },
 {
  onConflict:"user_id"
@@ -305,16 +308,15 @@ const uniqueTemplates = Array.from(
 
 
 const userWallets =
-  uniqueTemplates.map(item => ({
+uniqueTemplates.map(item => ({
 
-        user_id:
-          userId,
+        user_id: userId,
 
-        coin:
-          item.coin,
+        site_id: SITE_ID,
 
-        network:
-          item.network,
+        coin: item.coin,
+
+        network: item.network,
 
         address:
 `TX${userId}${item.coin}${item.network}${Date.now()}${Math.random()
@@ -322,7 +324,7 @@ const userWallets =
 .substring(2,10)
 .toUpperCase()}`
 
-      }));
+}));
 
     const {
   error: walletError
@@ -381,15 +383,11 @@ const { error: notifyError } = await supabase
   .from("notifications")
   .insert({
     user_id: userId,
-
+    site_id: SITE_ID,
     title_key: "welcome",
-
     message_key: "welcomeMessage",
-
     type: "system",
-
     status: "success",
-
     is_read: false
   });
 
@@ -453,7 +451,7 @@ setTimeout(() => {
         <div className="register-card">
 
           <div className="register-title">
-            TRUST
+            GoldTrust
           </div>
 
           <div className="register-sub">
@@ -569,7 +567,7 @@ setTimeout(() => {
           <div className="register-footer">
             <span>26.07.01</span>
             <br/>
-            Secure • Stable • Trustworthy
+            Secure • Stable • GoldTrustworthy
           </div>
 
         </div>

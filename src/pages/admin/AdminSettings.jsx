@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../lib/supabase";
+import { SITE_ID } from "../../config/site";
 
 export default function AdminSettings() {
 
@@ -13,9 +14,10 @@ export default function AdminSettings() {
   async function loadSettings() {
 
     const { data, error } = await supabase
-      .from("trade_settings")
-      .select("*")
-      .order("duration", { ascending: false });
+  .from("trade_settings")
+  .select("*")
+  .eq("site_id", SITE_ID)
+  .order("duration", { ascending: false });
 
     if (!error) {
 
@@ -45,7 +47,8 @@ export default function AdminSettings() {
 
       })
 
-      .eq("id", item.id);
+      .eq("id", item.id)
+      .eq("site_id", SITE_ID);
 
     if (!error) {
 

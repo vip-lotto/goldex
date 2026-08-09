@@ -1,6 +1,6 @@
 /* ==========================================================
    HOME.CSS
-   TRUST APP
+   GoldTrust APP
    SECTION 1
    RESET + LAYOUT
 ========================================================== */
@@ -1597,10 +1597,10 @@ button:focus-visible{
 }
 
 /* =================================
-   TRUST HEADER NEW SYSTEM
+   GoldTrust HEADER NEW SYSTEM
 ================================= */
 
-.trust-header{
+.GoldTrust-header{
 
     width:100%;
 
@@ -1617,7 +1617,7 @@ button:focus-visible{
 }
 
 
-.trust-brand{
+.GoldTrust-brand{
 
     display:flex;
 
@@ -1626,7 +1626,7 @@ button:focus-visible{
 }
 
 
-.trust-name{
+.GoldTrust-name{
 
     margin:0;
 
@@ -1641,7 +1641,7 @@ button:focus-visible{
 }
 
 
-.trust-tools{
+.GoldTrust-tools{
 
     display:flex;
 
@@ -1652,8 +1652,8 @@ button:focus-visible{
 }
 
 
-.trust-support,
-.trust-notify{
+.GoldTrust-support,
+.GoldTrust-notify{
 
     width:46px;
 
@@ -1676,7 +1676,7 @@ button:focus-visible{
 }
 
 
-.trust-notify{
+.GoldTrust-notify{
 
     position:relative;
 
@@ -1688,10 +1688,10 @@ button:focus-visible{
 ========================= */
 
 /* =========================
-   TRUST BALANCE
+   GoldTrust BALANCE
 ========================= */
 
-.trust-balance{
+.GoldTrust-balance{
 
     width:100%;
 
@@ -1745,11 +1745,11 @@ button:focus-visible{
 }
 
 /* =================================
-   TRUST ASSET NEW
+   GoldTrust ASSET NEW
 ================================= */
 
 
-.trust-assets{
+.GoldTrust-assets{
 
     width:100%;
 

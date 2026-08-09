@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SITE_ID } from "../config/site";
 import {
 ArrowLeft,
 ScanLine,
@@ -81,7 +82,8 @@ const loadWalletList = async () => {
   const { data, error } =
     await supabase
       .from("user_wallets")
-      .select("coin, network");
+.select("coin, network")
+.eq("site_id", SITE_ID);
 
   if (!error) {
 
@@ -169,7 +171,8 @@ await supabase
   .from("wallets")
   .select("*")
   .eq("user_id", user.id)
-  .single();
+.eq("site_id", SITE_ID)
+.single();
 
 if (
   senderWalletError ||
@@ -216,8 +219,9 @@ await supabase
   .from("user_wallets")
   .select("*")
   .eq("address", address.trim())
-  .eq("coin", coin)
-  .eq("network", network)
+.eq("coin", coin)
+.eq("network", network)
+.eq("site_id", SITE_ID)
   .single();
 
 if (!receiverAddress) {
@@ -256,6 +260,7 @@ const {
   .from("wallets")
   .select("*")
   .eq("user_id", receiverId)
+.eq("site_id", SITE_ID)
   .single();
 
 if (
@@ -284,7 +289,8 @@ await supabase
       Number(amount)
 
   })
-  .eq("user_id", user.id);
+  .eq("user_id", user.id)
+.eq("site_id", SITE_ID);
 
 if (senderError) {
 
@@ -327,7 +333,8 @@ await supabase
       Number(amount)
 
   })
-  .eq("user_id", receiverId);
+  .eq("user_id", receiverId)
+.eq("site_id", SITE_ID);
 
 if (receiverError) {
 
@@ -347,20 +354,20 @@ const { data, error } = await supabase
   .insert([
 
     {
+  site_id: SITE_ID,
 
-      sender_id: user.id,
+  sender_id: user.id,
 
-      receiver_id: receiverId,
+  receiver_id: receiverId,
 
-      amount: Number(amount),
+  amount: Number(amount),
 
-      coin,
+  coin,
 
-      network,
+  network,
 
-      status: "success",
-
-    },
+  status: "success"
+}
 
   ]);
 
@@ -396,6 +403,8 @@ await supabase
   .from("notifications")
   .insert([
     {
+      site_id: SITE_ID,
+
       user_id: receiverId,
 
       title_key: "transferReceived",
@@ -421,6 +430,7 @@ await supabase
   .from("notifications")
   .insert([
     {
+      site_id: SITE_ID,
       user_id: user.id,
 
       title_key: "transferCompleted",

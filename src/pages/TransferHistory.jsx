@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { SITE_ID } from "../config/site";
 
 export default function TransferHistory() {
 
@@ -21,15 +22,16 @@ export default function TransferHistory() {
     if (!user) return;
 
     const { data } =
-      await supabase
-        .from("transfers")
-        .select("*")
-        .or(
-          `sender_id.eq.${user.id},receiver_id.eq.${user.id}`
-        )
-        .order("id", {
-          ascending: false
-        });
+  await supabase
+    .from("transfers")
+    .select("*")
+    .eq("site_id", SITE_ID)
+    .or(
+      `sender_id.eq.${user.id},receiver_id.eq.${user.id}`
+    )
+    .order("id", {
+      ascending: false
+    });
 
     setHistory(data || []);
 

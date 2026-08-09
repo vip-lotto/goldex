@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SITE_ID } from "../config/site";
 import { validateBank } from "../lib/bankApi";
 import { useTranslation } from "react-i18next";
 import { useToast } from "../context/ToastContext";
@@ -94,6 +95,8 @@ export default function BankAccount() {
 
         await addBank({
     user_id: user.id,
+
+    site_id: SITE_ID,
 
     bank_name: bankName,
 

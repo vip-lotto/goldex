@@ -43,7 +43,7 @@ export default function About() {
 
           </div>
 
-          <h1>Trust</h1>
+          <h1>GoldTrust</h1>
 
           <span>Version 1.0.0</span>
 
@@ -166,7 +166,7 @@ export default function About() {
             blockchain networks and transaction
             amounts before sending assets.
 
-            Trust is not responsible for losses
+            GoldTrust is not responsible for losses
             caused by incorrect wallet addresses,
             wrong networks or user mistakes.
 
@@ -211,7 +211,7 @@ export default function About() {
 
           <p>
 
-            Trust provides technology services
+            GoldTrust provides technology services
             only.
 
             We do not guarantee profits,
@@ -259,7 +259,7 @@ export default function About() {
 
           <p>
 
-            © 2026 Trust
+            © 2026 GoldTrust
 
           </p>
 

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../lib/supabase";
+import { SITE_ID } from "../config/site";
 import { useTranslation } from "react-i18next";
 
 
@@ -76,6 +77,7 @@ export default function Mine() {
   .from("profiles")
   .select("*")
   .eq("id", user.id)
+  .eq("site_id", SITE_ID)
   .single();
 
 if (!error) {
@@ -127,6 +129,7 @@ navigator.clipboard.writeText(code);
   .from("kyc")
   .select("*")
   .eq("user_id", user.id)
+  .eq("site_id", SITE_ID)
   .order("created_at", { ascending: false })
   .limit(1)
   .maybeSingle();
@@ -189,7 +192,7 @@ console.log("ERROR =", error);
   <div className="mine-header">
 
     <h1 className="mine-title">
-      Trust
+      GoldTrust
     </h1>
 
     <button

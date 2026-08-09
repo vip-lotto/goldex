@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { SITE_ID } from "../../config/site";
 import { supabase } from "../../lib/supabase";
 import "./AdminDeposit.css";
 
@@ -40,15 +41,9 @@ setLoading(true);
 const {data,error}=
 
 await supabase
-
 .from("deposits")
-
-.select(`
-
-*
-
-`)
-
+.select("*")
+.eq("site_id", SITE_ID)
 .order(
 
 "created_at",
@@ -144,15 +139,11 @@ status:"processing"
 
 })
 
-.eq(
-"id",
-item.id
-)
+.eq("id", item.id)
 
-.eq(
-"status",
-"pending"
-)
+.eq("site_id", SITE_ID)
+
+.eq("status","pending")
 
 .select();
 
@@ -180,14 +171,9 @@ const {data:profile,error:profileError}=
 await supabase
 
 .from("profiles")
-
 .select("*")
-
-.eq(
-"id",
-item.user_id
-)
-
+.eq("id", item.user_id)
+.eq("site_id", SITE_ID)
 .single();
 
 
@@ -215,14 +201,9 @@ const {data:wallet,error:walletError}=
 await supabase
 
 .from("wallets")
-
 .select("*")
-
-.eq(
-"user_id",
-item.user_id
-)
-
+.eq("user_id", item.user_id)
+.eq("site_id", SITE_ID)
 .single();
 
 
@@ -285,8 +266,9 @@ switch (item.coin) {
 const { error: updateWalletError } =
 await supabase
   .from("wallets")
-  .update(updateData)
-  .eq("id", wallet.id);
+.update(updateData)
+.eq("id", wallet.id)
+.eq("site_id", SITE_ID);
 
 if (updateWalletError) {
   throw updateWalletError;
@@ -313,10 +295,11 @@ if (item.coin === "USDT") {
   const { error: updateProfileError } =
     await supabase
       .from("profiles")
-      .update({
-        balance: profileBalance
-      })
-      .eq("id", item.user_id);
+.update({
+balance: profileBalance
+})
+.eq("id", item.user_id)
+.eq("site_id", SITE_ID);
 
   if (updateProfileError) {
     throw updateProfileError;
@@ -338,19 +321,10 @@ const {data:asset}=
 await supabase
 
 .from("user_assets")
-
 .select("*")
-
-.eq(
-"user_id",
-item.user_id
-)
-
-.eq(
-"symbol",
-item.coin
-)
-
+.eq("user_id", item.user_id)
+.eq("symbol", item.coin)
+.eq("site_id", SITE_ID)
 .single();
 
 
@@ -375,17 +349,11 @@ const {error:assetError}=
 await supabase
 
 .from("user_assets")
-
 .update({
-
 balance:newAssetBalance
-
 })
-
-.eq(
-"id",
-asset.id
-);
+.eq("id", asset.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -406,6 +374,8 @@ await supabase
 .from("user_assets")
 
 .insert({
+
+site_id: SITE_ID,
 
 user_id:item.user_id,
 
@@ -433,17 +403,11 @@ const {error:depositError}=
 await supabase
 
 .from("deposits")
-
 .update({
-
 status:"approved"
-
 })
-
-.eq(
-"id",
-item.id
-);
+.eq("id", item.id)
+.eq("site_id", SITE_ID);
 
 
 
@@ -468,6 +432,8 @@ await supabase
 
 .insert({
 
+site_id: SITE_ID,
+
 user_id:item.user_id,
 
 type:"deposit",
@@ -490,12 +456,13 @@ description:
 // NOTIFICATION
 // ==========================
 
-
 await supabase
 
 .from("notifications")
 
 .insert({
+
+site_id: SITE_ID,
 
 user_id:item.user_id,
 
@@ -516,11 +483,6 @@ type:"deposit",
 is_read:false
 
 });
-
-
-
-
-
 
 alert(
 "เติมเงินสำเร็จ"
@@ -611,10 +573,9 @@ status:"rejected"
 
 })
 
-.eq(
-"id",
-item.id
-);
+.eq("id", item.id)
+
+.eq("site_id", SITE_ID);
 
 
 
@@ -633,6 +594,8 @@ await supabase
 .from("notifications")
 
 .insert({
+
+site_id: SITE_ID,
 
 user_id:item.user_id,
 

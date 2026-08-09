@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { SITE_ID } from "../config/site";
 import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
 import { useTranslation } from "react-i18next";
@@ -62,14 +63,9 @@ const { data, error } =
   await supabase
     .from("bank_accounts")
     .select("*")
-    .eq(
-      "user_id",
-      user.id
-    )
-    .eq(
-      "is_default",
-      true
-    )
+    .eq("user_id", user.id)
+    .eq("site_id", SITE_ID)
+    .eq("is_default", true)
     .maybeSingle();
 
 if (!error && data) {
@@ -121,36 +117,30 @@ if (
 
 const { error } =
   await supabase
-    .from("withdrawals")
-    .insert({
+  .from("withdrawals")
+  .insert({
 
-      user_id:
-        user.id,
+    site_id: SITE_ID,
 
-      type:
-        "bank",
+    user_id: user.id,
 
-      bank_name:
-        bank.bank_name,
+    type: "bank",
 
-      bank_account_name:
-        bank.account_name,
+    bank_name: bank.bank_name,
 
-      bank_account_number:
-        bank.account_number,
+    bank_account_name: bank.account_name,
 
-      amount:
-        Number(amount),
+    bank_account_number: bank.account_number,
 
-      fee,
+    amount: Number(amount),
 
-      receive_amount:
-        receiveAmount,
+    fee,
 
-      status:
-        "pending"
+    receive_amount: receiveAmount,
 
-    });
+    status: "pending"
+
+  });
 
 if (error) {
 

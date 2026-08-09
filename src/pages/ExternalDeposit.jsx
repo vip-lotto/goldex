@@ -5,6 +5,7 @@ import {
   Upload
 } from "lucide-react";
 
+import { SITE_ID } from "../config/site";
 import { supabase } from "../lib/supabase";
 import Toast from "../components/Toast";
 import { useTranslation } from "react-i18next";
@@ -257,24 +258,20 @@ await supabase
 .from("deposits")
 .insert([
 {
+  site_id: SITE_ID,
+
   user_id: user.id,
-
   member_id: user.member_id,
-
   first_name: user.first_name,
-
   last_name: user.last_name,
 
   coin: coin,
-
   network: network,
-
   amount: Number(amount),
 
   wallet_address: currentWallet.address,
 
   slip: slip.name,
-
   slip_url: slipUrl,
 
   status: "pending"

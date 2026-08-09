@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../lib/supabase";
+import { SITE_ID } from "../../config/site";
 
 import {
     ArrowLeft,
@@ -61,11 +62,9 @@ setLoading(true);
 const {data,error}=await supabase
 
 .from("admin_users")
-
 .select("*")
-
+.eq("site_id", SITE_ID)
 .neq("id",1)
-
 .order("id");
 
 if(error){
@@ -124,14 +123,11 @@ if(!addPassword.trim()){
 
 }
 
-const {data:exist}=await supabase
-
+const { data: exist } = await supabase
 .from("admin_users")
-
 .select("id")
-
-.eq("username",addUsername)
-
+.eq("site_id", SITE_ID)
+.eq("username", addUsername)
 .maybeSingle();
 
 if(exist){
@@ -152,9 +148,11 @@ const {error}=await supabase
 
 .insert({
 
-username:addUsername,
+site_id: SITE_ID,
 
-password:addPassword
+username: addUsername,
+
+password: addPassword
 
 });
 
@@ -216,11 +214,13 @@ const {error}=await supabase
 
 .update({
 
-password:newPassword
+password: newPassword
 
 })
 
-.eq("id",selectedAdmin.id);
+.eq("id", selectedAdmin.id)
+
+.eq("site_id", SITE_ID);
 
 if(error){
 
@@ -279,7 +279,9 @@ const {error}=await supabase
 
 .delete()
 
-.eq("id",selectedAdmin.id);
+.eq("id", selectedAdmin.id)
+
+.eq("site_id", SITE_ID);
 
 if(error){
 

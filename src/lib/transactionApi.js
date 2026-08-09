@@ -1,4 +1,5 @@
 import { supabase } from "./supabase";
+import { SITE_ID } from "../config/site";
 
 // =========================
 // รวมประวัติทั้งหมด
@@ -13,24 +14,28 @@ export async function getTransactions(userId) {
   ] = await Promise.all([
 
     supabase
-      .from("deposits")
-      .select("*")
-      .eq("user_id", userId),
+  .from("deposits")
+  .select("*")
+  .eq("user_id", userId)
+  .eq("site_id", SITE_ID),
 
     supabase
-      .from("withdrawals")
-      .select("*")
-      .eq("user_id", userId),
+  .from("withdrawals")
+  .select("*")
+  .eq("user_id", userId)
+  .eq("site_id", SITE_ID),
 
     supabase
-      .from("transfers")
-      .select("*")
-      .or(`sender_id.eq.${userId},receiver_id.eq.${userId}`),
+  .from("transfers")
+  .select("*")
+  .eq("site_id", SITE_ID)
+  .or(`sender_id.eq.${userId},receiver_id.eq.${userId}`),
 
     supabase
-      .from("trades")
-      .select("*")
-      .eq("user_id", userId)
+  .from("trades")
+  .select("*")
+  .eq("user_id", userId)
+  .eq("site_id", SITE_ID)
 
   ]);
 
@@ -188,10 +193,13 @@ console.log("Trades:", tradesRes.data);
 export async function addTransaction(values) {
 
   const { data, error } = await supabase
-    .from("transactions")
-    .insert(values)
-    .select()
-    .single();
+  .from("transactions")
+  .insert({
+    ...values,
+    site_id: SITE_ID
+  })
+  .select()
+  .single();
 
   if (error) throw error;
 
