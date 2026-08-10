@@ -169,11 +169,12 @@ export default function AdminDepositWallet() {
     setLoading(true);
 
     const { data } = await supabase
-      .from("deposit_wallets")
-      .select("*")
-      .order("display_order", {
-        ascending: true,
-      });
+  .from("deposit_wallets")
+  .select("*")
+  .eq("site_id", "GT")
+  .order("display_order", {
+    ascending: true,
+  });
 
     setWallets(data || []);
 
@@ -259,49 +260,57 @@ if (uploadError) {
 
     if (editingId) {
 
-      const { data, error } = await supabase
-  .from("deposit_wallets")
-  .insert({
-    coin: form.coin,
-    network: form.network,
-    address: form.address,
-    enabled: form.enabled,
-    display_order: form.sort,
-    qr_url,
-  })
-  .select();
+  const { error } = await supabase
+    .from("deposit_wallets")
+    .update({
 
-console.log("INSERT DATA:", data);
-console.log("INSERT ERROR:", error);
+      coin: form.coin,
 
-if (error) {
-  console.error(error);
-  alert(error.message);
-  setSaving(false);
-  return;
-}
+      network: form.network,
 
-alert("Save Success");
+      address: form.address,
 
-    } else {
+      enabled: form.enabled,
+
+      display_order: form.sort,
+
+      qr_url,
+
+      site_id: "GT"
+
+    })
+    .eq("id", editingId);
+
+  if (error) {
+    console.error(error);
+    alert(error.message);
+    setSaving(false);
+    return;
+  }
+
+  alert("Update Success");
+
+} else {
 
       await supabase
-        .from("deposit_wallets")
-        .insert({
+  .from("deposit_wallets")
+  .insert({
 
-          coin: form.coin,
+    coin: form.coin,
 
-          network: form.network,
+    network: form.network,
 
-          address: form.address,
+    address: form.address,
 
-          enabled: form.enabled,
+    enabled: form.enabled,
 
-          display_order: form.sort,
+    display_order: form.sort,
 
-          qr_url
+    qr_url,
 
-        });
+    site_id: "GT"
+
+  });
 
       alert("Save Success");
 
@@ -325,9 +334,10 @@ alert("Save Success");
     if (!ok) return;
 
     await supabase
-      .from("deposit_wallets")
-      .delete()
-      .eq("id", id);
+  .from("deposit_wallets")
+  .delete()
+  .eq("id", id)
+  .eq("site_id", "GT");
 
     loadWallets();
 

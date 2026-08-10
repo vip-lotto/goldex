@@ -117,6 +117,7 @@ const NETWORK_LOGO = {
   .from("deposit_wallets")
   .select("*")
   .eq("enabled", true)
+  .eq("site_id", SITE_ID)
   .order("display_order", { ascending: true });
 
 if (error) {
