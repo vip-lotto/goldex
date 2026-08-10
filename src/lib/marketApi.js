@@ -2,18 +2,20 @@ import marketData from "../data/marketData";
 
 export async function getMarkets() {
   try {
-    console.log("Fetching:", "/api/markets");
+    console.log("Fetching /api/markets");
 
     const res = await fetch("/api/markets");
 
-    console.log("URL =", res.url);
     console.log("Status =", res.status);
+    console.log("URL =", res.url);
 
     const text = await res.text();
 
-    console.log(text);
+    console.log("Response =", text);
 
     const json = JSON.parse(text);
+
+    console.log("JSON =", json);
 
     const backendMarkets = json.data;
 
