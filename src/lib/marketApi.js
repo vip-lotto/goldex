@@ -1,48 +1,33 @@
 import marketData from "../data/marketData";
 
-const API_URL = "/api/markets";
-
 export async function getMarkets() {
   try {
-    const res = await fetch(API_URL);
+    console.log("Fetching:", "/api/markets");
 
-    const json = await res.json();
+    const res = await fetch("/api/markets");
 
-    console.log("API Response:", json);
+    console.log("URL =", res.url);
+    console.log("Status =", res.status);
 
-    if (!json.success) {
-      throw new Error("API Error");
-    }
+    const text = await res.text();
+
+    console.log(text);
+
+    const json = JSON.parse(text);
 
     const backendMarkets = json.data;
 
-    console.log("backendMarkets:", backendMarkets);
-
-    const result = marketData.map((item) => {
+    return marketData.map((item) => {
       const api = backendMarkets.find(
         (m) => m.code === item.code
       );
 
-      if (!api) {
-        return {
-          ...item,
-          price: 0,
-          change: 0,
-          status: "offline",
-        };
-      }
-
       return {
         ...item,
-        price: api.price,
-        change: api.change,
-        status: "online",
+        price: api?.price ?? 0,
+        change: api?.change ?? 0,
       };
     });
-
-    console.log("result:", result);
-
-    return result;
 
   } catch (err) {
     console.error("MARKET ERROR:", err);
