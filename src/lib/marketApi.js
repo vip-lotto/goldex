@@ -2,27 +2,24 @@ import marketData from "../data/marketData";
 
 export async function getMarkets() {
   try {
-    console.log("Fetching /api/markets");
+    const url = window.location.origin + "/api/markets";
 
-    const res = await fetch("/api/markets");
+    console.log("URL =", url);
+
+    const res = await fetch(url);
 
     console.log("Status =", res.status);
-    console.log("URL =", res.url);
 
     const text = await res.text();
 
-    console.log("Response =", text);
+    console.log("TEXT =", text);
 
     const json = JSON.parse(text);
 
-    console.log("JSON =", json);
+    const backendMarkets = json.data || [];
 
-    const backendMarkets = json.data;
-
-    return marketData.map((item) => {
-      const api = backendMarkets.find(
-        (m) => m.code === item.code
-      );
+    return marketData.map(item => {
+      const api = backendMarkets.find(m => m.code === item.code);
 
       return {
         ...item,
@@ -32,7 +29,7 @@ export async function getMarkets() {
     });
 
   } catch (err) {
-    console.error("MARKET ERROR:", err);
+    console.error(err);
     return [];
   }
 }
