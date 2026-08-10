@@ -884,23 +884,23 @@ return (
 
 <div className="trade-time-tabs">
 
-{[30,60,90,120,180].map(t => (
+  {tradeSettings.map(item => (
 
-<button
-    key={t}
-    disabled
-    className={
-        duration === t
-            ? "time-btn active"
-            : "time-btn"
-    }
->
+    <button
+      key={item.id}
+      disabled
+      className={
+        duration === Number(item.duration)
+          ? "time-btn active"
+          : "time-btn"
+      }
+    >
 
-    {t}s
+      {Math.floor(Number(item.duration) / 60)}m
 
-</button>
+    </button>
 
-))}
+  ))}
 
 </div>
 

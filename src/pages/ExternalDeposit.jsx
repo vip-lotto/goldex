@@ -262,9 +262,7 @@ await supabase
   site_id: SITE_ID,
 
   user_id: user.id,
-  member_id: user.member_id,
-  first_name: user.first_name,
-  last_name: user.last_name,
+  
 
   coin: coin,
   network: network,
